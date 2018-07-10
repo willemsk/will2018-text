@@ -1,0 +1,40 @@
+
+\begin{figure}[htbp]
+\centering
+
+\begin{subfigure}[t]{8cm}
+	\centering
+	\caption{}\label{fig:rectification_contour}
+	\includegraphics[scale=1]{figures/pdf/fig_rectification_contour}
+\end{subfigure}
+
+\begin{subfigure}[t]{8cm}
+	\centering
+	\caption{}\label{fig:rectification_section}
+	\includegraphics[scale=1]{figures/pdf/fig_rectification_section}
+\end{subfigure}
+
+
+% legend commands
+\newcommand{\experimental}{\raisebox{0pt}{\tikz{\draw[-,black,dotted,line width = 0.75pt](0.,0.8mm) -- (5.5mm,0.8mm);\draw[black,solid,fill = white,line width = 0.5pt](2.75mm,0.8mm) circle (0.75mm)}}}
+\newcommand{\epnpns}{\raisebox{0pt}{\tikz{\draw[-,graphpurple,solid,line width = 0.75pt](0.,0.8mm) -- (5.5mm,0.8mm);\draw[graphpurple,solid,fill = white,line width = 0.5pt](2.mm,0) rectangle (3.5mm,1.5mm)}}}
+
+% caption
+\caption[\textbf{Conductance rectification.}]
+{
+\textbf{Ion conductance rectification (ICR) of single ClyA nanopores at different ionic strengths.}
+The ICR for bias voltage $\varpotential$ is defined by $G(+\varpotential)/G(-\varpotential)$ and shows the ratio between the nanopore conductance at positive relative to the conductance at negative bias.
+(\subref{fig:rectification_contour}) Contour plots of the ICR vs. the bias voltage and salt concentration as determined experimentally (left) and with ePNP-NS simuation (right).
+While the simulation somewhat overestimates the magnitude at lower salt concentrations (\SI{<500}{\milli\Molar}), there is an excellent qualitative match.
+(\subref{fig:rectification_section}) The ICR at \SI{+100}{\milli\volt} vs. the salt concentration as measured experimentally (\protect\experimental) and simulated with ePNP-NS (\protect\epnpns).
+A maximum is observed at \SI{\approx 150}{\milli\Molar} \ce{NaCl} in both the experiment (1.28) and the simulation (1.42).
+The ICR falls exponentially towards a value of 1 for salt concentrations both lower and higher than \SI{150}{\milli\Molar}.
+}
+
+% label
+\label{fig:rectification}
+
+\end{figure}
+
+
+%/graphlinemarker{dotted}{circle}{black}

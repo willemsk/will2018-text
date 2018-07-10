@@ -1,0 +1,141 @@
+%-------------------------------------------------------------------------------
+% PREAMBLE AND DOCUMENT FORMATTING
+%-------------------------------------------------------------------------------
+\documentclass[journal=ancac3, manuscript=suppinfo, etalmode=truncate,maxauthors=0]{achemso}
+\setkeys{acs}{etalmode=truncate,maxauthors=0}
+
+% PACKAGES
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{textcomp}
+\usepackage{textgreek}
+
+\usepackage[version=4]{mhchem}
+\usepackage[alsoload=synchem,separate-uncertainty=true,multi-part-units=single,tight-spacing=true]{siunitx}
+
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+\usepackage{array, booktabs, tabularx, multirow}
+
+% CAPTION FORMATTING
+\usepackage[font=footnotesize,labelfont=bf,labelsep=period]{caption} 							% format single-image captions and table titles
+\captionsetup[table]{singlelinecheck=false,font=footnotesize,labelfont=bf}
+\usepackage[font=footnotesize,labelfont=bf,labelsep=period]{subcaption} 						% format subfigure captions
+%\DeclareCaptionSubType*[alph]{figure}
+%\renewcommand\thesubfigure{\thefigure\alph{subfigure}}
+\captionsetup[subfigure]{labelfont=bf,textfont=normalfont,labelformat=simple,singlelinecheck=false} 	
+
+% CROSS-REFERENCE FORMATTING
+% For use with the cleveref package
+% Define the format of Figure, Table, Equation, and Section cross-references in the text
+\usepackage{xr-hyper}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\crefname{figure}{Fig.}{Figs.}
+\Crefname{figure}{Figure}{Figures}
+\crefname{table}{Tab.}{Tabs.}
+\Crefname{table}{Table}{Tables}
+\crefname{equation}{Eq.}{Eqs.}
+\Crefname{equation}{Equation}{Equations}
+\crefname{section}{Sec.}{Secs.}
+\Crefname{section}{Section}{Sections}
+
+
+% REFERENCES
+\renewcommand*{\bibfont}{\normalfont\small}
+
+
+%-------------------------------------------------------------------------------
+% CUSTOM COMMANDS
+%-------------------------------------------------------------------------------
+
+
+\input{additional_commands.tex}
+
+
+%-------------------------------------------------------------------------------
+% TITLE AND AUTHOR LIST
+%-------------------------------------------------------------------------------
+\title{Modelling of Ion and Water Transport in the Biological Nanopore ClyA}
+\input{authors.tex}
+
+
+%===============================================================================
+%
+% MAIN DOCUMENT BEGINS
+%
+%===============================================================================
+\begin{document}
+	
+\maketitle
+
+\section{Extended materials and methods}
+\subsection{Mutations of the ClyA-AS variant.}
+The mutations needed to convert the wild-type ClyA to the AS variant are listed in \cref{tab:clya_as_mutations}.
+\input{tab_clya_as_mutations}
+
+\subsection{Fitting of electrolyte properties}
+The parameters of the fitting functions used to interpolate the experimental ion diffusion coefficients, mobilities and transport numbers,
+and the electrolyte viscosity, density and relative permittivity are given in \cref{tab:corrections_parameters} and 
+the resulting curves are plotted in \cref{fig:corrections}.
+Note that since most of these functions are merely empirical fits with no physical meaning,
+and that they are solely used to interpolate and represent the experimental data.
+
+%To fit the diffusion coefficients, mobilities and cation transport number we made use of the following empirical function:
+%\begin{align}
+%\label{eq:diff-mob-transp-fit}
+%P(\dconc) = P_0/\left( 1 + P_1\dconc^{0.5} + P_2\dconc + P_3\dconc^{1.5} + P_4\dconc^2 \right)
+%\end{align}
+%where $P$ represents the fitted parameter, $\dconc = \avionconc/\SI{1}{\Molar}$ is the dimensionless average ion concentration, $P_0$ is the parameter value at infinite dilution and $P_1$,  $P_2$, $P_3$ and $P_45$ are fitting coefficients.
+%
+%The concentration dependent ion diffusion coefficients $\diffusion_{i}^1(\dconc)$,
+%we obtained by fitting the experimental self-diffusion coefficients data  of the individual ions (\SIrange{0}{5}{\Molar}) with Eq.~\ref{eq:diff-mob-transp-fit}.\cite{mills1989}
+%
+%The concentration dependent ionic mobility $\mobility_{i}(\concentration)$ can be calculated from the specific molar conductivity $\specmolarconductivity_{i}(\concentration)$ of the ion\cite{aburto2013I}
+%\begin{align}
+%\label{eq:conductivity-to-mobility}
+%\mobility_{i}(\concentration) = \frac{\specmolarconductivity_{i}(\concentration)}{\chargen_{i}\faraday} 
+%\quad\text{with}\quad \specmolarconductivity_{i}(\concentration) = \molarconductivity(\concentration) \transportn_{i}(\concentration),
+%\end{align}
+%where $\molarconductivity(\concentration)$ is the molar conductivity of the salt and $\transportn_{i}(\concentration)$ is the transport number of ion $i$,
+%i.e. the fraction of the total current carried by that ion in bulk.
+%Cation transport numbers $\transportn_{\ce{Na+}}$ (\SIrange{0}{5}{\Molar}) were obtained from literature\cite{panopoulos1986,currie1960,smits1966,schonert2014,dellamonica1979} 
+%and fitted with Eq.~\ref{eq:diff-mob-transp-fit}.
+%This allowed for the direct calculation of $\specmolarconductivity_{i}(\dconc)$ from the molar conductivities of \ce{NaCl}\cite{bianchi1989, currie1960, goldsack1976, dellamonica1979}
+%and the fitting of the $\mobility^1_{i}(\dconc)$ function with Eq.~\ref{eq:diff-mob-transp-fit}.
+%
+%The concentration dependent viscosity and density data of the electrolyte was taken from ~\citenum{hai-lang1996}.
+%The viscosity was fitted with:
+%\begin{align}
+%\label{eq:visc-fit}
+%\viscosity(\dconc) = \viscosity_0 \left( 1 + P_1 \dconc^{0.5} + P_2 \dconc + P_3 \dconc^2 + P_4 \dconc^{3.5} \right)
+%\end{align}
+%and the density with
+%\begin{align}
+%\label{eq:dens-fit}
+%\density(\dconc) = \density_0 \left( 1 + P_1 \dconc + P_2 \dconc^2 \right)
+%\end{align}
+%where the parameters have similar meanings as in Eq.~\ref{eq:diff-mob-transp-fit}.
+
+Finally, for the concentration dependence of the relative permittivity we made use of the model proposed by Gavish et al.:
+\begin{align}
+\relperm(\dconc) = \permittivity_{r,0} - \left(\permittivity_{r,0} - \permittivity_{r,ms}\right) L \left( \dfrac{3\alpha}{\permittivity_{r,0} - \permittivity_{r,ms}} \dconc \right)
+\end{align}
+
+\input{tab_corrections_parameters.tex}
+\input{fig_corrections.tex}
+
+
+%-------------------------------------------------------------------------------
+% SUPPORTING INFORMATION
+%-------------------------------------------------------------------------------
+\bibliography{modeling1}
+
+\end{document}

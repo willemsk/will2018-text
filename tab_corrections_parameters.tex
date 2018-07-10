@@ -1,0 +1,46 @@
+\begin{table*}[ht]
+
+\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+
+\renewcommand{\arraystretch}{1.5}
+\scriptsize
+\caption{Overview of the \ce{NaCl} fitting parameters used for interpolation.}
+\centering
+\label{tab:corrections_parameters}
+\begin{tabular}{@{}
+				l
+				S[table-format=1.3]
+				S[table-format=-1.2(2)e-1]
+				S[table-format=-1.2(2)e-1]
+				S[table-format=-1.2(2)e-1]
+				S[table-format=-1.2(2)e-1]
+				S[table-format=>1.2]
+				l
+				@{}}
+	\toprule
+							& \multicolumn{5}{c}{Fitting parameters}									&		&	\\
+	\cmidrule{2-6}
+	Property				& $P_{0}$	& $P_{1}$		& $P_{2}$		& $P_{3}$		& $P_{4}$		& $R^{2}$	& References	\\
+	\midrule
+	$\diffusion^+(c)$		& 1.334		& 2.02(14)e-1	& -3.05(41)e-1	& 2.19(38)e-1	& -3.13(108)e-2	& >0.99		& \citenum{mills1989}	\\
+	$\diffusion^-(c)$		& 2.032		& 1.49(30)e-1	& -4.94(904)e-2	& 3.40(826)e-2	& 1.43(230)e-2	& >0.99		& \citenum{mills1989}	\\
+	$\mobility^+(c)$		& 5.192		& 7.91(6)e-1	& -3.53(17)e-1	& 1.46(15)e-1	& 9.23(389)e-3	& >0.99		& \citenum{bianchi1989, currie1960, goldsack1976, dellamonica1979}	\\
+	$\mobility^-(c)$		& 7.909		& 6.29(6)e-1	& -4.29(17)e-1	& 2.12(14)e-1	& -1.07(37)e-2	& >0.99		& \citenum{bianchi1989, currie1960, goldsack1976, dellamonica1979}	\\
+	$\transportn^+(c)$		& 0.3963	& 9.38(164)e-2 	& 2.86(324)e-3	& -1.88(652)e-2	& 4.51(275)e-3	& 0.98		& \citenum{panopoulos1986,currie1960,smits1966,schonert2014,dellamonica1979}	\\
+	$\viscosity(c)$			& 0.8904	& 7.56(27)e-3	& 7.77(4)e-2	& 1.19(1)e-2	& 5.95(35)e-4	& >0.99		& \citenum{hai-lang1996}	\\
+	$\density(c)$			& 0.997		& 4.06(1)e-2	& -6.39(16)e-4	& 				& 				& >0.99		& \citenum{hai-lang1996}	\\
+	$\permittivity(c)$		& 78.15		& 3.08(0)e1		& 1.15(0)e1		& 				& 				&			& \citenum{gavish2016}	\\
+	$\diffusion^+(d)$		&			& 6.2 			& 0.01			& 				& 				&			& \citenum{makarov1998,simakov2010,pederson2015}	\\
+	$\diffusion^-(d)$	 	& 			& 6.2			& 0.01			& 				& 				&			& \citenum{makarov1998,simakov2010,pederson2015}	\\
+	$\mobility^+(d)$		& 			& 6.2			& 0.01			& 				& 				&			& \citenum{makarov1998,simakov2010,pederson2015}	\\
+	$\mobility^-(d)$		& 			& 6.2			& 0.01			& 				& 				&			& \citenum{makarov1998,simakov2010,pederson2015}	\\
+	$\viscosity(d)$			& 			& 3.36(23)		& 1.47(23)e-1 	& 				& 				& 0.97		& \citenum{pronk2013}	\\
+	\bottomrule
+\end{tabular}
+\end{table*}
+
+
+% NaCl transport numbers
+% panopoulos1986, currie1960, smits1966, schonert2014, dellamonica1979
+% NaCl conductance
+% bianchi1989, currie1960, goldsack1976, dellamonica1979
