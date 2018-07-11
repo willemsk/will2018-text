@@ -97,7 +97,22 @@
 % Abstract
 \newpage
 \begin{abstract}
-Biological nanopores have become valuable tools for the detection and analysis of molecules and the sequencing of nucleic acids at the single-molecule level. However, the physical understanding of the transport of ions and water across small nanopores and the scale the electrophoretic forces inside the nanopore is still superficial. From this perspective, we have built a detailed, 2D-axisymmetric continuum model of Cytolysin A (ClyA), a biological nanopore utilized for DNA and protein analysis. We used the steady-state Poison-Nernst-Planck (PNP) and Navier-Stokes (NS) equations to simulate the ionic fluxes and water flow through ClyA for a wide range of ionic strengths and bias voltages. To improve the accuracy and validity of our model at the nanoscale, we adapted the classical equations into a framework coined extended-PNP-NS (ePNP-NS). Our modifications include finite ion-size effects, ion-protein and water-protein interactions, self-consistent concentration dependencies for the ion diffusion coefficients, ion electrophoretic mobilities, solvent viscosity, solvent density and solvent relative permittivity. Our results show that, only when these are corrections enabled, our simplified ClyA model is able to accurately predict the ionic currents over a wide range of ionic strengths. We further report on the influence of both the bias voltage and the bulk ionic strength on the average ion concentrations inside the pore, the magnitude and direction of the electro-osmotic flow, and the shape of the electrostatic potential landscape inside the nanopore.
+Biological nanopores have become valuable tools for the detection and analysis of molecules and the 
+sequencing of nucleic acids at the single-molecule level. However, the physical understanding of the 
+transport of ions and water across small nanopores and the scale the electrophoretic forces inside the 
+nanopore is still superficial. From this perspective, we have built a detailed, 2D-axisymmetric continuum 
+model of Cytolysin A (ClyA), a biological nanopore utilized for DNA and protein analysis. We used the 
+steady-state Poison-Nernst-Planck (PNP) and Navier-Stokes (NS) equations to simulate the ionic fluxes and 
+water flow through ClyA for a wide range of ionic strengths and bias voltages. To improve the accuracy and 
+validity of our model at the nanoscale, we adapted the classical equations into a framework coined 
+extended-PNP-NS (ePNP-NS). Our modifications include finite ion-size effects, ion-protein and water-protein 
+interactions, self-consistent concentration dependencies for the ion diffusion coefficients, ion 
+electrophoretic mobilities, solvent viscosity, solvent density and solvent relative permittivity. Our results 
+show that, only when these are corrections enabled, our simplified ClyA model is able to accurately predict 
+the ionic currents over a wide range of ionic strengths. We further report on the influence of both the bias 
+voltage and the bulk ionic strength on the average ion concentrations inside the pore, the magnitude and 
+direction of the electro-osmotic flow, and the shape of the electrostatic potential landscape inside the 
+nanopore.
 \end{abstract}
 \newpage
 % Introduction
@@ -130,59 +145,75 @@ In this work we used ClyA-AS type I (ClyA), a dodecameric protein nanopore evolv
 
 
 \section{Theory}
-To improve our understanding of the ion and water transport mechanisms within ClyA,
-we created a computational model of the nanopore based on a set of well-known partial-differential equations (PDEs) called the coupled Poisson-Nernst-Planck-Navier-Stokes (PNP-NS) equations.
-Due to ClyA's complexity, a meaningful analytical solution is intractable and must hence be approximated numerically.
-We opted for the finite element method (FEM) as implemented in the commercial software COMSOL Multiphysics (version 5.3, \href{www.comsol.com}{www.comsol.com}).
+To improve our understanding of the ion and water transport mechanisms within ClyA, we created a 
+computational model of the nanopore based on a set of well-known partial-differential equations (PDEs) called 
+the coupled Poisson-Nernst-Planck-Navier-Stokes (PNP-NS) equations. Due to ClyA's complexity, a meaningful 
+analytical solution is intractable and must hence be approximated numerically. We opted for the finite 
+element method (FEM) as implemented in the commercial software COMSOL Multiphysics (version 5.3, 
+\href{www.comsol.com}{www.comsol.com}).
 
-While these equations have proven to be excellent tool for studying ion and water transport in both solid-state\cite{daiguji2004,lu2012,chaudhry2014,rempfer2016,lin2016}
-and biological nanopores,\cite{eisenberg1996,simakov2010,pederson2015} the underlying continuum assumption does not hold at the nanoscale under all circumstances,
-particularly at material interfaces\cite{vo2016} and in regions of high charge density.\cite{corry2000}
-To address these concerns and to improve the accuracy of our model, we propose a modified version of these equations, coined extended PNP-NS (ePNP-NS),
-which take into account finite size of the ions\cite{borukhov1997,lu2011} and the reduction of ion and water mobility near protein interfaces.\cite{makarov1998, pronk2013}
-Because the diffusion coefficient, mobility, viscosity, density\cite{} and relative permittivity\cite{gavish2016} often deviate significantly from the traditional `infinite dilution'
-values at experimentally relevant concentrations, we implemented a self-consistent dependency on the average ion concentration for all these parameters.
+While these equations have proven to be excellent tool for studying ion and water transport in both 
+solid-state\cite{daiguji2004,lu2012,chaudhry2014,rempfer2016,lin2016} and biological 
+nanopores,\cite{eisenberg1996,simakov2010,pederson2015} the underlying continuum assumption does not hold at 
+the nanoscale under all circumstances, particularly at material interfaces\cite{vo2016} and in regions of 
+high charge density.\cite{corry2000} To address these concerns and to improve the accuracy of our model, we 
+propose a modified version of these equations, coined extended PNP-NS (ePNP-NS), which take into account 
+finite size of the ions\cite{borukhov1997,lu2011} and the reduction of ion and water mobility near protein 
+interfaces.\cite{makarov1998, pronk2013} Because the diffusion coefficient, mobility, viscosity, 
+density\cite{} and relative permittivity\cite{gavish2016} often deviate significantly from the traditional 
+`infinite dilution' values at experimentally relevant concentrations, we implemented a self-consistent 
+dependency on the average ion concentration for all these parameters.
 
-In the following sections, we will begin by describing a 2D-axisymmetric model of the geometry and charge distribution of the ClyA,
-followed by an an outline of the classical PNP-NS equations and finally we will introduce in detail the nanoscale corrections and concentration dependencies of the ePNP-NS framework.
+In the following sections, we will begin by describing a 2D-axisymmetric model of the geometry and charge 
+distribution of the ClyA, followed by an an outline of the classical PNP-NS equations and finally we will 
+introduce in detail the nanoscale corrections and concentration dependencies of the ePNP-NS framework.
 
 %Fig 1: model geometry, charge distribution and boundary conditions
 \subsection{Axially Symmetric Model of ClyA.}
 
-ClyA is a multimeric protein complex that consists of 12 (or more) identical subunits which form a \SI{14}{\nano\meter} long hydrophilic channel through a lipid bilayer.
-The pore cavity is lined with predominantly negatively charged residues can be divided in roughly two cylindrical compartments:
-the \textit{cis} lumen (\SI{5.5}{\nano\meter} diameter, \SI{10}{\nano\meter} height) and
-the \textit{trans} constriction (\SI{3.3}{\nano\meter} diameter, \SI{4}{\nano\meter} height).
-Due to this high degree of axial symmetry, we modelled ClyA as a solid, cylindrically symmetric dielectric block,
-embedded within a lipid membrane represented as a \SI{2.8}{\nano\meter}-thick\cite{kucerka2011} dielectric disk 
-and surrounded by a spherical, electrolyte-filled reservoir with a radius of \SI{250}{\nano\meter} (\cref{fig:model_concept}a).\cite{lu2012,pederson2015}
-This approach greatly reduces the computational cost compared to a full 3D model, while still retaining sufficient accuracy to provide relevant results. 
+ClyA is a multimeric protein complex that consists of 12 (or more) identical subunits which form a 
+\SI{14}{\nano\meter} long hydrophilic channel through a lipid bilayer. The pore cavity is lined with 
+predominantly negatively charged residues can be divided in roughly two cylindrical compartments: the 
+\textit{cis} lumen (\SI{5.5}{\nano\meter} diameter, \SI{10}{\nano\meter} height) and the \textit{trans} 
+constriction (\SI{3.3}{\nano\meter} diameter, \SI{4}{\nano\meter} height). Due to this high degree of axial 
+symmetry, we modelled ClyA as a solid, cylindrically symmetric dielectric block, embedded within a lipid 
+membrane represented as a \SI{2.8}{\nano\meter}-thick\cite{kucerka2011} dielectric disk  and surrounded by a 
+spherical, electrolyte-filled reservoir with a radius of \SI{250}{\nano\meter} 
+(\cref{fig:model_concept}a).\cite{lu2012,pederson2015} This approach greatly reduces the computational cost 
+compared to a full 3D model, while still retaining sufficient accuracy to provide relevant results. 
 
 \paragraph{Nanopore geometry.}
 The nanopore geometry (\cref{fig:model_concept}b) was derived directly from a full atom model of ClyA-AS,
-an improved variant of ClyA evolved from the wild-type Cytolysin A from \textit{S. typhii} using directed evolution.\cite{soskine2013}
-Briefly, a homology model of ClyA-AS was constructed from the wild-type crystal structure (PDB: 2WCD)\cite{mueller2009} by introducing the necessary mutations in all 12 subunits (\cref{suppinfo:tab:clya_as_mutations}),
-followed by a brief energy optimization of the mutated side-chains with the conjugate gradient method (MODELLER, version 9.18).\cite{sali1993}
-We then computed the protonation state of titratable residue at \pH{7.5} and 
-assigned the correct a radius and partial charge to each atom of the model (PROPKA 3.1\cite{olsson2011} and PBD2PQR 2.1.1\cite{jurrus2018} software packages)
-as parametrized by the CHARMM36 forcefield.\cite{best2012}
-The atom radii were then used to compute a 3D-dimensional map of the nanopore's molecular surface with a probe radius of \SI{1.4}{\angstrom},
-which was radially averaged along the z-direction with a custom-built MATLAB script to generate an approximate axisymmetric outline of the nanopore.
-To improve the quality of the final computational mesh, the resulting polygon was then simplified manually by removing overlapping and superfluous vertices.
+an improved variant of ClyA evolved from the wild-type Cytolysin A from \textit{S. typhii} using directed 
+evolution.\cite{soskine2013} Briefly, a homology model of ClyA-AS was constructed from the wild-type crystal 
+structure (PDB: 2WCD)\cite{mueller2009} by introducing the necessary mutations in all 12 subunits 
+(\cref{suppinfo:tab:clya_as_mutations}), followed by a brief energy optimization of the mutated side-chains 
+with the conjugate gradient method (MODELLER, version 9.18).\cite{sali1993} We then computed the protonation 
+state of titratable residue at \pH{7.5} and assigned the correct a radius and partial charge to each atom of 
+the model (PROPKA 3.1\cite{olsson2011} and PBD2PQR 2.1.1\cite{jurrus2018} software packages) as parametrized 
+by the CHARMM36 forcefield.\cite{best2012} The atom radii were then used to compute a 3D-dimensional map of 
+the nanopore's molecular surface with a probe radius of \SI{1.4}{\angstrom}, which was radially averaged 
+along the z-direction with a custom-built MATLAB script to generate an approximate axisymmetric outline of 
+the nanopore. To improve the quality of the final computational mesh, the resulting polygon was then 
+simplified manually by removing overlapping and superfluous vertices.
 
 \paragraph{Nanopore fixed charge density.}
-Similar to the geometry, the two-dimensional charge distribution used in this model was also derived directly from the full atom model (\cref{fig:model_concept}c).
-Inspired by how charges are represented in the particle mesh Ewald (PME) method,\cite{aksimentiev2005} we computed the fixed charge distribution of the nanopore $\scdpore(r,z)$ by projecting 
-the partial charge $\partialcharge_{i}$ of each atom $i$ on a two-dimensional grid (\SI{0.005}{\nano\meter} resolution) with a Gaussian-like function:
+Similar to the geometry, the two-dimensional charge distribution used in this model was also derived directly 
+from the full atom model (\cref{fig:model_concept}c). Inspired by how charges are represented in the particle 
+mesh Ewald (PME) method,\cite{aksimentiev2005} we computed the fixed charge distribution of the nanopore 
+$\scdpore(r,z)$ by projecting the partial charge $\partialcharge_{i}$ of each atom $i$ on a two-dimensional 
+grid (\SI{0.005}{\nano\meter} resolution) with a Gaussian-like function:
 \begin{align}
 \label{eq:scdpore}
 \scdpore(r,z) = \displaystyle\sum_{i} \dfrac{\echarge\partialcharge_{i}}{\pi(\stdev\atomradius_{i})^2} 
 \exp{\left(-\dfrac{(r-r_i)^2 + (z-z_i)^2}{(\stdev\atomradius_{i})^2}\right)}
 \end{align}
 with $\echarge$ the elementary charge, $\atomradius_{i}$ the atom radius, $\sigma$ a sharpness factor (set to 0.5) and
-$r_i = \sqrt{x_i^2+y_i^2}$ and $z_i$ the distance of the atom from the central axis and the height along the central axis, respectively.
-Instead of explicitly selecting a few amino acids as `key' charged residues, our method includes all partial charges and is hence more comprehensive.
-Furthermore, since it can be applied as a single boundary condition over the entire model, it does not require the definition of additional geometric features to hold the charges.
+$r_i = \sqrt{x_i^2+y_i^2}$ and $z_i$ the distance of the atom from the central axis and the height along the 
+central axis, respectively. Instead of explicitly selecting a few amino acids as `key' charged residues, our 
+method includes all partial charges and is hence more comprehensive. Furthermore, since it can be applied as 
+a single boundary condition over the entire model, it does not require the definition of additional geometric 
+features to hold the charges.
 
 % Grid: r from 0 to 70 A, res = 0.05 A 
 % 		z from -35 to 135 A, res = 0.05 A
@@ -193,26 +224,32 @@ Furthermore, since it can be applied as a single boundary condition over the ent
 \subsection{Poisson-Nernst-Planck-Navier-Stokes (PNP-NS) equations}
 
 In this section we will start by describing the classical PNP-NS equations and their boundary conditions,
-followed by a description of the extended-PNP-NS (ePNP-NS) framework that includes a several additions and corrections 
-which enhance their physical accuracy at nanoscale and their ability to predict ionic currents at high ionic strengths.
+followed by a description of the extended-PNP-NS (ePNP-NS) framework that includes a several additions and 
+corrections which enhance their physical accuracy at nanoscale and their ability to predict ionic currents at 
+high ionic strengths.
 
-\paragraph{Poisson's equation (PE)} relates the electrostatic potential to the charges present in a system and is given by 
+\paragraph{Poisson's equation (PE)} relates the electrostatic potential to the charges present in a system 
+and is given by 
 \begin{align} 
 \label{eq:poisson}
 \nabla\cdot\left(\absperm\relperm \nabla\potential\right) = \scdpore + \scdion,
 \end{align}
-with $\potential$ the electric potential, $\absperm$ the vacuum permittivity (\SI{8.85419e-12}{\farad\per\meter}) and $\relperm$ the local relative permittivity.
-The total charge density on the right hand side of \cref{eq:poisson} consists of a fixed contribution $\scdpore$ due to charges of nanopore itself (\cref{eq:scdpore}),
-and a ion concentration dependent component $\scdion$ caused by local non-electroneutralities in the fluid (\cref{eq:scdion}).
+with $\potential$ the electric potential, $\absperm$ the vacuum permittivity 
+(\SI{8.85419e-12}{\farad\per\meter}) and $\relperm$ the local relative permittivity. The total charge density 
+on the right hand side of \cref{eq:poisson} consists of a fixed contribution $\scdpore$ due to charges of 
+nanopore itself (\cref{eq:scdpore}), and a ion concentration dependent component $\scdion$ caused by local 
+non-electroneutralities in the fluid (\cref{eq:scdion}).
 
-The Nernst-Plack equation (NPE) describes the flux $\flux_{i}$ of each ion $i$ under the influence of a chemical gradient (diffusion), a non-zero electrical field (electromigration)
-and a laminar fluid flow (convection) and is given by
+The Nernst-Plack equation (NPE) describes the flux $\flux_{i}$ of each ion $i$ under the influence of a 
+chemical gradient (diffusion), a non-zero electrical field (electromigration) and a laminar fluid flow 
+(convection) and is given by
 \begin{align}
 \label{eq:nernst-planck}
-\nabla\cdot\flux_{i} = \nabla\cdot\left( -\diffusion_{i}\nabla\concentration_{i} - \chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential +\velocity\concentration_{i}\right) = 0
+\nabla\cdot\flux_{i} = \nabla\cdot\left( -\diffusion_{i}\nabla\concentration_{i} - 
+\chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential +\velocity\concentration_{i}\right) = 0
 \end{align}
-with $\concentration_{i}$ the concentration, $\diffusion_{i}$ the diffusion coefficient, $\chargen_{i}$ the charge number, 
-$\mobility_{i}$ the electrophoretic mobility, and $\velocity$ the fluid velocity.
+with $\concentration_{i}$ the concentration, $\diffusion_{i}$ the diffusion coefficient, $\chargen_{i}$ the 
+charge number, $\mobility_{i}$ the electrophoretic mobility, and $\velocity$ the fluid velocity.
 The NPE is coupled to the PE by using the electric potential $\potential$ and the ion space charge density
 \begin{align} 
 \label{eq:scdion}
@@ -223,7 +260,8 @@ where $\faraday$ is Faraday's constant (\SI{96485.33}{\coulomb\per\mole}).
 \paragraph{The Navier-Stokes equation (NSE)} describes the fluid velocity $\velocity$ and is given  
 \begin{align}
 \label{eq:navier-stokes}
-\density\left(\velocity\cdot\nabla\right)\velocity = \nabla\cdot\left[-\pressure\identity + \viscosity\left(\nabla\velocity + \left(\nabla\velocity\right)^{\rm T}\right)\right]+\volumeforce,
+\density\left(\velocity\cdot\nabla\right)\velocity = \nabla\cdot\left[-\pressure\identity + 
+\viscosity\left(\nabla\velocity + \left(\nabla\velocity\right)^{\rm T}\right)\right]+\volumeforce,
 \end{align}
 together with the continuity equation
 \begin{align}
@@ -239,19 +277,26 @@ acts on all fluid elements with a non-zero $\scdion$ and electrical field $\efie
 
 \paragraph{Parameters for PNP-NS.}
 The system temperature was chosen to be \SI{298.15}{\kelvin}.
-The relative permittivities were set to $\permittivity_p = 20$ for the pore\cite{li2013}, $\permittivity_m = 3.2$ for the membrane\cite{gramse2013} and $\permittivity_w = 78.15$ for the fluid reservoir.
+The relative permittivities were set to $\permittivity_p = 20$ for the pore\cite{li2013},$\permittivity_m = 
+3.2$ for the membrane\cite{gramse2013} and $\permittivity_w = 78.15$ for the fluid reservoir.
 Other properties were set at those for an \ce{NaCl} solution in water at infinite dilution, with
-fluid density $\density = \SI{997}{\kilogram\per\cubic\meter}$;  dynamic viscosity $\viscosity = \SI{8.904e-4}{\pascal\second}$;
+fluid density $\density = \SI{997}{\kilogram\per\cubic\meter}$;  dynamic viscosity $\viscosity = 
+\SI{8.904e-4}{\pascal\second}$;
 charge numbers $\chargen_{\ce{Na+}} = +1$ and $\chargen_{\ce{Cl-}} = -1$;
-diffusion coefficients $\diffusion_{\ce{Na+}} = \SI{1.334e-9}{\square\meter\per\second}$ and $\diffusion_{\ce{Cl-}} = \SI{2.032e-9}{\square\meter\per\second}$;
-and mobilities $\mobility_{\ce{Na+}} = \SI{5.192e-4}{\square\meter\per\second\per\volt}$ and $\mobility_{\ce{Cl-}} = \SI{7.909e-4}{\square\meter\per\second\per\volt}$.
+diffusion coefficients $\diffusion_{\ce{Na+}} = \SI{1.334e-9}{\square\meter\per\second}$ and 
+$\diffusion_{\ce{Cl-}} = \SI{2.032e-9}{\square\meter\per\second}$;
+and mobilities $\mobility_{\ce{Na+}} = \SI{5.192e-4}{\square\meter\per\second\per\volt}$ and 
+$\mobility_{\ce{Cl-}} = \SI{7.909e-4}{\square\meter\per\second\per\volt}$.
 
 \paragraph{Boundary conditions.}
-The ion concentration at both reservoir boundaries was fixed using a Dirichlet boundary condition ($\concentration_i = \concentration_\textrm{bulk}$) 
+The ion concentration at both reservoir boundaries was fixed using a Dirichlet boundary condition 
+($\concentration_i = \concentration_\textrm{bulk}$) 
 and the free in-and outflow of fluid ensured by an open boundary condition with no normal stress
-($\left[-\pressure\identity + \viscosity\left(\nabla\velocity + \left(\nabla\velocity\right)^{\rm T}\right)\right]\normvec = 0$), effectively mimicking an endless reservoir.
-The bias voltage was applied to the \textit{trans} boundary ($\potential = \varpotential_\textrm{bias}$), while the \textit{cis} boundary was grounded ($\potential = 0$).
-On the nanopore and bilayer surface we applied a no-slip ($\vec{\velocity} = 0$) and no flux ($-\normvec\cdot\vec{\flux}_i = 0$) boundary conditions.
+($\left[-\pressure\identity + \viscosity\left(\nabla\velocity + \left(\nabla\velocity\right)^{\rm 
+T}\right)\right]\normvec = 0$), effectively mimicking an endless reservoir. The bias voltage was applied to 
+the \textit{trans} boundary ($\potential = \varpotential_\textrm{bias}$), while the \textit{cis} boundary was 
+grounded ($\potential = 0$). On the nanopore and bilayer surface we applied a no-slip ($\vec{\velocity} = 0$) 
+and no flux ($-\normvec\cdot\vec{\flux}_i = 0$) boundary conditions.
 
 \subsection{Extended PNP-NS (ePNP-NS) equations}
 Because the classical PNP-NS equations do not include any interactions between components in the system,
@@ -262,16 +307,18 @@ To mitigate these issues, we implemented three self-consistent corrections to th
 (3) inclusion of a finite ion size term to the NPE. 
 
 \paragraph{Concentration dependent properties.}
-The concentration dependent ion self-diffusion coefficients $\diffusion_{i}^1(\dconc)$, cation transport number $\transportn_{i}(\dconc)$,
-viscosity $\viscosity^1(\dconc)$, density $\density(\dconc)$ and relative permittivity $\permittivity_{w}(\dconc)$ could be fitted 
-directly the experimental data with the empirical equations given in \cref{tab:corrections_equations}.
-Here $\dconc = \avionconc/\SI{1}{\Molar}$ is a dimensionless value that represents the average ion concentration.
-The concentration-dependent ionic mobility $\mobility^1_{i}$ must first be derived from the salt's molar conductivity $\molarconductivity$
-and the ion's transport number $\transportn_{i}$ before it can be fitted\cite{aburto2013I}
+The concentration dependent ion self-diffusion coefficients $\diffusion_{i}^1(\dconc)$, cation transport 
+number $\transportn_{i}(\dconc)$, viscosity $\viscosity^1(\dconc)$, density $\density(\dconc)$ and relative 
+permittivity $\permittivity_{w}(\dconc)$ could be fitted directly the experimental data with the empirical 
+equations given in \cref{tab:corrections_equations}. Here $\dconc = \avionconc/\SI{1}{\Molar}$ is a 
+dimensionless value that represents the average ion concentration. The concentration-dependent ionic mobility 
+$\mobility^1_{i}$ must first be derived from the salt's molar conductivity $\molarconductivity$ and the ion's 
+transport number $\transportn_{i}$ before it can be fitted\cite{aburto2013I}
 \begin{align}
 \label{eq:conductivity-to-mobility}
 \mobility_{i}(\concentration) = \frac{\specmolarconductivity_{i}(\concentration)}{\chargen_{i}\faraday} 
-\quad\text{with}\quad \specmolarconductivity_{i}(\concentration) = \molarconductivity(\concentration) \transportn_{i}(\concentration),
+\quad\text{with}\quad \specmolarconductivity_{i}(\concentration) = \molarconductivity(\concentration) 
+\transportn_{i}(\concentration),
 \end{align}
 where $\specmolarconductivity_{i}(\concentration)$ is the specific molar conductivity of ion $i$.
 
@@ -281,19 +328,27 @@ where $\specmolarconductivity_{i}(\concentration)$ is the specific molar conduct
 % viscosity and density \cite{hai-lang1996}
 % relative permittivity \cite{gavish2016}
 
-All fitting functions can be found in \cref{tab:corrections_equations}, their fitting coefficients in \cref{suppinfo:tab:corrections_parameters} and a plot of the fits to the experimental data in \cref{suppinfo:fig:corrections}.
+All fitting functions can be found in \cref{tab:corrections_equations}, their fitting coefficients in 
+\cref{suppinfo:tab:corrections_parameters} and a plot of the fits to the experimental data in 
+\cref{suppinfo:fig:corrections}.
 
 \paragraph{Wall-distance corrections.}
-The diffusivity of small molecules such ions or water depends heavily on their proximity, i.e. within \SI{1.0}{\nano\meter} distance, to large molecules such as proteins or DNA.\cite{makarov1998}
-In small nanopores (\SI{\le 5}{\nano\meter} radius), these effects encompass a significant fraction of the total nanopore radius, and hence cannot be neglected.\cite{simakov2010,pederson2015}
-For the wall-distance dependent diffusion coefficients $\diffusion_{i}^2(\dwall)$ and mobilities $\mobility_{i}^2(\dwall)$ we used Eq.~11 from ref.~\citenum{simakov2010} 
-and the fitting parameters obtained by the authors.
-For the wall-distance dependent viscosity $\viscosity^2(\dwall)$, we first offset the inverse viscosity data from Figure~4 of ref.~\citenum{pronk2013} by each proteins' respective hydrodynamic radius, which we assume to be a good approximation of the average protein radius, and fitted all the resulting data points with a logistic function.
+The diffusivity of small molecules such ions or water depends heavily on their proximity, i.e. within 
+\SI{1.0}{\nano\meter} distance, to large molecules such as proteins or DNA.\cite{makarov1998} In small 
+nanopores (\SI{\le 5}{\nano\meter} radius), these effects encompass a significant fraction of the total 
+nanopore radius, and hence cannot be neglected.\cite{simakov2010,pederson2015} For the wall-distance 
+dependent diffusion coefficients $\diffusion_{i}^2(\dwall)$ and mobilities 
+$\mobility_{i}^2(\dwall)$ we used Eq.~11 from ref.~\citenum{simakov2010} 
+and the fitting parameters obtained by the authors. For the wall-distance dependent viscosity 
+$\viscosity^2(\dwall)$, we first offset the inverse viscosity data from Figure~4 of ref.~\citenum{pronk2013} 
+by each proteins' respective hydrodynamic radius, which we assume to be a good approximation of the average 
+protein radius, and fitted all the resulting data points with a logistic function.
 
 \paragraph{Finite ion-size effects.}
-Because the PNP equations do not take the size of the ions into account, they tend to overscreen locations with high charge densities resulting in unrealistically high ion concentrations.\cite{corry2000}
-This problem can be addressed by the addition of a nonlinear flux term to the NPE that poses an upper limit to the concentration.
-We opted for the size-modified PNP (SMPNP) framework developed by Lu and Zhou,\cite{lu2011}
+Because the PNP equations do not take the size of the ions into account, they tend to overscreen locations 
+with high charge densities resulting in unrealistically high ion concentrations.\cite{corry2000} This problem 
+can be addressed by the addition of a nonlinear flux term to the NPE that poses an upper limit to the 
+concentration. We opted for the size-modified PNP (SMPNP) framework developed by Lu and Zhou,\cite{lu2011}
 \begin{align}
 \nabla\cdot\flux_{i} = \nabla\cdot\left(
 	- \diffusion_{i}\nabla\concentration_{i}
@@ -302,12 +357,14 @@ We opted for the size-modified PNP (SMPNP) framework developed by Lu and Zhou,\c
 	+ \velocity\concentration_{i}\right)
 	\quad\text{with}\quad k_{i}=\ionsize_{i}^3/\ionsize_{0}^3
 \end{align}
-where $\ionsize_{i}$ and $\ionsize_{0}$ represent the maximum packing radius in a cubic lattice for ions and solvent molecules, respectively.
-The radii were set to \SI{0.5}{\nano\meter} for both \ce{Na+} and \ce{Cl-} and to \SI{0.311}{\nano\meter} for water,
-corresponding to maximum concentrations of \SI{13.3}{\Molar} and \SI{55.2}{\Molar}, respectively. 
+where $\ionsize_{i}$ and $\ionsize_{0}$ represent the maximum packing radius in a cubic lattice for ions and 
+solvent molecules, respectively. The radii were set to \SI{0.5}{\nano\meter} for both \ce{Na+} and \ce{Cl-} 
+and to \SI{0.311}{\nano\meter} for water, corresponding to maximum concentrations of \SI{13.3}{\Molar} and 
+\SI{55.2}{\Molar}, respectively. 
 
 \paragraph{The final ePNP-NS model.}
-We obtain the final ePNP-NS model by substituting the following, traditionally constant, parameters of the PNP-NS equations by the concentration- and distance-dependent functions
+We obtain the final ePNP-NS model by substituting the following, traditionally constant, parameters of the 
+PNP-NS equations by the concentration- and distance-dependent functions
 \begin{align}
 \diffusion_{i}		&= \left[ \diffusion_{i}^1(\dconc) \times \diffusion_{i}^2(\dwall) \right] \times \SI{e-9}{\square\meter\per\second}, \\
 \mobility_{i}  		&= \left[ \mobility_{i}^1(\dconc) \times \mobility_{i}^2(\dwall) \right] \times \SI{e-8}{\square\meter\per\second\per\volt}, \\
@@ -315,13 +372,13 @@ We obtain the final ePNP-NS model by substituting the following, traditionally c
 \density 	   		&= \density(\dconc) \times\SI{e3}{\kg\per\cubic\meter} \quad\text{and}, \\
 \permittivity_{w} 	&= \permittivity_{w}(\dconc)
 \end{align}
-where $\dconc = \avionconc/\SI{1}{\Molar}$ and $\dwall = \walldistance/\SI{1}{\nano\meter}$ represent the dimensionless average ion concentration and dimensionless distance from the nanopore wall, respectively.
-The detailed equations behind these functions are listed in \cref{tab:corrections_equations}, 
-their fits to the experimental data are shown in \cref{suppinfo:fig:corrections} 
-and the resulting fitting parameters are listed in \cref{suppinfo:tab:corrections_parameters}.
+where $\dconc = \avionconc/\SI{1}{\Molar}$ and $\dwall = \walldistance/\SI{1}{\nano\meter}$ represent the 
+dimensionless average ion concentration and dimensionless distance from the nanopore wall, respectively.
+The detailed equations behind these functions are listed in \cref{tab:corrections_equations}, their fits to 
+the experimental data are shown in \cref{suppinfo:fig:corrections} and the resulting fitting parameters are 
+listed in \cref{suppinfo:tab:corrections_parameters}.
 
 \input{tab_corrections_equations.tex}
-
 
 \section{Experimental}
 \paragraph{Single-channel ionic current measurements.}
@@ -329,8 +386,11 @@ and the resulting fitting parameters are listed in \cref{suppinfo:tab:correction
 
 \newpage
 \section{Results}
-In this section, we start by our describing experimental data on the ionic transport through ClyA in terms of conductance, rectification and ion selectivity, and compare these directly with our continuum simulations.
-Next, we discuss the influence of the applied bias voltage and the bulk ionic strength on 3 distinct nanopore properties: 1) the distribution of cations and anions inside the pore, 2) the total electrostatic potential and 3) the electro-osmotic flow. 
+In this section, we start by our describing experimental data on the ionic transport through ClyA in terms of 
+conductance, rectification and ion selectivity, and compare these directly with our continuum simulations. 
+Next, we discuss the influence of the applied bias voltage and the bulk ionic strength on 3 distinct nanopore 
+properties: 1) the distribution of cations and anions inside the pore, 2) the total electrostatic potential 
+and 3) the electro-osmotic flow. 
 
 \input{fig_conductance.tex}
 
@@ -338,27 +398,33 @@ Next, we discuss the influence of the applied bias voltage and the bulk ionic st
 % Key message: The extensions made to the PNP-NS equations are necessary to accurately predict the ionic current flowing through ClyA over a wide range of salt concentrations and bias voltages
 
 \paragraph{Ionic current and conductance.}
-The ionic current flowing through a nanopore is determined by both characteristics of the pore itself (i.e., its shape, size and electrostatic field),
-and by the properties of the electrolyte that surrounds it (i.e., ion diffusion coefficients, ion electrophoretic mobilities, solvent viscosity, density and relative permittivity).
-In order to reliably predict the ionic current, our nanopore simulation should thus not only contain an accurate geometry and charge distribution,
-it must also model all important transport processes (i.e., diffusion, electromigration and convection),
-which in turn should be parametrized with values relevant to the local conditions in the nanopore and the bulk electrolyte.
+The ionic current flowing through a nanopore is determined by both characteristics of the pore itself (i.e., 
+its shape, size and electrostatic field), and by the properties of the electrolyte that surrounds it (i.e., 
+ion diffusion coefficients, ion electrophoretic mobilities, solvent viscosity, density and relative 
+permittivity). In order to reliably predict the ionic current, our nanopore simulation should thus not only 
+contain an accurate geometry and charge distribution, it must also model all important transport processes 
+(i.e., diffusion, electromigration and convection), which in turn should be parametrized with values relevant 
+to the local conditions in the nanopore and the bulk electrolyte.
 
-To validate the ionic currents predicted by our computational model of the biological nanopore ClyA-AS Type I (ClyA)\citep{soskine2013},
-we used single-channel electrophysiology measure the current-voltage characteristics for \SIlist[list-units=single]{50;150;500;1000;3000}{\milli\Molar} \ce{NaCl} and
-between \SIlist[list-units=single]{-150;+150}{\milli\volt} with \SI{5}{\milli\volt} steps (\cref{fig:conductance}).
-The ionic current $\currentsim$ in our simulation was calculated by integration of the ionic flux $\vec{\flux_{i}}$ of each ion $i$ across the \textit{cis} reservoir boundary $S$:
+To validate the ionic currents predicted by our computational model of the biological nanopore ClyA-AS Type I 
+(ClyA)\citep{soskine2013}, we used single-channel electrophysiology measure the current-voltage 
+characteristics for \SIlist[list-units=single]{50;150;500;1000;3000}{\milli\Molar} \ce{NaCl} and between 
+\SIlist[list-units=single]{-150;+150}{\milli\volt} with \SI{5}{\milli\volt} steps (\cref{fig:conductance}). 
+The ionic current $\currentsim$ in our simulation was calculated by integration of the ionic flux 
+$\vec{\flux_{i}}$ of each ion $i$ across the \textit{cis} reservoir boundary $S$:
 \begin{equation}
 	\currentsim = \faraday\int_{S}\left(\displaystyle\sum_{i} \chargen_{i}\normvec\cdot\vec{\flux_{i}}\right)dS  
 \end{equation}
-with $\faraday$ the Faraday constant (\SI{96.485}{\coulomb\per\mole}), $\chargen_{i}$ the ion charge number and $\normvec$ the normal vector.
-Simulations were performed at \SIlist[list-units=single]{1;5;10;25;50;75;100;125;150;200;250;300;400;500;750;1000;1500;2000;2500;3000;4000;5000}{\milli\Molar}.
+with $\faraday$ the Faraday constant (\SI{96.485}{\coulomb\per\mole}), $\chargen_{i}$ the ion charge number 
+and $\normvec$ the normal vector. Simulations were performed at 
+\SIlist[list-units=single]{1;5;10;25;50;75;100;125;150;200;250;300;400;500;750;1000;1500;2000;2500;3000;4000;5000}{\milli\Molar}.
 
 
-In \cref{fig:conductance}a we plotted the experimental and simulated (PNP-NS and ePNP-NS) IV curves for several concentrations (\SIlist[list-units=single]{50;150;500;3000}{\milli\Molar})
-which we deemed representative of the experimentally relevant range of ionic strengths.
-The IV curves of ClyA exhibit the typical rectification of a negatively charged conical nanopore, with higher currents at positive compared to negative bias.\textbf{REF}
-The magnitude of the rectification depends heavily on the salt concentration 
+In \cref{fig:conductance}a we plotted the experimental and simulated (PNP-NS and ePNP-NS) IV curves for 
+several concentrations (\SIlist[list-units=single]{50;150;500;3000}{\milli\Molar}) which we deemed 
+representative of the experimentally relevant range of ionic strengths. The IV curves of ClyA exhibit the 
+typical rectification of a negatively charged conical nanopore, with higher currents at positive compared to 
+negative bias.\textbf{REF} The magnitude of the rectification depends heavily on the salt concentration 
 
 together with the simulated values obtained with the PNP-NS and the ePNP-NS equations.
 While both models show the same qualitative trends as the experimental data, i.e.  in terms of ionic current rectification
