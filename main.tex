@@ -102,6 +102,39 @@ Biological nanopores have become valuable tools for the detection and analysis o
 \newpage
 % Introduction
 \section{Introduction}
+Biosensors have been an intense field of research in the recent decades~\cite{zhan2015}. 
+Several breatkthroughs have enabled them to play integral role in the life sciences with
+applications ranging from the monitoring of blood glucose levels~\cite{chen2013} to ??. 
+
+A particular challenge for state-of-the-art biosensors is that they need to reach molecular
+sensitivities.  Nanopore based sensors solve this problem elegantly by funneling a solution
+containing molecules of interest through a pore in a membrane. If the pore is approximately the
+same size as the molecules, there can only ever be a single molecule inside the pore. The response
+of the ion current shift due to the blockage of the pore therefore achieves molecular sensitivity
+(see Fig.~\ref{} for an illustration).
+
+However, as the size of molecules is usually on the order of nanometer, it is not yet possible to
+reproducibly build solid state nanopores~\cite{} since both shape and size affect the resulting
+signal ion currents through the nanopore significantly. An alternative design is to self-assembled
+protein nanopores suspended on lipid bilayers have proven to be very accurate and to yield
+reproducible results~\cite{deam2016}. In fact their properties as biosensors are so desirable that
+they have already been commercialized for DNA sequencing applications~\cite{}. 
+
+Despite the successes of these biological nanopores, the modeling of the sensor operation is still
+in its infancy due to the multi-scale nature of the problem. On the one hand, it is necessary to
+resolve the charge distribution of the protein on the atomic level requiring molecular dynamics
+(MD)~\cite{}.  On the other hand, the size of the solvent reservoirs and thus the number of
+particles is too large to for a comprehensive MD simulation. More suited to the problem of the
+flow of the solvent as well as the electromigration and diffusion of the ions in the solvent is a
+continuum approach based on the Navier-Stokes equation (NSE) and the Poisson-Nernst-Planck equations
+(PNPE)~\cite{}.
+
+Thus the simulation of the nanopore sits awkwardly at the intersection of macroscopic and the
+microscopic. In this work, we want to show that it is still possible -- with remarkable accuracy --
+to simulate the operation of a biological nanopore using a continuum approach based on the NSE and
+PNPE. However, we will also see the limits of this approach which hint at the experimentally
+unexplored states of solutions within nanopores which are unlike anything that can be found in bulk
+solutions.
 
 
 TODO
