@@ -1,22 +1,49 @@
 \begin{figure*}[htbp]
-	
 	\centering
-	
-	% figure path
-	\includegraphics[scale=1]{figures/pdf/fig_conductance}
+	\begin{subfigure}[t]{4cm}
+		\centering
+		\caption{}\label{fig:current_iv_curves}
+		\includegraphics[scale=1]{figures/pdf/current/fig_current_iv_curves}
+	\end{subfigure}
+	\hspace{-0.5cm}
+	\begin{subfigure}[t]{4cm}
+		\centering
+		\caption{}\label{fig:current_conductance_curves}
+		\includegraphics[scale=1]{figures/pdf/current/fig_current_conductance_curves}
+	\end{subfigure}
+	%\hspace{-0.5cm}
+	\begin{minipage}[t]{8.5cm}
+		\begin{subfigure}[t]{9cm}
+			\centering
+			\caption{}\label{fig:current_conductance_contour}
+			\includegraphics[scale=1]{figures/pdf/current/fig_current_conductance_contour}
+		\end{subfigure}
+		
+		\begin{subfigure}[t]{9cm}
+			\centering
+			\caption{}\label{fig:current_rectification_contour}
+			\includegraphics[scale=1]{figures/pdf/current/fig_current_rectification_contour}
+		\end{subfigure}
+	\end{minipage}
 	
 	% caption
 	\caption
 	[\textbf{Conductance characteristics of single ClyA nanopores at different ionic strengths.}]
 	{
 		\textbf{Conductance characteristics of single ClyA nanopores at different ionic strengths.}
-		(a) Subset of the IV curves that were measured experimentally (\graphmarker{circle}{black}) and simulated using the classical PNP-NS (\graphline{solid}{graphgreen}) and extended PNP-NS (\graphline{solid}{graphpurple}) equations  at \SIlist[list-units=single]{50;150;500;3000}{\milli\Molar}.
-		Contour plots showing the conductance ($G = I/V$) landscape of ClyA-AS vs. bias voltage and salt concentration (\ce{NaCl}) (b) as measured experimentally with single channel recordings at \SI{298(1)}{\kelvin} and 
-		(c) as calculated by our simulation (left: PNP-NS, right: ePNP-NS).
-		(d) Contour plots showing the of percentage relative error of the simulated conductance landscape compared to the experimental one (left: PNP-NS, right: ePNP-NS).
-		The classical PNP-NS equations significantly overestimate the conductance under all conditions, particularly at high salt concentrations (\SI{>100}{\percent}).
-		In contrast, the errors of the ePNP-NS model are generally below \SIrange{5}{10}{\percent}.
-		The error is highest in the low concentration regime at positive bias voltages.
+		Comparison of the IV curves (a) and conductance curves $G = I/V$ (b) that were measured 
+		experimentally (\graphmarker{circle}{black}) and simulated using the classical PNP-NS 
+		(\graphline{solid}{graphgreen}) and extended PNP-NS (\graphline{solid}{graphpurple}) equations  at 
+		\SIlist[list-units=single]{50;150;500;1000;3000}{\milli\Molar}.
+		(c) Contour plots showing the relative error ($\displaystyle\frac{G_\text{s}-G_\text{m}}{G_{m}}$) 
+		between the simulation (left: PNP-NS, right: ePNP-NS) and the experimentally measured values in term 
+		of both the bias voltage and the concentration.
+		Note that the classical PNP-NS equations significantly overestimate the conductance under all 
+		conditions, particularly at high salt concentrations (\SI{>100}{\percent}).
+		In contrast, the errors of the ePNP-NS model are generally below \SIrange{5}{10}{\percent}, with the 
+		highest error in the low concentration regime and at positive bias voltages.
+		(d) Contour plots of the ion conductance rectification (ICR) vs. the bias voltage and the salt 
+		concentration as determined experimentally (left) and with ePNP-NS simuation (right).
 	}
 	
 	% label

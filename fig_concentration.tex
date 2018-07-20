@@ -1,16 +1,24 @@
 \begin{figure*}[htbp]
 \centering
-
-
-\begin{subfigure}[t]{7cm}
-	\centering
-	\caption{}\label{fig:concentration_pore_average}
-	\includegraphics[scale=1]{figures/pdf/fig_concentration_pore_average}
-\end{subfigure}
+\begin{minipage}[t]{5cm}
 \begin{subfigure}[t]{5cm}
 	\centering
+	\caption{}\label{fig:concentration_pore_average_vs_voltage}
+	\includegraphics[scale=1]{figures/pdf/fig_concentration_pore_average_vs_voltage}
+\end{subfigure}
+
+\begin{subfigure}[t]{5cm}
+	\centering
+	\caption{}\label{fig:concentration_pore_average_vs_concentration}
+	\includegraphics[scale=1]{figures/pdf/fig_concentration_pore_average_vs_concentration}
+\end{subfigure}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[t]{10cm}
+\begin{subfigure}[t]{6cm}
+	\centering
 	\caption{}\label{fig:concentration_contour}
-	\includegraphics[scale=1]{figures/pdf/fig_concentration_contour}
+	\includegraphics[scale=1]{figures/pdf/fig_concentration_contour_single}
 \end{subfigure}
 \hspace{-0.5cm}
 \begin{subfigure}[t]{4cm}
@@ -18,6 +26,7 @@
 	\caption{}\label{fig:concentration_radial_average}
 	\includegraphics[scale=1]{figures/pdf/fig_concentration_radial_average}
 \end{subfigure}
+\end{minipage}
 
 
 % legend commands
@@ -54,24 +63,36 @@
 \newcommand{\rachlpos}{\raisebox{2pt}{\tikz{\draw[-,blue,dotted,line width = 0.75pt](0,0) -- (5mm,0);}}}
 
 
-
-
 % caption
 \caption[\textbf{Ion concentration distribution inside ClyA.}]
 {
 \textbf{Ion concentration distribution inside ClyA.}
-(\subref{fig:concentration_pore_average})
-Relative ion concentrations averaged over the pore interior for \ce{Na+} (top) and \ce{Cl-} (bottom) 
-at 5 (\protect\bluesolid, \protect\bluedotted), 50 (\protect\orangesolid, \protect\orangedotted),
-150  (\protect\greensolid, \protect\greendotted), 500 (\protect\redsolid, \protect\reddotted),
-1000 (\protect\purplesolid, \protect\purpledotted) and \SI{5000}{\mM} (\protect\brownsolid, \protect\browndotted).
-(\subref{fig:concentration_contour})
-Contour plots of the \ce{Na+} (top) and \ce{Cl-} (bottom) concentrations inside the pore relative to the bulk value of \SI{150}{\mM}
-at bias voltages \SI{-100}{\mV} (left) and \SI{+100}{\mV} (right).
-(\subref{fig:concentration_radial_average})
-Radially averaged relative ion concentration profiles along the z-axis of pore 
-for \ce{Na+} (top) and \ce{Cl-} (bottom) at \SI{-100}{\mV} (\protect\rasodneg, \protect\rachlneg) and 
-\SI{+100}{\mV} (\protect\rasodpos, \protect\rachlpos).
+Relative ion concentrations averaged over the entire pore in function of (a) bias voltage and (b) bulk salt 
+concentration for both \ce{Na+} (full blue lines) and \ce{Cl-} (dotted red lines). Note that in general there 
+is a considerable enhancement for \ce{Na+} and a significant depletion for \ce{Cl-}, even at physiological 
+concentrations (\SI{\approx150}{\mM}). Both effects diminish with increasing concentration and bulk-like 
+conditions are observed for both ions at \SI{\approx0.5}{\Molar}.
+(c) Contour plots of the \ce{Na+} (top) and \ce{Cl-} (bottom) concentrations inside the pore relative to the 
+bulk value of \SI{150}{\mM} at bias voltages \SI{-100}{\mV} (left) and \SI{+100}{\mV} (right). These plots 
+indicate that under most conditions the ion concentrations in the lumen of the pore are bulk like, with the 
+constrictions showing the most drastic changes. Under negative bias voltages however, the lumen of the pore 
+becomes fully depleted from \ce{Cl-}.
+(d) Radially averaged relative ion concentration profiles along the z-axis of pore for \ce{Na+} (top) and 
+\ce{Cl-} (bottom) at \SI{-100}{\mV} (red) and \SI{+100}{\mV} (blue). 
+%(\subref{fig:concentration_pore_average})
+%Relative ion concentrations averaged over the pore interior for \ce{Na+} (top) and \ce{Cl-} (bottom) 
+%at 5 (\protect\bluesolid, \protect\bluedotted), 50 (\protect\orangesolid, \protect\orangedotted),
+%150  (\protect\greensolid, \protect\greendotted), 500 (\protect\redsolid, \protect\reddotted),
+%1000 (\protect\purplesolid, \protect\purpledotted) and \SI{5000}{\mM} (\protect\brownsolid, 
+%\protect\browndotted).
+%(\subref{fig:concentration_contour})
+%Contour plots of the \ce{Na+} (top) and \ce{Cl-} (bottom) concentrations inside the pore relative to the 
+%bulk value of \SI{150}{\mM}
+%at bias voltages \SI{-100}{\mV} (left) and \SI{+100}{\mV} (right).
+%(\subref{fig:concentration_radial_average})
+%Radially averaged relative ion concentration profiles along the z-axis of pore 
+%for \ce{Na+} (top) and \ce{Cl-} (bottom) at \SI{-100}{\mV} (\protect\rasodneg, \protect\rachlneg) and 
+%\SI{+100}{\mV} (\protect\rasodpos, \protect\rachlpos).
 }
 
 % label
