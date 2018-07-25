@@ -1,16 +1,59 @@
-% Extra commands (e.g. for linestyles)
-
 % create the figure
 \begin{figure}[htbp]
-
-\centering
-
-% figure path
-\includegraphics[scale=1]{figures/pdf/fig_model_concept}
+	\centering
+	\begin{minipage}[t]{5.5cm}
+		\begin{subfigure}[t]{5cm}
+			\centering
+			\caption{}\label{fig:clya_atomistic_side}
+			\includegraphics[width=5cm]{figures/concept/clya_side}
+		\end{subfigure}
+		\begin{subfigure}[t]{5cm}
+			\centering
+			\caption{}\label{fig:clya_atomistic_top}
+			\includegraphics[width=5cm]{figures/concept/clya_top}
+		\end{subfigure}
+	\end{minipage}
+  \vspace{1cm}
+  \begin{minipage}[t]{8.25cm}
+    \begin{subfigure}[t]{4.5cm}
+      \centering
+      \caption{}\label{fig:model_geometry}
+      \includegraphics[width=4.5cm]{figures/concept/model_geometry}
+    \end{subfigure}
+    \hspace{-0.8cm}
+    \begin{minipage}[t]{4.2cm}
+      \begin{subfigure}[t]{4.2cm}
+        \centering
+        \caption{}\label{fig:model_geometry_zoom}
+        \includegraphics[width=4.2cm]{figures/concept/model_geometry_zoom}
+      \end{subfigure}
+      \begin{minipage}[t]{4.5cm}
+        \hspace{0.7cm}
+        \begin{subfigure}[t]{1.2cm}
+          \centering
+          \caption{}\label{fig:model_geometry_vs_wedge}
+          \includegraphics[width=1.2cm]{figures/concept/model_geometry_vs_wedge}
+        \end{subfigure}
+        \begin{subfigure}[t]{2cm}
+          \centering
+          \caption{}\label{fig:model_charge_density}
+          \includegraphics[width=2cm]{figures/concept/model_charge_density}
+        \end{subfigure}
+      \end{minipage}
+    \end{minipage}
+  \end{minipage}
+%	\begin{subfigure}
+%		\centering
+%		\caption{}\label{fig:model_concept}
+%		\includegraphics[scale=1]{figures/concept/model_concept}
+%	\end{subfigure}
 
 % caption
 \caption[Geometry, charge distribution and boundary conditions of a 2D-axisymmetric of ClyA.]
 {
+\textbf{Atomistic model of ClyA-AS.}
+(\subref{fig:clya_atomistic_side}) Cross-sectional and (\subref{fig:clya_atomistic_top}) top views of an 
+all-atom model of the dodecameric nanopore ClyA-AS embedded in a lipid bilayer.
 (a) 2D-axisymmetric model of ClyA (grey) embedded in a lipid bilayer (green) and surrounded by a spherical water reservoir (blue).
 The former two are represented by solid dielectric blocks a relative permittivity of $\permittivity_p=20$ and $\permittivity_m=3.2$, respectively.
 A bias voltage ($\varpotential_\textrm{bias}$) is applied from the \textit{trans} reservoir boundary, while the \textit{cis} side is kept grounded.
