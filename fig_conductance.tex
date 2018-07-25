@@ -1,30 +1,64 @@
 \begin{figure*}[htbp]
-	\centering
-	\begin{subfigure}[t]{4cm}
-		\centering
-		\caption{}\label{fig:current_iv_curves}
-		\includegraphics[scale=1]{figures/pdf/current/fig_current_iv_curves}
-	\end{subfigure}
-	\hspace{-0.5cm}
-	\begin{subfigure}[t]{4cm}
-		\centering
-		\caption{}\label{fig:current_conductance_curves}
-		\includegraphics[scale=1]{figures/pdf/current/fig_current_conductance_curves}
-	\end{subfigure}
-	%\hspace{-0.5cm}
-	\begin{minipage}[t]{8.5cm}
-		\begin{subfigure}[t]{9cm}
-			\centering
-			\caption{}\label{fig:current_conductance_contour}
-			\includegraphics[scale=1]{figures/pdf/current/fig_current_conductance_contour}
-		\end{subfigure}
-		
-		\begin{subfigure}[t]{9cm}
-			\centering
-			\caption{}\label{fig:current_rectification_contour}
-			\includegraphics[scale=1]{figures/pdf/current/fig_current_rectification_contour}
-		\end{subfigure}
-	\end{minipage}
+  \centering
+  \begin{subfigure}[t]{3.75cm}
+    \centering
+    \caption{}\vspace{-3mm}\label{fig:current-voltage_curves}
+    \includegraphics[scale=1]{figures/conductance/current_vs_voltage_all_multiplot}
+  \end{subfigure}
+  \hspace{0.5cm}
+  \begin{minipage}[t]{12cm}
+    \begin{minipage}[t]{12cm}
+      \begin{subfigure}[t]{4.5cm}
+        \centering
+        \caption{}\vspace{-3mm}\label{fig:conductance-voltage_curves}
+        \includegraphics[scale=1]{figures/conductance/conductance_vs_voltage_all}
+      \end{subfigure}
+      \hspace{0.5cm}
+      \begin{minipage}[t]{6.5cm}
+        \begin{subfigure}[t]{5cm}
+          \centering
+          \caption{}\vspace{-3mm}\label{fig:conductance-concentration_0mV_curves}
+          \includegraphics[scale=1]{figures/conductance/conductance_vs_concentration_at0mV}
+        \end{subfigure}
+        \begin{subfigure}[t]{5cm}
+          \vspace*{-5mm}
+          \centering
+          \caption{}\vspace{-3mm}\label{fig:conductance_norm-concentration_0mV_curves}
+          \includegraphics[scale=1]{figures/conductance/conductance_normalized_vs_concentration_at0mV}
+        \end{subfigure}
+      \end{minipage}
+    \end{minipage}
+    \begin{minipage}{12cm}
+      \begin{subfigure}[t]{4cm}
+        \centering
+        \caption{}\vspace{-3mm}\label{fig:conductance_contour}
+        \includegraphics[scale=1]{figures/conductance/conductance_vs_voltage_and_concentration_measured}
+      \end{subfigure}
+      \hspace{5mm}
+      \begin{subfigure}[t]{7cm}
+        \centering
+        \caption{}\vspace{-3mm}\label{fig:conductance_error_contour}
+        \includegraphics[scale=1]{figures/conductance/conductance_error_vs_voltage_and_concentration}
+      \end{subfigure}
+    \end{minipage}
+    \begin{minipage}{12cm}
+      \begin{subfigure}[t]{4cm}
+        \centering
+        \caption{}\vspace{-3mm}\label{fig:rectification_contour}
+        \includegraphics[scale=1]{figures/conductance/rectification_vs_voltage_and_concentration_measured}
+      \end{subfigure}
+      \begin{subfigure}[t]{3.5cm}
+        \centering
+        \caption{}\vspace{-3mm}\label{fig:rectification_vs_voltage}
+        \includegraphics[scale=1]{figures/conductance/rectification_vs_voltage_all}
+      \end{subfigure}
+      \begin{subfigure}[t]{4cm}
+        \centering
+        \caption{}\vspace{-3mm}\label{fig:rectification_vs_concentration}
+        \includegraphics[scale=1]{figures/conductance/rectification_vs_concentration_at75mV}
+      \end{subfigure}
+    \end{minipage}
+  \end{minipage}
 	
 	% caption
 	\caption
@@ -45,6 +79,20 @@
 		(d) Contour plots of the ion conductance rectification (ICR) vs. the bias voltage and the salt 
 		concentration as determined experimentally (left) and with ePNP-NS simuation (right).
 	}
+
+%\textbf{Ion conductance rectification (ICR) of single ClyA nanopores at different ionic strengths.}
+%The ICR for bias voltage $\varpotential$ is defined by $G(+\varpotential)/G(-\varpotential)$ and shows the 
+%ratio between the nanopore conductance at positive relative to the conductance at negative bias.
+%(\subref{fig:rectification_contour}) Contour plots of the ICR vs. the bias voltage and salt concentration as 
+%determined experimentally (left) and with ePNP-NS simuation (right).
+%While the simulation somewhat overestimates the magnitude at lower salt concentrations 
+%(\SI{<500}{\milli\Molar}), there is an excellent qualitative match.
+%(\subref{fig:rectification_section}) The ICR at \SI{+100}{\milli\volt} vs. the salt concentration as 
+%measured experimentally (\protect\experimental) and simulated with ePNP-NS (\protect\epnpns).
+%A maximum is observed at \SI{\approx 150}{\milli\Molar} \ce{NaCl} in both the experiment (1.28) and the 
+%simulation (1.42).
+%The ICR falls exponentially towards a value of 1 for salt concentrations both lower and higher than 
+%\SI{150}{\milli\Molar}.
 	
 	% label
 	\label{fig:conductance}
