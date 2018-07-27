@@ -1,19 +1,19 @@
-% create the figure
 \begin{figure}[htbp]
+  
 	\centering
-	\begin{minipage}[t]{5.5cm}
-		\begin{subfigure}[t]{5cm}
+	\begin{minipage}[t]{3.5cm}
+		\begin{subfigure}[t]{3.5cm}
 			\centering
 			\caption{}\label{fig:clya_atomistic_side}
-			\includegraphics[width=5cm]{figures/concept/clya_side}
+			\includegraphics[width=3.5cm]{figures/concept/clya_side}
 		\end{subfigure}
-		\begin{subfigure}[t]{5cm}
+		\begin{subfigure}[t]{3.5cm}
 			\centering
 			\caption{}\label{fig:clya_atomistic_top}
-			\includegraphics[width=5cm]{figures/concept/clya_top}
+			\includegraphics[width=3.5cm]{figures/concept/clya_top}
 		\end{subfigure}
 	\end{minipage}
-  \vspace{1cm}
+  \hspace{1cm}
   \begin{minipage}[t]{8.25cm}
     \begin{subfigure}[t]{4.5cm}
       \centering
@@ -27,59 +27,50 @@
         \caption{}\label{fig:model_geometry_zoom}
         \includegraphics[width=4.2cm]{figures/concept/model_geometry_zoom}
       \end{subfigure}
+      \vspace{0.5cm}
       \begin{minipage}[t]{4.5cm}
-        \hspace{0.7cm}
+        \hspace{1cm}
         \begin{subfigure}[t]{1.2cm}
           \centering
           \caption{}\label{fig:model_geometry_vs_wedge}
+          \vspace{-3mm}
           \includegraphics[width=1.2cm]{figures/concept/model_geometry_vs_wedge}
         \end{subfigure}
         \begin{subfigure}[t]{2cm}
           \centering
           \caption{}\label{fig:model_charge_density}
+          \vspace{-3mm}
           \includegraphics[width=2cm]{figures/concept/model_charge_density}
         \end{subfigure}
       \end{minipage}
     \end{minipage}
   \end{minipage}
-%	\begin{subfigure}
-%		\centering
-%		\caption{}\label{fig:model_concept}
-%		\includegraphics[scale=1]{figures/concept/model_concept}
-%	\end{subfigure}
 
-% caption
-\caption[Geometry, charge distribution and boundary conditions of a 2D-axisymmetric of ClyA.]
+
+\caption[All-atom and 2D-axisymmetric models of ClyA.]
 {
-\textbf{Atomistic model of ClyA-AS.}
-(\subref{fig:clya_atomistic_side}) Cross-sectional and (\subref{fig:clya_atomistic_top}) top views of an 
-all-atom model of the dodecameric nanopore ClyA-AS embedded in a lipid bilayer.
-(a) 2D-axisymmetric model of ClyA (grey) embedded in a lipid bilayer (green) and surrounded by a spherical water reservoir (blue).
-The former two are represented by solid dielectric blocks a relative permittivity of $\permittivity_p=20$ and $\permittivity_m=3.2$, respectively.
-A bias voltage ($\varpotential_\textrm{bias}$) is applied from the \textit{trans} reservoir boundary, while the \textit{cis} side is kept grounded.
-Both boundaries are set up to mimic an endless reservoir of ions and water.
-(b) Zoom-in clearly showing the nanopore geometry.
-Note that the in the ePNP-NS model, the fluid viscosity $\viscosity$, the ion diffusion coefficients $\diffusion_{i}$ and the ion mobilities $\mobility_{i}$ are 
-a function of  the local average ion concentration $\avionconc$ and distance from the nanopore wall $\walldistance$,
-while the fluid's relative permittivity and $\permittivity_w$ and its density $\density$ are dependent only on $\avionconc$.
-The boundaries of nanopore and lipid bilayer in contact with the reservoir are set to no-slip (zero fluid velocity) and no-flux (impermeable to ions).
-(c) The fixed space charge density map of ClyA-AS ($\scdpore$), obtained by Gaussian projection of all charged atoms onto a 2D plane (see methods for details).
+\textbf{All-atom and 2D-axisymmetric models of ClyA.} (\subref{fig:clya_atomistic_side}) Cross-sectional and 
+(\subref{fig:clya_atomistic_top}) top views of an all-atom model of the dodecameric nanopore ClyA-AS embedded 
+in a lipid bilayer.\cite{soskine2013}
+(\subref{fig:model_geometry}) 2D-axisymmetric model of ClyA (grey) embedded in a lipid bilayer (green) and 
+surrounded by a spherical water reservoir (blue). The former two are represented by solid dielectric blocks a 
+relative permittivity of $\permittivity_p=20$ and $\permittivity_m=3.2$, respectively. A bias voltage 
+($\varpotential_\textrm{bias}$) is applied from the \textit{trans} reservoir boundary (red), while the 
+\textit{cis} side (green) is kept grounded. Both boundaries are set up to mimic an infinite reservoir of ions 
+and water. Note that the in the ePNP-NS model, the fluid viscosity $\viscosity$, the ion diffusion 
+coefficients $\diffusion_{i}$ and the ion mobilities $\mobility_{i}$ are a function of  the local average ion 
+concentration $\avionconc$ and distance from the nanopore wall $\walldistance$, while the fluid's relative 
+permittivity and $\permittivity_w$ and its density $\density$ are dependent only on $\avionconc$.
+(\subref{fig:model_geometry_zoom}) Zoom-in of the nanopore geometry and lipid bilayer. Their respective 
+boundaries in contact with the fluid reservoir are set to no-slip (zero fluid velocity) and no-flux 
+(impermeable to ions).
+(\subref{fig:model_geometry_vs_wedge}) The 2D-axisymmetric geometry was derived directly from the all-atom 
+model by computing the average inner and outer radii along the longitudinal axis of the pore, and hence 
+closely follows the outline of a \ang{30} wedge out of the homology model. 
+(\subref{fig:model_charge_density}) The fixed space charge density map of ClyA-AS ($\scdpore$), obtained by 
+Gaussian projection of each atom's partial charge onto a 2D plane (see methods for details).
 }
 
-% label
 \label{fig:model_concept}
 
 \end{figure}
-
-%% LONG CAPTION
-%\textbf{Geometry, charge distribution and boundary conditions of a 2D-axisymmetric of ClyA.}
-%(a) 2D-axisymmetric model of ClyA (grey) embedded in a \SI{2.8}{nm} thick lipid bilayer (green), both represented by solid dielectric blocks with permittivities $\relperm_p$ and $\relperm_m$, respectively.
-%They are surrounded by a spherical water reservoir with a radius of \SI{250}{\nano\meter} (blue).
-%The \textit{cis} and \textit{trans} boundaries are set-up to mimic an infinite reservoir by fixing their ion concentrations ($\concentration_{i} = \concentration_{i,\textrm{bulk}}$) and
-%by allowing for unrestricted fluid flow across them $\sigma_f\normvec=\left[-\pressure\identity + \viscosity\left(\nabla\velocity + \left(\nabla\velocity\right)^{\rm T}\right)\right]\normvec=0$).
-%A bias potential ($\potential=\varpotential_\textrm{bulk}$) is applied at \textit{trans} while the \textit{cis} boundary is kept grounded ($\potential=0$).
-%(b) Zoom-in clearly showing the nanopore geometry.
-%The reservoir's relative permittivity $\relperm_w$ and density $\density$ are only dependent on the local average ion concentration $\avionconc$,
-%while its viscosity $\viscosity$, the ion diffusion coeffiecients $\diffusion_{i}$ and ion mobilities $\mobility_{i}$ are a function of both $\avionconc$ and the distance from the nanopore walls $\walldistance$.
-%The nanopore and lipid bilayer boundaries  in contact with the reservoir have a no flux ($-\normvec\cdot\vec{\flux_{i}}=0$) and no slip ($\vec{\velocity}=0$) boundary conditions.
-%(c) Radially averaged charge density map of ClyA-AS, obtained by summation of all charged atoms onto a 2D plane, where each atom was represented as a 2D-Gaussian with a variance proportional the atom radius and a total integral equal to the net charge (see methods for details).

@@ -1,100 +1,136 @@
 \begin{figure*}[htbp]
   \centering
-  \begin{subfigure}[t]{3.75cm}
+  \begin{subfigure}[t]{4.5cm}
     \centering
     \caption{}\vspace{-3mm}\label{fig:current-voltage_curves}
     \includegraphics[scale=1]{figures/conductance/current_vs_voltage_all_multiplot}
   \end{subfigure}
-  \hspace{0.5cm}
-  \begin{minipage}[t]{12cm}
-    \begin{minipage}[t]{12cm}
-      \begin{subfigure}[t]{4.5cm}
-        \centering
-        \caption{}\vspace{-3mm}\label{fig:conductance-voltage_curves}
-        \includegraphics[scale=1]{figures/conductance/conductance_vs_voltage_all}
-      \end{subfigure}
-      \hspace{0.5cm}
-      \begin{minipage}[t]{6.5cm}
-        \begin{subfigure}[t]{5cm}
-          \centering
-          \caption{}\vspace{-3mm}\label{fig:conductance-concentration_0mV_curves}
-          \includegraphics[scale=1]{figures/conductance/conductance_vs_concentration_at0mV}
-        \end{subfigure}
-        \begin{subfigure}[t]{5cm}
-          \vspace*{-5mm}
-          \centering
-          \caption{}\vspace{-3mm}\label{fig:conductance_norm-concentration_0mV_curves}
-          \includegraphics[scale=1]{figures/conductance/conductance_normalized_vs_concentration_at0mV}
-        \end{subfigure}
-      \end{minipage}
-    \end{minipage}
-    \begin{minipage}{12cm}
-      \begin{subfigure}[t]{4cm}
-        \centering
-        \caption{}\vspace{-3mm}\label{fig:conductance_contour}
-        \includegraphics[scale=1]{figures/conductance/conductance_vs_voltage_and_concentration_measured}
-      \end{subfigure}
-      \hspace{5mm}
-      \begin{subfigure}[t]{7cm}
-        \centering
-        \caption{}\vspace{-3mm}\label{fig:conductance_error_contour}
-        \includegraphics[scale=1]{figures/conductance/conductance_error_vs_voltage_and_concentration}
-      \end{subfigure}
-    \end{minipage}
-    \begin{minipage}{12cm}
-      \begin{subfigure}[t]{4cm}
-        \centering
-        \caption{}\vspace{-3mm}\label{fig:rectification_contour}
-        \includegraphics[scale=1]{figures/conductance/rectification_vs_voltage_and_concentration_measured}
-      \end{subfigure}
-      \begin{subfigure}[t]{3.5cm}
-        \centering
-        \caption{}\vspace{-3mm}\label{fig:rectification_vs_voltage}
-        \includegraphics[scale=1]{figures/conductance/rectification_vs_voltage_all}
-      \end{subfigure}
-      \begin{subfigure}[t]{4cm}
-        \centering
-        \caption{}\vspace{-3mm}\label{fig:rectification_vs_concentration}
-        \includegraphics[scale=1]{figures/conductance/rectification_vs_concentration_at75mV}
-      \end{subfigure}
-    \end{minipage}
+%  \begin{subfigure}[t]{3.75cm}
+%    \centering
+%    \caption{}\vspace{-3mm}\label{fig:conductance-voltage_curves}
+%    \includegraphics[scale=1]{figures/conductance/conductance_vs_voltage_all_multiplot}
+%  \end{subfigure}
+  \begin{minipage}[t]{8cm}
+    \begin{subfigure}[t]{8cm}
+      \centering
+      \caption{}\vspace{-5mm}\label{fig:conductance_contourmap_epnp}
+      \includegraphics[scale=1]{figures/conductance/conductance_contourmap_epnp_v2}
+    \end{subfigure}
+    \begin{subfigure}[t]{8cm}
+      %\vspace{5mm}
+      \centering
+      \caption{}\vspace{-5mm}\label{fig:conductance_rectification_contourmap_epnp}
+      \includegraphics[scale=1]{figures/conductance/conductance_rectification_contourmap_epnp_v2}
+    \end{subfigure} 
   \end{minipage}
-	
-	% caption
-	\caption
-	[\textbf{Conductance characteristics of single ClyA nanopores at different ionic strengths.}]
-	{
-		\textbf{Conductance characteristics of single ClyA nanopores at different ionic strengths.}
-		Comparison of the IV curves (a) and conductance curves $G = I/V$ (b) that were measured 
-		experimentally (\graphmarker{circle}{black}) and simulated using the classical PNP-NS 
-		(\graphline{solid}{graphgreen}) and extended PNP-NS (\graphline{solid}{graphpurple}) equations  at 
-		\SIlist[list-units=single]{50;150;500;1000;3000}{\milli\Molar}.
-		(c) Contour plots showing the relative error ($\displaystyle\frac{G_\text{s}-G_\text{m}}{G_{m}}$) 
-		between the simulation (left: PNP-NS, right: ePNP-NS) and the experimentally measured values in term 
-		of both the bias voltage and the concentration.
-		Note that the classical PNP-NS equations significantly overestimate the conductance under all 
-		conditions, particularly at high salt concentrations (\SI{>100}{\percent}).
-		In contrast, the errors of the ePNP-NS model are generally below \SIrange{5}{10}{\percent}, with the 
-		highest error in the low concentration regime and at positive bias voltages.
-		(d) Contour plots of the ion conductance rectification (ICR) vs. the bias voltage and the salt 
-		concentration as determined experimentally (left) and with ePNP-NS simuation (right).
-	}
 
-%\textbf{Ion conductance rectification (ICR) of single ClyA nanopores at different ionic strengths.}
-%The ICR for bias voltage $\varpotential$ is defined by $G(+\varpotential)/G(-\varpotential)$ and shows the 
-%ratio between the nanopore conductance at positive relative to the conductance at negative bias.
-%(\subref{fig:rectification_contour}) Contour plots of the ICR vs. the bias voltage and salt concentration as 
-%determined experimentally (left) and with ePNP-NS simuation (right).
-%While the simulation somewhat overestimates the magnitude at lower salt concentrations 
-%(\SI{<500}{\milli\Molar}), there is an excellent qualitative match.
-%(\subref{fig:rectification_section}) The ICR at \SI{+100}{\milli\volt} vs. the salt concentration as 
-%measured experimentally (\protect\experimental) and simulated with ePNP-NS (\protect\epnpns).
-%A maximum is observed at \SI{\approx 150}{\milli\Molar} \ce{NaCl} in both the experiment (1.28) and the 
-%simulation (1.42).
-%The ICR falls exponentially towards a value of 1 for salt concentrations both lower and higher than 
-%\SI{150}{\milli\Molar}.
+%  \hspace{0.5cm}
+%  \begin{minipage}[t]{12cm}
+%    \begin{minipage}[t]{12cm}
+%      \begin{subfigure}[t]{4.5cm}
+%        \centering
+%        \caption{}\vspace{-3mm}\label{fig:conductance-voltage_curves}
+%        \includegraphics[scale=1]{figures/conductance/conductance_vs_voltage_all}
+%      \end{subfigure}
+%      \hspace{0.5cm}
+%      \begin{minipage}[t]{6.5cm}
+%        \begin{subfigure}[t]{5cm}
+%          \centering
+%          \caption{}\vspace{-3mm}\label{fig:conductance-concentration_0mV_curves}
+%          \includegraphics[scale=1]{figures/conductance/conductance_vs_concentration_at0mV}
+%        \end{subfigure}
+%        \begin{subfigure}[t]{5cm}
+%          \vspace*{-5mm}
+%          \centering
+%          \caption{}\vspace{-3mm}\label{fig:conductance_norm-concentration_0mV_curves}
+%          \includegraphics[scale=1]{figures/conductance/conductance_normalized_vs_concentration_at0mV}
+%        \end{subfigure}
+%      \end{minipage}
+%    \end{minipage}
+%    \begin{minipage}{12cm}
+%      \begin{subfigure}[t]{4cm}
+%        \centering
+%        \caption{}\vspace{-3mm}\label{fig:conductance_contour}
+%        \includegraphics[scale=1]{figures/conductance/conductance_vs_voltage_and_concentration_measured}
+%      \end{subfigure}
+%      \hspace{5mm}
+%      \begin{subfigure}[t]{7cm}
+%        \centering
+%        \caption{}\vspace{-3mm}\label{fig:conductance_error_contour}
+%        \includegraphics[scale=1]{figures/conductance/conductance_error_vs_voltage_and_concentration}
+%      \end{subfigure}
+%    \end{minipage}
+%    \begin{minipage}{12cm}
+%      \begin{subfigure}[t]{4cm}
+%        \centering
+%        \caption{}\vspace{-3mm}\label{fig:rectification_contour}
+%        \includegraphics[scale=1]{figures/conductance/rectification_vs_voltage_and_concentration_measured}
+%      \end{subfigure}
+%      \begin{subfigure}[t]{3.5cm}
+%        \centering
+%        \caption{}\vspace{-3mm}\label{fig:rectification_vs_voltage}
+%        \includegraphics[scale=1]{figures/conductance/rectification_vs_voltage_all}
+%      \end{subfigure}
+%      \begin{subfigure}[t]{4cm}
+%        \centering
+%        \caption{}\vspace{-3mm}\label{fig:rectification_vs_concentration}
+%        \includegraphics[scale=1]{figures/conductance/rectification_vs_concentration_at75mV}
+%      \end{subfigure}
+%    \end{minipage}
+%  \end{minipage}
 	
-	% label
-	\label{fig:conductance}
+% caption
+\caption
+[\textbf{Measured and simulated ion conductance and current rectification characteristics of single ClyA 
+nanopores.}]
+{
+\textbf{Measured and simulated ion conductance and current rectification characteristics of single ClyA 
+nanopores.}
+(\subref{fig:current-voltage_curves})
+Comparison of the single-pore current-voltage (IV) characteristics over a wide range of ionic strengths (from 
+\SIrange{0.05}{3}{\Molar} \ce{NaCl}) reveals the failure of the classical PNP-NS equations 
+(\graphline{dashed}{graphgreen}) to quantitatively predict the experimentally measured values  
+(\graphmarker{circle}{black}), particularly at high ionic strengths. In contrast, the extended PNP-NS  
+(ePNP-NS) equations (\graphline{solid}{graphpurple}) exhibit excellent agreement over the entire 
+concentration range. All measurements were performed at \SI{25\pm1}{\degreeCelsius}. Errorbars represent the 
+standard deviation of three independent measurements ($n=3$).
+(\subref{fig:conductance_contourmap_epnp})
+Contourmap of the simulated (ePNP-NS) ionic conductance ($G = I / V$) between \SIlist{-150;150}{\milli\volt} 
+and from \SIrange{0.005}{5}{\Molar}. The log-log plot on the right shows the dependency the bulk ionic 
+strength for \SI{+100}{\milli\volt} (blue) and \SI{-100}{\milli\volt} (red) for Solid lines represent for 
+\SI{-100}{\milli\volt} (\graphline{solid}{graphred}) and \SI{+100}{\milli\volt} 
+(\graphline{solid}{graphblue}) applied bias voltages. The corresponding experimental values are plotted as 
+circles. The bottom graph shows the dependency on applied bias voltage while the cross-section
+(\subref{fig:conductance_rectification_contourmap_epnp})
+Contourmap of the ionic conductance rectification ($\alpha = G_+ / G_-$), quantifying the increased 
+conductivity of ClyA at positive bias voltages ($\alpha > 1$). As in 
+(\subref{fig:conductance_contourmap_epnp}), circles and solid lines represent the measured experimental and 
+the simulated ePNP-NS datasets, respectively. While the measurement and the model agree qualitatively, a 
+good quantitative agreement is found only at concentrations \SI{\ge 0.5}{\Molar}.
+
+
+
+%(\subref{fig:conductance-voltage_curves})
+%The nanopore ionic conductance ($G = I/V$) for all the experimentally measured (\graphmarker{circle}{black}) 
+%and matching PNP-NS (\graphline{dashed}{graphgreen}) and ePNP-NS (\graphline{dashed}{graphgreen}) 
+%simulations.
+% (), the simulated current-voltage (IV) characteristics  significantly from the  ( are in close agreement 
+% with the simulated data using the extended PNP-NS (ePNP-NS) equations , 
+%of measured and Comparison of the  curves (a) and conductance curves $G = I/V$ (b) that were measured 
+%experimentally (\graphmarker{circle}{black}) and simulated using the classical PNP-NS 
+%(\graphline{solid}{graphgreen}) and extended PNP-NS () equations  at 
+%\SIlist[list-units=single]{50;150;500;1000;3000}{\milli\Molar}.
+%(c) Contour plots showing the relative error ($\displaystyle\frac{G_\text{s}-G_\text{m}}{G_{m}}$) 
+%between the simulation (left: PNP-NS, right: ePNP-NS) and the experimentally measured values in term 
+%of both the bias voltage and the concentration.
+%Note that the classical PNP-NS equations significantly overestimate the conductance under all 
+%conditions, particularly at high salt concentrations (\SI{>100}{\percent}).
+%In contrast, the errors of the ePNP-NS model are generally below \SIrange{5}{10}{\percent}, with the 
+%highest error in the low concentration regime and at positive bias voltages.
+%(d) Contour plots of the ion conductance rectification (ICR) vs. the bias voltage and the salt 
+%concentration as determined experimentally (left) and with ePNP-NS simuation (right).
+}
+
+\label{fig:conductance}
 	
 \end{figure*}
