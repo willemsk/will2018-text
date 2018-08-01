@@ -77,7 +77,6 @@
 %-------------------------------------------------------------------------------
 
 \input{additional_commands.tex}
-\input{tikz_commands.tex}
 
 %-------------------------------------------------------------------------------
 % TITLE AND AUTHOR LIST
@@ -199,7 +198,7 @@ In the following sections, we will begin by describing a 2D-axisymmetric model o
 distribution of the ClyA, followed by an an outline of the classical PNP-NS equations and finally we will 
 introduce in detail the nanoscale corrections and concentration dependencies of the ePNP-NS framework.
 
-%Fig 1: model geometry, charge distribution and boundary conditions
+
 \subsection{Axially Symmetric Model of ClyA.}
 
 ClyA is a multimeric protein complex that consists of 12 (or more) identical subunits which form a 
@@ -250,7 +249,7 @@ features to hold the charges.
 % 		z from -35 to 135 A, res = 0.05 A
 % Sigma = 0.5
 
-\input{fig_model_concept.tex}
+
 
 \subsection{Poisson-Nernst-Planck-Navier-Stokes (PNP-NS) equations}
 
@@ -277,7 +276,8 @@ chemical gradient (diffusion), a non-zero electrical field (electromigration) an
 \begin{align}
 \label{eq:nernst-planck}
 \nabla\cdot\flux_{i} = \nabla\cdot\left( -\diffusion_{i}\nabla\concentration_{i} - 
-\chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential +\velocity\concentration_{i}\right) = 0
+\chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential \right)
++\velocity\cdot\nabla\concentration_{i} = 0
 \end{align}
 with $\concentration_{i}$ the concentration, $\diffusion_{i}$ the diffusion coefficient, $\chargen_{i}$ the 
 charge number, $\mobility_{i}$ the electrophoretic mobility, and $\velocity$ the fluid velocity.
@@ -384,8 +384,9 @@ concentration. We opted for the size-modified PNP (SMPNP) framework developed by
 \nabla\cdot\flux_{i} = \nabla\cdot\left(
 	- \diffusion_{i}\nabla\concentration_{i}
 	- \chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential 
-	- \frac{k_{i}\concentration_{i} \displaystyle\sum_{l} \ionsize_{l}^3 \nabla \concentration_{l}}{1 - \displaystyle\sum_{l} \avogadro \ionsize_{l}^3 \concentration_{l}}
-	+ \velocity\concentration_{i}\right)
+	- \frac{k_{i}\concentration_{i} \displaystyle\sum_{l} \ionsize_{l}^3 \nabla \concentration_{l}}{1 - 
+	\displaystyle\sum_{l} \avogadro \ionsize_{l}^3 \concentration_{l}}\right)
+  +\velocity\cdot\nabla\concentration_{i} = 0
 	\quad\text{with}\quad k_{i}=\ionsize_{i}^3/\ionsize_{0}^3
 \end{align}
 where $\ionsize_{i}$ and $\ionsize_{0}$ represent the maximum packing radius in a cubic lattice for ions and 
@@ -423,7 +424,7 @@ Next, we discuss the influence of the applied bias voltage and the bulk ionic st
 properties: 1) the distribution of cations and anions inside the pore, 2) the total electrostatic potential 
 and 3) the electro-osmotic flow. 
 
-\input{fig_conductance.tex}
+
 
 \subsection{Transport of ions through ClyA}
 % Key message: The extensions made to the PNP-NS equations are necessary to accurately predict the ionic current flowing through ClyA over a wide range of salt concentrations and bias voltages
@@ -548,11 +549,10 @@ Inside the lumen of the pore ($1.6<z<\SI{12.25}{\nm}$),
 \paragraph{Potential profiles at positive bias voltage.}
 \paragraph{Potential profiles at negative bias voltage.}
 
-\input{fig_concentration}
+
 
 
 \subsection{Electro-osmotic flow}
-\input{fig_flow}
 
 
 \paragraph{Electro-osmotic flow profile, magnitude and direction.}
@@ -579,6 +579,12 @@ The authors thank ...
 \begin{suppinfo}
 	Extended materials and methods.
 \end{suppinfo}
+
+
+\input{fig_model_concept.tex}
+\input{fig_conductance.tex}
+\input{fig_concentration.tex}
+\input{fig_flow.tex}
 
 
 %-------------------------------------------------------------------------------

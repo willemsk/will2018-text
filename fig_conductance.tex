@@ -28,49 +28,37 @@ nanopores.}]
 nanopores.}
 (\subref{fig:current-voltage_curves})
 Comparison of the single-pore current-voltage (IV) characteristics over a wide range of ionic strengths (from 
-\SIrange{0.05}{3}{\Molar} \ce{NaCl}) reveals the failure of the classical PNP-NS equations 
-(\graphline{dashed}{graphgreen}) to quantitatively predict the experimentally measured values  
-(\graphmarker{circle}{black}), particularly at high ionic strengths. In contrast, the extended PNP-NS  
-(ePNP-NS) equations (\graphline{solid}{graphpurple}) exhibit excellent agreement over the entire 
-concentration range. All measurements were performed at \SI{25\pm1}{\degreeCelsius}. Errorbars represent the 
-standard deviation of three independent measurements ($n=3$).
+\SIrange{0.05}{3}{\Molar} \ce{NaCl}) reveals the inability of the classical PNP-NS equations to 
+quantitatively predict the experimentally measured values, particularly at high ionic strengths. In contrast, 
+the extended PNP-NS (ePNP-NS) equations exhibit excellent agreement over the entire concentration range. All 
+experimental measurements were performed at \SI{25\pm1}{\degreeCelsius}. Errorbars represent the standard 
+deviation of three independent measurements ($n=3$).
 (\subref{fig:conductance_contourmap_epnp})
-Contourmap of the simulated (ePNP-NS) ionic conductance ($G = I / V$) between \SIlist{-150;150}{\milli\volt} 
-and from \SIrange{0.005}{5}{\Molar}. The log-log plot on the right shows the dependency the bulk ionic 
-strength for \SI{+100}{\milli\volt} (blue) and \SI{-100}{\milli\volt} (red) for Solid lines represent for 
-\SI{-100}{\milli\volt} (\graphline{solid}{graphred}) and \SI{+100}{\milli\volt} 
-(\graphline{solid}{graphblue}) applied bias voltages. The corresponding experimental values are plotted as 
-circles. The bottom graph shows the dependency on applied bias voltage while the cross-section
+Contourmap of the simulated (ePNP-NS) ionic conductance ($G(c) = I / V$) vs. bias voltage and bulk salt 
+concentration. The graphs at the bottom and on the right show the dependency of the conductance on applied 
+bias voltage and on the bulk salt concentration. Solid lines and circles represent simulated and experimental 
+data, respectively. The kink in the slope of the concentration-conductance log-log plot at 
+\SI{\approx0.15}{\Molar} indicates the presence of 2 distinct conductance regimes. Power law fitting ($G = a 
+c^b$) shows near a linear ($b\approx1$) dependency at high ionic strengths (\SIrange{0.3}{1.5}{\Molar}) and a 
+near square-root ($b\approx0.5$) dependency at low salt concentrations (\SIrange{0.005}{0.075}{\Molar}).
 (\subref{fig:conductance_rectification_contourmap_epnp})
-Contourmap of the ionic conductance rectification ($\alpha = G_+ / G_-$), quantifying the increased 
-conductivity of ClyA at positive bias voltages ($\alpha > 1$). As in 
-(\subref{fig:conductance_contourmap_epnp}), circles and solid lines represent the measured experimental and 
-the simulated ePNP-NS datasets, respectively. While the measurement and the model agree qualitatively, a 
-good quantitative agreement is found only at concentrations \SI{\ge 0.5}{\Molar}.
-
-
-
-%(\subref{fig:conductance-voltage_curves})
-%The nanopore ionic conductance ($G = I/V$) for all the experimentally measured (\graphmarker{circle}{black}) 
-%and matching PNP-NS (\graphline{dashed}{graphgreen}) and ePNP-NS (\graphline{dashed}{graphgreen}) 
-%simulations.
-% (), the simulated current-voltage (IV) characteristics  significantly from the  ( are in close agreement 
-% with the simulated data using the extended PNP-NS (ePNP-NS) equations , 
-%of measured and Comparison of the  curves (a) and conductance curves $G = I/V$ (b) that were measured 
-%experimentally (\graphmarker{circle}{black}) and simulated using the classical PNP-NS 
-%(\graphline{solid}{graphgreen}) and extended PNP-NS () equations  at 
-%\SIlist[list-units=single]{50;150;500;1000;3000}{\milli\Molar}.
-%(c) Contour plots showing the relative error ($\displaystyle\frac{G_\text{s}-G_\text{m}}{G_{m}}$) 
-%between the simulation (left: PNP-NS, right: ePNP-NS) and the experimentally measured values in term 
-%of both the bias voltage and the concentration.
-%Note that the classical PNP-NS equations significantly overestimate the conductance under all 
-%conditions, particularly at high salt concentrations (\SI{>100}{\percent}).
-%In contrast, the errors of the ePNP-NS model are generally below \SIrange{5}{10}{\percent}, with the 
-%highest error in the low concentration regime and at positive bias voltages.
-%(d) Contour plots of the ion conductance rectification (ICR) vs. the bias voltage and the salt 
-%concentration as determined experimentally (left) and with ePNP-NS simuation (right).
+Contourmap of the simulated (ePNP-NS) ionic conductance rectification ($\alpha(V) = G(+V) / G(-V)$) vs. bias 
+voltage and bulk salt concentration. While $\alpha$ depends linearly on the applied bias in the investigated 
+voltage regime, a clear maximum is observed in the concentration dependency at $\SI{\approx0.15}{\Molar}$. 
+While the measurement and the model agree qualitatively, a good quantitative agreement is found only at 
+concentrations \SI{\ge 0.5}{\Molar}.
 }
 
 \label{fig:conductance}
 	
 \end{figure*}
+
+% Slopes of log-log plot
+%    0.005 to 0.05 M, -150 mV:
+%    a=0.495±0.005, b=2.873±0.054
+%    0.005 to 0.05 M, +150 mV:
+%    a=0.600±0.005, b=5.894±0.104
+%    0.3 to 1.5 M, -150 mV:
+%    a=1.000±0.016, b=7.734±0.052
+%    0.3 to 1.5 M, +150 mV:
+%    a=0.787±0.001, b=8.935±0.006
