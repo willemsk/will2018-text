@@ -361,15 +361,21 @@ surface we applied a no-slip ($\vec{\velocity} = 0$) boundary condition.
 
 
 
-\subsection{Extended PNP-NS (ePNP-NS) equations}
-Because the classical PNP-NS equations do not include any interactions between components in the system,
-their applicability is in principle limited to transport phenomena at very low ionic strengths.
-To mitigate these issues, we implemented three self-consistent corrections to the classical PNP-NS equations:
-(1) concentration dependent diffusion, mobility, viscosity, density an relative permittivity;
-(2) wall-distance dependent diffusion, mobility and viscosity; and
-(3) inclusion of a finite ion size term to the NPE. 
+\subsection{Extended PNP-NS Equations}
+The traditional PNP-NS equations as described above cannot capture the transport accurately within fluids of
+strongly varying concentrations or when the concentration is close to saturation or in nanoscale constrictions
+when wall effects are non-negligible. However, the simulation of transport of ions through protein nanopores
+happens precisely under these conditions and therefore we include the three following effects fully
+self-consistently:
+\begin{itemize}
+    \item concentration dependent diffusion, mobility, viscosity, density an relative permittivity;
+    \item wall-distance dependent diffusion, mobility and viscosity; and
+    \item inclusion of a finite ion size term to the NPE. 
+\end{itemize}
+In the remainder of this work, we will refer to the model containing these effects as extended PNP-NS
+(ePNP-NS).
 
-\paragraph{Concentration dependent properties.}
+\subsubsection{Concentration dependent properties.}
 The concentration dependent ion self-diffusion coefficients $\diffusion_{i}^1(\dconc)$, cation transport 
 number $\transportn_{i}(\dconc)$, viscosity $\viscosity^1(\dconc)$, density $\density(\dconc)$ and relative 
 permittivity $\permittivity_{w}(\dconc)$ could be fitted directly the experimental data with the empirical 
@@ -395,7 +401,7 @@ All fitting functions can be found in \cref{tab:corrections_equations}, their fi
 \cref{suppinfo:tab:corrections_parameters} and a plot of the fits to the experimental data in 
 \cref{suppinfo:fig:corrections}.
 
-\paragraph{Wall-distance corrections.}
+\subsubsection{Wall-distance corrections.}
 The diffusivity of small molecules such ions or water depends heavily on their proximity, i.e. within 
 \SI{1.0}{\nano\meter} distance, to large molecules such as proteins or DNA.\cite{makarov1998} In small 
 nanopores (\SI{\le 5}{\nano\meter} radius), these effects encompass a significant fraction of the total 
