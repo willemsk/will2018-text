@@ -456,86 +456,84 @@ listed in \cref{suppinfo:tab:corrections_parameters}.
 
 \newpage
 \section{Results}\label{sect:results}
-In this section, we start by our describing experimental data on the ionic transport through ClyA in terms of 
-conductance, rectification and ion selectivity, and compare these directly with our continuum simulations. 
-Next, we discuss the influence of the applied bias voltage and the bulk ionic strength on 3 distinct nanopore 
-properties: 1) the distribution of cations and anions inside the pore, 2) the total electrostatic potential 
-and 3) the electro-osmotic flow. 
+In this section, we start by our investigating the concentration and voltage dependencies of the ion 
+transport through ClyA in terms of conductance, rectification and selectivity. The values of the former two 
+parameters were also measured experimentally and hence these are used to benchmark the performance of our 
+model. Next, we will describe in detail several parameters that are of great interest, but cannot be readily 
+determined experimentally, namely the concentration of cations and anions inside the pore, the distribution 
+of the electrostatic potential and the properties of the electro-osmotic flow. 
 
-
-
+% Key message: The extensions made to the PNP-NS equations are necessary to accurately predict the ionic 
+%current flowing through ClyA over a wide range of salt concentrations and bias voltages
 \subsection{Transport of ions through ClyA}
-% Key message: The extensions made to the PNP-NS equations are necessary to accurately predict the ionic current flowing through ClyA over a wide range of salt concentrations and bias voltages
-
-\paragraph{Ionic current and conductance.}
 The ionic current flowing through a nanopore is determined by both characteristics of the pore itself (i.e., 
-its shape, size and electrostatic field), and by the properties of the electrolyte that surrounds it (i.e., 
+its shape, size and electrostatics), and by the properties of the electrolyte that surrounds it (i.e., 
 ion diffusion coefficients, ion electrophoretic mobilities, solvent viscosity, density and relative 
-permittivity). In order to reliably predict the ionic current, our nanopore simulation should thus not only 
-contain an accurate geometry and charge distribution, it must also model all important transport processes 
-(i.e., diffusion, electromigration and convection), which in turn should be parametrized with values relevant 
-to the local conditions in the nanopore and the bulk electrolyte.
+permittivity). To reliably predict the ionic current, our nanopore simulation should thus not only contain an 
+accurate geometry and charge distribution, it must also accurately portrait all relevant transport phenomena 
+(i.e., diffusion, electromigration and convection). These processes often depend strongly on the local 
+conditions (i.e. temperature, concentration, etc.) and hence they should also be parameterized with locally 
+relevant values. This becomes particularly important for nanopores, since the small scales often result in 
+conditions that differ significantly from those in the bulk.
 
-To validate the ionic currents predicted by our computational model of the biological nanopore ClyA-AS Type I 
-(ClyA)\citep{soskine2013}, we used single-channel electrophysiology measure the current-voltage 
-characteristics for \SIlist[list-units=single]{50;150;500;1000;3000}{\milli\Molar} \ce{NaCl} and between 
-\SIlist[list-units=single]{-150;+150}{\milli\volt} with \SI{5}{\milli\volt} steps (\cref{fig:conductance}). 
-The ionic current $\currentsim$ in our simulation was calculated by integration of the ionic flux 
-$\vec{\flux_{i}}$ of each ion $i$ across the \textit{cis} reservoir boundary $S$:
+\paragraph{Ionic current.}
+To investigate the importance of these localized effects, we performed steady-state simulations over a wide 
+range of bulk salt concentrations (from 0.005 to 5~M) and bias voltages using both the classical PNP-NS and 
+our extended PNP-NS (ePNP-NS) equations. To validate our model, we recorded single-channel current-voltage 
+(IV) curves of ClyA for a representative subset concentrations (0.05, 0.15, 0.5, 1 and 3~M), the results of 
+which were plotted together with simulations in \cref{fig:current-voltage_curves}.
+From the simulation, the total ionic current $\currentsim$ was obtained using
 \begin{equation}
-	\currentsim = \faraday\int_{S}\left(\displaystyle\sum_{i} \chargen_{i}\normvec\cdot\vec{\flux_{i}}\right)dS  
+  \currentsim = \faraday\int_{S}\left(\displaystyle\sum_{i}            
+                \chargen_{i}\normvec\cdot\vec{\flux_{i}}\right)dS  
 \end{equation}
-with $\faraday$ the Faraday constant (\SI{96.485}{\coulomb\per\mole}), $\chargen_{i}$ the ion charge number 
-and $\normvec$ the normal vector. Simulations were performed at 
-\SIlist[list-units=single]{1;5;10;25;50;75;100;125;150;200;250;300;400;500;750;1000;1500;2000;2500;3000;4000;5000}{\milli\Molar}.
-
-
-In \cref{fig:conductance}a we plotted the experimental and simulated (PNP-NS and ePNP-NS) IV curves for 
-several concentrations (\SIlist[list-units=single]{50;150;500;3000}{\milli\Molar}) which we deemed 
-representative of the experimentally relevant range of ionic strengths. The IV curves of ClyA exhibit the 
-typical rectification of a negatively charged conical nanopore, with higher currents at positive compared to 
-negative bias.\textbf{REF} The magnitude of the rectification depends heavily on the salt concentration 
-
-together with the simulated values obtained with the PNP-NS and the ePNP-NS equations.
-While both models show the same qualitative trends as the experimental data, i.e.  in terms of ionic current rectification
-
-From the IV curves we were able to calculate the ionic conductance ($\conductance = \current/\varpotential$) for bias voltages between \SIlist[list-units=single]{-150;+150}{mV} and
-for bulk salt concentrations from \SIrange{50}{3000}{\milli\Molar} for the experimental (\cref{fig:conductance}b) and the simulated data (\cref{fig:conductance}c).
-Experimentally, the conductance of ClyA rises from approximately \SIrange{0.5}{1}{\nano\siemens} at \SI{50}{\milli\Molar}
-
-To better quantitatively judge the difference between the experimental and simulated conductances,
-we calculated the their relative errors ($(\conductance_\textrm{sim}-\conductance_\textrm{exp})/\conductance_\textrm{exp}\times 100\%$)
-can be found in \cref{fig:conductance}d for both PNP-NS (left) and ePNP-NS (right).
-he PNP-NS equations overestimate the real ionic current under all tested conditions (\SIrange{40}{120}{\percent} deviation),
-the ePNP-NS model shows significantly improved match with the experimental data (\SIrange{5}{10}{\percent} deviation).
-
-For PNP-NS, the relative error increases with increasing ionic strength, 
-In constrast, the error for ePNP-NS is decreases with increasing salt concentrations and po
-In contrast,, with re By introducing the concentration dependent properties (ePNP-NS) results in a relative errors smaller that .
-
-
+with $\chargen_{i}$ the charge number and $\vec{\flux_{i}}$ the total flux of each ion $i$ across the 
+reservoir boundary $S$. $\faraday$ is the Faraday constant (\SI{96.485}{\coulomb\per\mole}) and $\normvec$ is 
+the normal vector.
+Over the entire investigated concentration range, the IVs from the ePNP-NS model closely correspond to the 
+measured values ($<5\%$ error). In contrast, the PNP-NS equations significantly overestimates the ionic 
+current for all measured concentrations. Interestingly, while the PNP-NS model performs the worst at high 
+salt concentrations -- as is to be expected --, for ePNP-NS the error is largest in at lower concentrations, 
+particularly at positive bias voltages. The corrections that contribute the most to the current prediction 
+are the concentration and wall-distance dependencies of the ion mobilities and diffusion coefficients.
 
 % Difference in conductance mechanism between high and low salt
-
+\paragraph{Ionic conductance.}
+To further investigate the ionic transport, we computed the the ionic conductance $\conductance$ from the IV 
+data
+\begin{equation}
+  \conductance = \displaystyle\frac{\current}{\varpotential}
+\end{equation}
+and the resulting concentration-voltage landscape can be found in \cref{fig:conductance_contourmap_epnp}. The 
+straight slopes of the concentration-conductivity log-log plot at -150~mV exhibits a clear `kink' at 
+$\approx$0.15~M, suggesting the presence of two different conductance regimes. Fitting of the data at low 
+(0.005 to 0.05~M) and high concentrations (0.3 to 1.5~M) with a simple power law function 
+($\conductance(\concentration)=a e^{b \concentration}$) yielded exponents of 
+$b=\SI{0.498\pm0.004}{\per\Molar}$ and $b=\SI{1.000\pm0.016}{\per\Molar}$, respectively. These perfect 
+square-root and linear dependencies are less apparent at high positive bias voltages, however, as fitting 
+yielded exponents of $b=\SI{0.614\pm0.009}{\per\Molar}$ and $b=\SI{0.787\pm0.001}{\per\Molar}$ for low and 
+high concentrations, respectively. Hence, while there are clearly two distinct ion transport modes at high 
+negative bias voltages, the converging exponents at high positive voltages suggest a `hybrid' mode with 
+characteristics of both regimes.
 
 \paragraph{Ionic current rectification.}
-A nanopore is said to exhibit ionic current rectification (ICR) when the conductance for a given bias voltage magnitude is higher when applied to one side of the nanopore compared to the other.
-Here, we define the rectification $\icr$ as $\conductance_+/\conductance_-$, or the ratio between the absolute pore conductances for at positive and negative bias voltages.
-ICR is a phenomenon often observed in nanopores that are both charged and contain a degree of geometrical asymmetry along the central axis of the pore.
-With it's high negative charge (\SI{-72}{\elementarycharge} at \pH{7.5}) and different \textit{cis} (\SI{\approx 3.3}{\nano\meter}) and \textit{trans} (\SI{\approx 5.5}{\nano\meter}) entry diameters,
-ClyA fulfils both conditions and hence exhibits a strong degree of rectification, which has been used to determine the orientation of the pore in the l
-it exhibits a asymmetric at cis (\SI{5.5}{\nano\meter})
+A nanopore is said to exhibit ionic current rectification (ICR) when the conductance for a given bias 
+voltage, the conductance is higher when it is applied to one side of the nanopore compared to the other.
+ICR is a phenomenon often observed in nanopores that are both charged and contain a degree of geometrical 
+asymmetry along the central axis of the pore. With it's high negative charge (\SI{-72}{\elementarycharge} at 
+\pH{7.5}) and different \textit{cis} ($\approx$3.3~nm) and \textit{trans} ($\approx$5.5~nm) entry diameters, 
+ClyA fulfils both conditions and hence exhibits a strong degree of rectification.
+Here, we define the ICR as
+\begin{equation}
+  \icr(\varpotential) = \displaystyle\frac{\conductance(+\varpotential)}{\conductance(-\varpotential)}
+\end{equation}
+i.e. the ratio between the conductance of the pore at positive and negative bias voltages of equal magnitude. 
+The dependency of $\icr$
 
-
-
-
-\cref{fig:rectification_contour} gives an overview experimentally determined and simulated (ePNP-NS) rectification magnitudes in terms of voltage and salt concentration.
-A cross-section of these plots at \SI{100}{\milli\volt} is given in \cref{fig:rectification_section}.
- 
-% Experiments
-
-While the ICR rises linearly with the applied bias voltage, the concentration dependency exhibits a maximum value of 1.28 for the experiment
-The concentration dependence is not as trivial, and hence we plotted its values at \SI{100}{\milli\volt} vs. the bulk concentration in \cref{fig:rectification_section}
+While $\icr$ rises linearly with the applied bias voltage, the concentration dependency exhibits a maximum 
+value of 1.28 for the experiment
+The concentration dependence is not as trivial, and hence we plotted its values at \SI{100}{\milli\volt} vs. 
+the bulk concentration in \cref{fig:conductance_rectification_contourmap_epnp}
 Due to the high degree of electrostatic screening, the ICR is close to unity (1.02) , but rises rapidly when ,The rectification rises concentration dependency is not so trivial, however, as it appears to show a maximum value of 1.28 at \SI{150}{\milli\Molar},
 and decreasing for both lower and higher salt concentrations.
 The simulation shows the 
@@ -544,6 +542,8 @@ The simulation shows the
 
 
 \paragraph{Ion selectivity.}
+\cref{fig:transport_number_contourmap_epnp}
+
 
 
 \subsection{Ion concentration distribution}
