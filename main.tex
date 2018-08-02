@@ -175,9 +175,9 @@ averaging scheme for the angular dependence of the charge distribution of the fu
 Figs.~\ref{fig:clya_atomistic_side} and \ref{fig:clya_atomistic_top} in order to accurately represent the
 nanopore in a 2D-axisymemtric simulation. Second, defining a viable transport model for the ion species and
 the flow of the solution through the nanopore. This includes the definition of the set of parameters
-comprising mobilities, diffusion coefficients, and effective sizes of the ion species as well as the fluid
-viscosity and density of the solution. In particular, it is necessary to take in consideration the
-nanofluidics within the pore since none of the parameters retain their bulk values in nanoscale
+comprising mobilities, diffusion coefficients, and effective sizes of the ion species as well as the
+viscosity, density, and permittivity of the solution. In particular, it is necessary to take in consideration
+the nanofluidics within the pore since none of the parameters retain their bulk values in nanoscale
 constrictions.
 
 
@@ -189,7 +189,7 @@ and \ref{fig:clya_atomistic_top}). The pore cavity is lined with predominantly n
 can be divided in roughly two cylindrical compartments: the \cis{} lumen (\SI{5.5}{\nano\meter} diameter,
 \SI{10}{\nano\meter} height) and the \trans{} constriction (\SI{3.3}{\nano\meter} diameter,
 \SI{4}{\nano\meter} height). Due to this high degree of axial symmetry, we modelled ClyA as a solid,
-cylindrically symmetric dielectric block, embedded within a lipid membrane represented as a
+cylindrically symmetric dielectric block, embedded within a lipid bilayer represented as a
 \SI{2.8}{\nano\meter}-thick\cite{kucerka2011} dielectric disk  and surrounded by a spherical,
 electrolyte-filled reservoir with a radius of \SI{250}{\nano\meter} 
 (cf.~Figs.~\ref{fig:model_geometry} and \ref{fig:model_geometry_zoom}).\cite{lu2012,pederson2015} This approach
@@ -241,49 +241,75 @@ in the domain of $\scdpore$ and precomputed values are used.
 
 
 \subsection{Poisson-Nernst-Planck-Navier-Stokes (PNP-NS) equations}
+To describe the ion and water transport mechanisms within ClyA, we created a computational model of the fluid
+based on a set of well-known partial-differential equations (PDEs) called the coupled
+Poisson-Nernst-Planck-Navier-Stokes (PNP-NS) equations. 
 
-%To improve our understanding of the ion and water transport mechanisms within ClyA, we created a 
-%computational model of the nanopore based on a set of well-known partial-differential equations (PDEs) called 
-%the coupled Poisson-Nernst-Planck-Navier-Stokes (PNP-NS) equations. Due to ClyA's complexity, a meaningful 
-%analytical solution is intractable and must hence be approximated numerically. We opted for the finite 
-%element method (FEM) as implemented in the commercial software COMSOL Multiphysics (version 5.3, 
-%\href{www.comsol.com}{www.comsol.com}).
-%
-%While these equations have proven to be excellent tool for studying ion and water transport in both 
-%solid-state\cite{daiguji2004,lu2012,chaudhry2014,rempfer2016,lin2016} and biological 
-%nanopores,\cite{eisenberg1996,simakov2010,pederson2015} the underlying continuum assumption does not hold at 
-%the nanoscale under all circumstances, particularly at material interfaces\cite{vo2016} and in regions of 
-%high charge density.\cite{corry2000} To address these concerns and to improve the accuracy of our model, we 
-%propose a modified version of these equations, coined extended PNP-NS (ePNP-NS), which take into account 
-%finite size of the ions\cite{borukhov1997,lu2011} and the reduction of ion and water mobility near protein 
-%interfaces.\cite{makarov1998, pronk2013} Because the diffusion coefficient, mobility, viscosity, 
-%density\cite{} and relative permittivity\cite{gavish2016} often deviate significantly from the traditional 
-%`infinite dilution' values at experimentally relevant concentrations, we implemented a self-consistent 
-%dependency on the average ion concentration for all these parameters.
-%
-%In the following sections, we will begin by describing a 2D-axisymmetric model of the geometry and charge 
-%distribution of the ClyA, followed by an an outline of the classical PNP-NS equations and finally we will 
-%introduce in detail the nanoscale corrections and concentration dependencies of the ePNP-NS framework.
+While these equations have proven to be excellent tool for studying ion and water transport in both 
+solid-state\cite{daiguji2004,lu2012,chaudhry2014,rempfer2016,lin2016} and biological 
+nanopores,\cite{eisenberg1996,simakov2010,pederson2015} the underlying continuum assumption does not hold at 
+the nanoscale under all circumstances, particularly at material interfaces\cite{vo2016} and in regions of 
+high charge density.\cite{corry2000} To address these concerns and to improve the accuracy of our model, we 
+propose a modified version of these equations, that we will refer to as extended PNP-NS (ePNP-NS), which takes
+into account the finite size of the ions\cite{borukhov1997,lu2011} and the reduction of ion and water mobility
+near protein interfaces.\cite{makarov1998, pronk2013} Because the diffusion coefficient, mobility, viscosity,
+density\cite{} and relative permittivity\cite{gavish2016} often deviate significantly from the traditional
+`infinite dilution' values at experimentally relevant concentrations, we implemented a self-consistent
+dependency on the average ion concentration for all these parameters.
 
 In this section we will start by describing the classical PNP-NS equations and their boundary conditions,
-followed by a description of the extended-PNP-NS (ePNP-NS) framework that includes a several additions and 
-corrections which enhance their physical accuracy at nanoscale and their ability to predict ionic currents at 
-high ionic strengths.
+followed by a description of ePNP-NS framework that includes a several additions and corrections which enhance
+their physical accuracy at nanoscale and their ability to predict ionic currents at high ionic strengths.
 
-\paragraph{Poisson's equation (PE)} relates the electrostatic potential to the charges present in a system 
+Due to the complexity of the set of self-consistent equations, we chose to solve the system using the finite
+element method (FEM) as provided by the commercial software COMSOL Multiphysics (version 5.3,
+\href{www.comsol.com}{www.comsol.com}).
+
+\subsubsection{Poisson Equation} 
+The Poisson equation (PE) relates the electrostatic potential to the charges present in a system 
 and is given by 
 \begin{align} 
 \label{eq:poisson}
-\nabla\cdot\left(\absperm\relperm \nabla\potential\right) = \scdpore + \scdion,
+\nabla\cdot\left(\absperm\relperm \nabla\potential\right) = - \scdpore - \scdion,
 \end{align}
-with $\potential$ the electric potential, $\absperm$ the vacuum permittivity 
-(\SI{8.85419e-12}{\farad\per\meter}) and $\relperm$ the local relative permittivity. The total charge density 
-on the right hand side of \cref{eq:poisson} consists of a fixed contribution $\scdpore$ due to charges of 
-nanopore itself (\cref{eq:scdpore}), and a ion concentration dependent component $\scdion$ caused by local 
-non-electroneutralities in the fluid (\cref{eq:scdion}).
+with $\potential$ the electric potential, $\absperm=\SI{8.85419e-12}{\farad\per\meter}$ the vacuum
+permittivity, and $\relperm$ the local relative permittivity of the medium listed in
+\cref{tab:pnpns_parameters}. The total charge density on the right hand side of \cref{eq:poisson} consists of
+a fixed contribution $\scdpore$ due to charges of the nanopore of \cref{eq:scdpore}, and an ion concentration
+dependent component $\scdion$ caused by local non-electroneutralities in the fluid (cf.~\cref{eq:scdion}).
 
-The Nernst-Plack equation (NPE) describes the flux $\flux_{i}$ of each ion $i$ under the influence of a 
-chemical gradient (diffusion), a non-zero electrical field (electromigration) and a laminar fluid flow 
+Dirichlet boundary conditions are applied to the boundaries of the \cis{} and \trans{} reservoirs. The
+potential at the \cis{} boundary is set to $\potential = 0$ whereas at the \trans{} boundary it is set to
+$\potential = \Vbias$. Neumann boundary conditions apply where at the bilayer-boundary interface.
+
+
+
+\begin{table}[t]
+\begin{center}
+\begin{tabular}{c|c|l}
+    Parameter & Value & Description \\\hline 
+    $T$                    & \SI{298.15}{\kelvin} & System temperature\\
+    $\permittivity_p$      & \num{20} & Relative permittivity of pore\cite{li2013}\\
+    $\permittivity_m$      & \num{3.2}& Relative permittivity of bilayer\cite{gramse2013} \\
+    $\permittivity_w$      & \num{78.15}& Relative permittivity of fluid \\
+    $\density$             & \SI{997}{\kilogram\per\cubic\meter}& Density of fluid at infinite dilution\\
+    $\viscosity$           & \SI{8.904}{\pascal\second}& Dynamic viscosity\\
+    $\chargen_{\ce{Na+}}$  & \num{+1} & charge number of \ce{Na+} \\
+    $\chargen_{\ce{Cl-}}$  & \num{-1} & charge number of \ce{Cl-} \\
+    $\diffusion_{\ce{Na+}}$& \SI{1.334e-9}{\square\meter\per\second} & Diffusion coefficient of \ce{Na+} \\
+    $\diffusion_{\ce{Cl-}}$& \SI{2.032e-9}{\square\meter\per\second} & Diffusion coefficient of \ce{Cl-} \\
+    $\mobility_{\ce{Na+}}$ & \SI{5.192e-4}{\square\meter\per\second\per\volt} & Mobility of \ce{Na+}\\
+    $\mobility_{\ce{Cl-}}$ & \SI{7.909e-4}{\square\meter\per\second\per\volt} & Mobility of \ce{Na+}
+\end{tabular}
+\caption{Parameters for the PNP-NS system-of-equations for an \ce{NaCl} solution.}
+\label{tab:pnpns_parameters}
+\end{center}
+\end{table}
+
+
+\subsubsection{Nernst-Planck Equation}
+The Nernst-Plack equation (NPE) describes the flux $\flux_{i}$ of each ion species $i$ under the influence of
+a chemical gradient (diffusion), a non-zero electrical field (electromigration) and a laminar fluid flow
 (convection) and is given by
 \begin{align}
 \label{eq:nernst-planck}
@@ -292,15 +318,24 @@ chemical gradient (diffusion), a non-zero electrical field (electromigration) an
 +\velocity\cdot\nabla\concentration_{i} = 0
 \end{align}
 with $\concentration_{i}$ the concentration, $\diffusion_{i}$ the diffusion coefficient, $\chargen_{i}$ the 
-charge number, $\mobility_{i}$ the electrophoretic mobility, and $\velocity$ the fluid velocity.
-The NPE is coupled to the PE by using the electric potential $\potential$ and the ion space charge density
+charge number, $\mobility_{i}$ the electrophoretic mobility, and $\velocity$ the fluid velocity. The relevant
+parameters for \ce{NaCl} are listed in \cref{tab:pnpns_parameters}.
+The NPE is coupled to the PE by the electric potential $\potential$ and the ion space charge density
 \begin{align} 
 \label{eq:scdion}
 \scdion = \faraday\displaystyle\sum_{i}\chargen_{i}\concentration_{i},
 \end{align}
-where $\faraday$ is Faraday's constant (\SI{96485.33}{\coulomb\per\mole}).
+where $\faraday= \SI{96485.33}{\coulomb\per\mole}$ is Faraday's constant.
 
-\paragraph{The Navier-Stokes equation (NSE)} describes the fluid velocity $\velocity$ and is given  
+The ion concentration at both reservoir boundaries was fixed using a Dirichlet boundary condition 
+($\concentration_i = \concentration_\textrm{bulk}$). At the fluid-bilayer and fluid-pore interface Neumann
+boundary conditions apply, i.e.~no current can flow in or out the pore or the bilayer.
+
+
+
+\subsubsection{Navier-Stokes Equation} 
+The Navier-Stokes equation (NSE) for laminar flow of an incompressible fluid will be used to describe the
+fluid velocity field $\velocity$. It is given by
 \begin{align}
 \label{eq:navier-stokes}
 \density\left(\velocity\cdot\nabla\right)\velocity = \nabla\cdot\left[-\pressure\identity + 
@@ -311,35 +346,20 @@ together with the continuity equation
 \label{eq:navier-stokes-contin}
 \density\nabla\cdot\left(\velocity\right) = 0,
 \end{align}
-where $\density$ and $\viscosity$ are the fluid's density and dynamic viscosity, respectively. 
-The driving force that generates the electro-osmotic flow 
+where $\density$ and $\viscosity$ are the fluid's density and dynamic viscosity, respectively. For \ce{NaCl}
+the parameters are given in \cref{tab:pnpns_parameters}. The driving force that generates the electro-osmotic
+flow 
 \begin{align}
 \volumeforce = \echarge\avogadro\scdion\efield,
 \end{align}
-acts on all fluid elements with a non-zero $\scdion$ and electrical field $\efield$.
+acts on all fluid elements with a non-zero net space charge density $\scdion$ and electrical field $\efield$.
 
-\paragraph{Parameters for PNP-NS.}
-The system temperature was chosen to be \SI{298.15}{\kelvin}.
-The relative permittivities were set to $\permittivity_p = 20$ for the pore\cite{li2013},$\permittivity_m = 
-3.2$ for the membrane\cite{gramse2013} and $\permittivity_w = 78.15$ for the fluid reservoir.
-Other properties were set at those for an \ce{NaCl} solution in water at infinite dilution, with
-fluid density $\density = \SI{997}{\kilogram\per\cubic\meter}$;  dynamic viscosity $\viscosity = 
-\SI{8.904e-4}{\pascal\second}$;
-charge numbers $\chargen_{\ce{Na+}} = +1$ and $\chargen_{\ce{Cl-}} = -1$;
-diffusion coefficients $\diffusion_{\ce{Na+}} = \SI{1.334e-9}{\square\meter\per\second}$ and 
-$\diffusion_{\ce{Cl-}} = \SI{2.032e-9}{\square\meter\per\second}$;
-and mobilities $\mobility_{\ce{Na+}} = \SI{5.192e-4}{\square\meter\per\second\per\volt}$ and 
-$\mobility_{\ce{Cl-}} = \SI{7.909e-4}{\square\meter\per\second\per\volt}$.
+At the boundaries of the \cis{} and \trans{} reservoirs, we use open boundary conditions with no normal stress
+($\left[-\pressure\identity + \viscosity\left(\nabla\velocity + \left(\nabla\velocity\right)^{\rm
+T}\right)\right]\normvec = 0$), effectively mimicking an endless reservoir. On the nanopore and bilayer
+surface we applied a no-slip ($\vec{\velocity} = 0$) boundary condition.
 
-\paragraph{Boundary conditions.}
-The ion concentration at both reservoir boundaries was fixed using a Dirichlet boundary condition 
-($\concentration_i = \concentration_\textrm{bulk}$) 
-and the free in-and outflow of fluid ensured by an open boundary condition with no normal stress
-($\left[-\pressure\identity + \viscosity\left(\nabla\velocity + \left(\nabla\velocity\right)^{\rm 
-T}\right)\right]\normvec = 0$), effectively mimicking an endless reservoir. The bias voltage was applied to 
-the \textit{trans} boundary ($\potential = \varpotential_\textrm{bias}$), while the \textit{cis} boundary was 
-grounded ($\potential = 0$). On the nanopore and bilayer surface we applied a no-slip ($\vec{\velocity} = 0$) 
-and no flux ($-\normvec\cdot\vec{\flux}_i = 0$) boundary conditions.
+
 
 \subsection{Extended PNP-NS (ePNP-NS) equations}
 Because the classical PNP-NS equations do not include any interactions between components in the system,
