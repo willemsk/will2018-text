@@ -150,6 +150,10 @@ to simulate the operation of a biological nanopore using a continuum approach ba
 PNPE. However, we will also see the limits of this approach which hint at experimentally unexplored states of
 solutions within nanopores which are unlike anything that can be found in bulk solutions.
 
+Throughout this work, we will focus on ClyA-AS type I (ClyA), a dodecameric protein nanopore evolved from
+Cytolysin A of \textit{S. typhii} (\cref{fig:clya_atomistic}).\cite{soskine2013} However, the lessons learned
+form the modeling can be readily transferred to other types of nanopores.
+
 This work is organized as follows. In the section \emph{\nameref{sect:modeling_approach}} we will explain the
 details of the simulation, while in the section \emph{\nameref{sect:experiment}} the experimental setup will
 be described. The verification of the model and a subsequent in-depth analysis of the ion transport physics
@@ -157,29 +161,30 @@ through the pore will be conducted in the section \emph{\nameref{sect:results}}.
 the following conclusions are left for the remaining sections.
 
 
-TODO
-
-\begin{enumerate}
-	\item Application and importance of nanopores for DNA sequencing, single-protein analysis. 
-	\item Simulations used as a tool to understand nanopore physics
-	\subitem Molecular dynamics: most accurate, computationally very expensive,
-	\subitem Brownian dynamics: intermediate accuracy, computationally less expensive;
-	\subitem Continuum approaches (PNP-NS): least accurate (many assumptions), but computationally very fast and easy to understand data.
-	\item Most continuum work was done on solid-state nanopores, likely due to complex nature and smaller size of biological nanopores
-	\item Emphasize need for more accurate continuum models of biological nanopores that take into account
-	\subitem the scale of the nanopore (i.e. micro- vs. nanofluidics),
-	\subitem interactions between parts of the system (i.e. ion-ion, water-ion, ion-protein and water-protein).
-	\item Cytolysin A (ClyA) is an ideal model system:
-	\subitem not too small (i.e. narrowest constriction is \SI{\approx3.3}{\nano\meter})
-	\subitem experimentally interesting
-	\subitem ???
-\end{enumerate}
-
-This paper shows that a complete model of a biological nanopore suspended on a lipid bilayer is feasible and we will show that it can match experimental results.
-
-In this work we used ClyA-AS type I (ClyA), a dodecameric protein nanopore evolved from Cytolysin A of \textit{S. typhii} to be more experimentally stable and consistent (\cref{fig:clya_atomistic}).\cite{soskine2013}
 
 \section{Modeling Approach}\label{sect:modeling_approach}
+Our goal is to model the protein nanopore ClyA  suspended on a lipid bilyer in a 2D-axisymmetric system in an
+aqueous solution of NaCl. The lipid bilayer separates two reservoirs which can be electrically biased so that
+an ion current flows through the nanopore in between the reservoirs. With no loss of generality we will assume
+that the upper cis-reservoir (positive $z$-direction) is grounded, while the lower trans-reservoir is biased
+with an applied potential of $\Vbias$. Figure~\ref{fig:model_geometry} illustrates the geometry of the
+simulation domain.
+
+The construction of a viable modeling approach then decomposes into two separate tasks. First, finding an
+averaging scheme for the angular dependence of the charge distribution of the full 3D ClyA structure shown in
+Figs.~\ref{fig:clya_atomistic_side} and \ref{fig:clya_atomistic_top} in order to accurately represent the
+nanopore in a 2D-axisymemtric simulation. Second, defining a viable transport model for the ion species and
+the flow of the solution through the nanopore. This includes the definition of the set of parameters
+comprising mobilities, diffusion coefficients, and effective sizes of the ion species as well as the fluid
+viscosity and density of the solution. In particular, it is necessary to take in consideration the
+nanofluidics within the pore since none of the parameters retain their bulk values in nanoscale
+constrictions.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\vspace{1cm}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 To improve our understanding of the ion and water transport mechanisms within ClyA, we created a 
 computational model of the nanopore based on a set of well-known partial-differential equations (PDEs) called 
 the coupled Poisson-Nernst-Planck-Navier-Stokes (PNP-NS) equations. Due to ClyA's complexity, a meaningful 
