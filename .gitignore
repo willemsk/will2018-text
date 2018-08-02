@@ -1,5 +1,6 @@
 # Manually added entries
 notebook/*/*.pdf
+*.ini
 
 # Auto LaTeX
 ## Core latex/pdflatex auxiliary files:
