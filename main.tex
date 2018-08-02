@@ -181,55 +181,27 @@ nanofluidics within the pore since none of the parameters retain their bulk valu
 constrictions.
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vspace{1cm}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-To improve our understanding of the ion and water transport mechanisms within ClyA, we created a 
-computational model of the nanopore based on a set of well-known partial-differential equations (PDEs) called 
-the coupled Poisson-Nernst-Planck-Navier-Stokes (PNP-NS) equations. Due to ClyA's complexity, a meaningful 
-analytical solution is intractable and must hence be approximated numerically. We opted for the finite 
-element method (FEM) as implemented in the commercial software COMSOL Multiphysics (version 5.3, 
-\href{www.comsol.com}{www.comsol.com}).
-
-While these equations have proven to be excellent tool for studying ion and water transport in both 
-solid-state\cite{daiguji2004,lu2012,chaudhry2014,rempfer2016,lin2016} and biological 
-nanopores,\cite{eisenberg1996,simakov2010,pederson2015} the underlying continuum assumption does not hold at 
-the nanoscale under all circumstances, particularly at material interfaces\cite{vo2016} and in regions of 
-high charge density.\cite{corry2000} To address these concerns and to improve the accuracy of our model, we 
-propose a modified version of these equations, coined extended PNP-NS (ePNP-NS), which take into account 
-finite size of the ions\cite{borukhov1997,lu2011} and the reduction of ion and water mobility near protein 
-interfaces.\cite{makarov1998, pronk2013} Because the diffusion coefficient, mobility, viscosity, 
-density\cite{} and relative permittivity\cite{gavish2016} often deviate significantly from the traditional 
-`infinite dilution' values at experimentally relevant concentrations, we implemented a self-consistent 
-dependency on the average ion concentration for all these parameters.
-
-In the following sections, we will begin by describing a 2D-axisymmetric model of the geometry and charge 
-distribution of the ClyA, followed by an an outline of the classical PNP-NS equations and finally we will 
-introduce in detail the nanoscale corrections and concentration dependencies of the ePNP-NS framework.
-
 
 \subsection{Axially Symmetric Model of ClyA}
-
 ClyA is a multimeric protein complex that consists of 12 (or more) identical subunits which form a 
-\SI{14}{\nano\meter} long hydrophilic channel through a lipid bilayer. The pore cavity is lined with 
-predominantly negatively charged residues can be divided in roughly two cylindrical compartments: the 
-\textit{cis} lumen (\SI{5.5}{\nano\meter} diameter, \SI{10}{\nano\meter} height) and the \textit{trans} 
-constriction (\SI{3.3}{\nano\meter} diameter, \SI{4}{\nano\meter} height). Due to this high degree of axial 
-symmetry, we modelled ClyA as a solid, cylindrically symmetric dielectric block, embedded within a lipid 
-membrane represented as a \SI{2.8}{\nano\meter}-thick\cite{kucerka2011} dielectric disk  and surrounded by a 
-spherical, electrolyte-filled reservoir with a radius of \SI{250}{\nano\meter} 
-(\cref{fig:model_concept}a).\cite{lu2012,pederson2015} This approach greatly reduces the computational cost 
-compared to a full 3D model, while still retaining sufficient accuracy to provide relevant results. 
+\SI{14}{\nano\meter} long hydrophilic channel through a lipid bilayer (cf.~Figs.~\ref{fig:clya_atomistic_side}
+and \ref{fig:clya_atomistic_top}). The pore cavity is lined with predominantly negatively charged residues and
+can be divided in roughly two cylindrical compartments: the \cis{} lumen (\SI{5.5}{\nano\meter} diameter,
+\SI{10}{\nano\meter} height) and the \trans{} constriction (\SI{3.3}{\nano\meter} diameter,
+\SI{4}{\nano\meter} height). Due to this high degree of axial symmetry, we modelled ClyA as a solid,
+cylindrically symmetric dielectric block, embedded within a lipid membrane represented as a
+\SI{2.8}{\nano\meter}-thick\cite{kucerka2011} dielectric disk  and surrounded by a spherical,
+electrolyte-filled reservoir with a radius of \SI{250}{\nano\meter} 
+(cf.~Figs.~\ref{fig:model_geometry} and \ref{fig:model_geometry_zoom}).\cite{lu2012,pederson2015} This approach
+greatly reduces the computational cost compared to a full 3D model, while remaining sufficiently accurate.
 
-\paragraph{Nanopore geometry.}
 The nanopore geometry (\cref{fig:model_concept}b) was derived directly from a full atom model of ClyA-AS,
 an improved variant of ClyA evolved from the wild-type Cytolysin A from \textit{S. typhii} using directed 
 evolution.\cite{soskine2013} Briefly, a homology model of ClyA-AS was constructed from the wild-type crystal 
 structure (PDB: 2WCD)\cite{mueller2009} by introducing the necessary mutations in all 12 subunits 
 (\cref{suppinfo:tab:clya_as_mutations}), followed by a brief energy optimization of the mutated side-chains 
 with the conjugate gradient method (MODELLER, version 9.18).\cite{sali1993} We then computed the protonation 
-state of titratable residue at \pH{7.5} and assigned the correct a radius and partial charge to each atom of 
+state of titratable residue at \pH{7.5} and assigned the correct radius and partial charge to each atom of 
 the model (PROPKA 3.1\cite{olsson2011} and PBD2PQR 2.1.1\cite{jurrus2018} software packages) as parametrized 
 by the CHARMM36 forcefield.\cite{best2012} The atom radii were then used to compute a 3D-dimensional map of 
 the nanopore's molecular surface with a probe radius of \SI{1.4}{\angstrom}, which was radially averaged 
@@ -237,23 +209,30 @@ along the z-direction with a custom-built MATLAB script to generate an approxima
 the nanopore. To improve the quality of the final computational mesh, the resulting polygon was then 
 simplified manually by removing overlapping and superfluous vertices.
 
-\paragraph{Nanopore fixed charge density.}
-Similar to the geometry, the two-dimensional charge distribution used in this model was also derived directly 
-from the full atom model (\cref{fig:model_concept}c). Inspired by how charges are represented in the particle 
-mesh Ewald (PME) method,\cite{aksimentiev2005} we computed the fixed charge distribution of the nanopore 
-$\scdpore(r,z)$ by projecting the partial charge $\partialcharge_{i}$ of each atom $i$ on a two-dimensional 
-grid (\SI{0.005}{\nano\meter} resolution) with a Gaussian-like function:
+Similar to the geometry, the two-dimensional charge distribution used in this model was also derived directly
+from the full atom model (cf.~\cref{fig:model_concept}c). Inspired by how charges are represented in the
+particle mesh Ewald (PME) method,\cite{aksimentiev2005} we computed the fixed charge distribution of the
+nanopore $\scdpore(r,z)$ by assuming that an atom $i$ of partial charge $\partialcharge_{i}$ at the location
+$(x_i, y_i, z_i)$ in the full 3D atomistic pore model will contribute the partial charge
+$\partialcharge_{i}/2\pi\sqrt{x_i^2 + y_i^2}$ to a point $(r_i,z_i)$ in the averaged 2D-axisymmetric model.
+That means we effectively spread the charge over all angles to achieve axial symmetry. 
+
+Following that, we assume a Gaussian distribution of the space charge density of each atom $i$ around its
+respective 2D-axisymmetric coordinates $(r_i,z_i)$. With the atom radius $\atomradius_{i}$ and the sharpness
+factor $\sigma = \num{0.5}$, we find for the 2D space charge density
 \begin{align}
 \label{eq:scdpore}
 \scdpore(r,z) = \displaystyle\sum_{i} \dfrac{\echarge\partialcharge_{i}}{\pi(\stdev\atomradius_{i})^2} 
 \exp{\left(-\dfrac{(r-r_i)^2 + (z-z_i)^2}{(\stdev\atomradius_{i})^2}\right)}
 \end{align}
-with $\echarge$ the elementary charge, $\atomradius_{i}$ the atom radius, $\sigma$ a sharpness factor (set to 0.5) and
-$r_i = \sqrt{x_i^2+y_i^2}$ and $z_i$ the distance of the atom from the central axis and the height along the 
-central axis, respectively. Instead of explicitly selecting a few amino acids as `key' charged residues, our 
-method includes all partial charges and is hence more comprehensive. Furthermore, since it can be applied as 
-a single boundary condition over the entire model, it does not require the definition of additional geometric 
-features to hold the charges.
+where $\echarge$ is the elementary charge. To embed $\scdpore$ with sufficient detail yet efficiently
+into a numeric solver, the spatial coordinates are discretized with a grid spacing of \SI{0.005}{\nano\meter}
+in the domain of $\scdpore$ and precomputed values are used.
+
+%Instead of explicitly selecting a few amino acids as \emph{key} charged
+%residues, our method includes all partial charges and is hence more comprehensive. Furthermore, since it can
+%be applied as a single boundary condition over the entire model, it does not require the definition of
+%additional geometric features to hold the charges.
 
 % Grid: r from 0 to 70 A, res = 0.05 A 
 % 		z from -35 to 135 A, res = 0.05 A
@@ -262,6 +241,29 @@ features to hold the charges.
 
 
 \subsection{Poisson-Nernst-Planck-Navier-Stokes (PNP-NS) equations}
+
+%To improve our understanding of the ion and water transport mechanisms within ClyA, we created a 
+%computational model of the nanopore based on a set of well-known partial-differential equations (PDEs) called 
+%the coupled Poisson-Nernst-Planck-Navier-Stokes (PNP-NS) equations. Due to ClyA's complexity, a meaningful 
+%analytical solution is intractable and must hence be approximated numerically. We opted for the finite 
+%element method (FEM) as implemented in the commercial software COMSOL Multiphysics (version 5.3, 
+%\href{www.comsol.com}{www.comsol.com}).
+%
+%While these equations have proven to be excellent tool for studying ion and water transport in both 
+%solid-state\cite{daiguji2004,lu2012,chaudhry2014,rempfer2016,lin2016} and biological 
+%nanopores,\cite{eisenberg1996,simakov2010,pederson2015} the underlying continuum assumption does not hold at 
+%the nanoscale under all circumstances, particularly at material interfaces\cite{vo2016} and in regions of 
+%high charge density.\cite{corry2000} To address these concerns and to improve the accuracy of our model, we 
+%propose a modified version of these equations, coined extended PNP-NS (ePNP-NS), which take into account 
+%finite size of the ions\cite{borukhov1997,lu2011} and the reduction of ion and water mobility near protein 
+%interfaces.\cite{makarov1998, pronk2013} Because the diffusion coefficient, mobility, viscosity, 
+%density\cite{} and relative permittivity\cite{gavish2016} often deviate significantly from the traditional 
+%`infinite dilution' values at experimentally relevant concentrations, we implemented a self-consistent 
+%dependency on the average ion concentration for all these parameters.
+%
+%In the following sections, we will begin by describing a 2D-axisymmetric model of the geometry and charge 
+%distribution of the ClyA, followed by an an outline of the classical PNP-NS equations and finally we will 
+%introduce in detail the nanoscale corrections and concentration dependencies of the ePNP-NS framework.
 
 In this section we will start by describing the classical PNP-NS equations and their boundary conditions,
 followed by a description of the extended-PNP-NS (ePNP-NS) framework that includes a several additions and 
