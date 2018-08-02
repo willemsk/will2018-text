@@ -16,6 +16,12 @@
       \centering
       \caption{}\vspace{-5mm}\label{fig:conductance_rectification_contourmap_epnp}
       \includegraphics[scale=1]{figures/conductance/conductance_rectification_contourmap_epnp}
+    \end{subfigure}
+    \begin{subfigure}[t]{8cm}
+      %\vspace{5mm}
+      \centering
+      \caption{}\vspace{-5mm}\label{fig:transport_number_contourmap_epnp}
+      \includegraphics[scale=1]{figures/conductance/transport_number_contourmap_epnp}
     \end{subfigure} 
   \end{minipage}
 
@@ -34,19 +40,23 @@ the extended PNP-NS (ePNP-NS) equations exhibit excellent agreement over the ent
 experimental measurements were performed at \SI{25\pm1}{\degreeCelsius}. Errorbars represent the standard 
 deviation of three independent measurements ($n=3$).
 (\subref{fig:conductance_contourmap_epnp})
-Contourmap of the simulated (ePNP-NS) ionic conductance ($G(c) = I / V$) vs. bias voltage and bulk salt 
-concentration. The graphs at the bottom and on the right show the dependency of the conductance on applied 
-bias voltage and on the bulk salt concentration. Solid lines and circles represent simulated and experimental 
-data, respectively. The kink in the slope of the concentration-conductance log-log plot at 
-\SI{\approx0.15}{\Molar} indicates the presence of 2 distinct conductance regimes. Power law fitting ($G = a 
-c^b$) shows near a linear ($b\approx1$) dependency at high ionic strengths (\SIrange{0.3}{1.5}{\Molar}) and a 
-near square-root ($b\approx0.5$) dependency at low salt concentrations (\SIrange{0.005}{0.075}{\Molar}).
+Concentration-voltage heatmap (left) of the simulated ionic conductance, $G(c) = I / V$, and the bulk salt 
+concentration dependencies (right) at +150~mV (blue) and -150~mV (red). The simulated (ePNP-NS) and 
+experimental data are represented by solid lines and open circles, respectively. The kink in the slopes of 
+the log-log plots at $\approx$0.15~M suggest that the conductance mechanism is different at low and high bulk 
+ionic strengths. While the low and high regimes exhibit respectively square-root 
+($G \propto c_\text{bulk}^{0.5}$) and linear ($G \propto c_\text{bulk}^1$) dependencies at negative bias 
+voltages, the exponents converge at positive bias voltages (low: $G \propto c_\text{bulk}^{0.61}$, high: 
+$G \propto c_\text{bulk}^{0.79}$).
 (\subref{fig:conductance_rectification_contourmap_epnp})
-Contourmap of the simulated (ePNP-NS) ionic conductance rectification ($\alpha(V) = G(+V) / G(-V)$) vs. bias 
-voltage and bulk salt concentration. While $\alpha$ depends linearly on the applied bias in the investigated 
-voltage regime, a clear maximum is observed in the concentration dependency at $\SI{\approx0.15}{\Molar}$. 
-While the measurement and the model agree qualitatively, a good quantitative agreement is found only at 
-concentrations \SI{\ge 0.5}{\Molar}.
+Concentration-voltage heatmap of the simulated (ePNP-NS) ionic conductance rectification ($\alpha(V) = G(+V) 
+/ G(-V)$), which highlights ClyA's tendency for higher currents at positive bias voltages. $\alpha$ is a 
+linear function of voltage, but shows a maximum in the concentration dependency at $\approx$0.15~M. The 
+measurement and the model agree qualitatively about the shape of the curve, a good quantitative match is 
+found only at concentrations $\ge$0.5~M.
+(\subref{fig:transport_number_contourmap_epnp})
+Concentration-voltage heatmap of the fraction of the current carried by \ce{Na+} ions, i.e. the 
+\ce{Na+} transport number ($t_{\ce{Na+}} = G_{\ce{Na+}}/G$).
 }
 
 \label{fig:conductance}
