@@ -291,7 +291,7 @@ $\potential = \Vbias$. Neumann boundary conditions apply where at the bilayer-bo
     $T$                    & \SI{298.15}{\kelvin} & System temperature\\
     $\permittivity_p$      & \num{20} & Relative permittivity of pore\cite{li2013}\\
     $\permittivity_m$      & \num{3.2}& Relative permittivity of bilayer\cite{gramse2013} \\
-    $\permittivity_w$      & \num{78.15}& Relative permittivity of fluid \\
+    $\permittivity_f$      & \num{78.15}& Relative permittivity of fluid \\
     $\density$             & \SI{997}{\kilogram\per\cubic\meter}& Density of fluid at infinite dilution\\
     $\viscosity$           & \SI{8.904}{\pascal\second}& Dynamic viscosity\\
     $\chargen_{\ce{Na+}}$  & \num{+1} & charge number of \ce{Na+} \\
@@ -373,16 +373,33 @@ self-consistently:
     \item inclusion of a finite ion size term to the NPE. 
 \end{itemize}
 In the remainder of this work, we will refer to the model containing these effects as extended PNP-NS
-(ePNP-NS).
+(ePNP-NS). 
 
-\subsubsection{Concentration dependent properties.}
-The concentration dependent ion self-diffusion coefficients $\diffusion_{i}^1(\dconc)$, cation transport 
-number $\transportn_{i}(\dconc)$, viscosity $\viscosity^1(\dconc)$, density $\density(\dconc)$ and relative 
-permittivity $\permittivity_{w}(\dconc)$ could be fitted directly the experimental data with the empirical 
-equations given in \cref{tab:corrections_equations}. Here $\dconc = \avionconc/\SI{1}{\Molar}$ is a 
-dimensionless value that represents the average ion concentration. The concentration-dependent ionic mobility 
-$\mobility^1_{i}$ must first be derived from the salt's molar conductivity $\molarconductivity$ and the ion's 
-transport number $\transportn_{i}$ before it can be fitted\cite{aburto2013I}
+Concentration and wall-distance dependent parameters can be included by substitution of experimentally
+determined functions as
+\begin{align}
+\diffusion_{i}		&= \left[ \diffusion_{i}^c(\dconc) \times \diffusion_{i}^w\left(\dwall\right) \right] 
+    \times \SI{e-9}{\square\meter\per\second}, \label{eq:diffusion} \\
+\mobility_{i}  		&= \left[ \mobility_{i}^c(\dconc) \times \mobility_{i}^w\left(\dwall\right) \right] 
+    \times \SI{e-8}{\square\meter\per\second\per\volt}, \label{eq:mobility}\\
+\viscosity     		&= \left[ \viscosity^c(\dconc) \times \viscosity^w\left(\dwall\right)\right] 
+    \times \SI{e-4}{\pascal\second}, \label{eq:viscosity}\\
+\density 	   		&= \density(\dconc) \times\SI{e3}{\kg\per\cubic\meter}, \label{eq:density}\\
+\permittivity_{f} 	&= \permittivity_{f}(\dconc),
+    \label{eq:permittivity}
+\end{align}
+where the superscripts $c$ and $w$ indicate the concentration and wall-distance dependent functions,
+respectively, $\dconc = \avionconc/\SI{1}{\Molar}$ and $\dwall = \walldistance/\SI{1}{\nano\meter}$ represent
+the dimensionless average ion concentration and dimensionless distance from the nanopore wall, respectively.
+For the present work, the definition of these functions is given in \cref{tab:corrections_equations}, their
+fits to the experimental data are shown in \cref{suppinfo:fig:corrections} and the resulting fitting
+parameters are listed in \cref{suppinfo:tab:corrections_parameters}.
+
+\input{tab_corrections_equations.tex}
+
+To obtain the concentration-dependent ionic mobility  $\mobility^c_{i}$ from fitted functions, it must first
+be derived from the salt's molar conductivity $\molarconductivity$ and the ion's transport number
+$\transportn_{i}$ before it can be fitted\cite{aburto2013I}
 \begin{align}
 \label{eq:conductivity-to-mobility}
 \mobility_{i}(\concentration) = \frac{\specmolarconductivity_{i}(\concentration)}{\chargen_{i}\faraday} 
@@ -391,29 +408,26 @@ transport number $\transportn_{i}$ before it can be fitted\cite{aburto2013I}
 \end{align}
 where $\specmolarconductivity_{i}(\concentration)$ is the specific molar conductivity of ion $i$.
 
-% self-diffusion coefficients \cite{mills1989}
-% cation transport number\cite{panopoulos1986,currie1960,smits1966,schonert2014,dellamonica1979}
-% molar conductivity \cite{bianchi1989, currie1960, goldsack1976, dellamonica1979}
-% viscosity and density \cite{hai-lang1996}
-% relative permittivity \cite{gavish2016}
 
-All fitting functions can be found in \cref{tab:corrections_equations}, their fitting coefficients in 
-\cref{suppinfo:tab:corrections_parameters} and a plot of the fits to the experimental data in 
-\cref{suppinfo:fig:corrections}.
+Note that all parameters simply depend on the average concentration rather than on the concentration of each
+species. This is because measurements are usually performed in bulk solutions where the concentrations of the
+ions are the same. However, at interfaces and within nanopores the concentrations may differ wildly. But due
+to the lack of experimental data for these conditions, we need to resort to extrapolation -- which is simply
+the average. Nevertheless, later on in Sect.~\ref{}, we will see that the current concentration and dependent
+functions will lead to an excellent fit to experimental data in all but the most extreme cases.
 
-\subsubsection{Wall-distance corrections.}
-The diffusivity of small molecules such ions or water depends heavily on their proximity, i.e. within 
-\SI{1.0}{\nano\meter} distance, to large molecules such as proteins or DNA.\cite{makarov1998} In small 
-nanopores (\SI{\le 5}{\nano\meter} radius), these effects encompass a significant fraction of the total 
-nanopore radius, and hence cannot be neglected.\cite{simakov2010,pederson2015} For the wall-distance 
-dependent diffusion coefficients $\diffusion_{i}^2(\dwall)$ and mobilities 
-$\mobility_{i}^2(\dwall)$ we used Eq.~11 from ref.~\citenum{simakov2010} 
-and the fitting parameters obtained by the authors. For the wall-distance dependent viscosity 
-$\viscosity^2(\dwall)$, we first offset the inverse viscosity data from Figure~4 of ref.~\citenum{pronk2013} 
-by each proteins' respective hydrodynamic radius, which we assume to be a good approximation of the average 
-protein radius, and fitted all the resulting data points with a logistic function.
+The diffusivity of ions or small molecules like water depends heavily on their proximity to large molecules
+such as proteins or DNA.\cite{makarov1998} Since these effects happen only for distances of less than about 
+a nanometer, they can usually be neglected. However, in small nanopores (\SI{\le 5}{\nano\meter}
+radius), they comprise a significant fraction of the total nanopore radius and hence must be taken into
+account.\cite{simakov2010,pederson2015}  The wall-distance dependent diffusion coefficients 
+$\diffusion_{i}^w(\dwall)$ and mobilities $\mobility_{i}^w(\dwall)$ and their respective fitting parameters 
+were directly adapted from Ref.~\citenum{simakov2010}. The wall-distance dependent viscosity
+$\viscosity^w(\dwall)$ was fitted as a logistic function to the average of the inverse viscosities from
+Ref.~\citenum{pronk2013} where the hydrodynamic radius of the proteins was interpreted as the position of the
+wall (cf.~\cref{fig:}).
 
-\paragraph{Finite ion-size effects.}
+
 Because the PNP equations do not take the size of the ions into account, they tend to overscreen locations 
 with high charge densities resulting in unrealistically high ion concentrations.\cite{corry2000} This problem 
 can be addressed by the addition of a nonlinear flux term to the NPE that poses an upper limit to the 
@@ -432,23 +446,8 @@ solvent molecules, respectively. The radii were set to \SI{0.5}{\nano\meter} for
 and to \SI{0.311}{\nano\meter} for water, corresponding to maximum concentrations of \SI{13.3}{\Molar} and 
 \SI{55.2}{\Molar}, respectively. 
 
-\paragraph{The final ePNP-NS model.}
-We obtain the final ePNP-NS model by substituting the following, traditionally constant, parameters of the 
-PNP-NS equations by the concentration- and distance-dependent functions
-\begin{align}
-\diffusion_{i}		&= \left[ \diffusion_{i}^1(\dconc) \times \diffusion_{i}^2(\dwall) \right] \times \SI{e-9}{\square\meter\per\second}, \\
-\mobility_{i}  		&= \left[ \mobility_{i}^1(\dconc) \times \mobility_{i}^2(\dwall) \right] \times \SI{e-8}{\square\meter\per\second\per\volt}, \\
-\viscosity     		&= \left[ \viscosity^1(\dconc) \times \viscosity^2(\dwall)\right] \times \SI{e-4}{\pascal\second}, \\
-\density 	   		&= \density(\dconc) \times\SI{e3}{\kg\per\cubic\meter} \quad\text{and}, \\
-\permittivity_{w} 	&= \permittivity_{w}(\dconc)
-\end{align}
-where $\dconc = \avionconc/\SI{1}{\Molar}$ and $\dwall = \walldistance/\SI{1}{\nano\meter}$ represent the 
-dimensionless average ion concentration and dimensionless distance from the nanopore wall, respectively.
-The detailed equations behind these functions are listed in \cref{tab:corrections_equations}, their fits to 
-the experimental data are shown in \cref{suppinfo:fig:corrections} and the resulting fitting parameters are 
-listed in \cref{suppinfo:tab:corrections_parameters}.
 
-\input{tab_corrections_equations.tex}
+
 
 \section{Experimental}\label{sect:experiment}
 \paragraph{Single-channel ionic current measurements.}
