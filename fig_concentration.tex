@@ -1,30 +1,20 @@
 \begin{figure*}[htbp]
 \centering
-\begin{minipage}[t]{5cm}
-\begin{subfigure}[t]{5cm}
+\begin{minipage}[t]{8.2cm}
+\begin{subfigure}[t]{8.2cm}
 	\centering
-	\caption{}\vspace{-3mm}\label{fig:concentration_pore_average_vs_voltage}
-	\includegraphics[scale=1]{figures/concentration/concentration_pore_average_vs_voltage}
-  \hspace{1cm}
+	\caption{}\vspace{-3mm}\label{fig:concentration_contours}
+	\includegraphics[scale=1]{figures/concentration/concentration_contours}
 \end{subfigure}
-\begin{subfigure}[t]{5cm}
+\begin{subfigure}[t]{8.2cm}
+  \centering
+  \caption{}\vspace{-3mm}\label{fig:concentration_radial_profiles}
+  \includegraphics[scale=1]{figures/concentration/concentration_radial_profiles}
+\end{subfigure}
+\begin{subfigure}[t]{8.2cm}
 	\centering
 	\caption{}\vspace{-3mm}\label{fig:concentration_pore_average_vs_concentration}
 	\includegraphics[scale=1]{figures/concentration/concentration_pore_average_vs_concentration}
-\end{subfigure}
-\end{minipage}
-\hspace{0.5cm}
-\begin{minipage}[t]{10cm}
-\begin{subfigure}[t]{6cm}
-	\centering
-	\caption{}\vspace{-3mm}\label{fig:concentration_contour}
-	\includegraphics[scale=1]{figures/concentration/concentration_contour}
-\end{subfigure}
-\hspace{-0.5cm}
-\begin{subfigure}[t]{4cm}
-	\centering
-	\caption{}\vspace{-3mm}\label{fig:concentration_radial_average}
-	\includegraphics[scale=1]{figures/concentration/concentration_radial_average}
 \end{subfigure}
 \end{minipage}
 
@@ -33,24 +23,23 @@
 [\textbf{Ion concentration distribution inside ClyA.}]
 {
 \textbf{Ion concentration distribution inside ClyA.}
-Relative ion concentrations averaged over the entire pore in function of
-(\subref{fig:concentration_pore_average_vs_voltage}) bias voltage and 
-(\subref{fig:concentration_pore_average_vs_concentration}) bulk salt concentration for both \ce{Na+} (full 
-blue lines) and \ce{Cl-} (dotted red lines). Due to ClyA's negatively charged interior, the \ce{Na+} 
-concentration inside the pore is considerably enhanced while the amount of \ce{Cl-} ions is significantly 
-depleted, particularly at lower ionic strengths. Both effects diminish with increasing concentration and 
-bulk-like conditions are observed for both ions at \SI{\approx0.5}{\Molar}. Interestingly, the \ce{Cl-} 
-concentration increases rapidly at higher positive bias voltages, resulting in bulk-like conditions at 
-\SI{+150}{\milli\volt}.
-(\subref{fig:concentration_contour}) Cross-section contour plots of the \ce{Na+} (top) and \ce{Cl-} (bottom) 
-concentrations inside the pore relative to the bulk value of \SI{0.15}{\Molar} at bias voltages 
-\SI{-100}{\mV} (left) and \SI{+100}{\mV} (right). These plots reveal the dramatic, but local concentration 
-changes near charged residues, particularly in the highly negatively charged constriction. While conditions 
-inside the lumen of the pore are generally close to bulk, a strong depletion of \ce{Cl-} can occur under high 
-negative bias voltages.
-(\subref{fig:concentration_radial_average}) Ion concentration profiles along the z-axis of the pore at 
-\SI{0.15}{\Molar} for \ce{Na+} (top) and \ce{Cl-} (bottom) at \SI{-100}{\mV} (red) and \SI{+100}{\mV} (blue), 
-obtained by averaging the concentrations over the radius of the pore.
+(\subref{fig:concentration_contours})
+Cross-section contour plots of the \ce{Na+} and \ce{Cl-} concentrations inside the pore relative to the bulk 
+value of $0.15$~M at bias voltages $-100$ and $+100$~mV. These plots reveal the local 
+concentration changes near charged residues, particularly in the highly negatively charged constriction. 
+While conditions inside the lumen of the pore are generally close to bulk, a strong depletion of \ce{Cl-} can 
+occur under high negative bias voltages.
+(\subref{fig:concentration_radial_profiles})
+Relative \ce{Na+} and \ce{Cl-} concentration profiles (to $\concentration_\text{bulk}=0.15$~M) along the 
+radius of the pore at the center of the constriction ($z=-0.3$~nm) and the lumen ($z=5$~nm) for $-100$ and 
+$+100$~mV, showing the formation of the electrical double layer.
+(\subref{fig:concentration_pore_average_vs_concentration})
+Relative \ce{Na+} and \ce{Cl-} concentrations averaged over the entire pore in function of bulk salt 
+concentration. ClyA's negatively charged interior results in the enhancement and the depletion of 
+respectively \ce{Na+} and \ce{Cl-} concentrations inside the pore, particularly at lower ionic strengths. 
+Both effects diminish with increasing concentrations and bulk-like conditions are observed for both ions at 
+$\approx0.5$~M. Interestingly, the \ce{Cl-} concentration increases rapidly at higher positive bias voltages, 
+resulting in bulk-like conditions at $+150$~mV for $\concentration_\text{bulk}>0.05$~M.
 }
 
 \label{fig:concentration}
