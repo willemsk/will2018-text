@@ -4,12 +4,12 @@
 	\begin{minipage}[t]{3.5cm}
 		\begin{subfigure}[t]{3.5cm}
 			\centering
-			\caption{}\label{fig:clya_atomistic_side}
+			\caption{}\label{fig:clya_side}
 			\includegraphics[width=3.5cm]{figures/concept/clya_side}
 		\end{subfigure}
 		\begin{subfigure}[t]{3.5cm}
 			\centering
-			\caption{}\label{fig:clya_atomistic_top}
+			\caption{}\label{fig:clya_top}
 			\includegraphics[width=3.5cm]{figures/concept/clya_top}
 		\end{subfigure}
 	\end{minipage}
@@ -46,18 +46,17 @@
     \end{minipage}
   \end{minipage}
 
-
 \caption[All-atom and 2D-axisymmetric models of ClyA.]
 {
-\textbf{All-atom and 2D-axisymmetric models of ClyA.} (\subref{fig:clya_atomistic_side}) Cross-sectional and 
-(\subref{fig:clya_atomistic_top}) top views of an all-atom model of the dodecameric nanopore ClyA-AS embedded 
-in a lipid bilayer.\cite{soskine2013}
+\textbf{All-atom and 2D-axisymmetric models of ClyA.}
+(\subref{fig:clya_side}) Cross-sectional and (\subref{fig:clya_top}) top views of an all-atom model of the 
+dodecameric nanopore ClyA-AS embedded in a lipid bilayer.\cite{soskine2013}
 (\subref{fig:model_geometry}) and (\subref{fig:model_geometry_zoom}) 2D-axisymmetric model of ClyA (grey) 
 embedded in a lipid bilayer (green) and surrounded by a spherical water reservoir (blue). The relative 
 permittivity of the latter, $\permittivity_w$, is dependent on the local average ion concentration 
 $\avionconc$, while the former two have a fixed permittivity of $\permittivity_p=20$ and 
-$\permittivity_m=3.2$, respectively. A bias voltage is applied at the \textit{trans} reservoir boundary 
-($\potential = \varpotential_\textrm{bias}$), red), while the \textit{cis} side is kept grounded ($\potential 
+$\permittivity_m=3.2$, respectively. A bias voltage is applied at the \trans\ reservoir boundary 
+($\potential = \varpotential_\textrm{bias}$), red), while the \cis\ side is kept grounded ($\potential 
 = 0$, blue). The fixed concentration ($\concentration_i = \concentration_{i,\text{bulk}}$) and no normal 
 stress ($\sigma_f \vec{n} = 0$) boundary conditions serve to mimic an infinite reservoir. Note that the in 
 the ePNP-NS model, the viscosity $\viscosity$, the ion diffusion coefficients $\diffusion_{i}$ and the ion 
@@ -65,13 +64,14 @@ mobilities $\mobility_{i}$ are also a function of both $\avionconc$ and $\walldi
 from the nanopore wall. The fluid density is solely dependent on $\avionconc$. The walls of the nanopore and 
 lipid bilayer in contact with the reservoir have Dirichlet boundary conditions, i.e. no-slip ($\vec{u} = 0$) 
 for fluids and and no-flux ($-\vec{n} \cdot \vec{\flux_i} = 0$) for ions.
-(\subref{fig:model_geometry_vs_wedge}) The 2D-axisymmetric geometry was derived directly from the all-atom 
-model by computing the average inner and outer radii along the longitudinal axis of the pore, and hence 
-closely follows the outline of a \ang{30} wedge out of the homology model. 
-(\subref{fig:model_charge_density}) The fixed space charge density ($\scdpore$) map of ClyA-AS, obtained by 
-Gaussian projection of each atom's partial charge onto a 2D plane (see methods for details).
+(\subref{fig:model_geometry_vs_wedge})
+The 2D-axisymmetric geometry was derived directly from the all-atom model by computing the average inner and 
+outer radii along the longitudinal axis of the pore, and hence closely follows the outline of a \ang{30} 
+wedge out of the homology model. 
+(\subref{fig:model_charge_density})
+The fixed space charge density ($\scdpore$) map of ClyA-AS, obtained by Gaussian projection of each atom's 
+partial charge onto a 2D plane (see methods for details).
 }
 
 \label{fig:model_concept}
-
 \end{figure}

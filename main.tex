@@ -13,6 +13,7 @@
 \usepackage{amssymb}
 \usepackage{textcomp}
 \usepackage{textgreek}
+\usepackage{gensymb}
 
 \usepackage[version=4]{mhchem}
 \usepackage[alsoload=synchem]{siunitx}
@@ -151,8 +152,8 @@ PNPE. However, we will also see the limits of this approach which hint at experi
 solutions within nanopores which are unlike anything that can be found in bulk solutions.
 
 Throughout this work, we will focus on ClyA-AS type I (ClyA), a dodecameric protein nanopore evolved from
-Cytolysin A of \textit{S. typhii} (\cref{fig:clya_atomistic}).\cite{soskine2013} However, the lessons learned
-form the modeling can be readily transferred to other types of nanopores.
+Cytolysin A of \textit{S. typhii} (\cref{fig:clya_side, fig:clya_top}).\cite{soskine2013} 
+However, the lessons learned form the modeling can be readily transferred to other types of nanopores.
 
 This work is organized as follows. In the section \emph{\nameref{sect:modeling_approach}} we will explain the
 details of the simulation, while in the section \emph{\nameref{sect:experiment}} the experimental setup for
@@ -172,45 +173,43 @@ simulation domain.
 
 The construction of a viable modeling approach then decomposes into two separate tasks. First, finding an
 averaging scheme for the angular dependence of the charge distribution of the full 3D ClyA structure shown in
-Figs.~\ref{fig:clya_atomistic_side} and \ref{fig:clya_atomistic_top} in order to accurately represent the
-nanopore in a 2D-axisymemtric simulation. Second, defining a viable transport model for the ion species and
-the flow of the solution through the nanopore. This includes the definition of the set of parameters
-comprising mobilities, diffusion coefficients, and effective sizes of the ion species as well as the
-viscosity, density, and permittivity of the solution. In particular, it is necessary to take in consideration
-the nanofluidics within the pore since none of the parameters retain their bulk values in nanoscale
-constrictions.
+Figs.~\ref{fig:clya_side} and \ref{fig:clya_top} in order to accurately represent the nanopore in a 
+2D-axisymemtric simulation. Second, defining a viable transport model for the ion species and the flow of the 
+solution through the nanopore. This includes the definition of the set of parameters comprising mobilities, 
+diffusion coefficients, and effective sizes of the ion species as well as the viscosity, density, and 
+permittivity of the solution. In particular, it is necessary to take in consideration the nanofluidics within 
+the pore since none of the parameters retain their bulk values in nanoscale constrictions.
 
 
 
 \subsection{Axially Symmetric Model of ClyA}
-ClyA is a multimeric protein complex that consists of 12 (or more) identical subunits which form a 
-\SI{14}{\nano\meter} long hydrophilic channel through a lipid bilayer (cf.~Figs.~\ref{fig:clya_atomistic_side}
-and \ref{fig:clya_atomistic_top}). The pore cavity is lined with predominantly negatively charged residues and
-can be divided in roughly two cylindrical compartments: the \cis{} lumen (\SI{5.5}{\nano\meter} diameter,
-\SI{10}{\nano\meter} height) and the \trans{} constriction (\SI{3.3}{\nano\meter} diameter,
-\SI{4}{\nano\meter} height). Due to this high degree of axial symmetry, we modelled ClyA as a solid,
-cylindrically symmetric dielectric block, embedded within a lipid bilayer which is represented as a
-\SI{2.8}{\nano\meter}-thick\cite{kucerka2011} dielectric disk  and surrounded by a spherical,
-electrolyte-filled reservoir with a radius of \SI{250}{\nano\meter} 
-(cf.~Figs.~\ref{fig:model_geometry} and \ref{fig:model_geometry_zoom}).\cite{lu2012,pederson2015} This approach
-greatly reduces the computational cost compared to a full 3D model, while remaining sufficiently accurate.
+ClyA is a multimeric protein complex that consists of 12 (or more) identical subunits which form a $14$~nm 
+long hydrophilic channel through a lipid bilayer (cf.~\cref{fig:clya_side, fig:clya_top}). The pore cavity is 
+lined with predominantly negatively charged residues and can be divided in roughly two cylindrical 
+compartments: the \cis\ lumen ($\approx5.5$~nm diameter, $\approx10$~nm height) and the \trans\ constriction 
+($\approx3.3$~nm diameter, $\approx4$~nm height). Due to this high degree of axial symmetry, we modelled ClyA 
+as a solid, cylindrically symmetric dielectric block, embedded within a lipid bilayer which is represented as 
+a $2.8$~nm-thick\cite{kucerka2011} dielectric disk  and surrounded by a spherical, electrolyte-filled 
+reservoir with a radius of $250$~nm (cf.~\cref{fig:model_geometry, 
+fig:model_geometry_zoom}).\cite{lu2012,pederson2015} This approach greatly reduces the computational cost 
+compared to a full 3D model, while retaining sufficient molecular details as to produce meaningful results.
 
-The nanopore geometry (\cref{fig:model_concept}b) was derived directly from a full atom model of ClyA-AS --
-an improved variant of ClyA evolved from the wild-type Cytolysin A from \textit{S. typhii} using directed 
-evolution.\cite{soskine2013} Briefly, a homology model of ClyA-AS was constructed from the wild-type crystal 
-structure (PDB: 2WCD)\cite{mueller2009} by introducing the necessary mutations in all 12 subunits 
+The nanopore geometry (\cref{fig:model_geometry_vs_wedge}) was derived directly from a full atom model of 
+ClyA-AS -- an improved variant of ClyA evolved from the wild-type Cytolysin A from \textit{S. typhii} using 
+directed evolution.\cite{soskine2013} Briefly, a homology model of ClyA-AS was constructed from the wild-type 
+crystal structure (PDB: 2WCD)\cite{mueller2009} by introducing the necessary mutations in all 12 subunits 
 (\cref{suppinfo:tab:clya_as_mutations}), followed by a brief energy optimization of the mutated side-chains 
 with the conjugate gradient method (MODELLER, version 9.18).\cite{sali1993} We then computed the protonation 
 state of titratable residue at \pH{7.5} and assigned the correct radius and partial charge to each atom of 
 the model (PROPKA 3.1\cite{olsson2011} and PBD2PQR 2.1.1\cite{jurrus2018} software packages) as parametrized 
 by the CHARMM36 forcefield.\cite{best2012} The atom radii were then used to compute a 3D-dimensional map of 
-the nanopore's molecular surface with a probe radius of \SI{1.4}{\angstrom}, which was radially averaged 
+the nanopore's molecular surface with a probe radius of $1.4$~\AA, which was radially averaged 
 along the z-direction with a custom-built MATLAB script to generate an approximate axisymmetric outline of 
 the nanopore. To improve the quality of the final computational mesh, the resulting polygon was then 
 simplified manually by removing overlapping and superfluous vertices.
 
 Similar to the geometry, the two-dimensional charge distribution used in this model was also derived directly
-from the full atom model (cf.~\cref{fig:model_concept}c). Inspired by how charges are represented in the
+from the full atom model (cf.~\cref{fig:model_charge_density}). Inspired by how charges are represented in the
 particle mesh Ewald (PME) method,\cite{aksimentiev2005} we computed the fixed charge distribution of the
 nanopore $\scdpore(r,z)$ by assuming that an atom $i$ of partial charge $\partialcharge_{i}$ at the location
 $(x_i, y_i, z_i)$ in the full 3D atomistic pore model will contribute the partial charge
@@ -226,8 +225,8 @@ factor $\sigma = \num{0.5}$, we find for the 2D space charge density
 \exp{\left(-\dfrac{(r-r_i)^2 + (z-z_i)^2}{(\stdev\atomradius_{i})^2}\right)}
 \end{align}
 where $\echarge$ is the elementary charge. To embed $\scdpore$ with sufficient detail yet efficiently
-into a numeric solver, the spatial coordinates are discretized with a grid spacing of \SI{0.005}{\nano\meter}
-in the domain of $\scdpore$ and precomputed values are used during the solver runtime.
+into a numeric solver, the spatial coordinates are discretized with a grid spacing of $0.005$~nm in the 
+domain of $\scdpore$ and precomputed values are used during the solver runtime.
 
 %Instead of explicitly selecting a few amino acids as \emph{key} charged
 %residues, our method includes all partial charges and is hence more comprehensive. Furthermore, since it can
@@ -274,13 +273,13 @@ and is given by
 \end{align}
 with $\potential$ the electric potential, $\absperm=\SI{8.85419e-12}{\farad\per\meter}$ the vacuum
 permittivity, and $\relperm$ the local relative permittivity of the medium listed in
-\cref{tab:pnpns_parameters}. The total charge density on the right hand side of Eq.~\eqref{eq:poisson}
-consists of a fixed contribution $\scdpore$ due to charges of the nanopore of Eq.~\eqref{eq:scdpore}, and an ion
+\cref{tab:pnpns_parameters}. The total charge density on the right hand side of \cref{eq:poisson}
+consists of a fixed contribution $\scdpore$ due to charges of the nanopore of \cref{eq:scdpore}, and an ion
 concentration dependent component $\scdion$ caused by local non-electroneutralities in the fluid
-(cf.~Eq.~\eqref{eq:scdion}).
+(cf.\cref{eq:scdion}).
 
-Dirichlet boundary conditions are applied to the boundaries of the \cis{} and \trans{} reservoirs. The
-potential at the \cis{} boundary is set to $\potential = 0$ whereas at the \trans{} boundary it is set to
+Dirichlet boundary conditions are applied to the boundaries of the \cis\ and \trans\ reservoirs. The
+potential at the \cis\ boundary is set to $\potential = 0$ whereas at the \trans\ boundary it is set to
 $\potential = \Vbias$. Neumann boundary conditions apply at the bilayer-boundary interface.
 
 
@@ -355,7 +354,7 @@ flow
 \end{align}
 acts on all fluid elements with a non-zero net space charge density $\scdion$ and electrical field $\efield$.
 
-At the boundaries of the \cis{} and \trans{} reservoirs, we use open boundary conditions with no normal stress
+At the boundaries of the \cis\ and \trans\ reservoirs, we use open boundary conditions with no normal stress
 ($\left[-\pressure\identity + \viscosity\left(\nabla\velocity + \left(\nabla\velocity\right)^{\rm
 T}\right)\right]\normvec = 0$), effectively mimicking an endless reservoir. On the nanopore and bilayer
 surface we applied a no-slip ($\vec{\velocity} = 0$) boundary condition.
@@ -410,25 +409,32 @@ $\transportn_{i}$ before it can be fitted\cite{aburto2013I}
 where $\specmolarconductivity_{i}(\concentration)$ is the specific molar conductivity of ion $i$.
 
 
-Note that all parameters simply depend on the average concentration rather than on the concentration of each
-species. This is because measurements are usually performed in bulk solutions where the concentrations of the
-ions are the same. However, at interfaces and within nanopores the concentrations may differ wildly. But due
-to the lack of experimental data for these conditions, we need to resort to extrapolation -- which is simply
-the average. Nevertheless, later on in Sect.~\ref{}, we will see that the current concentration and dependent
-functions will lead to an excellent fit to experimental data in all but the most extreme cases, justifying our
-choice a posteriori.
+Note that all parameters simply depend on the average local concentration rather than on the concentration of 
+each species. This is because measurements are usually performed in bulk solutions where the concentrations 
+of the ions are the same. However, at interfaces and within nanopores the concentrations may differ wildly. 
+But due to the lack of experimental data for these conditions, we need to resort to extrapolation -- which is 
+simply the average. Nevertheless, later on in Sect.~\ref{}, we will see that the current concentration and 
+dependent functions will lead to an excellent fit to experimental data in all but the most extreme cases, 
+justifying our choice a posteriori.
 
 The diffusivity of ions or small molecules like water depends heavily on their proximity to large molecules
 such as proteins or DNA.\cite{makarov1998} Since these effects happen only for distances of less than about 
-a nanometer, they can usually be neglected. However, in small nanopores (\SI{\le 5}{\nano\meter}
-radius), they comprise a significant fraction of the total nanopore radius and hence must be taken into
+a nanometer, they can usually be neglected. However, in small nanopores ($\le5$~nm radius), they comprise a 
+significant fraction of the total nanopore radius and hence must be taken into 
 account.\cite{simakov2010,pederson2015}  The wall-distance dependent diffusion coefficients 
 $\diffusion_{i}^w(\dwall)$ and mobilities $\mobility_{i}^w(\dwall)$ and their respective fitting parameters 
 were directly adapted from Ref.~\citenum{simakov2010}. The wall-distance dependent viscosity
 $\viscosity^w(\dwall)$ was fitted as a logistic function to the average of the inverse viscosities from
 Ref.~\citenum{pronk2013} where the hydrodynamic radius of the proteins was interpreted as the position of the
-wall (cf.~\cref{fig:}).
+wall (cf.~\cref{fig:corrections}).
 
+In their simulations of the nanopore \textalpha-hemolysin (\ahl), Simakov and Pederson also reduced the ion 
+diffusion coefficients as a function of the ratio between the radii of the ion and the 
+nanopore\cite{simakov2010,pederson2015}. This correction is based on the experimental observation that the 
+diffusivity of micrometer-sized particles reduces significantly when they are confined in pores and slits of 
+comparable dimensions\cite{renkin1954,deen1987,dechadilok2006}, and while this relationship certainly holds 
+for nanometer-sized particles or proteins,\cite{muthukumar2014} its validity is questionable for small ions 
+whose hydrodynamic radius is comparable to that of the solvent.\cite{anderson1972,deen1987}
 
 Because the PNP equations do not take the size of the ions into account, they tend to overscreen locations 
 with high charge densities resulting in unrealistically high ion concentrations.\cite{corry2000} This problem 
@@ -518,55 +524,55 @@ negative bias voltages, the converging exponents at high positive voltages sugge
 characteristics of both regimes.
 
 \paragraph{Ionic current rectification.}
-A nanopore is said to exhibit ionic current rectification (ICR) when the conductance for a given bias 
-voltage, the conductance is higher when it is applied to one side of the nanopore compared to the other.
-ICR is a phenomenon often observed in nanopores that are both charged and contain a degree of geometrical 
-asymmetry along the central axis of the pore. With it's high negative charge (\SI{-72}{\elementarycharge} at 
-\pH{7.5}) and different \textit{cis} ($\approx$3.3~nm) and \textit{trans} ($\approx$5.5~nm) entry diameters, 
-ClyA fulfils both conditions and hence exhibits a strong degree of rectification.
-Here, we define the ICR as
+A nanopore exhibits ionic current rectification (ICR) when the conductance for a given bias voltage magnitude 
+is higher when it is applied to one side of the nanopore compared to the other. Here, we define the ICR as
 \begin{equation}
-  \icr(\varpotential) = \displaystyle\frac{\conductance(+\varpotential)}{\conductance(-\varpotential)}
+\icr(\varpotential) = \displaystyle\frac{\conductance(+\varpotential)}{\conductance(-\varpotential)}
 \end{equation}
-i.e. the ratio between the conductance of the pore at positive and negative bias voltages of equal magnitude. 
-The dependency of $\icr$
-
-While $\icr$ rises linearly with the applied bias voltage, the concentration dependency exhibits a maximum 
-value of 1.28 for the experiment
-The concentration dependence is not as trivial, and hence we plotted its values at \SI{100}{\milli\volt} vs. 
-the bulk concentration in \cref{fig:conductance_rectification_contourmap_epnp}
-Due to the high degree of electrostatic screening, the ICR is close to unity (1.02) , but rises rapidly when ,The rectification rises concentration dependency is not so trivial, however, as it appears to show a maximum value of 1.28 at \SI{150}{\milli\Molar},
-and decreasing for both lower and higher salt concentrations.
-The simulation shows the 
-
-% Simulations
-
+i.e. the ratio between the conductance at positive and negative bias voltages of equal magnitude. 
+ICR is a phenomenon often observed in nanopores that are both charged and contain a degree of geometrical 
+asymmetry along the central axis of the pore. With it's high negative charge ($-72~\elementarycharge$ at 
+pH~7.5) and different \cis\ ($\approx3.3$~nm) and \trans\ ($\approx5.5$~nm) entry diameters, ClyA fulfills 
+both conditions and hence exhibits a strong degree of rectification. The simulated concentration-voltage 
+landscape of $\icr$ was plotted in \cref{fig:conductance_rectification_contourmap_epnp} (left), together with 
+cross-sections at $50$, $100$ and $150$~mV (right) for comparison with the experimentally measured values. 
+Starting at $0.005$~M, $\icr$ rises rapidly with concentration until a maximum is reached at $\approx0.15$~M, 
+after which it falls towards unity at $5$~M. While a good qualitative agreement is found with the 
+experimental data over the entire range, $\icr$ matches quantitatively only for $\cbulk > 0.5$~M. In general, 
+the simulation overestimates the rectification, particularly at the maximum and at high bias voltages, with 
+$\icr$ values of $1.20$, $1.43$ and $1.69$ for the simulation and $1.14$, $1.28$ and $1.46$ for the 
+experiment at $50$, $100$ and $150$~mV, respectively.
 
 \paragraph{Ion selectivity.}
+The ion selectivity of a nanopore is the preference with which it transports one ion type over the other. In 
+the case of a binary electrolyte such as \ce{NaCl}, a pore is said the be cation selective when the 
+contribution of \ce{Na+} to the overall current is larger than that of \ce{Cl-}, and anion selective if the 
+opposite is true. Here, we represent the ion selectivity by the its transport number
+\begin{align*}
+\transportn_{\ce{Na+}} =
+\displaystyle\frac{\conductance_{\ce{Na+}}}{\conductance} =
+\displaystyle\frac{\conductance_{\ce{Na+}}}{\conductance_{\ce{Na+}} + \conductance_{\ce{Cl-}}},
+\end{align*}
+i.e. the fraction of the total current that is carried by \ce{Na+} ions. 
 \cref{fig:transport_number_contourmap_epnp}
 
 
 
 \subsection{Ion concentration distribution}
+% fig:concentration_contours
+% fig:concentration_radial_profiles
+% fig:concentration_pore_average_vs_concentration
+%
 To improve our insight into the origin of the current rectification and ion selectivity, we investigated the ion concentrations inside the nanopore.
 
+
+\paragraph{Cation concentrations inside ClyA are always enhanced compared to bulk.}
+
+\paragraph{Anion concentrations inside ClyA depend strongly on the applied bias voltage.}
+
+\paragraph{Ion concentrations in the lumen and the constriction differ significantly.}
+
 \paragraph{Average ion concentration inside the pore.}
-To show the influence of the ionic strength and the applied bias voltage on the ion concentration inside the pore,
-we computed the average ion concentration inside the pore, relative to the bulk value (\cref{fig:concentration_pore_average}).
-In the case of \ce{Na+}, a clear enhancement is observed for 
-
-The mean ion concentrations inside the nanopore, normalized by their corresponding bulk values, were plotted in \cref{fig:concentration_pore_average} against the bias voltage for range of bulk concentrations (\SIlist{5;50;150;500;1000;5000}{\mM}).
-for \ce{Na+} (top) and \ce{Cl-} (bottom)
-
-
-
-
-
-with the latter showing a strong bias dependency 
-with almost full depletion at negative voltages.
-\paragraph{Ion concentration in the pore lumen.}
-Inside the lumen of the pore ($1.6<z<\SI{12.25}{\nm}$), 
-\paragraph{Ion concentration in the pore constriction.}
 
 
 
@@ -610,7 +616,37 @@ resulting in highly
 \section{Discussion}\label{sect:discussion}
 % Inter-figure observations and discussion
 
-\paragraph{Rectification at negative biases is caused by depletion of anions in the nanopore lumen.}
+\subsection{The extended PNP-NS equations significantly improve the accuracy of continuum simulations at the 
+nanoscale.}
+
+\begin{itemize}
+  \item Most important `corrections':
+  \subitem concentration dependent ion diffusion coefficient and mobilities
+  \subitem wall distance 
+\end{itemize}
+
+\subsection{Ionic current rectification is caused by depletion of anions in the nanopore lumen at negative 
+bias voltages.}
+
+\subsection{ClyA's ion selectivity is highly concentration and voltage dependent.}
+While the ion selectivity can be estimated experimentally using the Goldman-Hodgkin-Katz 
+equation (GHKe),\cite{franceschini2016,huang2017} the asymmetric salt concentrations used to determine the 
+nanopore's reversal potential raises the question for which salt concentration this ion selectivity is valid.
+Moreover, the many assumptions and simplifications used to derive the GHKe (Nernst-Einstein relation, no 
+convective transport, uniform electrical field over the pore) suggest that the ion selectivity calculated for 
+larger pores should be considered as a rough estimation only.
+
+\subsection{The electro-osmotic flow exhibits a maximum at 0.5~M due to two competing concentration-dependent 
+effects.}
+
+\begin{itemize}
+  \item Reduced double layer overlap and the appearance of alternating positive and negative space charge 
+  densities at the nanopore walls results in reduced electro-osmotic flow at higher salt concentrations.
+  \item Poor electro-static screening of the the highly negatively charged \trans\ constriction 
+  results in an body force that opposes the bulk flow of the nanopore and hence a diminishes the 
+  electro-osmotic flow magnitude at low salt concentrations.
+  \item Both effect are weakest at $\approx0.5$~M, resulting in maximum at that concentration.
+\end{itemize}
 
 \section{Conclusions}\label{sect:conclusions}
 

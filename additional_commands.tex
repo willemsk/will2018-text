@@ -1,5 +1,5 @@
 % Shorthands
-\newcommand{\ahl}{\textalphaHL}
+\newcommand{\ahl}{\textalpha HL}
 \newcommand{\etal}{\textit{et al.}}
 \newcommand{\cis}{\textit{cis}}
 \newcommand{\trans}{\textit{trans}}
@@ -18,7 +18,7 @@
 
 % Vectors and math stuff
 \renewcommand{\vec}[1]{\boldsymbol{#1}}
-\renewcommand{\r}{\vec{r}} % positional vector
+\newcommand{\rpos}{\vec{r}} % positional vector
 \newcommand{\normvec}{\vec{\hat{n}}} % normal vector
 \newcommand{\identity}{\vec{\rm I}} % Identity vector
 \newcommand{\stdev}{\sigma}
@@ -57,7 +57,6 @@
 \newcommand{\density}{\varrho}						% Fluid density
 \newcommand{\viscosity}{\eta}					% Fluid viscosity
 
-
 \newcommand{\iondiffusion}[1]{\diffusion_{#1}}	% Ion Diffusion coefficient
 \newcommand{\ionmobility}[1]{\mobility_{#1}}	% Ion electrophoretic mobility
 \newcommand{\iontransportn}[1]{\transportn{#1}}	% Ion transport number
@@ -79,7 +78,8 @@
 \newcommand{\conductance}{G}
 \newcommand{\icr}{\alpha}
 
-
+% Shorthands
+\newcommand{\cbulk}{\concentration_\text{bulk}}
 
 % Atom properties
 \newcommand{\partialcharge}{\delta}
