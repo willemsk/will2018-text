@@ -34,11 +34,11 @@ nanopores.}]
 nanopores.}
 (\subref{fig:current-voltage_curves})
 Comparison of the single-pore current-voltage (IV) characteristics over a wide range of ionic strengths (from 
-\SIrange{0.05}{3}{\Molar} \ce{NaCl}) reveals the inability of the classical PNP-NS equations to 
-quantitatively predict the experimentally measured values, particularly at high ionic strengths. In contrast, 
-the extended PNP-NS (ePNP-NS) equations exhibit excellent agreement over the entire concentration range. All 
-experimental measurements were performed at $25\pm1$\textdegree C. Errorbars represent the standard deviation 
-of three independent measurements ($n=3$).
+\SIrange{0.05}{3}{\Molar} \ce{NaCl}) reveals the inability of the classical PNP-NS (dotted green lines) 
+equations to quantitatively predict the experimentally measured values (black circles), particularly at high 
+ionic strengths. In contrast, the extended PNP-NS (ePNP-NS, purple lines) equations exhibit excellent 
+agreement over the entire concentration range. All experimental measurements were performed at 
+$25\pm1$\textdegree C. Errorbars represent the standard deviation of three independent measurements ($n=3$).
 (\subref{fig:conductance_contourmap_epnp})
 Concentration-voltage heatmap (left) of the simulated ionic conductance,
 $\conductance(\concentration) = \current / \varpotential$,
@@ -59,7 +59,12 @@ qualitatively about the shape of the curve, a good quantitative match is found o
 $\ge0.5$~M.
 (\subref{fig:transport_number_contourmap_epnp})
 Concentration-voltage heatmap of the fraction of the current carried by \ce{Na+} ions, i.e. the 
-\ce{Na+} transport number ($\transportn_{\ce{Na+}} = \conductance_{\ce{Na+}}/\conductance$).
+\ce{Na+} transport number ($\transportn_{\ce{Na+}} = \conductance_{\ce{Na+}}/\conductance$). ClyA remains 
+cation-selective up until a concentration of $\approx2$~M, after which the electrostatic screening and the 
+high \ce{Cl-} mobility of result in more anions traversing the pore than cations. At very low concentrations 
+($50$~mM at $-150$~mV and $10$~mM at $+150$~mV), the net \ce{Cl-} flux follows the direction of the 
+electro-osmotic flow (i.e. against the electric potential gradient), resulting in a negative contribution the 
+the overall ionic current and a \ce{Na+} transport number $>1$.
 }
 
 \label{fig:conductance}
