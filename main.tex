@@ -106,19 +106,15 @@ nanopore is not fully understood. From this perspective, we have built a detaile
 model of Cytolysin A (ClyA), a biological nanopore utilized for DNA and protein analysis, based on the
 steady-state Poison-Nernst-Planck (PNP) and Navier-Stokes (NS) equations. Because the classical PNP-NS
 equations were unable reproduce the experimentally observed ionic fluxes, we developed a novel framework
-coined extended-PNP-NS (ePNP-NS), which improves their accuracy and validity for nanoscale model through the
+coined extended-PNP-NS (ePNP-NS), which improves their accuracy and validity at the nanoscale through the
 inclusion of finite ion-size effects, ion-protein and water-protein interactions, self-consistent
 concentration dependencies for the ion diffusion coefficients, ion electrophoretic mobilities, solvent
 viscosity, solvent density and solvent relative permittivity. Our results show that, only when these are 
 corrections enabled, our simplified ClyA model is able to accurately predict the ionic currents over a wide 
-range of ionic strengths and applied potentials. We found that, due to ClyA's unique shape and charge 
-distribution, the electro-osmotic flow does not decrease monotonically with salt concentration but rather 
-exhibits a maximum at $\approx500$~mM.
-
-We further report on the influence of both the bias voltage 
-and the bulk ionic 
-strength on the average ion concentrations inside the pore, the magnitude and direction of the 
-electro-osmotic flow, and the shape of the electrostatic potential landscape inside the nanopore.
+range of ionic strengths and applied potentials. We further report on the influence of both the bias voltage 
+and the bulk ionic strength on the ion selectivity, the average ion concentrations inside the pore, the shape 
+of the electrostatic potential landscape inside the nanopore and the magnitude and direction of the 
+electro-osmotic flow.
 \end{abstract}
 \newpage
 % Introduction
@@ -323,7 +319,7 @@ The NPE is coupled to the PE by the electric potential $\potential$ and the ion 
 where $\faraday= \SI{96485.33}{\coulomb\per\mole}$ is Faraday's constant.
 
 The ion concentration at both reservoir boundaries was fixed using a Dirichlet boundary condition 
-($\concentration_i = \concentration_\textrm{bulk}$). At the fluid-protein and fluid-bilayer interface Neumann
+($\concentration_i = \cbulk$). At the fluid-protein and fluid-bilayer interface Neumann
 boundary conditions apply, i.e.~no current can flow in or out of the protein or the bilayer.
 
 
@@ -507,15 +503,15 @@ data
 \end{equation}
 and the resulting concentration-voltage landscape can be found in \cref{fig:conductance_contourmap_epnp}. The 
 straight slopes of the concentration-conductivity log-log plot at -150~mV exhibits a clear `kink' at 
-$\approx$0.15~M, suggesting the presence of two different conductance regimes. Fitting of the data at low 
+$\approx0.15$~M, suggesting the presence of two different conductance regimes. Fitting of the data at low 
 (0.005 to 0.05~M) and high concentrations (0.3 to 1.5~M) with a simple power law function 
-($\conductance(\concentration_\text{bulk})=a \concentration_\text{bulk}^{b}$) yielded exponents of 
-$b=\SI{0.498\pm0.004}{\per\Molar}$ and $b=\SI{1.000\pm0.016}{\per\Molar}$, respectively. These perfect 
-square-root and linear dependencies are less apparent at high positive bias voltages, however, as fitting 
-yielded exponents of $b=\SI{0.614\pm0.009}{\per\Molar}$ and $b=\SI{0.787\pm0.001}{\per\Molar}$ for low and 
-high concentrations, respectively. Hence, while there are clearly two distinct ion transport modes at high 
-negative bias voltages, the converging exponents at high positive voltages suggest a `hybrid' mode with 
-characteristics of both regimes.
+($\conductance(\cbulk)=a \cbulk^{b}$) yielded exponents of $b=\SI{0.498\pm0.004}{\per\Molar}$ and 
+$b=\SI{1.000\pm0.016}{\per\Molar}$, respectively. These perfect square-root and linear dependencies are less 
+apparent at high positive bias voltages, however, as fitting yielded exponents of 
+$b=\SI{0.614\pm0.009}{\per\Molar}$ and $b=\SI{0.787\pm0.001}{\per\Molar}$ for low and high concentrations, 
+respectively. Hence, while there are clearly two distinct ion transport modes at high negative bias voltages, 
+the converging exponents at high positive voltages suggest a `hybrid' mode with characteristics of both 
+regimes.
 
 \paragraph{Ionic current rectification.}
 A nanopore exhibits ionic current rectification (ICR) when the conductance for a given bias voltage magnitude 
@@ -539,20 +535,23 @@ experiment at $50$, $100$ and $150$~mV, respectively.
 
 \paragraph{Ion selectivity.}
 The ion selectivity of a nanopore determines the preference with which it transports one ion type over the 
-other. In the case of a binary electrolyte such as \ce{NaCl}, cation selectivity indicates that the 
-contribution of \ce{Na+} to the overall current is larger than that of \ce{Cl-}, and vice versa for anion 
-selectivity. Here, we represent the ion selectivity by the \ce{Na+} transport number
+other. Here, we represent the ClyA's ion selectivity by the apparent \ce{Na+} transport number
 \begin{align*}
 \transportn_{\ce{Na+}} =
 \displaystyle\frac{\conductance_{\ce{Na+}}}{\conductance} =
 \displaystyle\frac{\conductance_{\ce{Na+}}}{\conductance_{\ce{Na+}} + \conductance_{\ce{Cl-}}},
 \end{align*}
 i.e. the fraction of the total current that is carried by \ce{Na+} ions 
-(\cref{fig:transport_number_contourmap_epnp}). ClyA is cation selective ($\tna > 0.5$) for all investigated 
-voltages up to a bulk concentration of $\approx2$~M, after which it drops below $0.5$, resulting in a anion 
-selective pore. Note that the $\tna$ at $5$~M ($0.45$) still exceeds the value for bulk at that concentration 
-($0.352$).
-
+(\cref{fig:transport_number_contourmap_epnp}). As expected from its negatively charged interior, ClyA is 
+cation selective ($\tna > 0.5$) for all investigated voltages up to a bulk concentration of $\approx2$~M, 
+after which it drops below $0.5$ to a minimum value of $0.45$ at $5$~M. The latter is $\approx1.27\times$ its 
+value in bulk, indicating that even at saturation ClyA is preferential towards cations. Between $0.05 < 
+\cbulk < 1$~M, $\tna$ decays logarithmically ($\tna(\cbulk)=a+b\log\cbulk$) with slopes $b=-0.40$ and $-0.29$ 
+for $-150$ and $+150$~mV, respectively.
+\todo{What do these different slopes mean?}
+Due to the overall negative contribution of \ce{Cl-} to the ionic 
+current at low ionic strengths and high applied bias voltages $\tna$ exceeds unity at under these conditions 
+(below $10$~mM and $50$~mM for $+150$ and $-150$~mV, respectively).
 
 
 
@@ -561,7 +560,9 @@ selective pore. Note that the $\tna$ at $5$~M ($0.45$) still exceeds the value f
 % fig:concentration_radial_profiles
 % fig:concentration_pore_average_vs_concentration
 %
-To improve our insight into the origin of the current rectification and ion selectivity, we investigated the ion concentrations inside the nanopore.
+To improve our understanding into the origin of the current rectification and ion selectivity, we 
+investigated the influence of ionic strength and bias voltage on the individual ion concentrations inside 
+ClyA. At p
 
 
 \paragraph{Cation concentrations inside ClyA are always enhanced compared to bulk.}
@@ -672,7 +673,6 @@ The authors thank ...
 \input{fig_model_concept.tex}
 \input{fig_conductance.tex}
 \input{fig_concentration.tex}
-\input{fig_ion_charge_density.tex}
 \input{fig_potential.tex}
 \input{fig_flow.tex}
 \input{fig_pressure.tex}
