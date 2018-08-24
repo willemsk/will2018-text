@@ -543,16 +543,16 @@ other. Here, we represent the ClyA's ion selectivity by the apparent \ce{Na+} tr
 \end{align*}
 i.e. the fraction of the total current that is carried by \ce{Na+} ions 
 (\cref{fig:transport_number_contourmap_epnp}). As expected from its negatively charged interior, ClyA is 
-cation selective ($\tna > 0.5$) for all investigated voltages up to a bulk concentration of $\approx2$~M, 
-after which it drops below $0.5$ to a minimum value of $0.45$ at $5$~M. The latter is $\approx1.27\times$ its 
-value in bulk, indicating that even at saturation ClyA is preferential towards cations. Between $0.05 < 
-\cbulk < 1$~M, $\tna$ decays logarithmically ($\tna(\cbulk)=a+b\log\cbulk$) with slopes $b=-0.40$ and $-0.29$ 
-for $-150$ and $+150$~mV, respectively.
+cation selective ($\tna > 0.5$) for all investigated voltages up to a reservoir salt concentration of 
+$\approx2$~M, after which it drops below $0.5$ to a minimum value of $0.45$ at $5$~M. The latter is 
+$\approx1.27\times$ its value in bulk, indicating that even at saturation ClyA is preferential towards 
+cations. Between $0.05 < \cbulk < 1$~M, $\tna$ decays logarithmically ($\tna(\cbulk)=a+b\log\cbulk$) with 
+slopes $b=-0.40$ and $-0.29$ for $-150$ and $+150$~mV, respectively.
 \todo{What do these different slopes mean?}
-Due to the overall negative contribution of \ce{Cl-} to the ionic 
-current at low ionic strengths and high applied bias voltages $\tna$ exceeds unity at under these conditions 
-(below $10$~mM and $50$~mM for $+150$ and $-150$~mV, respectively).
-
+At low concentrations and high applied bias voltages (below $10$~mM and $50$~mM for $+150$ and $-150$~mV, 
+respectively), $\tna$ is observed to exceed unity. Under these conditions, the convective flux of \Cl\ 
+becomes slightly larger than its opposing electromigratory flux, resulting in an overall negative 
+contribution of \Cl\ to the ionic current.
 
 
 \subsection{Ion concentration distribution}
@@ -561,12 +561,31 @@ current at low ionic strengths and high applied bias voltages $\tna$ exceeds uni
 % fig:concentration_pore_average_vs_concentration
 %
 To further elucidate the origin of the current rectification and ion selectivity, we investigated the 
-influence of ionic strength and bias voltage on the individual ion concentrations inside ClyA. At p
+influence of the reservoir salt concentration and bias voltage on the individual ion concentrations inside 
+ClyA (\cref{fig:concentration}). Note that the figures given below are obtained from a nanoscale continuum 
+steady-state simulation, and hence represent a time-averaged situation (typically on the order of $10$ to 
+$100$~ns).\todo{REF}
 
+To gain a global insight into the effect of $\cbulk$ and $\vbias$ on the number of ions inside the pore, we 
+computed their average concentrations inside the pore, relative to the reservoir salt concentration
+($\left<\ci/\cbulk\right>_\text{pore}$, \cref{fig:concentration_pore_average_vs_concentration}). At high 
+reservoir concentrations ($\cbulk > 1$~M), the lumen of the pore becomes fully screened from the negative 
+charges that line it, leading to bulk-like conditions ($\left<\ci/\cbulk\right>_\text{pore} \approx 1$) for 
+both positive and negative ions. At lower concentrations however, the reduced screening gives rise to an 
+overlapping electrical double layer, which results in the enhancement of cations and the depletion of anions. 
+The magnitude of these effects appears to follow a power law at low concentrations ($0.005$ to $0.05$~M), 
+with exponents of $-0.910\pm0.010$ and $0.778\pm0.015$ for \Na\ and \Cl\, respectively.
 
-\paragraph{Cation concentrations inside ClyA are always enhanced compared to bulk.}
-
+While the \Na\ concentrations are relatively independent of the applied bias voltage $\vbias$, with at most a 
+2-fold difference between $+150$~mV (higher) and $-150$~mV (lower), the effect for \Cl\ at reservoir 
+concentrations below $0.1$~M is more than 10-fold. 
 \paragraph{Anion concentrations inside ClyA depend strongly on the applied bias voltage.}
+% power law slopes at 0 mV (0.005 to 0.05M)
+% cpos
+% a=0.276±0.014, b=-0.910±0.010
+% cneg
+% a=3.236±0.166, b=0.778±0.015
+
 
 \paragraph{Ion concentrations in the lumen and the constriction differ significantly.}
 
