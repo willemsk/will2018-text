@@ -169,7 +169,7 @@ Our goal is to model the protein nanopore ClyA  suspended on a lipid bilyer in a
 aqueous solution of NaCl. The lipid bilayer separates two reservoirs which can be electrically biased so that
 an ion current flows through the nanopore in between the reservoirs. With no loss of generality we will assume
 that the upper cis-reservoir (positive $z$-direction) is grounded, while the lower trans-reservoir is biased
-with an applied potential of $\Vbias$. Figure~\ref{fig:model_geometry} illustrates the geometry of the
+with an applied potential of $\vbias$. Figure~\ref{fig:model_geometry} illustrates the geometry of the
 simulation domain.
 
 The construction of a viable modeling approach then decomposes into two separate tasks. First, finding an
@@ -271,7 +271,7 @@ concentration dependent component $\scdion$ caused by local non-electroneutralit
 
 Dirichlet boundary conditions are applied to the boundaries of the \cis\ and \trans\ reservoirs. The
 potential at the \cis\ boundary is set to $\potential = 0$ whereas at the \trans\ boundary it is set to
-$\potential = \Vbias$. Neumann boundary conditions apply at the bilayer-boundary interface.
+$\potential = \vbias$. Neumann boundary conditions apply at the bilayer-boundary interface.
 
 
 
@@ -499,7 +499,7 @@ entire experimentally accessible concentration and voltage ranges.
 To further investigate the ionic transport, we computed the the ionic conductance $\conductance$ from the IV 
 data
 \begin{equation}
-  \conductance = \displaystyle\frac{\current}{\varpotential}
+  \conductance = \displaystyle\frac{\current}{\vbias}
 \end{equation}
 and the resulting concentration-voltage landscape can be found in \cref{fig:conductance_contourmap_epnp}. The 
 straight slopes of the concentration-conductivity log-log plot at -150~mV exhibits a clear `kink' at 
@@ -517,7 +517,7 @@ regimes.
 A nanopore exhibits ionic current rectification (ICR) when the conductance for a given bias voltage magnitude 
 is higher when it is applied to one side of the nanopore compared to the other. Here, we define the ICR as
 \begin{equation}
-\icr(\varpotential) = \displaystyle\frac{\conductance(+\varpotential)}{\conductance(-\varpotential)}
+\icr(\vbias) = \displaystyle\frac{\conductance(+\vbias)}{\conductance(-\vbias)}
 \end{equation}
 i.e. the ratio between the conductance at positive and negative bias voltages of equal magnitude. 
 ICR is a phenomenon often observed in nanopores that are both charged and contain a degree of geometrical 
@@ -560,9 +560,8 @@ current at low ionic strengths and high applied bias voltages $\tna$ exceeds uni
 % fig:concentration_radial_profiles
 % fig:concentration_pore_average_vs_concentration
 %
-To improve our understanding into the origin of the current rectification and ion selectivity, we 
-investigated the influence of ionic strength and bias voltage on the individual ion concentrations inside 
-ClyA. At p
+To further elucidate the origin of the current rectification and ion selectivity, we investigated the 
+influence of ionic strength and bias voltage on the individual ion concentrations inside ClyA. At p
 
 
 \paragraph{Cation concentrations inside ClyA are always enhanced compared to bulk.}
