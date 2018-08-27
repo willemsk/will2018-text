@@ -556,69 +556,96 @@ contribution of \Cl\ to the ionic current.
 
 
 \subsection{Ion concentration distribution}
-% fig:concentration_contours
-% fig:concentration_radial_profiles
-% fig:concentration_pore_average_vs_concentration
-%
-To further elucidate the origin of the current rectification and ion selectivity, we investigated the 
-influence of the reservoir salt concentration and bias voltage on the individual ion concentrations inside 
-ClyA (\cref{fig:concentration}). Note that the figures given below are obtained from a nanoscale continuum 
-steady-state simulation, and hence represent a time-averaged situation (typically on the order of $10$ to 
-$100$~ns).\todo{REF}
+To further elucidate the origin of the current rectification and ion selectivity, we evaluated  the effect of 
+reservoir salt concentration and the bias voltage on the relative individual ion concentrations inside ClyA 
+($\left<\ci/\cbulk\right>_\text{pore}$, \cref{fig:concentration_pore_average_vs_concentration}).
 
-To gain a global insight into the effect of $\cbulk$ and $\vbias$ on the number of ions inside the pore, we 
-computed their average concentrations inside the pore, relative to the reservoir salt concentration
-($\left<\ci/\cbulk\right>_\text{pore}$, \cref{fig:concentration_pore_average_vs_concentration}). At high 
-reservoir concentrations ($\cbulk > 1$~M), the lumen of the pore becomes fully screened from the negative 
-charges that line it, leading to bulk-like conditions ($\left<\ci/\cbulk\right>_\text{pore} \approx 1$) for 
-both positive and negative ions. At lower concentrations however, the reduced screening gives rise to an 
-overlapping electrical double layer, which results in the enhancement of cations and the depletion of anions. 
-The magnitude of these effects appears to follow a power law at low concentrations ($0.005$ to $0.05$~M), 
-with exponents of $-0.910\pm0.010$ and $0.778\pm0.015$ for \Na\ and \Cl\, respectively.
+At high reservoir concentrations ($\cbulk > 1$~M), the lumen of the pore becomes fully screened from the 
+negative charges that line it, leading to bulk-like conditions ($\left<\ci/\cbulk\right>_\text{pore} \approx 
+1$) for both positive and negative ions. At lower concentrations however, the reduced screening gives rise to 
+an overlapping electrical double layer, which results in the enhancement of cations and the depletion of 
+anions. The magnitude of these effects appears to follow a power law at low concentrations ($\cbulk=0.005$ to 
+$0.05$~M), with exponents of $-0.910\pm0.010$ and $0.778\pm0.015$ for \Na\ and \Cl\, respectively. The \Na\ 
+concentrations exhibit at most a 2 to 3-fold increase when $\vbias$ changes from $\vbias=-150$ to $+150$~mV. 
+In contrast, the number of \Cl\ ions inside pore between those 2 bias voltages can differ more than 10-fold 
+at reservoir concentrations below $0.1$~M, with a high degree of depletion at negative voltages.
 
-While the \Na\ concentrations are relatively independent of the applied bias voltage $\vbias$, with at most a 
-2-fold difference between $+150$~mV (higher) and $-150$~mV (lower), the effect for \Cl\ at reservoir 
-concentrations below $0.1$~M is more than 10-fold. 
-\paragraph{Anion concentrations inside ClyA depend strongly on the applied bias voltage.}
+The contourplots of the relative ion concentrations ($\ci/\cbulk$) at $\cbulk=0.15$~M 
+(\cref{fig:concentration_contours}) reveal that the \trans\ constriction ($1.85\text{~nm}<z<1.60\text{~nm}$) 
+remains depleted of anions and enhanced in cations for both $\vbias=-100$ and $+100$~mV . This is not the 
+case in the lumen ($1.60\text{~nm}<z<12.25\text{~nm}$), where the \Na\ concentration is bulk-like and 
+enhanced for $-100$ and $+100$~mV, respectively. Conversely, the number of \Cl\ ions is highly depleted in 
+the lumen at $-100$~mV, while it is bulk-like for $+100$~mV. This is further exemplified by the radial 
+profiles through the middle of the constriction ($z=-0.3$~nm) and the lumen ($z=5$~nm) 
+(\cref{fig:concentration_radial_profiles}), which also clearly show the formation of the electrical double 
+layer.
+
+Note that the figures given above were obtained from a nanoscale continuum steady-state simulation, and hence 
+represent a time-averaged situation (typically on the order of $10$ to $100$~ns).\todo{REF}
+
 % power law slopes at 0 mV (0.005 to 0.05M)
 % cpos
 % a=0.276±0.014, b=-0.910±0.010
 % cneg
 % a=3.236±0.166, b=0.778±0.015
 
-
-\paragraph{Ion concentrations in the lumen and the constriction differ significantly.}
-
-\paragraph{Average ion concentration inside the pore.}
-
-
-
-
-%The show the influence of the bulk reservoir concentration average ion concentrations relative to the bulk reservoir concentration were plotted
-%against the applied bias voltages in \cref{fig:concentration_pore_average}
-%
-%At higher salt concentrations (\SI{>500}{\mM}) both ions are close to their bulk values ($\left<c_{i}/c_\text{bulk}\right>_\text{pore} \approx 1$).
-%This is no longer the case at lower ionic strengths (\SI{<500}{\mM}), where we observe a strong enhancement for \ce{Na+} and a depletion for \ce{Cl-}.
-%While the former only depeSodium ions  both ions exhibit a dependency on voltage, the one for \ce{Cl-} is The latter also depends on the  o
-%The concentration depends weakly on voltage for \ce{Na+}, but strongly for \ce{Cl-}, particularly at low salt concentrations
-%with increased enrichment for positive biases A weak voltage dependency can be observed for cations (stronger enhancement at positive bias voltages) and a 
-%For higher concentrations,
-%Above bulk concentrations of , both  and \ce{Cl-} are close to bulk under all conditions.
-%Below these concentrations \ce{Na+} is enriched while \ce{Cl-} depletes from the pore.
-
-
 \subsection{Ion charge density}
-At low ionic strengths ($\le0.5$~M), the electrical double layer (EDL) inside the pore is very diffuse and 
-virtually no significant negative charge densities are formed, not even next to the basic residues. In 
-contrast, at high salt concentrations the EDL is confined to $\approx0.5$~nm distance from the nanopore wall, 
-resulting in highly 
+The formation of an electrical double layer inside the pore and the resulting asymmetry in the cation and 
+anion concentrations results in a net charge density inside the pore ($\scdion$, \cref{eq:scdion}). At 
+reservoir concentrations $\le0.5$~M, the electrical double layer (EDL) inside the pore is very diffuse and 
+overlaps significantly (\cref{suppinfo:fig:ion_charge_density_contours}, first 3 panels). Moreover, the 
+absence of anions prevents the formation of any significant negative charge densities next to the few 
+positively charged residues lining the pore walls. The situation at high salt concentrations (e.g. $5$~M) is 
+very different, with almost no charge density within the `bulk' of the pore lumen ($d\ge0.5$~nm), but with 
+pockets of highly charged and alternating pockets of positive and negative charge densities close to the 
+nanopore wall (\cref{suppinfo:fig:ion_charge_density_contours}, last panel). This sharp confinement is shown 
+clearly by the radial density profiles (\cref{suppinfo:fig:ion_charge_density_radial_profiles}) through the 
+constriction ($z=-0.3$~nm) and the lumen ($z=5$~nm).
+
+Integration of $\scdion$ over `bulk' ($d\ge0.5$~nm) and surface ($d<0.5$~nm) volumes inside the pore yields 
+the net amount of mobile charges present inside those locations ($\Qion$, 
+\cref{suppinfo:fig:ion_charge_pore_bulk_surface_total_vs_concentration}). While $\Qion$ rises appreciatively 
+with increasing reservoir concentration, the majority of these additional charges are confined to the surface 
+of the pore. Up until $0.1$~M, $\Qion$ is distributed equally between the surface and bulk layers 
+($\approx+27$ and $\approx+22$~$\echarge$, respectively). At higher concentrations, the number of ions in the 
+surface layer rises (to $+58$~$\echarge$ at $5$~M), while that in the bulk pore diminishes ($+0$~$\echarge$ 
+at $5$~M). $\Qion$ also depends on the applied bias voltage, as it is $+10$ to $+15$~$\echarge$ higher at 
+$+150$~mV compared to $-150$~mV.
 
 \subsection{Electrostatic potential}
+The transport of ions and water molecules through biological nanopores depend heavily on the configuration of 
+fixed charges and the resulting electrostatic potential ($\potential$)inside the 
+pore\cite{bhattacharya20011}\todo{ref}). The distribution at physiological salt concentrations 
+($\cbulk=0.15$~M and $\vbias=0$~mV, \cref{fig:potential_contour}) shows that the negatively charged 
+residues inside the walls result in `hotspots' of high negatively potentials (up to $-75$~mV) that protrude 
+significantly into the `bulk' of the pore. This is particularly the case near the \cis\ entry of the pore 
+($10<z<12$~nm), in the middle of the lumen ($4<z<6$~nm) and inside the \trans\ constriction 
+($1.85<z<1.60$~nm). To better quantify the effect of the electrostatic potential, we computed its average 
+radial value along the nanopore's length
+\begin{align}
+\left<\potential\right>_\text{rad} =
+\displaystyle\frac{1}{\pi \cdot R(z)^2}\int_{0}^{R(z)}\potential(r,z) \cdot 2 \pi \cdot r dr,
+\end{align}
+where $R(z)$ taken as the pore radius for $-1.85\le z \le12.25$~nm, $2$~nm for $z<-1.85$~nm and $4$~nm for 
+$z>12.25$~nm (\cref{fig:potential_radial_averages}). At $0.15$~M, $\radpot$ decreases sharply upon entering 
+the pore from the \cis\ side from $0$ to $-19.1$~mV at $z=10.9$~nm, followed by a increase to $-7.6$~mV at 
+$z=9.0$~nm and a gradual drop to $-27.9$~mV at $4.7$~nm. The potential then sharply rises again $-8.2$~mV at 
+$z=3.2$~n prior to falling to a value of $-57$~mV inside the \trans\ constriction.
+\todo{trans constriction potential drop vs. salt concentration}
+\todo{\cref{fig:potential_clya_charges}}
+% cis
+% 0.05 : -1.33 = -33.8 mV
+% 0.15 : -0.75 = -19.1 mV
+% 0.50 : -0.39 = -9.9 mV
+% 5.00 : -0.07 = -1.8 mV
+% 
 
-\paragraph{Potential profiles at positive bias voltage.}
-\paragraph{Potential profiles at negative bias voltage.}
+\todo{\cref{fig:potential_energy_radial_averages}}
 
+\todo{\cref{fig:potential_trans_energy_barrier}}
 
+%The high negative magnitide of the electrostatic potential inside the \trans\ constriction is the primary 
+%reason for ClyA's cation selectivity, a potential at the 
 
 
 \subsection{Electro-osmotic flow}
@@ -669,7 +696,9 @@ effects.}
 \section{Conclusions}\label{sect:conclusions}
 
 \begin{acknowledgement}
-The authors thank ...
+K.W. thanks the Research Foundation Flanders (FWO) for the doctoral fellowship and the project grant 
+(\todo{number}). The work of G.M. was supported by an ERC consolidator grant (DeE-Nano, \todo{number}).
+The authors thank Ujjal Barman and Chang Chen for their valuable discussions.
 \end{acknowledgement}
 
 
