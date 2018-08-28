@@ -1,7 +1,7 @@
 %-------------------------------------------------------------------------------
 % PREAMBLE AND DOCUMENT FORMATTING
 %-------------------------------------------------------------------------------
-\documentclass[journal=ancac3, manuscript=article, etalmode=truncate,maxauthors=0]{achemso}
+\documentclass[journal=ancac3,manuscript=article,etalmode=truncate,maxauthors=0,layout=twocolumn]{achemso}
 	\setkeys{acs}{etalmode=truncate,maxauthors=0}
 
 % PACKAGES
@@ -96,8 +96,10 @@
 
 % Title and authors
 \maketitle
-% Abstract
-\newpage
+
+%-------------------------------------------------------------------------------
+% ABSTRACT
+%-------------------------------------------------------------------------------
 \begin{abstract}
 Biological nanopores have become valuable tools for the detection and analysis of molecules and the
 sequencing of nucleic acids at the single-molecule level. However, the physical understanding of the
@@ -116,8 +118,11 @@ and the bulk ionic strength on the ion selectivity, the average ion concentratio
 of the electrostatic potential landscape inside the nanopore and the magnitude and direction of the 
 electro-osmotic flow.
 \end{abstract}
-\newpage
-% Introduction
+
+
+%-------------------------------------------------------------------------------
+% INTRODUCTION
+%-------------------------------------------------------------------------------
 \section{Introduction}
 Biosensors have been an intense field of research in the recent decades.\cite{zhan2015}
 Several breatkthroughs have enabled them to play an integral role in the life sciences with
@@ -153,7 +158,7 @@ PNPE. However, we will also see the limits of this approach which hint at experi
 solutions within nanopores which are unlike anything that can be found in bulk solutions.
 
 Throughout this work, we will focus on ClyA-AS type I (ClyA), a dodecameric protein nanopore evolved from
-Cytolysin A of \textit{S. typhii} (\cref{fig:clya_side, fig:clya_top}).\cite{soskine2013} 
+Cytolysin A of \textit{S. typhii} (\cref{fig:clya_side,fig:clya_top}).\cite{soskine2013} 
 However, the lessons learned form the modeling can be readily transferred to other types of nanopores.
 
 This work is organized as follows. In the section \emph{\nameref{sect:modeling_approach}} we will explain the
@@ -162,7 +167,7 @@ the verification of the model will be described. The resulting data and comparis
 subsequent in-depth analysis of the ion transport physics through the pore will be conducted in the section
 \emph{\nameref{sect:results}}. The discussion and the conclusions follow in the remaining sections.
 
-
+\input{fig_model_concept.tex}
 
 \section{Modeling Approach}\label{sect:modeling_approach}
 Our goal is to model the protein nanopore ClyA  suspended on a lipid bilyer in a 2D-axisymmetric system in an
@@ -262,8 +267,8 @@ and is given by
 \label{eq:poisson}
 \nabla\cdot\left(\absperm\relperm \nabla\potential\right) = - \scdpore - \scdion,
 \end{align}
-with $\potential$ the electric potential, $\absperm=\SI{8.85419e-12}{\farad\per\meter}$ the vacuum
-permittivity, and $\relperm$ the local relative permittivity of the medium listed in
+with $\potential$ the electric potential, $\absperm$ the vacuum permittivity 
+(\SI{8.85419e-12}{\farad\per\meter}), and $\relperm$ the local relative permittivity of the medium listed in
 \cref{tab:pnpns_parameters}. The total charge density on the right hand side of \cref{eq:poisson}
 consists of a fixed contribution $\scdpore$ due to charges of the nanopore of \cref{eq:scdpore}, and an ion
 concentration dependent component $\scdion$ caused by local non-electroneutralities in the fluid
@@ -273,29 +278,7 @@ Dirichlet boundary conditions are applied to the boundaries of the \cis\ and \tr
 potential at the \cis\ boundary is set to $\potential = 0$ whereas at the \trans\ boundary it is set to
 $\potential = \vbias$. Neumann boundary conditions apply at the bilayer-boundary interface.
 
-
-
-\begin{table}[t]
-\begin{center}
-\begin{tabular}{c|c|l}
-    Parameter & Value & Description \\\hline 
-    $T$                    & \SI{298.15}{\kelvin} & System temperature\\
-    $\permittivity_p$      & \num{20} & Relative permittivity of pore\cite{li2013}\\
-    $\permittivity_m$      & \num{3.2}& Relative permittivity of bilayer\cite{gramse2013} \\
-    $\permittivity_f$      & \num{78.15}& Relative permittivity of fluid \\
-    $\density$             & \SI{997}{\kilogram\per\cubic\meter}& Density of fluid at infinite dilution\\
-    $\viscosity$           & \SI{8.904}{\pascal\second}& Dynamic viscosity\\
-    $\chargen_{\ce{Na+}}$  & \num{+1} & charge number of \ce{Na+} \\
-    $\chargen_{\ce{Cl-}}$  & \num{-1} & charge number of \ce{Cl-} \\
-    $\diffusion_{\ce{Na+}}$& \SI{1.334e-9}{\square\meter\per\second} & Diffusion coefficient of \ce{Na+} \\
-    $\diffusion_{\ce{Cl-}}$& \SI{2.032e-9}{\square\meter\per\second} & Diffusion coefficient of \ce{Cl-} \\
-    $\mobility_{\ce{Na+}}$ & \SI{5.192e-4}{\square\meter\per\second\per\volt} & Mobility of \ce{Na+}\\
-    $\mobility_{\ce{Cl-}}$ & \SI{7.909e-4}{\square\meter\per\second\per\volt} & Mobility of \ce{Na+}
-\end{tabular}
-\caption{Parameters for the PNP-NS system-of-equations for an \ce{NaCl} solution.}
-\label{tab:pnpns_parameters}
-\end{center}
-\end{table}
+\input{tab_pnpns_parameters.tex}
 
 
 \subsubsection{Nernst-Planck Equation}
@@ -304,9 +287,11 @@ a chemical gradient (diffusion), a non-zero electrical field (electromigration) 
 (convection) and is given by
 \begin{align}
 \label{eq:nernst-planck}
+\begin{split}
 \nabla\cdot\flux_{i} = \nabla\cdot\left( -\diffusion_{i}\nabla\concentration_{i} - 
-\chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential \right)
+\chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential \right) \\
 +\velocity\cdot\nabla\concentration_{i} = 0
+\end{split}
 \end{align}
 with $\concentration_{i}$ the concentration, $\diffusion_{i}$ the diffusion coefficient, $\chargen_{i}$ the 
 charge number, $\mobility_{i}$ the electrophoretic mobility, and $\velocity$ the fluid velocity. The relevant
@@ -323,14 +308,16 @@ The ion concentration at both reservoir boundaries was fixed using a Dirichlet b
 boundary conditions apply, i.e.~no current can flow in or out of the protein or the bilayer.
 
 
-
 \subsubsection{Navier-Stokes Equation} 
 The Navier-Stokes equation (NSE) for laminar flow of an incompressible fluid will be used to describe the
 fluid velocity field $\velocity$. It is given by
 \begin{align}
 \label{eq:navier-stokes}
-\density\left(\velocity\cdot\nabla\right)\velocity = \nabla\cdot\left[-\pressure\identity + 
+\begin{split}
+\density\left(\velocity\cdot\nabla\right)\velocity = \\
+\nabla\cdot\left[-\pressure\identity + 
 \viscosity\left(\nabla\velocity + \left(\nabla\velocity\right)^{\rm T}\right)\right]+\volumeforce,
+\end{split}
 \end{align}
 together with the continuity equation
 \begin{align}
@@ -349,7 +336,6 @@ At the boundaries of the \cis\ and \trans\ reservoirs, we use open boundary cond
 ($\left[-\pressure\identity + \viscosity\left(\nabla\velocity + \left(\nabla\velocity\right)^{\rm
 T}\right)\right]\normvec = 0$), effectively mimicking an endless reservoir. On the nanopore and bilayer
 surface we applied a no-slip ($\vec{\velocity} = 0$) boundary condition.
-
 
 
 \subsection{Extended PNP-NS Equations}
@@ -442,13 +428,14 @@ and to \SI{0.311}{\nano\meter} for water, corresponding to maximum concentration
 \SI{55.2}{\Molar}, respectively. 
 
 
-
-
 \section{Experimental}\label{sect:experiment}
 \paragraph{Single-channel ionic current measurements.}
 \textbf{For Florian}
 
-\newpage
+
+%-------------------------------------------------------------------------------
+% RESULTS
+%------------------------------------------------------------------------------
 \section{Results}\label{sect:results}
 In this section, we start by our investigating the concentration and voltage dependencies of the ion 
 transport through ClyA in terms of conductance, rectification and selectivity. The values of the former two 
@@ -554,6 +541,7 @@ respectively), $\tna$ is observed to exceed unity. Under these conditions, the c
 becomes slightly larger than its opposing electromigratory flux, resulting in an overall negative 
 contribution of \Cl\ to the ionic current.
 
+\input{fig_conductance.tex}
 
 \subsection{Ion concentration distribution}
 To further elucidate the origin of the current rectification and ion selectivity, we evaluated  the effect of 
@@ -588,6 +576,8 @@ represent a time-averaged situation (typically on the order of $10$ to $100$~ns)
 % a=0.276±0.014, b=-0.910±0.010
 % cneg
 % a=3.236±0.166, b=0.778±0.015
+
+\input{fig_concentration.tex}
 
 \subsection{Ion charge density}
 The formation of an electrical double layer inside the pore and the resulting asymmetry in the cation and 
@@ -630,7 +620,7 @@ where $R(z)$ taken as the pore radius for $-1.85\le z \le12.25$~nm, $2$~nm for $
 $z>12.25$~nm (\cref{fig:potential_radial_averages}). At $0.15$~M, $\radpot$ decreases sharply upon entering 
 the pore from the \cis\ side from $0$ to $-19.1$~mV at $z=10.9$~nm, followed by a increase to $-7.6$~mV at 
 $z=9.0$~nm and a gradual drop to $-27.9$~mV at $4.7$~nm. The potential then sharply rises again $-8.2$~mV at 
-$z=3.2$~n prior to falling to a value of $-57$~mV inside the \trans\ constriction.
+$z=3.2$~n prior to falling to its lowest value of $-57$~mV inside the \trans\ constriction.
 \todo{trans constriction potential drop vs. salt concentration}
 \todo{\cref{fig:potential_clya_charges}}
 % cis
@@ -647,17 +637,27 @@ $z=3.2$~n prior to falling to a value of $-57$~mV inside the \trans\ constrictio
 %The high negative magnitide of the electrostatic potential inside the \trans\ constriction is the primary 
 %reason for ClyA's cation selectivity, a potential at the 
 
+\input{fig_potential.tex}
 
 \subsection{Electro-osmotic flow}
 
+The electro-osmotic flow (EOF) is one of the most important features of biological nanopores, as it allows 
+for the capture of nucleic acids\cite{wong2007}, peptides\cite{huang2017} and 
+proteins\cite{soskine2012,soskine2013,vanmeervelt2014,soskine_biesemans2015,biesemans_soskine2015,wloka2017}
+irrespective of their charge.
 
 \paragraph{Electro-osmotic flow profile, magnitude and direction.}
 \paragraph{Electro-osmotic flow at low, medium and high ionic strengths.}
 \paragraph{Electro-osmotic pressure.}
-\cref{fig:pressure}
+\cref{suppinfo:fig:pressure}
 \cite{hoogerheide2014}
 
+\input{fig_flow.tex}
 
+
+%-------------------------------------------------------------------------------
+% DISCUSSION
+%------------------------------------------------------------------------------
 \section{Discussion}\label{sect:discussion}
 % Inter-figure observations and discussion
 
@@ -695,10 +695,14 @@ effects.}
 
 \section{Conclusions}\label{sect:conclusions}
 
+
+%-------------------------------------------------------------------------------
+% ACKNOWLEDGEMENT
+%-------------------------------------------------------------------------------
 \begin{acknowledgement}
 K.W. thanks the Research Foundation Flanders (FWO) for the doctoral fellowship and the project grant 
 (\todo{number}). The work of G.M. was supported by an ERC consolidator grant (DeE-Nano, \todo{number}).
-The authors thank Ujjal Barman and Chang Chen for their valuable discussions.
+The authors thank Ujjal Barman and Chang Chen for their valuable feedback during discussions.
 \end{acknowledgement}
 
 
@@ -713,16 +717,7 @@ The authors thank Ujjal Barman and Chang Chen for their valuable discussions.
 %-------------------------------------------------------------------------------
 % REFERENCES
 %-------------------------------------------------------------------------------
-\newpage % new page
 \bibliography{modeling1}
-
-\newpage
-\input{fig_model_concept.tex}
-\input{fig_conductance.tex}
-\input{fig_concentration.tex}
-\input{fig_potential.tex}
-\input{fig_flow.tex}
-\input{fig_pressure.tex}
 
 %\includepdf{supporting_information}
 \end{document}
