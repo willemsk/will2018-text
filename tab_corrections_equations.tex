@@ -11,23 +11,30 @@
 	Property					& Dep.\textsuperscript{\emph{a}}	& Function 						& Fitting function\textsuperscript{\emph{b}}	& Source \\
 	\midrule
 	\multirow{2}{3.5cm}{Ion self-diffusion coefficient}	& $\dconc$	& $\diffusion_{i}^c(\dconc)$	& $P_0/\left( 1 + P_1\dconc^{0.5} + P_2\dconc + P_3\dconc^{1.5} + P_4\dconc^2 \right)$ & This work \\
-														& $\dwall$	& $\diffusion_{i}^w(\dwall)$	& $1-\exp{\left(-P_1(\dwall+P_2)\right)}$	& \citenum{makarov1998, simakov2010} \vspace{0.25cm} \\
+														& $\dwall$	& $\diffusion_{i}^w(\dwall)$	& 
+														$1-\exp{\left(-P_1(\dwall+P_2)\right)}$	& \citenum{Makarov-1998,Simakov-2010} 
+														\vspace{0.25cm} \\
 	
     \multirow{2}{3cm}{Ion electrophoretic mobility}		& $\dconc$	& $\mobility_{i}^c(\dconc)$		& $P_0/\left( 1 + P_1\dconc^{0.5} + P_2\dconc + P_3\dconc^{1.5} + P_4\dconc^2 \right)$	& This work \\
-														& $\dwall$	& $\mobility_{i}^w(\dwall)$		& $1-\exp{\left(-P_1(\dwall+P_2)\right)}$	& \citenum{makarov1998, simakov2010}	\vspace{0.25cm} \\
+														& $\dwall$	& $\mobility_{i}^w(\dwall)$		& 
+														$1-\exp{\left(-P_1(\dwall+P_2)\right)}$	& \citenum{Makarov-1998,Simakov-2010}	
+														\vspace{0.25cm} \\
 	
 	Ion transport number								& $\dconc$	& $\transportn_{i}(\dconc)$		& $P_0/\left( 1 + P_1\dconc^{0.5} + P_2\dconc + P_3\dconc^{1.5} + P_4\dconc^2 \right)$& This work \vspace{0.25cm} \\
 	
     \multirow{2}{*}{Dynamic viscosity}					& $\dconc$	& $\viscosity^c(\dconc)$		& $P_0 \left( 1 + P_1 \dconc^{0.5} + P_2 \dconc + P_3 \dconc^2 + P_4 \dconc^{3.5} \right)$	& This work \\
-														& $\dwall$	& $\viscosity^w(\dwall)$		& $1+\exp{\left(-P_1(\dwall-P_2) \right)}$	& \citenum{pronk2013}	\vspace{0.25cm} \\
+														& $\dwall$	& $\viscosity^w(\dwall)$		& $1+\exp{\left(-P_1(\dwall-P_2) 
+														\right)}$	& \citenum{Pronk-2014}	\vspace{0.25cm} \\
 	
 	Fluid density										& $\dconc$	& $\density(\dconc)$			& $P_0 \left( 1 + P_1 \dconc + P_2 \dconc^2 \right)$	& This work \vspace{0.25cm} \\	
 	
-	Fluid relative permittivity							& $\dconc$	& $\permittivity_{w}(\dconc)$	& $P_0 - \left(P_0 - P_1\right) L \left( \dfrac{3P_2}{P_0 - P_1} \dconc \right)$	& \citenum{gavish2016} \\
+	Fluid relative permittivity							& $\dconc$	& $\permittivity_{w}(\dconc)$	& $P_0 - \left(P_0 - 
+	P_1\right) L \left( \dfrac{3P_2}{P_0 - P_1} \dconc \right)$	& \citenum{Gavish-2016} \\
 	\bottomrule
 \end{tabularx}
 \begin{flushleft}
-	\textsuperscript{\emph{a}}Dependencies on either $\dconc = \avionconc/\SI{1}{\Molar}$ (dimensionless average ion concentration) and $\dwall = \walldistance/\SI{1}{\nano\meter}$ (dimensionless distance from the nanopore wall);
+	\textsuperscript{\emph{a}}Dependencies on either $\dconc = \avionconc/1$~M (dimensionless average ion 
+	concentration) and $\dwall = \walldistance/1$~nm (dimensionless distance from the nanopore wall);
 	\textsuperscript{\emph{b}}These functions are empirical and hence have no physical meaning.
 	The values of the fitting parameters $P_x$ of each property can be found in Table~\ref{suppinfo:tab:corrections_parameters}.
 \end{flushleft}
