@@ -1,31 +1,33 @@
-\begin{figure*}[htbp]
+\begin{figure*}[!htb]
   \centering
-  \begin{minipage}[t]{5cm}
+  \begin{minipage}[h]{15cm}
+  \begin{minipage}[h]{5cm}
     \begin{subfigure}[t]{4.5cm}
       \centering
       \caption{}\vspace{-3mm}\label{fig:current-voltage_curves}
       \includegraphics[scale=1]{figures/conductance/current_vs_voltage_all_multiplot}
     \end{subfigure}
   \end{minipage}
-  \begin{minipage}[t]{8cm}
+  \begin{minipage}[h]{8cm}
     \begin{subfigure}[t]{8cm}
       \centering
       \caption{}\vspace{-5mm}\label{fig:conductance_contourmap_epnp}
       \includegraphics[scale=1]{figures/conductance/conductance_contourmap_epnp}
     \end{subfigure}
-    \begin{subfigure}[t]{8cm}
+    \begin{subfigure}[h]{8cm}
       \vspace{3mm}
       \centering
       \caption{}\vspace{-5mm}\label{fig:conductance_rectification_contourmap_epnp}
       \includegraphics[scale=1]{figures/conductance/conductance_rectification_contourmap_epnp}
     \end{subfigure}
-    \begin{subfigure}[t]{8cm}
+    \begin{subfigure}[h]{8cm}
       \vspace{3mm}
       \centering
       \caption{}\vspace{-5mm}\label{fig:transport_number_contourmap_epnp}
       \includegraphics[scale=1]{figures/conductance/transport_number_contourmap_epnp}
     \end{subfigure} 
   \end{minipage}
+\end{minipage}
 
 % caption
 \caption
@@ -55,19 +57,16 @@ Concentration-voltage heatmap of the simulated (ePNP-NS) ionic conductance recti
 ($\icr(\vbias) = \conductance(+\vbias) / \conductance(-\vbias)$), which highlights ClyA's tendency for higher 
 currents at positive bias voltages. $\icr$ is a linear function of voltage, but shows a maximum in the 
 concentration dependency at $\approx0.15$~M. The measurement and the model agree qualitatively about the 
-shape of the curve, a good quantitative match is found only at concentrations $\ge0.5$~M.
+shape of the curve, a good quantitative match, however, is found only at concentrations $\ge0.5$~M.
 (\subref{fig:transport_number_contourmap_epnp})
-Concentration-voltage heatmap of the fraction of the current carried by \ce{Na+} ions, i.e. the 
-\Na\ transport number ($\transportn_{\Na} = \conductance_{\Na}/\conductance$). ClyA remains cation-selective 
-up until a concentration of $\approx2$~M, after which the electrostatic screening and the high \Cl\ mobility 
-of result in more anions traversing the pore than cations. At very low concentrations ($50$~mM at $-150$~mV 
-and $10$~mM at $+150$~mV), the net \ce{Cl-} flux follows the direction of the electro-osmotic flow (i.e. 
-against the electric potential gradient), resulting in a negative contribution the the overall ionic current 
-and a \Na\ transport number $>1$.
-}
-
-\label{fig:conductance}
-	
+Concentration-voltage heatmap of the fraction of the current carried by cations, i.e. the \Na\ transport 
+number ($\transportn_{\Na} = \conductance_{\Na}/\conductance$). ClyA remains cation-selective up until a 
+concentration of $\approx2$~M, after which the electrostatic screening and the high \Cl\ mobility of result 
+in more anions traversing the pore than cations. At very low concentrations ($50$~mM at $-150$~mV and $10$~mM 
+at $+150$~mV), the net \ce{Cl-} flux follows the direction of the electro-osmotic flow (i.e. against the 
+electric potential gradient), resulting in a negative contribution the the overall ionic current and a \Na\ 
+transport number $>1$.
+}\label{fig:conductance}
 \end{figure*}
 
 % Slopes of log-log plot
