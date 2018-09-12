@@ -361,21 +361,25 @@ surface layer rises (to $+58$~$\echarge$ at $5$~M), while that in the bulk pore 
 at $5$~M). $\Qion$ also depends on the applied bias voltage, as it is $+10$ to $+15$~$\echarge$ higher at 
 $+150$~mV compared to $-150$~mV.
 
-\subsection{Electrostatic potential}\label{sect:electrostatic_potential}
+\subsection{Electrostatic potential and energy}\label{sect:electrostatic_potential}
 \input{fig_potential.tex}
 In a nanometer sized pores, the transport of ions and water molecules is modulated by electrostatic potential 
 ($\potential$) that results from the discrete fixed charges inside the walls of the 
 pore.\cite{Bhattacharya-2011}\todo{more ref}. In the following section we aim to describe the most salient 
-features of this potential and link it back to the observed ionic conductance properties.
+features of the potential (\cref{fig:potential}) and to link it back to the observed ionic conductance 
+properties through the average electrostatic energy of cations and anions (\cref{fig:potential_energy}).
 
 \paragraph{Influence of the fixed charges.}
-The potential distribution at physiological salt concentrations ($\cbulk=0.15$~M) and no applied bias 
-($\vbias=0$~mV) shows that the negatively charged residues inside the walls result in `hotspots' of high 
-negatively potentials (up to $-75$~mV) that protrude significantly into the `bulk' of the pore 
-(\cref{fig:potential_contour}). This is particularly the case near the \cis\ entry of the pore 
-($10<z<12$~nm), in the middle of the lumen ($4<z<6$~nm) and inside the \trans\ constriction 
-($1.85<z<1.60$~nm). To be able to qualitatively describe the modulation of the electrostatic potential by the 
-pore's charge distribution, we computed its average radial value along the nanopore's length
+To demonstrate the extend to which ClyA's fixed charges ($\scdpore$) influence the distribution of the 
+electrostatic potential inside the pore, we plotted the contourmaps of the potential for representative 
+concentrations over the entire investigated concentration range (\cref{fig:potential_contours}).
+At low salt concentrations ($\cbulk<0.15$~M), the lack of ionic screening results in a highly negative 
+potential in the entire pore. At medium concentrations ($0.15<\cbulk<1$~M), the center of the pore becomes 
+almost neutral, with well-defined, highly negative `hotspots' whose influence extends significantly into the 
+`bulk' of the pore. They are located near the \cis\ entry of the pore ($10<z<12$~nm), in the middle of the 
+lumen ($4<z<6$~nm) and inside the \trans\ constriction ($1.85<z<1.60$~nm). At very high concentrations, the 
+To be able to better quantitatively describe the modulation of the electrostatic potential, we computed its 
+average radial value along the nanopore's length
 \begin{align}
 \radpot=\displaystyle\frac{1}{\pi \cdot R(z)^2}\int_{0}^{R(z)}\potential(r,z) \cdot 2 \pi \cdot r dr \text{,}
 \end{align}
@@ -400,15 +404,18 @@ the ions must overcome when traversing the pore should provide a more quantitati
 of ClyA's rectification, ion selectivity and asymmetric ion concentrations. To this end, we computed the 
 radially averaged electrostatic energy for monovalent ions  $\radenergy = \chargen_{i} \echarge \radpot$ 
 (\cref{fig:potential_energy_radial_averages}) and the magnitude of the energy barriers at the \trans\ 
-constriction ($\Delta E_{\text{B},i}$, \cref{fig:potential_trans_energy_barrier}).
+constriction ($\Delta E_{\text{B},i}$, \cref{fig:potential_energy_trans_barrier}).
+
+\input{fig_potential_energy.tex}
 
 \paragraph{Energy landscape at $\mathbf{+150}$~mV.}
 At positive bias voltages, cations traverse the pore from \trans\ to \cis\ 
 (\cref{fig:potential_energy_radial_averages}, top left). Upon entering the \trans\ constriction, the 
 electrostatic energy drops dramatically, followed by a relatively flat energy landscape with a small barrier 
-for entry in the lumen at $z\approx1.6$~nm (\cref{fig:potential_trans_energy_barrier}, blue curves). At very 
+for entry in the lumen at $z\approx1.6$~nm (\cref{fig:potential_energy_trans_barrier}, blue curves). At very 
 low ionic strengths ($\cbulk<0.025$~M), the energy at \trans\ is significantly lower than that the final 
-energy in the \cis\ compartment (e.g. $\Delta\radenergy>2\kT$ at $0.005$~M), forcing the ions to accumulate 
+energy in the \cis\ compartment (e.g. $\Delta\radenergy>2$~$\kT$ at $0.005$~M), forcing the ions to 
+accumulate 
 inside the pore. At higher concentrations ($\cbulk>0.05$~M), the increased screening smooths out the 
 potential drop inside the pore, allowing the cations to migrate unhindered across the entire length of the 
 pore.
@@ -418,10 +425,10 @@ Anions travelling from \cis\ to \trans\ must overcome energy barriers when both 
 pore, but is only relevant at lower ionic strengths ($\cbulk<0.05$~M), since its magnitude is attenuated 
 strongly with increasing salt concentration (from $\approx1.7$~$\kT$ at $0.005$~M to $\approx0.5$~$kT$ at 
 $0.05$~M). Once inside the lumen, anions can move relatively unencumbered to the \trans\ constriction, where 
-they face the second, more significant energy barrier (\cref{fig:potential_trans_energy_barrier}, blue 
+they face the second, more significant energy barrier (\cref{fig:potential_energy_trans_barrier}, blue 
 curves). This barrier reduces the number of anions that can exit the pore, causing them to accumulate inside 
 the pore and increasing their concentration. Ions that pass the final barrier are rewarded with a large 
-reduction of their electrostatic energy, as the bulk of the voltage drop occurs after the \trans\ 
+reduction of their electrostatic energy, as the bulk of the voltage drop occurs only \emph{after} the \trans\ 
 constriction.
 
 \paragraph{Energy landscape at $\mathbf{-150}$~mV.}
@@ -430,19 +437,46 @@ electrostatic energy throughout the lumen of the pore up until the \trans\ const
 (\cref{fig:potential_energy_radial_averages}, top right). This promotes the efficient removal of cations 
 from the pore lumen, and results in a lower concentration compared to positive voltages 
 (\cref{fig:concentration}). To fully exit from the pore, however, cations must overcome a large energy 
-barrier (\cref{fig:potential_trans_energy_barrier}, red curves), which reduces the nanopore's ability to 
+barrier (\cref{fig:potential_energy_trans_barrier}, red curves), which reduces the nanopore's ability to 
 conduct cations compared to positive potentials and hence contributes to the ion current rectification.
  
 The situation for anions at negative bias voltages, where they must go from \trans\ to \cis\, is very 
 different (\cref{fig:potential_energy_radial_averages}, bottom left), as they are faced with overcoming the 
-large energy barrier at the constriction (\cref{fig:potential_trans_energy_barrier}, red curves). This 
+large energy barrier at the constriction (\cref{fig:potential_energy_trans_barrier}, red curves). This 
 effectively prevents them from entering the pore, explaining why ClyA is more ion selective at negative 
 bias voltages. Once across the barrier, the continuous drop of electrostatic energy towards the \cis\ entry 
 serves as a strong driving force to deplete the entire lumen of anions, resulting in much lower 
 concentrations compared to positive voltages.
 
-\paragraph{Concentration and voltage dependency of the \trans\ energy barrier.}
+\paragraph{Concentration and voltage dependencies of the \trans\ energy barrier.}
+The constrictions present in many biological nanopores often play a crucial role in shaping the ionic 
+conductance properties as the confinement of charged residues results in large electrostatic energy 
+barriers.\cite{Maglia-2008,Franceschini-2016,Huang-2017} With its highly negatively charged \trans\ 
+constriction, ClyA's affinity for the transport of anions is significantly diminished, resulting in high 
+cation selectivities ($S_{i}=\transportn_{i}/(1-\transportn_{i})$).  
+(\cref{fig:transport_number_contourmap_epnp}).
+We estimated the magnitude of the 
+For concentrations between $0.01$ and $1$~M, however, there is a clear difference in ion selectivity between 
+positive and negative bias voltages. At $0.1$~M, for example, the ion selectivity 
+$\transportn_{\Na}$ increases $3.3$-fold from $5.7$ at $+150$~mV 
+to $19$ at $-150$~mV. The energy barriers under these conditions are This observation can be explained by the 
+difference in electrostatic energy barrier height in the constriction at positive and negative voltages 
+(\cref{fig:potential_energy_trans_barrier}). Again, at $0.1$~M the 
 
+%0.1M, -150mV: 1.8943409
+%0.1M, +150mV: 0.90132562
+
+% at concentrations below $0.1$~M 
+%($\transportn_{\Na}$.  The magnitude of th
+%is  , contain a constriction with an electrostatic energy barrier that dominates the 
+%pore's ionic transport properties. At negative voltages, $\deltaEt$ 
+%represents the electrostatic barrier that cations and anions must overcome to respectively exit and enter 
+%the 
+%pore, and vice versa at positive voltages. In all cases, the additional `tilting' of the energy landscape at 
+%increased bias magnitudes reduces the barrier height. 
+%. It falls logarithmically from $\approx5$~$\kT$ at $0.005$~M to $\approx0$~$\kT$ at $1$~M, wit In 
+%contrast, at positive voltages $\deltaEt$ starts from a value of $\approx2$~$\kT$ at $0.005$~M the remains 
+%where it becomes $\approx0$. 
 
 
 % cis
@@ -476,7 +510,7 @@ uniform positive charge density inside the pore result a parabolic radial veloci
 driven flow \todo{ref} (\cref{fig:flow_constriction_contour,fig:flow_constriction_profiles}). As the 
 ionic charge density $\scdion$ becomes increasingly confined to nanopore walls ($0.5\le\cbulk<1$~M, 
 \cref{fig:ion_charge_density}), the central maximum flattens out, resulting in the `plug' flow profile 
-typically observed for electro-osmotically driven flows \todo{ref}. Interestignly, at high salt 
+typically observed for electro-osmotically driven flows \todo{ref}. Interestingly, at high salt 
 concentrations ($\cbulk\ge1$~M) the velocity at the center of the pore becomes lower than that at the walls.
 \todo{why? lack of charge density in the lumen, complete confinement of charges to the wall?}
 

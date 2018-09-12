@@ -1,13 +1,13 @@
 \begin{figure*}[!htb]
   \centering
-  \begin{minipage}[t]{10.75cm}
-    \begin{subfigure}[t]{5.5cm}
+  \begin{minipage}[t]{18.25cm}
+    \begin{subfigure}[t]{12cm}
       \centering
-      \caption{}\vspace{-3mm}\label{fig:potential_contour}
-      \includegraphics[scale=1]{figures/potential/potential_contour_150mM_0mV}
+      \caption{}\vspace{-3mm}\label{fig:potential_contours}
+      \includegraphics[scale=1]{figures/potential/potential_contours_0mV}
     \end{subfigure}
     \hspace{-5mm}
-    \begin{subfigure}[t]{2.5cm}
+    \begin{subfigure}[t]{3cm}
       \centering
       \caption{}\vspace{-3mm}\label{fig:potential_radial_averages}
       \includegraphics[scale=1]{figures/potential/potential_radial_averages_0mV}
@@ -19,20 +19,6 @@
       \includegraphics[scale=1]{figures/potential/potential_clya_charges}
     \end{subfigure}
   \end{minipage}
-  \hspace{-8mm}
-  \begin{minipage}[t]{6.25cm}
-    \begin{subfigure}[t]{6.25cm}
-      \centering
-      \caption{}\vspace{-5mm}\label{fig:potential_energy_radial_averages}
-      \includegraphics[scale=1]{figures/potential/potential_energy_radial_averages}
-    \end{subfigure}
-    \begin{subfigure}[t]{6.25cm}
-      \vspace{-3mm}
-      \centering
-      \caption{}\vspace{-3mm}\label{fig:potential_trans_energy_barrier}
-      \includegraphics[scale=1]{figures/potential/potential_trans_energy_barrier}
-    \end{subfigure}
-  \end{minipage}
 \centering
 
 % caption
@@ -40,31 +26,21 @@
 [\textbf{Electrostatic potential inside ClyA.}]
 {
 \textbf{Electrostatic potential inside ClyA.}
-(\subref{fig:potential_contour})
-At physiological salt concentrations (0.15~M), the negative electrostatic potential extends significantly
-inside the lumen of ClyA, particularly inside the \trans\ constriction ($1.85<z<1.60$~nm). In the lumen of 
-the pore, influential negative `hotspots' can be found in the middle ($4<z<6$~nm) and at the \cis\ entry 
-($10<z<12$~nm). 
+(\subref{fig:potential_contours})
+Electrostatic potential landscape inside ClyA due to its fixed charges (i.e. at $\vbias=0$~mV) at several key 
+concentrations ($\cbulk=0.005$, $0.05$, $0.15$, $0.5$ and $5$~M). Note that even at physiological salt 
+concentrations ($\cbulk=0.15$~M), the negative electrostatic potential extends significantly inside the lumen 
+($1.60<z<12.25$~nm), and even more so inside the \trans\ constriction ($1.85<z<1.60$~nm). For the former, 
+localized influential negative `hotspots' can be found in the middle ($4<z<6$~nm) and at the \cis\ entry 
+($10<z<12$~nm).
 (\subref{fig:potential_radial_averages})
 The electrostatic potential along the length of the pore and averaged along the the entire radius of the 
-nanopore ($\left<\potential\right>_{\text{rad}}$) shows the effect of increased screening at higher reservoir 
-concentrations. Above $0.5$~M, the lumen of the pore becomes almost fully screened while the constriction 
-remains highly negative still. 
+nanopore ($\left<\potential\right>_{\text{rad}}$) allows for bette quantification of the effect of increased 
+screening at higher reservoir concentrations. While the lumen of the pore becomes almost fully screened for 
+$\cbulk>0.5$~M, the constriction still retains some of its negative influence at $5$~M. 
 (\subref{fig:potential_clya_charges})
 A single subunit of ClyA in which all amino acids with a net charge and whose side chains face the inside of 
 the pore, i.e. that contribute the most to the electrostatic potential, are highlighted. Negatively (Asp+Glu) 
 and positively and positively (Lys+Arg) charged residues are colored in red and blue, respectively.
-(\subref{fig:potential_energy_radial_averages})
-Approximate electrostatic energy landscape for single ions $\radenergy = \chargen_{i} \echarge \radpot$ as 
-calculated directly from the radial electrostatic potential at $+150$ and $-150$~mV applied bias voltages. 
-The arrows at top indicate the direction in which the ions must travel in order to contribute positively to 
-the ionic current. To set the `starting' energy of each ion to $0$, the curves of \Na\ at $+150$~mV and \Cl\ 
-at $-150$~mV were offset by their bias voltages. The light and dark lines correspond to low and high bulk 
-salt concentrations, respectively.
-(\subref{fig:potential_trans_energy_barrier})
-Electrostatic energy barrier height ($\Delta E_{\text{B},i}$) at the \trans\ constriction depends strongly on 
-$\cbulk$ (left) and weakly on the $\vbias$ (right). The $\Delta E_{\text{B},i}$ values for high negative and 
-positive bias voltages converge at concentrations $> 0.5$~M. Discontinuity at $0$~mV reflects the difference 
-in $\Delta E_{\text{B},i}$ when traversing the pore from \cis\ to \trans\ or vice versa.
 }\label{fig:potential}
 \end{figure*}
