@@ -171,7 +171,7 @@ solutions within nanopores which are unlike anything that can be found in bulk s
 
 With an eye on improving our understanding of the transport phenomena inside biological nanopores, we created 
 a 2D-axisymmetric continuum model of the a dodecameric protein nanopore Cytolysin A (ClyA)\cite{Soskine-2013} 
-that captures its essential geometrical features (i.e. shape and charge) whilst remaining computationally 
+that captures its essential geometrical features (i.e. shape and charge) while remaining computationally 
 efficient (\cref{fig:model_concept}). To realistically compute the ionic and water fluxes through the pore, 
 this model was then applied to an extended version of the Poisson-Nernst-Planck-Navier-Stokes (ePNP-NS) 
 equations, which we solved numerically using the finite element method. The ePNP-NS equations include 
@@ -179,7 +179,7 @@ self-consistent concentration- and positional-dependent parameters for both the 
 mobilities of the ions, and the viscosity, density and relative permittivity of the solvent. We then 
 investigated the concentration and voltage dependencies of the ion transport through ClyA in terms of 
 conductance, rectification and selectivity. The values of the former two parameters were also measured 
-experimentally and hence were are used to benchmark the accuracy of our model. This is followed by a detailed 
+experimentally and employed as a benchmark to gauge the accuracy of our model. This is followed by a detailed 
 description of several parameters that are of great interest, but cannot be readily determined 
 experimentally, namely the concentration of cations and anions inside the pore, the ionic charge density 
 inside the pore, the distribution of the electrostatic potential and the properties of the electro-osmotic 
@@ -191,6 +191,11 @@ readily transferred to other types of nanopores.
 %------------------------------------------------------------------------------
 \section{Results}\label{sect:results}
 
+\subsection{Simulation setup}
+\todo{Simulation setup... }
+Note that the latter is applied to the boundary of the \trans\ compartment while 
+the \cis\ side is kept grounded (\cref{fig:model_geometry}).
+
 \input{fig_conductance.tex}
 
 \subsection{Transport of ions through ClyA}\label{sect:ion_transport}
@@ -199,37 +204,27 @@ electrolyte that surrounds it. To accurately predict the ionic current through a
 should thus contain an adequate representation of its most salient geometrical features, and accurately 
 portrait all relevant transport phenomena. The parameters utilized to describe these processes depend on the 
 local conditions inside the electrolyte, such as the ion concentrations and proximity to the nanopore, and 
-hence require locally relevant values. We implemented such a self-consistent parametrization in our ePNP-NS 
-model with dependencies on both the average ion concentration %$\ca$
-It is deemed instrumental to compare the predicted ionic transport properties -- in terms of 
-current, conductance, rectification and ion selectivity -- over a wide range of reservoir salt concentrations 
-and applied bias voltages with those obtained experimentally through single channel recordings and computed 
-using the classical PNP-NS equations. Note that the latter is applied to the boundary of the \trans\ 
-compartment while the \cis\ side is kept grounded (\cref{fig:model_geometry}).
+hence require position dependent values. We implemented such a self-consistent parametrization in our ePNP-NS 
+model with dependencies on both the average ion concentration $\avionconc$ and distance from the pore wall 
+$d$. We compared the simulated ionic transport properties -- in terms of current, conductance, rectification 
+and ion selectivity -- with those obtained experimentally through single channel recordings.
 
 %(i.e. shape and charge distribution),
 %(i.e. diffusion, electromigration and convection).
 %(i.e. ion diffusion coefficients and mobilities; solvent viscosity, density and relative permittivity)
 
 \paragraph{Ionic current.}
-The simulated (using both PNP-NS and ePNP-NS) and experimentally measured current-voltage (IV) curves of ClyA 
-between $-150$ and $+150$~mV and for reservoir salt concentrations of $0.05$, $0.15$, $0.5$, $1$ and $3$~M 
-are plotted in \cref{fig:current-voltage_curves}. The latter were obtained using single-channel recordings, 
-while the former were computed from the ionic flux under steady-state conditions using
-\begin{equation}
-  \currentsim = \faraday\int_{S}\left(\displaystyle\sum_{i}\chargen_{i}\normvec\cdot\vec{\flux_{i}}\right)dS  
-\end{equation}
-with $\chargen_{i}$ the charge number and $\vec{\flux_{i}}$ the total flux of each ion $i$ across the
-reservoir boundary $S$, $\faraday$ the Faraday constant (\SI{96485}{\coulomb\per\mole}) and $\normvec$ the
-normal vector. Over the entire investigated concentration range, the IVs from the ePNP-NS model closely
-correspond to the measured values ($<5\%$ error). In contrast, the PNP-NS equations significantly
-overestimate the ionic current for all measured concentrations. The PNP-NS model performs the worst at high 
-salt concentrations, as is to be expected since it uses parameters that are only valid at `infinite
-dilution'. Interestingly, for ePNP-NS the error is largest in at lower concentrations, with slightly smaller 
-and larger currents at negative and positive bias voltages, respectively. While the reasons for this are 
-unclear, their cause is likely to be found in the under- and overestimation of the cation concentration at 
-these respective voltages.\todo{ref} Another possibility could also be that our mobility model, which makes 
-use of electroneutral `bulk' values for unconfined ions, begins to break down under these 
+Using both PNP-NS and ePNP-NS, we simulated the current-voltage (IV) curves of ClyA and compared it with the 
+experimentally measured values for applied bias voltages between $-150$ and $+150$~mV and for reservoir salt 
+concentrations of $0.05$, $0.15$, $0.5$, $1$ and $3$~M (\cref{fig:current-voltage_curves}). Over the entire 
+investigated concentration range, the IVs from the ePNP-NS model closely correspond to the measured values 
+($<5\%$ error). In contrast, the PNP-NS equations significantly overestimate the ionic current for all 
+measured concentrations. The PNP-NS model performs the worst at high salt concentrations, as is to be 
+expected since it uses parameters that are only valid at `infinite dilution'. For ePNP-NS the error is 
+largest at lower concentrations, with slightly smaller and larger currents at negative and positive bias 
+voltages, respectively. Their cause is likely to be found in the under- and overestimation of the cation 
+concentration at these respective voltages.\todo{ref} Another possibility could also be that our mobility 
+model, which makes use of electroneutral `bulk' values for unconfined ions, begins to break down under these 
 conditions.\cite{Duan-2010}
 
 Regardless of these minor discrepancies, it is clear that our simplified, 2D-axisymmetric model, in 
@@ -240,23 +235,28 @@ ranges.
 
 % Difference in conductance mechanism between high and low salt
 \paragraph{Ionic conductance.}
-To further investigate ClyA's ionic transport mechanism, we computed the the ionic conductance $\conductance$ 
-from the IV data using
-\begin{equation}
-  \conductance = \displaystyle\frac{\current}{\vbias}
-\end{equation}
-and the resulting concentration-voltage landscape can be found in \cref{fig:conductance_contourmap_epnp}. The 
-straight slopes of the concentration-conductivity log-log plot at $-150$~mV exhibits a clear `kink' at 
-$\approx0.15$~M, suggesting the presence of two different conductance regimes. Curve fitting at low 
-($0.005\le\cbulk\le0.05$~M) and high concentrations ($0.3\le\cbulk\le1.5$~M) with a power law function 
-($\conductance(\cbulk)=a\cbulk^{\gamma}$) yielded exponents $\gamma$ of $0.498\pm0.004$~$\text{M}^{-1}$ and 
-$1.000\pm0.016$~$\text{M}^{-1}$, respectively. while the linear dependency on $\cbulk$ is commonly 
-observed at high salt concentrations\todo{ref}, the square-root dependency at low salt suggests a transport 
-mode dominated by the surface charge density due to the overlapping of the electrical double 
-layers.\cite{Uematsu-2018} These mechanisms are less well defined at high positive bias voltages, however, as 
-fitting yielded $\gamma$ value of $0.614\pm0.009$~$\text{M}^{-1}$ and $0.787\pm0.001$~$\text{M}^{-1}$ for 
-low and high concentrations, respectively. Hence, while there are clearly two distinct ion transport modes at 
-high negative bias voltages, the converging exponents at high positive voltages suggest a `hybrid' mode with 
+To further investigate ClyA's ionic transport mechanism, we computed the the ionic conductance 
+$\conductance=\current / \vbias$ and the resulting concentration-voltage landscape can be found in 
+\cref{fig:conductance_contourmap_epnp}. The straight slopes of the concentration-conductivity log-log plot at 
+$-150$~mV exhibit a clear `kink' at $\approx0.15$~M, suggesting the presence of two different conductance 
+regimes. At low ionic strengths ($0.005\le\cbulk\le0.05$~M) and high negative bias voltages ($>-100$~mV) 
+fitting with the power law function $\conductance(\cbulk)=a\cbulk^{\gamma}$ yields an exponent that 
+asymptotically approaches $\gamma=1/2$. This suggests that the transport mechanism is dominated by the charge 
+density inside the pore, which is determined by the electrical double layer which as well has a square-root 
+dependence on the bulk concentration $\cbulk$.\cite{Uematsu-2018} Under all other conditions, $\gamma$ yields 
+values between $0.5$ and $?$
+
+
+
+($0.3\le\cbulk\le1.5$~M) 
+ yielded exponents $\gamma$ of 
+$0.4984$~$\text{M}^{-1}$ and $1.000$~$\text{M}^{-1}$, respectively. while the linear dependency on $\cbulk$ 
+is commonly observed at high salt concentrations\todo{ref}, the square-root dependency at low salt suggests a 
+transport mode dominated by the surface charge density due to the overlapping of the electrical double 
+layers. These mechanisms are less well defined at high positive bias voltages, however, as 
+fitting yielded $\gamma$ value of $0.614$~$\text{M}^{-1}$ and $0.787$~$\text{M}^{-1}$ for low and high 
+concentrations, respectively. Hence, while there are clearly two distinct ion transport modes at high 
+negative bias voltages, the converging exponents at high positive voltages suggest a `hybrid' mode with 
 characteristics of both regimes.
 
 \paragraph{Ionic current rectification.}
@@ -857,6 +857,15 @@ with steric factor
 where $\ionsize_{i}$ and $\ionsize_{0}$ represent the maximum packing radius in a cubic lattice for ions and 
 solvent molecules, respectively. The radii were set to $0.5$~nm for both \Na\ and \Cl\ and to $0.311$~nm for 
 water, corresponding to maximum concentrations of $13.3$~M and $55.2$~M, respectively. 
+
+\paragraph{Computation of simulated ionic current.}\todo{finish him}
+The simulated ionic currents were computed from the ionic flux under steady-state conditions using
+\begin{equation}
+\currentsim = \faraday\int_{S}\left(\displaystyle\sum_{i}\chargen_{i}\normvec\cdot\vec{\flux}_{i}\right)dS  
+\end{equation}
+with $\chargen_{i}$ the charge number and $\vec{\flux}_{i}$ the total flux of each ion $i$ across the
+reservoir boundary $S$, $\faraday$ the Faraday constant (\SI{96485}{\coulomb\per\mole}) and $\normvec$ the
+normal vector.
 
 \paragraph{ClyA expression and purification.}
 ClyA-AS monomers were expressed, purified and oligomerized using methods described in detail 

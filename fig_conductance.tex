@@ -37,35 +37,23 @@ nanopores.}]
 \textbf{Measured and simulated ion conductance and current rectification characteristics of single ClyA 
 nanopores.}
 (\subref{fig:current-voltage_curves})
-Comparison of the single-pore current-voltage (IV) characteristics over a wide range of ionic strengths (from 
-\SIrange{0.05}{3}{\Molar} \ce{NaCl}) reveals the inability of the classical PNP-NS (dotted green lines) 
-equations to quantitatively predict the experimentally measured values (black circles), particularly at high 
-ionic strengths. In contrast, the extended PNP-NS (ePNP-NS, purple lines) equations exhibit excellent 
-agreement over the entire concentration range. All experimental measurements were performed at 
-$25\pm1$\textdegree C. Errorbars represent the standard deviation of three independent measurements ($n=3$).
+Simulated and experimental current-voltage (IV) characteristics between $-150$ and $+150$~mV at $0.05$, 
+$0.15$, $0.5$, $1$ and $3$~M \ce{NaCl}. All experimental measurements were performed at $25\pm1$\textdegree 
+C. Errorbars represent the standard deviation of three independent measurements ($n=3$).
 (\subref{fig:conductance_contourmap_epnp})
 Concentration-voltage heatmap (left) of the simulated ionic conductance,
 $\conductance(\cbulk) = \current / \vbias$, and the bulk salt concentration dependencies (right) at $+150$~mV 
 (blue) and $-150$~mV (red). The simulated (ePNP-NS) and experimental data are represented by solid lines and 
-open circles, respectively. The kink in the slopes of the log-log plots at $\approx0.15$~M suggest that the 
-conductance mechanism is different at low and high bulk ionic strengths. While the low and high regimes 
-exhibit respectively square-root ($\conductance \propto \cbulk^{0.5}$) and linear ($\conductance \propto 
-\cbulk^1$) dependencies at negative bias voltages, the exponents converge at positive bias voltages (low: 
-$\conductance \propto \cbulk^{0.61}$, high: $\conductance \propto \cbulk^{0.79}$).
+open circles, respectively.
 (\subref{fig:conductance_rectification_contourmap_epnp})
 Concentration-voltage heatmap of the simulated (ePNP-NS) ionic conductance rectification 
 ($\icr(\vbias) = \conductance(+\vbias) / \conductance(-\vbias)$), which highlights ClyA's tendency for higher 
 currents at positive bias voltages. $\icr$ is a linear function of voltage, but shows a maximum in the 
-concentration dependency at $\approx0.15$~M. The measurement and the model agree qualitatively about the 
-shape of the curve, a good quantitative match, however, is found only at concentrations $\ge0.5$~M.
+concentration dependency at $\approx0.15$~M.
 (\subref{fig:transport_number_contourmap_epnp})
-Concentration-voltage heatmap of the fraction of the current carried by cations, i.e. the \Na\ transport 
-number ($\transportn_{\Na} = \conductance_{\Na}/\conductance$). ClyA remains cation-selective up until a 
-concentration of $\approx2$~M, after which the electrostatic screening and the high \Cl\ mobility of result 
-in more anions traversing the pore than cations. At very low concentrations ($50$~mM at $-150$~mV and $10$~mM 
-at $+150$~mV), the net \ce{Cl-} flux follows the direction of the electro-osmotic flow (i.e. against the 
-electric potential gradient), resulting in a negative contribution the the overall ionic current and a \Na\ 
-transport number $>1$.
+Concentration-voltage heatmap (left) and selected values at $-150$ and $+150$~mV (right) of the fraction of 
+the current carried by cations, i.e. the \Na\ transport number 
+$\transportn_{\Na}=\conductance_{\Na}/\conductance$.
 }\label{fig:conductance}
 \end{figure*}
 
