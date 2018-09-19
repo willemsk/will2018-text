@@ -239,7 +239,7 @@ To further investigate ClyA's ionic transport mechanism, we computed the the ion
 $\conductance=\current / \vbias$ and the resulting concentration-voltage landscape can be found in 
 \cref{fig:conductance_contourmap_epnp}. The straight slopes of the concentration-conductivity log-log plot at 
 $-150$~mV exhibit a clear `kink' at $\approx0.15$~M, suggesting the presence of two different conductance 
-regimes. At low ionic strengths ($0.005\le\cbulk\le0.05$~M) and high negative bias voltages ($>-100$~mV) 
+regimes. At low ionic strengths ($0.005\le\cbulk\le0.15$~M) and high negative bias voltages ($>-100$~mV) 
 fitting with the power law function $\conductance(\cbulk)=a\cbulk^{\gamma}$ yields an exponent that 
 asymptotically approaches $\gamma=1/2$. This suggests that the transport mechanism is dominated by the charge 
 density inside the pore, which is determined by the electrical double layer which as well has a square-root 
@@ -309,10 +309,10 @@ ClyA (\cref{fig:concentration}) and the accumulation of mobile charges as a resu
 
 \paragraph{Relative cation and anion concentrations.}
 At high reservoir concentrations ($\cbulk > 1$~M), the lumen of the pore becomes fully screened from the 
-negative charges that line it, leading to bulk-like conditions ($\left<\ci/\cbulk\right>_{\text{pore}}\approx 
-1$) for both positive and negative ions. At lower concentrations however, the reduced screening gives rise to 
-an overlapping electrical double layer, which results in the enhancement of cations and the depletion of 
-anions. The magnitude of these effects appears to follow a power law at low concentrations ($\cbulk=0.005$ to 
+negative charges that line it, leading to bulk-like conditions ($\pav{\ci/\cbulk}{p}\approx1$) for both 
+positive and negative ions. At lower concentrations however, the reduced screening gives rise to an 
+overlapping electrical double layer, which results in the enhancement of cations and the depletion of anions. 
+The magnitude of these effects appears to follow a power law at low concentrations ($\cbulk=0.005$ to 
 $0.05$~M), with exponents of $-0.910\pm0.010$ and $0.778\pm0.015$ for \Na\ and \Cl\, respectively. The \Na\ 
 concentrations exhibit at most a 2 to 3-fold increase when $\vbias$ changes from $\vbias=-150$ to $+150$~mV. 
 In contrast, the number of \Cl\ ions inside pore between those 2 bias voltages can differ more than 10-fold 
@@ -320,13 +320,13 @@ at reservoir concentrations below $0.1$~M, with a high degree of depletion at ne
 
 The contourplots of the relative ion concentrations ($\ci/\cbulk$) at $\cbulk=0.15$~M 
 (\cref{fig:concentration_contours}) reveal that the \trans\ constriction ($1.85\text{~nm}<z<1.60\text{~nm}$) 
-remains depleted of anions and enhanced in cations for both $\vbias=-100$ and $+100$~mV . This is not the 
+remains depleted of anions and enhanced in cations for both $\vbias=-100$ and $+100$~mV. This is not the 
 case in the lumen ($1.60\text{~nm}<z<12.25\text{~nm}$), where the \Na\ concentration is bulk-like and 
-enhanced for $-100$ and $+100$~mV, respectively. Conversely, the number of \Cl\ ions is highly depleted in 
-the lumen at $-100$~mV, while it is bulk-like for $+100$~mV. This is further exemplified by the radial 
-profiles through the middle of the constriction ($z=-0.3$~nm) and the lumen ($z=5$~nm) 
-(\cref{fig:concentration_radial_profiles}), which also clearly show the formation of the electrical double 
-layer.
+enhanced for $\vbias<0$ and $\vbias>0$, respectively. Conversely, the number of \Cl\ ions becomes more and 
+more depleted in the lumen for increasing negative bias magnitudes, while it is virtually bulk-like at higher 
+positive bias voltages. This is further exemplified by the radial profiles through the middle of the 
+constriction ($z=-0.3$~nm) and the lumen ($z=5$~nm) (\cref{fig:concentration_radial_profiles}) which also 
+clearly show the formation of the electrical double layer.
 
 Note that the figures given above were obtained from a nanoscale continuum steady-state simulation, and hence 
 represent a time-averaged situation (typically on the order of $10$ to $100$~ns).\todo{REF}
@@ -352,24 +352,25 @@ clearly by the radial density profiles (\cref{fig:ion_charge_density_radial_prof
 constriction ($z=-0.3$~nm) and the lumen ($z=5$~nm).
 
 Integration of $\scdion$ over `bulk' ($d\ge0.5$~nm) and surface ($d<0.5$~nm) volumes inside the pore yields 
-the net amount of mobile charges present inside those locations ($\Qion$, 
-\cref{fig:ion_charge_pore_bulk_surface_total_vs_concentration}). While $\Qion$ rises appreciatively 
+respectively $\pav{\Qion}{b}$ and $\pav{\Qion}{s}$, i.e. the average number of mobile charges present inside 
+those locations (\cref{fig:ion_charge_pore_bulk_surface_total_vs_concentration}). While total number of 
+charges inside the pore $\pav{\Qion}{p} = \pav{\Qion}{b} + \pav{\Qion}{s}$ rises appreciatively 
 with increasing reservoir concentration, the majority of these additional charges are confined to the surface 
-of the pore. Up until $0.1$~M, $\Qion$ is distributed equally between the surface and bulk layers 
+of the pore. Up until $0.1$~M, $\pav{\Qion}{p}$ is distributed equally between the surface and bulk layers 
 ($\approx+27$ and $\approx+22$~$\echarge$, respectively). At higher concentrations, the number of ions in the 
 surface layer rises (to $+58$~$\echarge$ at $5$~M), while that in the bulk pore diminishes ($+0$~$\echarge$ 
-at $5$~M). $\Qion$ also depends on the applied bias voltage, as it is $+10$ to $+15$~$\echarge$ higher at 
-$+150$~mV compared to $-150$~mV.
+at $5$~M). $\pav{\Qion}{p}$ also depends on the applied bias voltage, as it is $+10$ to $+15$~$\echarge$ 
+higher at $+150$~mV compared to $-150$~mV.
 
 \subsection{Electrostatic potential}\label{sect:electrostatic_potential}
 
 \input{fig_potential.tex}
 
-In nanometer sized pores, the transport of ions and water molecules is strongly influenced by the charged 
-residues embedded in the interior walls of the protein (\cref{fig:potential_clya_charges}), as they 
-significantly alter the electrostatic potential landscape inside the pore.\cite{Bhattacharya-2011}\todo{more 
-ref} In the following section we aim to describe the most salient features of this modulated potential and 
-its relative importance over the entire investigated concentration range.
+In nanometer sized pores, the modification of the electrostatic potential distribution by the charged 
+residues embedded in the interior walls of the protein (\cref{fig:potential_clya_charges}), significantly 
+influences the transport of ions and water molecules.\cite{Bhattacharya-2011}\todo{more ref}
+In the following section we aim to describe the most salient features of this modulated potential and its 
+relative importance over the entire investigated concentration range.
 
 \paragraph{Global electrostatic potential.}
 The electrostatic potential distribution at $\vbias=0$~mV clearly shows the influence of the nanopore's fixed 
@@ -634,15 +635,14 @@ The nanopore geometry (\cref{fig:model_geometry_vs_wedge}) was derived directly 
 ClyA-AS -- an improved variant of ClyA evolved from the wild-type Cytolysin A from \textit{S. typhii} using 
 directed evolution.\cite{Soskine-2013} Briefly, a homology model of ClyA-AS was constructed from the 
 wild-type crystal structure (PDB: 2WCD)\cite{Mueller-2009} by introducing the necessary mutations in all 12 
-subunits (\cref{suppinfo:tab:clya_as_mutations}), followed by a brief energy optimization of the mutated 
-side-chains with the conjugate gradient method (MODELLER, version 9.18).\cite{Sali-1993} We then computed the 
-protonation state of titratable residue at pH~$7.5$ and assigned the correct radius and partial charge to 
-each atom of the model (PROPKA 3.1\cite{Olsson-2011} and PBD2PQR 2.1.1\cite{Jurrus-2018} software packages) 
-as parametrized by the CHARMM36 forcefield.\cite{Best-2012} The atom radii were then used to compute a 
-3D-dimensional map of the nanopore's molecular surface with a probe radius of $1.4$~\AA, which was radially 
-averaged along the z-direction with a custom-built MATLAB script to generate an approximate axisymmetric 
-outline of the nanopore. To improve the quality of the final computational mesh, the resulting polygon was 
-then simplified manually by removing overlapping and superfluous vertices.
+subunits an minimizing the resulting structure (see SI fot details). We then computed the protonation state 
+of titratable residue at pH~$7.5$ and assigned the correct radius and partial charge to each atom of the 
+model (PROPKA 3.1\cite{Olsson-2011} and PBD2PQR 2.1.1\cite{Jurrus-2018} software packages) as parametrized by 
+the CHARMM36 forcefield.\cite{Best-2012} The atom radii were then used to compute a 3D-dimensional map of the 
+nanopore's molecular surface with a probe radius of $1.4$~\AA, which was radially averaged along the 
+z-direction with a custom-built MATLAB script to generate an approximate axisymmetric outline of the 
+nanopore. To improve the quality of the final computational mesh, the resulting polygon was then simplified 
+manually by removing overlapping and superfluous vertices.
 
 Similar to the geometry, the two-dimensional charge distribution used in this model was also derived directly
 from the full atom model (cf.~\cref{fig:model_charge_density}). Inspired by how charges are represented in the
@@ -718,8 +718,7 @@ a chemical gradient (diffusion), a non-zero electrical field (electromigration) 
 (convection) and is given by
 \begin{multline}\label{eq:nernst-planck}
 \nabla\cdot\flux_{i} = \nabla \cdot \left[ -\diffusion_{i}\nabla\concentration_{i} - 
-\chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential \right]
-+\velocity\cdot\nabla\concentration_{i} = 0
+\chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential + \velocity\concentration_{i}\right] = 0
 \end{multline}
 with $\concentration_{i}$ the concentration, $\diffusion_{i}$ the diffusion coefficient, $\chargen_{i}$ the 
 charge number, $\mobility_{i}$ the electrophoretic mobility, and $\velocity$ the fluid velocity. The relevant
@@ -842,8 +841,8 @@ concentration. We opted for the size-modified PNP (SMPNP) framework developed by
 \nabla\cdot\flux_{i} = \nabla \cdot \Big[
 - \diffusion_{i}\nabla\concentration_{i}
 - \chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential
-- \beta_{i} \concentration_{i} \Big] \\
-+\velocity\cdot\nabla\concentration_{i} = 0
++ \velocity\concentration_{i} \\
+- \beta_{i} \concentration_{i} \Big] = 0
 \end{multline}
 with steric factor
 \begin{equation}
@@ -906,7 +905,11 @@ The authors thank Ujjal Barman and Chang Chen for their valuable feedback during
 % SUPPORTING INFORMATION
 %-------------------------------------------------------------------------------
 \begin{suppinfo}
-	Extended materials and methods.
+	The supplementary info contains the Extended materials and methods, with details on the construction of the 
+	ClyA-AS homology model, the fitting of the electrolyte properties and the calculation of the pore averaged 
+	values. It also contains additional results, including a figures about the voltage dependency of the 
+	power-law exponent of the conductance fits and the electro-osmotic pressure distribution inside the pore, 
+	and a table detailing the peak values of the radial electrostatic potential inside ClyA.
 \end{suppinfo}
 
 

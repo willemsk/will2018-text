@@ -77,11 +77,23 @@
 \maketitle
 
 \section{Extended materials and methods}
-\subsection{Mutations of the ClyA-AS variant.}
-The mutations needed to convert the wild-type ClyA to the AS variant are listed in \cref{tab:clya_as_mutations}.
-\input{tab_clya_as_mutations}
 
-\subsection{Fitting of electrolyte properties}
+\subsection{ClyA-AS homology model}
+A full atom model of ClyA-AS\cite{Soskine-2013} was build using the MODELLER (version 9.18) software package 
+by introduction of the following point mutations in each of the 12 chains of the wild-type ClyA crystal 
+structure (PDBID: 
+2WCD\cite{Mueller-2009}):
+K8Q, N15S, Q38K, A57G, T67V, C87A, A90V, A95S, L99Q, E103G, K118R, L119I, I124V, T125K, V136T, F166Y, K172R, 
+V185I, K212N, K214R, S217T, T224S, N227A, T244A, E276G, C285S, K290Q.
+The resulting structure was optimized by annealing first the mutated residues alone, and subsequently also 
+the closed atoms around them, using a conjugate gradient (from $150$ to $1000$ to $300$~K with $4$~fs 
+timesteps).\cite{Sali-1993}
+
+% are listed in \cref{tab:clya_as_mutations}.
+% \input{tab_clya_as_mutations.tex}
+
+\subsection{Fitting of the electrolyte properties}
+\input{fig_corrections.tex}
 The parameters of the fitting functions used to interpolate the experimental ion diffusion coefficients, 
 mobilities and transport numbers, and the electrolyte viscosity, density and relative permittivity are given 
 in \cref{tab:corrections_parameters} and the resulting curves are plotted in \cref{fig:corrections}. Note 
@@ -92,12 +104,63 @@ Finally, for the concentration dependence of the relative permittivity we made u
 \begin{align}
 \relperm(\dconc) = \permittivity_{r,0} - \left(\permittivity_{r,0} - \permittivity_{r,ms}\right) L \left( \dfrac{3\alpha}{\permittivity_{r,0} - \permittivity_{r,ms}} \dconc \right)
 \end{align}
-
 \input{tab_corrections_parameters.tex}
-\input{fig_corrections.tex}
-\input{tab_radial_potential.tex}
-\input{fig_pressure.tex}
 
+\subsection{Surface integration to compute pore averaged values}
+The average pore values for quantity of interest $X$ was computed by
+\begin{align}
+  \left< X \right>_{\alpha} =
+    \displaystyle\frac{\displaystyle\iint_{V_{\alpha}} \beta_{\alpha} X \,dr\,dz}
+                      {\displaystyle\iint_{V_{\alpha}} \beta_{\alpha} \,dr\,dz}
+\end{align}
+where
+\begin{equation}
+  \alpha=
+  \begin{cases}
+    \text{p}, & d \ge 0  \text{~nm} \text{, average over the entire pore} \\
+    \text{b}, & d > 0.5  \text{~nm} \text{, average over the pore `bulk' }  \\
+    \text{s}, & d \le 0.5\text{~nm} \text{, average over the pore `surface' } 
+  \end{cases}
+\end{equation}
+and
+\begin{align}
+  \beta_{\text{p}} &=
+  \begin{cases}
+    1, & \text{if}\ -1.85\le z \le 12.25  \text{ and } r \le r_\text{p}(z) \\
+    0, & \text{otherwise}
+  \end{cases} \\
+  \beta_{\text{b}} &=
+  \begin{cases}
+  1, & \text{if}\ -1.85\le z \le 12.25  \text{ and } r \le r_\text{p}(z) \text{ and } d > 0.5 \\
+  0, & \text{otherwise}
+  \end{cases} \\
+  \beta_{\text{s}} &=
+  \begin{cases}
+  1, & \text{if}\ -1.85\le z \le 12.25  \text{ and } r \le r_\text{p}(z) \text{ and } d \le 0.5 \\
+  0, & \text{otherwise}
+  \end{cases}
+\end{align}
+with $d$ is the distance from the nanopore wall and $r_\text{p}(z)$ is the radius of the pore at height $z$.
+
+
+
+
+\section{Extented results}
+\subsection{Voltage dependency of the conductance log-log slopes}
+The values of the fitted power-law exponent $\gamma$ for both the simulated (ePNP-NS) and experimental data 
+in the low and high concentration regimes can be found in \cref{fig:conductance_loglogslopes}.
+\input{fig_conductance_loglogslopes.tex}
+
+\subsection{Peak values of the radial potential profiles inside ClyA}
+The peak values of the radial electrostatic potential $\radpot$ at the \cis\ entry, middle of the lumen and 
+the \trans\ constriction for $0.005$, $0.05$, $0.15$, $0.5$ and $5$~M \ce{NaCl} are summarized in 
+\cref{tab:radial_potential}.
+\input{tab_radial_potential.tex}
+
+\subsection{Pressure distribution inside ClyA}
+The electro-osmotic pressure distribution inside ClyA, as a consequence of the strong local enhancement of 
+the ion concentration, is given in \cref{fig:pressure}.
+\input{fig_pressure.tex}
 
 
 %-------------------------------------------------------------------------------
