@@ -135,8 +135,6 @@ electrostatic potential landscape and the magnitude and direction of the electro
 
 \section{Introduction}
 
-\input{fig_model_concept.tex}
-
 Biosensors have been an intense field of research in the recent decades\cite{Zhang-2016}. Several 
 breakthroughs have enabled them to play an integral role in the life sciences with applications ranging from 
 the monitoring of blood glucose levels\cite{Chen-2013} to \todo{??}.
@@ -154,6 +152,8 @@ yields reproducible results is to use self-assembled protein nanopores suspended
 bilayers\cite{Deamer-2016}.
 In fact their properties as biosensors are so desirable that they have already been commercialized for DNA
 sequencing applications\todo{ref}.
+
+\input{fig_model_concept.tex}
 
 Despite the successes of these biological nanopores, the modeling of the sensor operation is still in its 
 infancy due to the multi-scale nature of the problem. On the one hand, it is necessary to resolve the charge 
@@ -189,25 +189,79 @@ readily transferred to other types of nanopores.
 %-------------------------------------------------------------------------------
 % RESULTS
 %------------------------------------------------------------------------------
-\section{Results}\label{sect:results}
+\section{Results and discussion}\label{sect:results}
 
-\subsection{Simulation setup}
-\todo{Simulation setup... }
-Note that the latter is applied to the boundary of the \trans\ compartment while 
-the \cis\ side is kept grounded (\cref{fig:model_geometry}).
+\subsection{Model setup}
+
+\paragraph{A 2D-axisymmetric continuum model of ClyA-AS.}
+With its 12 identical subunits (\cref{fig:clya_side,fig:clya_top}), ClyA exhibits a high degree of radial 
+symmetry along the length of its channel. This is a feature present in many biological nanopores,\todo{ref} 
+making them amenable to representation by highly computationally efficient 2D-axisymmetric models with 
+relatively low loss of details.\cite{Pederson-2015} 
+
+ClyA forms a $14$~nm 
+long hydrophilic channel through a lipid bilayer that can be divided in two cylindrical compartments: the 
+\cis\ lumen ($\approx6$~nm diameter, $\approx10$~nm height), and the \trans\ constriction ($\approx3.3$~nm 
+diameter, $\approx4$~nm height).
+
+For this work we choose the dodecameric ClyA-AS type I as our test case, as it is one of the most extensively 
+used variants of ClyA.\cite{Soskine-2013,Soskine-Biesemans-2015,Biesemans-Soskine-2015,VanMeervelt-2014,
+Franceschini-2016,Wloka-2017,VanMeervelt-2017} To obtain \todo{suitable} 2D-axisymmetric representations of 
+both the nanopore geometry and its fixed charge distribution ($\scdpore$), 
+
+were derived directly from an equilibrated full-atom homology model of ClyA-AS. The geometry was obtained by 
+radially averaging the 3D molecular surface, defined by a  . For the latter we projected the partial 
+charge of each atom, represented by a 2D-Gaussian function, on a 2D grid.
+\cref{fig:model_geometry_vs_wedge,fig:model_charge_density}
+
+%as a solid, cylindrically symmetric dielectric block, embedded within a lipid bilayer which is represented 
+
+%(cf.~,fig:model_geometry_zoom})\cite{Lu-2012,Pederson-2015}. This approach greatly 
+%reduces the computational cost compared to a full 3D model, while retaining sufficient molecular details as 
+%to produce meaningful results.
+
+%Note that the latter is applied to the boundary of the \trans\ compartment while 
+%the \cis\ side is kept grounded (\cref{fig:model_geometry}).
+
+
+\paragraph{Extended Poisson-Nernst-Planck Navier-Stokes equations.}
+Because the PNP equations do not take the size of the ions into account, they tend to overscreen locations 
+with high charge densities resulting in unrealistically high ion concentrations\cite{Corry-2000}. This 
+problem can be addressed by the addition of a nonlinear flux term to the NPE that poses an upper limit to the 
+concentration. We opted for the size-modified PNP (SMPNP) framework developed by Lu and Zhou,\cite{Lu-2011}
+\begin{multline}
+\nabla\cdot\flux_{i} = \nabla \cdot \Big[
+- \diffusion_{i}\nabla\concentration_{i}
+- \chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential
++ \velocity\concentration_{i} \\
+- \beta_{i} \concentration_{i} \Big] = 0
+\end{multline}
+with steric factor
+\begin{equation}
+\beta_{i} =
+\frac{
+  \ionsize_{i}^3/\ionsize_{0}^3 \displaystyle\sum_{l} \ionsize_{l}^3 \nabla \concentration_{l}
+}{
+  1 - \displaystyle\sum_{l} \avogadro \ionsize_{l}^3 \concentration_{l}
+}
+\end{equation}
+where $\ionsize_{i}$ and $\ionsize_{0}$ represent the maximum packing radius in a cubic lattice for ions and 
+solvent molecules, respectively. The radii were set to $0.5$~nm for both \Na\ and \Cl\ and to $0.311$~nm for 
+water, corresponding to maximum concentrations of $13.3$~M and $55.2$~M, respectively. 
 
 \input{fig_conductance.tex}
 
 \subsection{Transport of ions through ClyA}\label{sect:ion_transport}
-The ionic current flowing through a nanopore is determined by the properties of both the pore and the 
-electrolyte that surrounds it. To accurately predict the ionic current through a nanopore, a simulation 
-should thus contain an adequate representation of its most salient geometrical features, and accurately 
-portrait all relevant transport phenomena. The parameters utilized to describe these processes depend on the 
-local conditions inside the electrolyte, such as the ion concentrations and proximity to the nanopore, and 
-hence require position dependent values. We implemented such a self-consistent parametrization in our ePNP-NS 
-model with dependencies on both the average ion concentration $\avionconc$ and distance from the pore wall 
-$d$. We compared the simulated ionic transport properties -- in terms of current, conductance, rectification 
-and ion selectivity -- with those obtained experimentally through single channel recordings.
+The ionic current flowing through a nanopore is determined by the geometrical features the pore and the 
+physical properties of the electrolyte that surrounds it. To accurately predict the ionic current through a 
+nanopore, a simulation should thus contain an adequate representation of its most salient geometrical 
+features, and accurately portrait all relevant transport phenomena. The parameters utilized to describe these 
+processes depend on the local conditions inside the electrolyte, such as the ion concentrations and proximity 
+to the nanopore, and hence require position dependent values. We implemented such a self-consistent 
+parametrization in our ePNP-NS model with dependencies on both the average ion concentration $\avionconc$ and 
+distance from the pore wall $\walldistance$. We compared the simulated ionic transport properties -- in terms 
+of current, conductance, rectification and ion selectivity -- with those obtained experimentally through 
+single channel recordings.
 
 %(i.e. shape and charge distribution),
 %(i.e. diffusion, electromigration and convection).
@@ -345,7 +399,9 @@ reservoir concentrations $\le0.5$~M, the electrical double layer (EDL) inside th
 overlaps significantly (\cref{fig:ion_charge_density_contours}, 3 leftmost panels). Moreover, the 
 absence of anions prevents the formation of any significant negative charge densities next to the few 
 positively charged residues lining the pore walls. The situation at high salt concentrations (e.g. $5$~M) is 
-very different, with almost no charge density within the `bulk' of the pore lumen ($d\ge0.5$~nm), but with 
+very different, with almost no charge density within the `bulk' of the pore lumen ($\walldistance\ge0.5$~nm), 
+but 
+with 
 pockets of highly charged and alternating pockets of positive and negative charge densities close to the 
 nanopore wall (\cref{fig:ion_charge_density_contours}, rightmost panel). This sharp confinement is shown 
 clearly by the radial density profiles (\cref{fig:ion_charge_density_radial_profiles}) through the 
@@ -635,10 +691,10 @@ The nanopore geometry (\cref{fig:model_geometry_vs_wedge}) was derived directly 
 ClyA-AS -- an improved variant of ClyA evolved from the wild-type Cytolysin A from \textit{S. typhii} using 
 directed evolution.\cite{Soskine-2013} Briefly, a homology model of ClyA-AS was constructed from the 
 wild-type crystal structure (PDB: 2WCD)\cite{Mueller-2009} by introducing the necessary mutations in all 12 
-subunits an minimizing the resulting structure (see SI fot details). We then computed the protonation state 
-of titratable residue at pH~$7.5$ and assigned the correct radius and partial charge to each atom of the 
-model (PROPKA 3.1\cite{Olsson-2011} and PBD2PQR 2.1.1\cite{Jurrus-2018} software packages) as parametrized by 
-the CHARMM36 forcefield.\cite{Best-2012} The atom radii were then used to compute a 3D-dimensional map of the 
+subunits an minimizing the resulting structure (see SI for details). We then computed the protonation state 
+of titratable residue at pH~$7.5$ (PROPKA 3.1\cite{Olsson-2011}) and assigned the correct radius and partial 
+charge to each atom of the model (PBD2PQR 2.1.1\cite{Jurrus-2018}) as parametrized by the CHARMM36 
+forcefield.\cite{Best-2012} The atom radii were then used to compute a 3D-dimensional map of the 
 nanopore's molecular surface with a probe radius of $1.4$~\AA, which was radially averaged along the 
 z-direction with a custom-built MATLAB script to generate an approximate axisymmetric outline of the 
 nanopore. To improve the quality of the final computational mesh, the resulting polygon was then simplified 
