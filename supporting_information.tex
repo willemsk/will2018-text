@@ -76,6 +76,7 @@
 	
 \maketitle
 
+\newpage
 \section{Extended materials and methods}
 
 \subsection{ClyA-AS homology model}
@@ -92,6 +93,7 @@ timesteps).\cite{Sali-1993}
 % are listed in \cref{tab:clya_as_mutations}.
 % \input{tab_clya_as_mutations.tex}
 
+\newpage
 \subsection{Fitting of the electrolyte properties}
 \input{fig_corrections.tex}
 The parameters of the fitting functions used to interpolate the experimental ion diffusion coefficients, 
@@ -106,12 +108,14 @@ Finally, for the concentration dependence of the relative permittivity we made u
 \end{align}
 \input{tab_corrections_parameters.tex}
 
+\newpage
 \subsection{Surface integration to compute pore averaged values}
 The average pore values for quantity of interest $X$ was computed by
 \begin{align}
   \left< X \right>_{\alpha} =
     \displaystyle\frac{\displaystyle\iint_{V_{\alpha}} \beta_{\alpha} X \,dr\,dz}
                       {\displaystyle\iint_{V_{\alpha}} \beta_{\alpha} \,dr\,dz}
+  \text{ ,}
 \end{align}
 where
 \begin{equation}
@@ -140,9 +144,210 @@ and
   0, & \text{otherwise}
   \end{cases}
 \end{align}
-with $d$ is the distance from the nanopore wall and $r_\text{p}(z)$ is the radius of the pore at height $z$.
+with $d$ the distance from the nanopore wall and $r_\text{p}(z)$ is the radius of the pore at height $z$.
+
+\newpage
+\subsection{Weak forms of the ePNP-NS equations}
+
+\paragraph{Poisson equation.}
+The global potential distribution is described by the Poisson equation\cite{Lu-2012}
+\begin{align} 
+\label{eq:poisson}
+\nabla \cdot \left( \absperm \relperm \nabla \potential \right) =
+-\left( \scdpore + \scdion \right) \text{ ,}
+\end{align}
+with $\potential$ the electric potential, $\absperm$ the vacuum permittivity 
+($8.85419\times10^{-12}\text{~F\,m}^{-1}$), and $\relperm$ the local relative permittivity of the medium. 
+$\scdpore$ and $\scdion$ are the fixed (due to the pore) and mobile (due to the ions) charge distributions, 
+respectively. To solve this equation with the finite element method, we must be derive its weak form by 
+multiplication with an arbitrary test function and integration over the entire computational domain $\Omega$. 
+For \cref{eq:poisson} with the potential test function $\psi$ this yields 
+\begin{align}
+\displaystyle\int_{\Omega} 
+\left[
+  \nabla \cdot \left( \absperm \relperm \nabla \potential \right)
+\right]
+\psi \,d\Omega
+={}&
+-
+\displaystyle\int_{\Omega} \left[ \scdpore + \scdion \right] \psi \,d\Omega \notag \\
+% newline
+\displaystyle\int_{\Omega}
+\left[
+  \nabla \psi \cdot \left( \absperm \relperm \nabla \potential \right)
+\right]
+\,d\Omega
+-
+\displaystyle\int_{\Gamma}
+\left[
+  \psi \left( \absperm \relperm \nabla \potential \right) \cdot \vec{n}
+\right]
+\,d\Gamma
+={}&
+\displaystyle\int_{\Omega} \left[ \psi \scdpore \right] \,d\Omega
++
+\displaystyle\int_{\Omega} \left[ \psi \scdion \right] \,d\Omega
+\text{ ,}
+\end{align}
+with $\Gamma$ the boundary of $\Omega$ and $\vec{n}$ the normal vector on $\Gamma$.
+
+\paragraph{Size-modified Nernst-Planck equation.}
+The total ionic flux $\flux_{i}$ of ion $i$ expressed by the size-modified Nernst-Planck equation 
+(smNPE)\cite{Lu-2012} includes a diffusive, electromigratory, steric and convective component
+\begin{equation}
+\label{eq:smpnp}
+\nabla\cdot\flux_{i} = \nabla \cdot 
+\left(
+  - \diffusion_{i}\nabla\concentration_{i}
+  - \chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential
+  - \beta_{i} \concentration_{i} 
+  + \velocity\concentration_{i}
+  \right) = 0  \text{\quad with }
+  \beta_{i} = \frac
+          {\ionsize_{i}^3/\ionsize_{0}^3 \displaystyle\sum_{j} \ionsize_{j}^3 \nabla \concentration_{j}}
+          {1 - \displaystyle\sum_{j} \avogadro \ionsize_{j}^3 \concentration_{j}}
+  \text{ ,}
+\end{equation}
+with ion diffusion coefficient $\diffusion_{i}$, concentration $\concentration_{i}$, charge number 
+$\chargen_{i}$, mobility $\mobility_{i}$, electrostatic potential $\potential$, steric saturation factor 
+$\beta_{i}$ and fluid velocity $\velocity$. $\avogadro$ is Avogadro's constant 
+($6.022\times10^{23}\text{~mol}^{-1}$) and $\ionsize_{i}$ and $\ionsize_{0}$ are the limiting cubic diameters 
+for ions and water, respectively. Using the ion concentration test function $d_i$, the weak form of 
+\cref{eq:smpnp} becomes 
+expressed as
+\begin{align}
+% raw weak expression
+\displaystyle\int_{\Omega} \left[ \nabla \cdot \flux_{i} \right] d_{i} \,d\Omega ={}&
+% apply Gauss theorem
+\displaystyle\int_{\Omega} \left[\nabla d_{i} \cdot \flux_{i} \right]\,d\Omega 
++
+\displaystyle\int_{\Gamma} \left[ d_{i} \flux_{i} \cdot \vec{n} \right]\,d\Gamma \\
+={}&
+-
+\displaystyle\int_{\Omega}
+\left[
+  \nabla d_{i} \cdot \diffusion_{i}\nabla\concentration_{i}
+\right]\,d\Omega
+-
+\displaystyle\int_{\Omega}
+\left[
+  \nabla d_{i} \cdot \chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential
+\right]\,d\Omega \notag \\
+& -
+\displaystyle\int_{\Omega}
+\left[
+  \nabla d_{i} \cdot \beta_{i} \concentration_{i}
+\right]\,d\Omega
++
+\displaystyle\int_{\Omega}
+\left[
+  \nabla d_{i} \cdot \velocity \concentration_{i}
+\right]\,d\Omega \notag \\
+& +
+\displaystyle\int_{\Gamma}
+\left[
+  d_{i} \diffusion_{i} \nabla \concentration_{i} \cdot \vec{n}
+\right]\,d\Gamma
++
+\displaystyle\int_{\Gamma}
+\left[
+  d_{i} \chargen_{i} \mobility_{i} \concentration_{i} \nabla \potential \cdot \vec{n}
+\right]\,d\Gamma \notag \\
+& +
+\displaystyle\int_{\Gamma}
+\left[
+  d_{i} \beta_{i} \concentration_{i}
+  \cdot \vec{n}
+\right]\,d\Gamma
++
+\displaystyle\int_{\Gamma}
+\left[
+  d_{i} \velocity \concentration_{i} \cdot \vec{n}
+\right]\,d\Gamma \notag \\
+={}& 0 \notag
+\text{ .}
+\end{align}
+
+\paragraph{Variable density and viscosity Navier-Stokes equation.}
+The laminar fluid flow of an incompressible fluid with a variable density and viscosity is given 
+by the system of equations\cite{Axelsson-2015}
+\begin{align}
+\label{eq:ns_density_continuity}
+\vec{\vel} \cdot \nabla \density ={}& 0 \\
+\label{eq:ns_conservation}
+\left( \vec{\vel} \cdot \nabla \right) \left( \density\vec{\vel} \right) 
++ \nabla \cdot \hydrostresstensor ={}& \vec{\force} \text{\quad with }
+\hydrostresstensor =
+  \pressure\identity - \viscosity\left[\nabla\vec{\vel}+\left(\nabla\vec{\vel} \right)^\mathsf{T}\right] 
+\\
+\label{eq:ns_velocity_continuity}
+\nabla \cdot \left( \density\vec{\vel} \right) - \vec{\vel} \cdot \nabla \density &= 0
+\end{align}
+with fluid velocity $\vec{\vel}$, density $\density$, viscosity $\viscosity$, pressure $\pressure$, body 
+force $\vec{\force}$ and hydrodynamic stress tensor $\hydrostresstensor$.
+The pressure test function $q$ is used to derive the weak forms of \cref{eq:ns_density_continuity}
+\begin{align}
+% Density continuity
+\displaystyle\int_{\Omega} \left[ \vec{\vel} \cdot \nabla \density \right] q \,d\Omega ={}&
+\displaystyle\int_{\Omega} \left[ q \vec{\vel} \cdot \nabla \density \right] \,d\Omega = 0 \text{ ,}
+\end{align}
+and \cref{eq:ns_velocity_continuity}
+\begin{align}
+% Velocity continuity
+\displaystyle\int_{\Omega}
+\left[\nabla \cdot \left( \density \vec{\vel} \right) - \vec{\vel} \cdot \nabla \density \right] q
+\,d\Omega ={}&
+\displaystyle\int_{\Omega}
+\left[\nabla \cdot \left( \density \vec{\vel} \right) \right] q \,d\Omega
+-
+\displaystyle\int_{\Omega}
+\left[ q \vec{\vel} \cdot \nabla \density \right] \,d\Omega \\
+={}&
+\displaystyle\int_{\Omega}
+\left[\nabla q \cdot \left( \density \vec{\vel} \right) \right] \,d\Omega
+-
+\displaystyle\int_{\Gamma}
+\left[ q \left( \density \vec{\vel} \right) \cdot \vec{n} \right] \,d\Gamma
+-
+\displaystyle\int_{\Omega}
+\left[ q \vec{\vel} \cdot \nabla \density \right] \,d\Omega \notag
+\text{ .}
+\end{align}
+For \cref{eq:ns_conservation} we use the velocity test function $\vec{v}=\left[v_r, v_\phi, v_z\right]$
+\begin{align}
+\displaystyle\int_{\Omega}
+\left[
+  \left( \vec{\vel} \cdot \nabla \right) \left( \density\vec{\vel} \right) + \nabla \cdot \hydrostresstensor
+\right]
+\cdot \vec{v} \,d\Omega
+={}&
+\displaystyle\int_{\Omega} \vec{\force} \cdot \vec{v} \,d\Omega \\
+% Conservation
+\displaystyle\int_{\Omega}
+\left[
+  \left( \vec{\vel} \cdot \nabla \right) \left( \density\vec{\vel} \right) \cdot\vec{v}
+\right]
+\,d\Omega
++
+\displaystyle\int_{\Omega}
+\left[
+\hydrostresstensor \cdot \nabla\vec{v}
+\right]
+\,d\Omega
++
+\displaystyle\int_{\Gamma}
+\left[
+\vec{v} \cdot
+\hydrostresstensor
+\cdot\vec{n}
+\right]
+\,d\Gamma
+={}& \displaystyle\int_{\Omega} \vec{\force} \cdot \vec{v} \,d\Omega \notag
+\text{ .}
+\end{align}
 
 
+\newpage
 \section{Extented results}
 \subsection{Voltage dependency of the conductance log-log slopes}
 The values of the fitted power-law exponent $\gamma$ for both the simulated (ePNP-NS) and experimental data 

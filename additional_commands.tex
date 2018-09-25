@@ -26,6 +26,9 @@
 \newcommand{\identity}{\vec{\rm I}} % Identity vector
 \newcommand{\stdev}{\sigma}
 \newcommand{\pav}[2]{\left< #1 \right>_{\text{#2}}} % Pore average
+\newcommand{\vc}[2]{#1_{#2}} 
+\newcommand{\pd}[2]{\displaystyle\frac{\partial #1}{\partial #2}}
+\newcommand{\hydrostresstensor}{\sigma_{ij}}
 
 % Physical constants
 \newcommand{\boltzmann}{k_{\rm B}}
@@ -35,6 +38,8 @@
 \newcommand{\echarge}{e}
 
 % Field variables
+\newcommand{\vel}{u}
+\newcommand{\force}{F}
 \newcommand{\potential}{\varphi}			% Electrostatic potential
 \newcommand{\varpotential}{V}				% Electrostatic potential
 \newcommand{\concentration}{c}				% Ion concentration
@@ -75,7 +80,7 @@
 \newcommand{\scdpore}{\scd_{\text{pore}}^f}		% Fixed charge density
 \newcommand{\scdion}{\scd_{\text{ion}}}			% Ionic charge density
 \newcommand{\flux}{J} 							% Ion flux
-\newcommand{\volumeforce}{\vec{F}_{\rm ion}}	% Fluid volume force
+\newcommand{\volumeforce}{\vec{\force}_{\rm ion}}	% Fluid volume force
 
 \newcommand{\current}{I}
 \newcommand{\currentsim}{\current_{\rm sim}}

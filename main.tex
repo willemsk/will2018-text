@@ -11,6 +11,7 @@
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{mathtools}
 \usepackage{textcomp}
 \usepackage{textgreek}
 \usepackage{gensymb}
@@ -792,8 +793,8 @@ boundary conditions apply, i.e.~no current can flow in or out of the protein or 
 
 
 \paragraph{Navier-Stokes Equation} 
-The Navier-Stokes equation (NSE) for laminar flow of an incompressible fluid will be used to describe the
-fluid velocity field $\velocity$. It is given by
+The Navier-Stokes equation (NSE) for laminar flow of an incompressible fluid with variable density and 
+variable viscosity used to describe the fluid velocity field $\velocity$ is given by\cite{Axelsson-2015}
 \begin{multline}\label{eq:navier-stokes}
 \density\left(\velocity\cdot\nabla\right)\velocity =
 \nabla\cdot\left[-\pressure\identity + 
