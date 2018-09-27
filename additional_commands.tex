@@ -5,12 +5,6 @@
 \newcommand{\cis}{\textit{cis}}
 \newcommand{\trans}{\textit{trans}}
 
-% Referencing
-\newcommand{\reffig}[1]{Figure~\ref{#1}}
-\newcommand{\refsubfig}[2]{\reffig{#1}#2}
-\newcommand{\reftable}[1]{Table~\ref{#1}}
-\newcommand{\refeq}[1]{Eq.~\ref{#1}}
-
 % Units
 \DeclareSIUnit{\molar}{\mole\per\cubic\deci\metre}
 \DeclareSIUnit{\Molar}{\textsc{M}}
@@ -46,6 +40,7 @@
 \newcommand{\velocity}{\vec{u}}				% Fluid velocity
 \newcommand{\pressure}{p}					% Fluid pressure
 \newcommand{\efield}{\vec{E}}				% Electrical field
+\newcommand{\displacement}{\vec{D}} % Electrical displacement fiedl
 \newcommand{\walldistance}{d}				% Wall distance
 
 % Dimensionless variables
@@ -79,7 +74,7 @@
 \newcommand{\scd}{\rho}							% Total charge density
 \newcommand{\scdpore}{\scd_{\text{pore}}^f}		% Fixed charge density
 \newcommand{\scdion}{\scd_{\text{ion}}}			% Ionic charge density
-\newcommand{\flux}{J} 							% Ion flux
+\newcommand{\flux}{\vec{J}} 							% Ion flux
 \newcommand{\volumeforce}{\vec{\force}_{\rm ion}}	% Fluid volume force
 
 \newcommand{\current}{I}

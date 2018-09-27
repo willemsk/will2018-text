@@ -136,25 +136,26 @@ electrostatic potential landscape and the magnitude and direction of the electro
 
 \section{Introduction}
 
-Biosensors have been an intense field of research in the recent decades\cite{Zhang-2016}. Several 
-breakthroughs have enabled them to play an integral role in the life sciences with applications ranging from 
-the monitoring of blood glucose levels\cite{Chen-2013} to \todo{??}.
+Over the past two decades, nanopores have more than proven their worth as stochastic sensors at the ultimate 
+analytical limit.\cite{Bayley-2001,Zhang-2016} Generally, nanopores are used in `resistive pulse' mode, were 
+the interaction or translocation of individual molecules with or through the pore result in the a temporary 
+modulation of the ionic conductance. While nanopore research was initially focuses towards single-molecule 
+DNA sequencing, in recent years the field of interest has broadened to numerous other applications, such as 
+the quantification of biomarkers,\cite{Huang-2017} protein sequencing\cite{Restrepo-Perez-2018} and 
+single-molecule enzymology.\cite{Willems-VanMeervelt-2017,Laszlo-2017}
 
-A particular challenge for state-of-the-art biosensors is that they need to reach molecular sensitivities.  
-Nanopore based sensors solve this problem elegantly by funneling a solution containing molecules of interest 
-through a pore in a membrane. If the pore is approximately the same size as the molecules, there can only 
-ever be a single molecule inside the pore and therefore the response of the ion current due to the blockage 
-of the pore gives detailed information about the molecule.
-
-However, as the size of molecules is usually on the order of nanometer, it is not yet possible to reproducibly
-build solid state nanopores\todo{ref} since both shape and size affect the resulting signal ion currents 
-through the nanopore significantly. An alternative design which has proven to be very accurate and which 
+% Continuum modelling nanopores
+%   Mostly used for solid state nanopores
+%   Modelling of biological nanopores derived from work on ion channels \cite{Maffeo-2012}
+%   focused on alpha-hemolysin
+% Molecular dynamics: \cite{Aksimentiev-2005,Bhattacharya-2011,Wong-Ekkabut-2016}
+% Brownian dynamics:  \cite{Noskov-2004,Simakov-2010,Pederson-2015}
+  
+ 
 yields reproducible results is to use self-assembled protein nanopores suspended on lipid 
 bilayers\cite{Deamer-2016}.
 In fact their properties as biosensors are so desirable that they have already been commercialized for DNA
 sequencing applications\todo{ref}.
-
-\input{fig_model_concept.tex}
 
 Despite the successes of these biological nanopores, the modeling of the sensor operation is still in its 
 infancy due to the multi-scale nature of the problem. On the one hand, it is necessary to resolve the charge 
@@ -170,18 +171,31 @@ simulate the operation of a biological nanopore using a continuum approach based
 However, we will also see the limits of this approach which hint at experimentally unexplored states of
 solutions within nanopores which are unlike anything that can be found in bulk solutions.
 
-With an eye on improving our understanding of the transport phenomena inside biological nanopores, we created 
-a 2D-axisymmetric continuum model of the a dodecameric protein nanopore Cytolysin A (ClyA)\cite{Soskine-2013} 
-that captures its essential geometrical features (i.e. shape and charge) while remaining computationally 
-efficient (\cref{fig:model_concept}). To realistically compute the ionic and water fluxes through the pore, 
-this model was then applied to an extended version of the Poisson-Nernst-Planck-Navier-Stokes (ePNP-NS) 
-equations, which we solved numerically using the finite element method. The ePNP-NS equations include 
-self-consistent concentration- and positional-dependent parameters for both the diffusion coefficients and 
-mobilities of the ions, and the viscosity, density and relative permittivity of the solvent. We then 
-investigated the concentration and voltage dependencies of the ion transport through ClyA in terms of 
-conductance, rectification and selectivity. The values of the former two parameters were also measured 
-experimentally and employed as a benchmark to gauge the accuracy of our model. This is followed by a detailed 
-description of several parameters that are of great interest, but cannot be readily determined 
+
+ClyA-AS was artificially evolved from of the wild type \textit{S. typhi} Cytolysin A to exhibit improved 
+stability during electrical recordings in lipid bilayers.\cite{Soskine-2013} While it has been extensively 
+used in experimental studies of both proteins\cite{Soskine-2013,VanMeervelt-2014,Soskine-Biesemans-2015,
+Biesemans-Soskine-2015,Wloka-2017,VanMeervelt-2017} and DNA,\cite{Franceschini-2013,Franceschini-2016} 
+several quantities of interest, such as the precise ionic conditions inside the pore and the magnitude of the 
+electro-osmotic flow, remain unclear. Because these properties are very challenging to determine 
+experimentally over a broad range of conditions, we turned to numerical modeling to shed light on these 
+properties and to further our general understanding of the pore.
+To this end, we implemented a modified version of the Poisson-Nernst-Planck-Navier-Stokes (PNP-NS) equations 
+and solved it for a 2D-axisymmetric continuum model of ClyA-AS. Our modifications attempt to empirically 
+extend the validity of the PNP-NS equations 1) at the nanoscale and 2) beyond infinite dilution. For the 
+former, we  implemented spatially dependent ion transport coefficients,\cite{Makarov-1998, Simakov-2010} and 
+an solvent viscosity\cite{Pronk-2014,Hsu-2017}, which respectively decrease and increase significantly in 
+close proximity to the nanopore wall. For the latter, we took for the finite size of the ions into account by 
+inclusion of a steric flux term,\cite{Lu-2011} and implemented self-consistent, empirical concentration 
+dependencies of the ionic diffusion coefficients and mobilities,\cite{Baldessari-2008-1} and the solvent 
+density,\cite{} viscosity and relative permittivity.\cite{Gavish-2016}
+
+We begin our study of ClyA's by describing its conductance, rectification and ion selectivity over a wide 
+range of experimentally accessible conditions. Next we investigate the concentration and voltage dependencies 
+of the ion transport through ClyA in 
+terms of conductance, rectification and selectivity. The values of the former two parameters were also 
+measured experimentally and employed as a benchmark to gauge the accuracy of our model. This is followed by a 
+detailed description of several parameters that are of great interest, but cannot be readily determined 
 experimentally, namely the concentration of cations and anions inside the pore, the ionic charge density 
 inside the pore, the distribution of the electrostatic potential and the properties of the electro-osmotic 
 flow. While this work solely describes the ClyA nanopore, the lessons learned form the modeling can be 
@@ -192,40 +206,39 @@ readily transferred to other types of nanopores.
 %------------------------------------------------------------------------------
 \section{Results and discussion}\label{sect:results}
 
-\subsection{Model setup}
+\subsection{Model and equations}
+
+\input{fig_model_concept.tex}
 
 \paragraph{A 2D-axisymmetric continuum model of ClyA-AS.}
-With its 12 identical subunits (\cref{fig:clya_side,fig:clya_top}), ClyA exhibits a high degree of radial 
-symmetry along the length of its channel. This is a feature present in many biological nanopores,\todo{ref} 
-making them amenable to representation by highly computationally efficient 2D-axisymmetric models with 
-relatively low loss of details.\cite{Pederson-2015} 
+ClyA is a relatively large protein nanopore that self-assembles on lipid bilayers to form $14$~nm long 
+hydrophilic channels. The interior of the pore can be divided into roughly two cylindrical compartments 
+(\cref{fig:clya_side}): the \cis\ lumen ($\approx6$~nm diameter, $\approx10$~nm height), and the \trans\ 
+constriction ($\approx3.3$~nm diameter, $\approx4$~nm height). Because ClyA consists of $>10$ identical 
+subunits (\cref{fig:clya_top}), it exhibits a high degree of radial symmetry --- a geometrical feature allows 
+to obtain meaningful results at low computational cost by reduction of the full 3D structure to a much more 
+computationally efficient 2D-axisymmetric model.\cite{Pederson-2015,Lu-2012}  
 
-ClyA forms a $14$~nm 
-long hydrophilic channel through a lipid bilayer that can be divided in two cylindrical compartments: the 
-\cis\ lumen ($\approx6$~nm diameter, $\approx10$~nm height), and the \trans\ constriction ($\approx3.3$~nm 
-diameter, $\approx4$~nm height).
-
-For this work we choose the dodecameric ClyA-AS type I as our test case, as it is one of the most extensively 
-used variants of ClyA.\cite{Soskine-2013,Soskine-Biesemans-2015,Biesemans-Soskine-2015,VanMeervelt-2014,
-Franceschini-2016,Wloka-2017,VanMeervelt-2017} To obtain \todo{suitable} 2D-axisymmetric representations of 
-both the nanopore geometry and its fixed charge distribution ($\scdpore$), 
-
-were derived directly from an equilibrated full-atom homology model of ClyA-AS. The geometry was obtained by 
-radially averaging the 3D molecular surface, defined by a  . For the latter we projected the partial 
-charge of each atom, represented by a 2D-Gaussian function, on a 2D grid.
-\cref{fig:model_geometry_vs_wedge,fig:model_charge_density}
-
-%as a solid, cylindrically symmetric dielectric block, embedded within a lipid bilayer which is represented 
-
-%(cf.~,fig:model_geometry_zoom})\cite{Lu-2012,Pederson-2015}. This approach greatly 
-%reduces the computational cost compared to a full 3D model, while retaining sufficient molecular details as 
-%to produce meaningful results.
-
-%Note that the latter is applied to the boundary of the \trans\ compartment while 
-%the \cis\ side is kept grounded (\cref{fig:model_geometry}).
+The nanopore's 2D-axisymmetric geometry (\cref{fig:model_geometry_vs_wedge}) was obtained by radially 
+averaging the molecular surface definition of a full-atom homology model of ClyA-AS. The 2D charge density 
+distribution (\cref{fig:model_charge_density}) was constructed by projecting the partial charges of all 
+atoms, represented by 2D-Gaussian functions, onto a plane. To ensure that our model accurately portraits the 
+steady-state behavior of the ClyA-AS, we averaged the geometry and charge maps over $\approx50$ full-atom 
+structures, extracted from the last $5$~ns (i.e. every $100$~ps) of a $10$~ns explicit solvent molecular 
+dynamics simulation (cfr. M\&M for details). In the simulation geometry 
+(\cref{fig:model_geometry_zoom,fig:model_geometry}), 
+the nanopore is located at the center of a large spherical electrolyte reservoir ($R=250$~nm), which is split 
+into two hemispherical compartments by a lipid bilayer ($h=2.8$~nm). Because the boundaries of the nanopore 
+and the bilayer are impermeable, transport of water and ions must occur through the nanopore.
 
 
 \paragraph{Extended Poisson-Nernst-Planck Navier-Stokes equations.}
+The coupled Poisson-Nernst-Planck Navier-Stokes equations (PNPNSE) have been exploited extensively for the 
+study of transport phenomena in both solid-state\cite{Daiguji-2004,Lu-2012} and biological 
+nanopores.\cite{Eisenberg-1996,Simakov-2010, Pederson-2015} While the PNPNSE yield good qualitative insights, 
+their ability to quantitatively predict experimental data, particularly at non-dilute ($>1$~mM).
+
+To address these shortcomings, we propose to modify the PNPNSE to include steric effects due to ion crowding, 
 Because the PNP equations do not take the size of the ions into account, they tend to overscreen locations 
 with high charge densities resulting in unrealistically high ion concentrations\cite{Corry-2000}. This 
 problem can be addressed by the addition of a nonlinear flux term to the NPE that poses an upper limit to the 
@@ -250,9 +263,10 @@ where $\ionsize_{i}$ and $\ionsize_{0}$ represent the maximum packing radius in 
 solvent molecules, respectively. The radii were set to $0.5$~nm for both \Na\ and \Cl\ and to $0.311$~nm for 
 water, corresponding to maximum concentrations of $13.3$~M and $55.2$~M, respectively. 
 
+\subsection{Transport of ions through ClyA}\label{sect:ion_transport}
+
 \input{fig_conductance.tex}
 
-\subsection{Transport of ions through ClyA}\label{sect:ion_transport}
 The ionic current flowing through a nanopore is determined by the geometrical features the pore and the 
 physical properties of the electrolyte that surrounds it. To accurately predict the ionic current through a 
 nanopore, a simulation should thus contain an adequate representation of its most salient geometrical 
@@ -657,6 +671,20 @@ effects.}
 
 
 \section{Materials and methods}
+
+% was derived an representative axisymmetric outline of the pore, we radially averaged its 3D molecular 
+%surface (MSMS\cite{Sanner-1995}) of the equilibrated homology model pore 
+%and radially 
+%averaged its boundary to obtain a 2D outline.
+%
+%and fixed charge distribution 
+%were derived directly from an equilibrated, full-atom homology model of the 
+%pore (MODELLER 9.17,\cite{Sali-1993}, VMD 1.9.4\cite{Humphrey-1996} and NAMD 2.13\cite{Phillips-2005}).
+%
+%The charge distribution was computed by projecting the partial 
+%charge of each atom (obtained with PDB2PQR 2.1.1\cite{Jurrus-2018}), represented by a 2D-Gaussian function, 
+%on a 2D grid.
+
 
 \paragraph{Modeling approach}
 Our goal is to model the protein nanopore ClyA  suspended on a lipid bilyer in a 2D-axisymmetric system in an
