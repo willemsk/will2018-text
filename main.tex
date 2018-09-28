@@ -136,40 +136,72 @@ electrostatic potential landscape and the magnitude and direction of the electro
 
 \section{Introduction}
 
-Over the past two decades, nanopores have more than proven their worth as stochastic sensors at the ultimate 
-analytical limit.\cite{Bayley-2001,Zhang-2016} Generally, nanopores are used in `resistive pulse' mode, were 
-the interaction or translocation of individual molecules with or through the pore result in the a temporary 
-modulation of the ionic conductance. While nanopore research was initially focuses towards single-molecule 
-DNA sequencing, in recent years the field of interest has broadened to numerous other applications, such as 
-the quantification of biomarkers,\cite{Huang-2017} protein sequencing\cite{Restrepo-Perez-2018} and 
-single-molecule enzymology.\cite{Willems-VanMeervelt-2017,Laszlo-2017}
+The transport of water, ions and other small molecules through nanoscale geometries is a field of intense 
+study using both experimental, theoretical and computational methods.\cite{Sparreboom-2010,Bocquet-2010,
+Maffeo-2012,Thomas-2014,Wang-2014,Kim-2015} A primary driving force behind this research is the development 
+of nanopores as label-free stochastic sensors at the ultimate analytical limit,\cite{Bayley-2001,Dekker-2007,
+Venkatesan-2011,Zhang-2016} which have applications ranging from the analysis of biopolymers such as 
+DNA\cite{Deamer-2016} or proteins\cite{Restrepo-Perez-2018} to biosensors for the the detection and 
+quantification of biomarkers,\cite{Soskine-2012,VanMeervelt-2014,Huang-2017,Chen-2013}, to the fundamental 
+study of chemical or enzymatic reactions at the single molecular level.\cite{Willems-VanMeervelt-2017,
+Laszlo-2017}
+
+Nanopore are generally operated in the `resistive pulse' mode, were a constant bias voltage is applied across 
+a nanopore. The resulting electrical field causes a net flux of ions, and in most cases also water, to flow 
+through it, whose magnitude depends on the size, shape and charge distribution of the pore. Whenever a 
+molecule of comparable dimensions interacts with, or translocates through, the pore, a temporal fluctuation 
+of the ionic conductance is observed that encodes a plethora of information about the molecule its magnitude, 
+duration or even noise levels. These molecules are driven towards or away from the pore by a combination of 
+coulombic (if they are charged) and hydrodynamic (if the nanopore is charged) forces, often referred to as 
+electrophoresis and electro-osmosis, respectively. Unraveling how these ionic current fluctuations are 
+generated, and the magnitude of the forces involved, is a key component to further our understanding of how 
+nanopores interrogate single molecules and to improve our control of the capture and translocation mechanisms.
+
+To investigate these phenomena, researchers have employed a wide range of computational methods, including 
+molecular dynamics (MD), Brownian dynamics (BD), and continuum simulations.
+
+%as they are able to provide direct and detailed information about the 
+%Computational methods have already contributed significantly to our qualitative understanding of the 
+%transport mechanisms of water and ions through confined, nanoscale geometries.
+
+
+Because biological nanopores are formed by self-assembly of proteins, their size, shape and charge 
+distribution are known at an atomistic level, making them highly reproducible. However, their small size and 
+complexity makes them notoriously difficult to model accurately with anything less than molecular dynamics 
+(MS) simulations.
+
+
+% Experimental reviews:
+% Simulation reviews: Maffeo-2012,Thomas-2014,Kim-2015
 
 % Continuum modelling nanopores
 %   Mostly used for solid state nanopores
+%     SS ref: Cervera-2005
 %   Modelling of biological nanopores derived from work on ion channels \cite{Maffeo-2012}
-%   focused on alpha-hemolysin
-% Molecular dynamics: \cite{Aksimentiev-2005,Bhattacharya-2011,Wong-Ekkabut-2016}
-% Brownian dynamics:  \cite{Noskov-2004,Simakov-2010,Pederson-2015}
+%   Ion channels: Gillespie-2002
+%   Alpha-hemolysin:
+%     Molecular dynamics: \cite{Aksimentiev-2005,Bhattacharya-2011,Wong-Ekkabut-2016}
+%     Brownian dynamics:  \cite{Noskov-2004,Pederson-2015}
+%     Continuum: \cite{Simakov-2010,Pederson-2015}
+
+% EOF: Haywood-2014
+% Confinement:Joly-2006,Saugey-2005
   
- 
-yields reproducible results is to use self-assembled protein nanopores suspended on lipid 
-bilayers\cite{Deamer-2016}.
-In fact their properties as biosensors are so desirable that they have already been commercialized for DNA
-sequencing applications\todo{ref}.
 
-Despite the successes of these biological nanopores, the modeling of the sensor operation is still in its 
-infancy due to the multi-scale nature of the problem. On the one hand, it is necessary to resolve the charge 
-distribution of the protein on the atomic level requiring molecular dynamics (MD)\todo{ref}.  On the other 
-hand, the size of the solvent reservoirs and thus the number of particles is too large for a comprehensive MD 
-simulation. More suited to the problem of the flow of the solvent as well as the electromigration and 
-diffusion of the ions in the solvent is a continuum approach based on the Navier-Stokes equation (NSE) and 
-the Poisson-Nernst-Planck equations (PNPE)\todo{ref}.
-
-Thus the simulation of the nanopore sits uncomfortably at the intersection of the macroscopic and the
-microscopic. In this work, we want to show that it is still possible -- with remarkable accuracy -- to 
-simulate the operation of a biological nanopore using a continuum approach based on the NSE and PNPE. 
-However, we will also see the limits of this approach which hint at experimentally unexplored states of
-solutions within nanopores which are unlike anything that can be found in bulk solutions.
+%Despite the successes of these biological nanopores, the modeling of the sensor operation is still in its 
+%infancy due to the multi-scale nature of the problem. On the one hand, it is necessary to resolve the charge 
+%distribution of the protein on the atomic level requiring molecular dynamics (MD)\todo{ref}.  On the other 
+%hand, the size of the solvent reservoirs and thus the number of particles is too large for a comprehensive 
+%MD 
+%simulation. More suited to the problem of the flow of the solvent as well as the electromigration and 
+%diffusion of the ions in the solvent is a continuum approach based on the Navier-Stokes equation (NSE) and 
+%the Poisson-Nernst-Planck equations (PNPE)\todo{ref}.
+%
+%Thus the simulation of the nanopore sits uncomfortably at the intersection of the macroscopic and the
+%microscopic. In this work, we want to show that it is still possible -- with remarkable accuracy -- to 
+%simulate the operation of a biological nanopore using a continuum approach based on the NSE and PNPE. 
+%However, we will also see the limits of this approach which hint at experimentally unexplored states of
+%solutions within nanopores which are unlike anything that can be found in bulk solutions.
 
 
 ClyA-AS was artificially evolved from of the wild type \textit{S. typhi} Cytolysin A to exhibit improved 
