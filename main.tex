@@ -517,7 +517,7 @@ of the pore, with only a small negative potential inside the constriction.
 We further quantified the electrostatic potential at $0$~mV applied bias voltage along the nanopore's length
 by computing its radial average
 \begin{align}
-\radpot=\displaystyle\frac{1}{\pi \cdot R(z)^2}\int_{0}^{R(z)}\potential(r,z) \cdot 2 \pi \cdot r dr \text{,}
+\radpot=\displaystyle\frac{1}{\pi R(z)^2}\int_{0}^{R(z)}\potential(r,z) \;2 \pi r \; dr \text{,}
 \end{align}
 where $R(z)$ is taken as the pore radius for $-1.85\le z \le12.25$~nm, $2$~nm for $z<-1.85$~nm and $4$~nm for
 $z>12.25$~nm (\cref{fig:potential_radial_averages}).
@@ -720,11 +720,30 @@ effects.}
 \end{itemize}
 
 \section{Conclusions}\label{sect:conclusions}
-We have developed extended version of the Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations and used it
-to model the transport of ions and water through the biological nanopore ClyA. Our ePNP-NS equations take
+We have developed an extended version of the Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations and used
+them to model the transport of ions and water through the biological nanopore ClyA. Our ePNP-NS equations take
 into account the finite size of the ions and include a self-consistent, concentration- and
 positional-dependent parametrization of the ionic transport coefficients (diffusion coefficient and mobility)
 and the electrolyte properties (density, viscosity and relative permittivity).
+
+We have verified our approach by matching experimental results to a very high degree of accuracy while
+the model parameters where gauged on other experiments, ultimately leaving no degrees of freedom. This shows
+that a continuum approach to modeling biological nanopores is not only feasible but to a very high degree
+predictive.
+
+Inaccuracies only arise in the low salt limit, leading to an experimentally unexplored fluid configuration
+within the pore which almost only contains one ion species. It is likely that if proper model parameters for
+this domain can be extracted from other sources, that the ePNP-NS equations will also be able to reproduce
+experimental values under these conditions.
+
+In the analysis of the operation of the biological nanopore with our model we found that the ionic currents
+very much depend on the details of the electric field structure within the pore which define potential
+barriers for the ion species. This of course means that the charge configuration of the protein needs to be
+implemented accurately to obtain meaningful and predictive results and any simplifications regarding the pore
+structure would likely deteriorate the results.
+
+Following our analysis of ClyA, it stands to reason that other biological nanopores can be treated
+analogously and their properties could likely be mapped out systematically using our ePNP-NS model.
 
 
 
