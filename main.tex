@@ -271,7 +271,7 @@ averaging the molecular surface definition of a full-atom homology model of ClyA
 distribution (\cref{fig:model_charge_density}) was constructed by projecting the partial charges of all
 atoms, represented by 2D-Gaussian functions, onto a plane. To ensure that our model accurately portraits the
 steady-state behavior of the ClyA-AS, we averaged the geometry and charge maps over $\approx50$ full-atom
-structures, extracted from the last $5$~ns (i.e. every $100$~ps) of a $10$~ns explicit solvent molecular
+structures, extracted from the last $5$~ns (i.e. every $100$~ps) of a $30$~ns explicit solvent molecular
 dynamics simulation (cfr. M\&M for details). In the simulation geometry
 (\cref{fig:model_geometry_zoom,fig:model_geometry}),
 the nanopore is located at the center of a large spherical electrolyte reservoir ($R=250$~nm), which is split
@@ -748,41 +748,25 @@ analogously and their properties could likely be mapped out systematically using
 
 \section{Materials and methods}
 
-\paragraph{ClyA-AS homology model.}
-A full atom model of ClyA-AS\cite{Soskine-2013} was build and optimized (MODELLER v9.18) by introduction of the following point mutations in each of the 12 chains of the wild-type ClyA crystal structure (PDBID: 2WCD\cite{Mueller-2009}):
-K8Q, N15S, Q38K, A57G, T67V, C87A, A90V, A95S, L99Q, E103G, K118R, L119I, I124V, T125K, V136T, F166Y, K172R,
-V185I, K212N, K214R, S217T, T224S, N227A, T244A, E276G, C285S, K290Q.
-The conformation of all mutated side chains was then optimized with an annealing protocol (heating: 150, 250, 400, 700 and 1000~K, cooling: 1000, 800, 600, 500, 400 and 300~K). At each temperature, the energy was minimized for 200 iterations with a conjugate gradients algorithm (4~fs timestep).\cite{Shanno-1980} The anneal was performed twice, once without taking interactions with non-mutated residues into account and once with all non-bonded interactions.\cite{Sali-1993} The refined structure was then embedded in the center of an $18\times18$~nm$^2$ lipid bilayer patch (DPhPC lipid, created using the CHARMM-GUI membrane builder\cite{Lee-2016} and equilibrated using NAMD\cite{Philips-2005}) and subsequently hydrated by 214640 TIP3 water molecules, confined in a box of $18\times18\times32\text{nm}^3$. The global charge of the system was neutralized, and its salt concentration set to $\approx$0.15~M, by replacing 1276 random TIP3 molecules with 674 \Na\ and 602 \Cl\ ions (VMD v1.9.4\cite{Humphrey-1996}).\cite{Aksimentiev-2005}
+\paragraph{ClyA-AS homology model.} A full atom model of ClyA-AS\cite{Soskine-2013} was built and optimized
+(MODELLER v9.18\cite{Sali-1993}) by introduction of the following point mutations in each of the 12 chains of the wild-type ClyA crystal structure (PDBID: 2WCD\cite{Mueller-2009}): K8Q, N15S, Q38K, A57G, T67V, C87A, A90V, A95S, L99Q, E103G, K118R, L119I, I124V, T125K, V136T, F166Y, K172R, V185I, K212N, K214R, S217T, T224S, N227A, T244A, E276G, C285S, K290Q. Next, the conformation of all mutated side chains was optimized with an double annealing protocol (heating: 150, 250, 400, 700 and 1000~K, cooling: 1000, 800, 600, 500, 400 and 300~K) where at each temperature the energy was minimized for 200 iterations with a conjugate gradients algorithm (4~fs timestep).\cite{Shanno-1980} The first anneal was performed solely on the mutated residues themselves, while the second run also took the non-bonded interactions with the neighboring atoms into account. The refined nanopore structure was then embedded in the center of an $18\times18$~nm$^2$ equilibrated DPhPC lipid bilayer patch by manual removal of all overlapping lipids, resulting in 463 lipid molecules. The bilayer was created with the CHARMM-GUI\cite{Jo-2008} membrane builder\cite{Lee-2016} and equilibrated with NAMD\cite{Phillips-2005}, as described in detail in [\citenum{Wu-2014}]. The system was then solvated in a box of $18\times18\times32\text{nm}^3$ by addition of 214640 TIP3 water molecules (VMD solvate plugin). The global charge was neutralized by replacing 1276 random water molecules with 674 \Na\ and 602 \Cl\ ions (VMD autoionize plugin).\cite{Humphrey-1996} Using molecular dynamics (MD) with NAMD (1~fs timestep, CHARMM36 forcefield\cite{Best-2012}), the final system was minimized for 5~ps, heated from 0 to 298.15~K in 4~ps and equilibrated for 4~ns as NpT ensemble.\cite{Aksimentiev-2005} Finally a 30~ns production run (2~fs timestep) was performed using a NVT ensemble at 298.15~K and the atomic coordinates saved every 5~ps. Note that structural deterioration was prevented by harmonically restraining the protein's C$_\alpha$ atoms to their original positions (spring constant of 695~pN~nm$^{-1}$) during all MD runs.\cite{Bhattacharya-2011}
 
-\paragraph{Axially symmetric geometry.}
-ClyA is a multimeric protein complex that consists of 12 identical subunits which form a $14$~nm long
-hydrophilic channel through a lipid bilayer (cf.~\cref{fig:clya_side,fig:clya_top}). The pore cavity is lined
-with predominantly negatively charged residues and can be divided in roughly two cylindrical compartments:
-the \cis\ lumen ($\approx5.5$~nm diameter, $\approx10$~nm height) and the \trans\ constriction
-($\approx3.3$~nm diameter, $\approx4$~nm height). Due to this high degree of axial symmetry, we modelled ClyA
-as a solid, cylindrically symmetric dielectric block, embedded within a lipid bilayer which is represented as
-a $2.8$~nm-thick\cite{Kucerka-2011} dielectric disk  and surrounded by a spherical, electrolyte-filled
-reservoir with a radius of $250$~nm
-(cf.~\cref{fig:model_geometry,fig:model_geometry_zoom})\cite{Lu-2012,Pederson-2015}. This approach greatly
-reduces the computational cost compared to a full 3D model, while retaining sufficient molecular details as
-to produce meaningful results.
+\paragraph{Axially symmetric geometry.} The 2D-axisymmetric geometry of the ClyA-AS nanopore (\cref{fig:model_geometry_vs_wedge}) was derived directly from its full atom model by radially averaging the molecular density. Briefly, 50 sets of atomic coordinates were extracted from the final 5~ns of the the coordinates of the 30~ns MD production run (i.e. every 100~fs) and aligned by minimizing the RMSD between their backbone atoms (VMD RMSD tool). Next, we computed and averaged the 3D-dimensional molecular density maps of all 50 structures on a 0.5~\AA\ resolution grid using the the Gaussian function\cite{Li-2013}
+\begin{align}
+\label{eq:denspore}
+\rho_\text{mol}(x,y,z) = 1 - \displaystyle\prod_{i} \left[
+1 - \exp{\left(-\dfrac{(x-x_i)^2 + (y-y_i)^2 + (z-z_i)^2}{(\stdev\atomradius_{i})^2}\right)}
+\right]
+\end{align}
 
-The nanopore geometry (\cref{fig:model_geometry_vs_wedge}) was derived directly from a full atom model of
-ClyA-AS -- an improved variant of ClyA evolved from the wild-type Cytolysin A from \textit{S. typhii} using
-directed evolution.\cite{Soskine-2013} Briefly, a homology model of ClyA-AS was constructed from the
-wild-type crystal structure (PDB: 2WCD)\cite{Mueller-2009} by introducing the necessary mutations in all 12
-subunits an minimizing the resulting structure (see SI for details). We then computed the protonation state
-of titratable residue at pH~$7.5$ (PROPKA 3.1\cite{Olsson-2011}) and assigned the correct radius and partial
-charge to each atom of the model (PBD2PQR 2.1.1\cite{Jurrus-2018}) as parametrized by the CHARMM36
-forcefield.\cite{Best-2012} The atom radii were then used to compute a 3D-dimensional map of the
-nanopore's molecular surface with a probe radius of $1.4$~\AA, which was radially averaged along the
-z-direction with a custom-built MATLAB script to generate an approximate axisymmetric outline of the
-nanopore. To improve the quality of the final computational mesh, the resulting polygon was then simplified
-manually by removing overlapping and superfluous vertices.
+ and radially averaged along the z-axis, relative to the center of the pore using a custom MATLAB script.
+To improve the quality of the final computational mesh, the resulting polygon was then simplified manually by removing overlapping and superfluous vertices.
+hich was radially
+averaged along the z-direction with a  to generate an approximate axisymmetric
+outline of the nanopore.
 
 \paragraph{Axially symmetric charge density.}
-Similar to the geometry, the two-dimensional charge distribution used in this model was also derived directly
-from the full atom model (cf.~\cref{fig:model_charge_density}). Inspired by how charges are represented in the
+The two-dimensional charge distribution used in this model was also derived directly from the 50 aligned nanopore coordinates (cf.~\cref{fig:model_charge_density}). Inspired by how charges are represented in the
 particle mesh Ewald (PME) method,\cite{Aksimentiev-2005} we computed the fixed charge distribution of the
 nanopore $\scdpore(r,z)$ by assuming that an atom $i$ of partial charge $\partialcharge_{i}$ at the location
 $(x_i, y_i, z_i)$ in the full 3D atomistic pore model will contribute the partial charge
@@ -799,7 +783,7 @@ factor $\sigma = \num{0.5}$, we find for the 2D space charge density
 \end{align}
 where $\echarge$ is the elementary charge. To embed $\scdpore$ with sufficient detail yet efficiently
 into a numeric solver, the spatial coordinates are discretized with a grid spacing of $0.005$~nm in the
-domain of $\scdpore$ and precomputed values are used during the solver runtime.
+domain of $\scdpore$ and precomputed values are used during the solver runtime. All partial charges (at pH~7.5) and radii were taken from the CHARMM36 forcefield\cite{Best-2012} and assigned using PROPKA\cite{Olsson-2011} and PBD2PQR.\cite{Jurrus-2018}
 
 \paragraph{Poisson-Nernst-Planck-Navier-Stokes equations}
 To describe the ion and water transport mechanisms within ClyA, we created a computational model of the fluid
