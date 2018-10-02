@@ -746,26 +746,13 @@ Following our analysis of ClyA, it stands to reason that other biological nanopo
 analogously and their properties could likely be mapped out systematically using our ePNP-NS model.
 
 
-
-
 \section{Materials and methods}
 
 \paragraph{ClyA-AS homology model.}
-A full atom model of ClyA-AS\cite{Soskine-2013} was build and optimized using the MODELLER (version 9.18)
-software package by introduction of the following point mutations in each of the 12 chains of the wild-type
-ClyA crystal structure (PDBID: 2WCD\cite{Mueller-2009}):
+A full atom model of ClyA-AS\cite{Soskine-2013} was build and optimized (MODELLER v9.18) by introduction of the following point mutations in each of the 12 chains of the wild-type ClyA crystal structure (PDBID: 2WCD\cite{Mueller-2009}):
 K8Q, N15S, Q38K, A57G, T67V, C87A, A90V, A95S, L99Q, E103G, K118R, L119I, I124V, T125K, V136T, F166Y, K172R,
 V185I, K212N, K214R, S217T, T224S, N227A, T244A, E276G, C285S, K290Q.
-The conformation of all mutated side chains was then optimized by annealing (heating: 150, 250, 400, 700 and
-1000~K, cooling: 1000, 800, 600, 500, 400 and 300~K) and minimizing their energy with a conjugate gradients
-algorithm (4~fs timestep, 200 iterations for each temperature).\cite{Shanno-1980} This anneal was performed
-twice, once without taking interactions with non-mutated residues into account and once with all non-bonded
-interactions.\cite{Sali-1993} Using VMD,\cite{Humphrey-1996} the refined structure was then embedded in the
-center of a $18\times18$~nm$^2$ lipid bilayer patch (DPhPC lipid, created using the CHARMM-GUI membrane
-builder\cite{Lee-2016}) and subsequently hydrated by 214640 TIP3 water molecules, confined in a box of
-$18\times18\times32\text{nm}^3$. The global charge of the system was neutralized, and its salt concentration
-set to $\approx$0.15~M, by replacing 1276 random TIP3 molecules with 674 \Na\ and 602 \Cl\
-ions.\cite{Aksimentiev-2005}
+The conformation of all mutated side chains was then optimized with an annealing protocol (heating: 150, 250, 400, 700 and 1000~K, cooling: 1000, 800, 600, 500, 400 and 300~K). At each temperature, the energy was minimized for 200 iterations with a conjugate gradients algorithm (4~fs timestep).\cite{Shanno-1980} The anneal was performed twice, once without taking interactions with non-mutated residues into account and once with all non-bonded interactions.\cite{Sali-1993} The refined structure was then embedded in the center of an $18\times18$~nm$^2$ lipid bilayer patch (DPhPC lipid, created using the CHARMM-GUI membrane builder\cite{Lee-2016} and equilibrated using NAMD\cite{Philips-2005}) and subsequently hydrated by 214640 TIP3 water molecules, confined in a box of $18\times18\times32\text{nm}^3$. The global charge of the system was neutralized, and its salt concentration set to $\approx$0.15~M, by replacing 1276 random TIP3 molecules with 674 \Na\ and 602 \Cl\ ions (VMD v1.9.4\cite{Humphrey-1996}).\cite{Aksimentiev-2005}
 
 \paragraph{Axially symmetric geometry.}
 ClyA is a multimeric protein complex that consists of 12 identical subunits which form a $14$~nm long
@@ -1063,7 +1050,7 @@ The authors thank Ujjal Barman and Chang Chen for their valuable feedback during
 	and a table detailing the peak values of the radial electrostatic potential inside ClyA.
 \end{suppinfo}
 
-\bibliography{modeling1}
+\bibliography{bibliography}
 
 %\includepdf{supporting_information}
 \end{document}
