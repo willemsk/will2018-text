@@ -311,26 +311,6 @@ concentration and voltage dependency of the electro-osmotic flow.
 
 \input{fig_model_concept.tex}
 
-\paragraph{A 2D-axisymmetric continuum model of ClyA-AS.}
-ClyA is a relatively large protein nanopore that self-assembles on lipid bilayers to form $14$~nm long
-hydrophilic channels. The interior of the pore can be divided into roughly two cylindrical compartments
-(\cref{fig:clya_side}): the \cis\ lumen ($\approx6$~nm diameter, $\approx10$~nm height), and the \trans\
-constriction ($\approx3.3$~nm diameter, $\approx4$~nm height). Because ClyA consists of $>10$ identical
-subunits (\cref{fig:clya_top}), it exhibits a high degree of radial symmetry -- a geometrical feature allows
-us to obtain meaningful results at low computational cost by reduction of the full 3D structure to a much more
-computationally efficient 2D-axisymmetric model.\cite{Cervera-2005,Lu-2012,Pederson-2015}
-
-Both the nanopore's 2D-axisymmetric geometry (\cref{fig:model_geometry_vs_wedge}) and charge distribution
-(\cref{fig:model_charge_density}) were computed from the equilibrated coordinated of a full-atom homology model of ClyA-AS (see methods for details). The geometry was Briefly,  by radially averaging the 50 3D atomic density maps of a . The 2D charge density
-distribution  was constructed by projecting the partial charges of all atoms,represented by 2D-Gaussian functions, onto a plane. To ensure that our model accurately portraits the
-steady-state behavior of the ClyA-AS, we averaged the geometry and charge maps over $\approx50$ full-atom
-structures, extracted from the last $5$~ns (i.e. every $100$~ps) of a $30$~ns explicit solvent molecular
-dynamics simulation (cfr. M\&M for details). In the final simulated system
-(\cref{fig:model_geometry_zoom,fig:model_geometry}), the nanopore is located at the center of a large
-spherical electrolyte reservoir ($R=250$~nm), which is split into two hemispherical compartments by a lipid
-bilayer ($h=2.8$~nm). Because the boundaries of the nanopore and the bilayer are impermeable, transport of
-water and ions must occur through the nanopore.
-
 \paragraph{Extended Poisson-Nernst-Planck Navier-Stokes equations.}
 
 % Nanofluidics
@@ -339,19 +319,17 @@ To describe the ion and water transport mechanisms within ClyA, we created a com
 based on a set of well-known partial-differential equations called the coupled
 Poisson-Nernst-Planck and Navier-Stokes (PNP-NS) equations.\cite{Eisenberg-1996,Cervera-2005,Lu-2012}
 
-While these equations have proven to be excellent tool for studying ion and water transport in both
+Even though these equations have proven to be excellent tools for studying ion and water transport in both
 solid-state\cite{Daiguji-2004,Lu-2012,Chaudhry-2014,Rempfer-2016,Lin-2016} and biological
 nanopores\cite{Eisenberg-1996,Simakov-2010,Pederson-2015}, the underlying continuum assumption does not hold
-at the nanoscale ($r_{\text{pore}}<1$~nm) under all circumstances, particularly at material
+at the nanoscale ($r_{\text{pore}}<\SI{2.5}{\nm}$) under all circumstances, particularly at material
 interfaces\cite{Vo-2016} and in regions of high charge density\cite{Corry-2000}. To address these concerns
 and to improve the accuracy of our model, we propose a modified version of these equations, that we will
 refer to as extended PNP-NS (ePNP-NS), which takes into account the finite size of the
-ions\cite{Borukhov-1997,Lu-2011} and the reduction of ion and water mobility near protein
+ions\cite{Borukhov-1997,Lu-2011} and the reduction of ion and water motility near protein
 interfaces.\cite{Makarov-1998, Pronk-2014} Because the diffusion coefficients\cite{Mills-1989},
-mobilities\cite{Baldessari-2008-2}, viscosity\cite{Hai-Lang-1996}, density\cite{Hai-Lang-1996} and relative
-permittivity\cite{Gavish-2016} deviate significantly from the traditional `infinite dilution' values at
-experimentally relevant concentrations, we implemented a self-consistent dependency on the average ion
-concentration for all these parameters.
+mobilities\cite{Baldessari-2008-1}, viscosity\cite{Axelsson-2015,Hai-Lang-1996}, density\cite{Axelsson-2015,
+Hai-Lang-1996} and relative permittivity\cite{Gavish-2016} deviate significantly from the traditional infinite dilution values at experimentally relevant concentrations, we implemented a self-consistent dependency on the average ion concentration for all these parameters.
 
 The final set of equations consist of the Poisson equation to compute the electrostatics\cite{Lu-2012}
 \begin{align}
@@ -360,32 +338,26 @@ The final set of equations consist of the Poisson equation to compute the electr
   \text{ ,}
 \end{align}
 with $\potential$ the electric potential, $\absperm$ the vacuum permittivity
-($8.85419\times10^{-12}\text{~F\,m}^{-1}$), and $\relperm$ the local relative permittivity of the medium.
-$\scdpore$ and $\scdion$ are the fixed (due to the pore) and mobile (due to the ions) charge distributions,
-respectively. $\relperm$ is equal to
-\begin{align}
-  \relperm =
-  \begin{cases}
-    \relperm^0, & \text{for PNP-NS} \\
-    \relperm^0 \relperm^c(\dconc) & \text{for ePNP-NS}
-  \end{cases}\notag
-  \text{ ,}
-\end{align}
-The the ionic fluxes $\flux_{i}$ were computed with the size-modified Nernst-Planck equation\cite{Lu-2012}
+($8.85419\times10^{-12}\text{~F\,m}^{-1}$), $\relperm=\relperm^0 \relperm^c$ the local relative permittivity, with $\relperm^0$ the value at infinite dilution and $\relperm^c$ an empirical function that depends on the average ion concentration (see methods for detailed expressions).\cite{Gavish-2016} $\scdpore$ and $\scdion$ represent the fixed -- due to charged groups on the pore -- and the mobile -- due to a charge imbalance in the liquid -- charge distributions, respectively.
+
+% \viscosity     		&= \left[ \viscosity^c(\dconc) \times \viscosity^w\left(\dwall\right)\right]
+% \times \SI{e-4}{\pascal\second}, \label{eq:viscosity}\\
+% \density 	   		&= \density(\dconc) \times\SI{e3}{\kg\per\cubic\meter}, \label{eq:density}\\
+
+The the ionic fluxes $\flux_{i}$ were computed with the size-modified Nernst-Planck equation of Lu et al.\cite{Lu-2012}
 \begin{multline}
   \label{eq:smnp}
   \nabla\cdot\flux_{i} = \nabla \cdot
   \left(
-    \diffusion_{i}\nabla\concentration_{i}
-    + \chargen_{i}\mobility_{i} \concentration_{i} \nabla\potential \right. \\
+    \diffusion_{i}\nabla\concentration_{i} \right. \\
+    + \chargen_{i}\mobility_{i} \concentration_{i} \nabla\potential
     \left.
     + \vec{\beta_{i}} \concentration_{i}
     - \velocity \concentration_{i}
   \right)
 \end{multline}
-with ion diffusion coefficient $\diffusion_{i}$, concentration $\concentration_{i}$, charge number
-$\chargen_{i}$, mobility $\mobility_{i}$, electrostatic potential $\potential$, steric saturation factor
-$\beta_{i}$ and fluid velocity $\velocity$. The values of $\diffusion_{i}$, $\mobility_{i}$ and $\beta_{i}$ are
+with ion diffusion coefficient $\diffusion_{i}=\diffusion_{i}^0\diffusion_{i}^c\diffusion_{i}^w$, concentration $\concentration_{i}$, charge number $\chargen_{i}$, mobility
+$\mobility_{i}=\mobility_{i}^0\mobility_{i}^c\mobility_{i}^w$, electrostatic potential $\potential$, steric saturation factor $\beta_{i}$ and fluid velocity $\velocity$. The values of $\diffusion_{i}$, $\mobility_{i}$ and $\beta_{i}$ are
 \begin{align}
   \diffusion_{i} =
   \begin{cases}
@@ -440,17 +412,19 @@ defined as
 \end{align}
 
 
-% \begin{align}
-% \diffusion_{i}		&= \left[ \diffusion_{i}^c(\dconc) \times \diffusion_{i}^w\left(\dwall\right) \right]
-% \times \SI{e-9}{\square\meter\per\second}, \label{eq:diffusion} \\
-% \mobility_{i}  		&= \left[ \mobility_{i}^c(\dconc) \times \mobility_{i}^w\left(\dwall\right) \right]
-% \times \SI{e-8}{\square\meter\per\second\per\volt}, \label{eq:mobility}\\
-% \viscosity     		&= \left[ \viscosity^c(\dconc) \times \viscosity^w\left(\dwall\right)\right]
-% \times \SI{e-4}{\pascal\second}, \label{eq:viscosity}\\
-% \density 	   		&= \density(\dconc) \times\SI{e3}{\kg\per\cubic\meter}, \label{eq:density}\\
-% \permittivity_{f} 	&= \permittivity_{f}(\dconc),
-% \label{eq:permittivity}
-% \end{align}
+\paragraph{A 2D-axisymmetric continuum model of ClyA-AS.}
+ClyA is a relatively large protein nanopore that self-assembles on lipid bilayers to form $14$~nm long
+hydrophilic channels. The interior of the pore can be divided into roughly two cylindrical compartments
+(\cref{fig:clya_side}): the \cis\ lumen ($\approx6$~nm diameter, $\approx10$~nm height), and the \trans\
+constriction ($\approx3.3$~nm diameter, $\approx4$~nm height). Because ClyA consists of $>10$ identical
+subunits (\cref{fig:clya_top}), it exhibits a high degree of radial symmetry -- a geometrical feature allows
+us to obtain meaningful results at low computational cost by reduction of the full 3D structure to a much more
+computationally efficient 2D-axisymmetric model.\cite{Cervera-2005,Lu-2012,Pederson-2015}
+
+Both the nanopore's 2D-axisymmetric geometry (\cref{fig:model_geometry_vs_wedge}) and its charge distribution
+(\cref{fig:model_charge_density}, $\scdpore$) were computed from the \emph{equilibrium averaged} atomic coordinates of a full-atom homology model of ClyA-AS (see methods for full details). Briefly, we calculated the 3D  density\cite{Li-2013} and charge\cite{Aksimentiev-2005} maps by projecting respectively the density and partial charges of each atom, represented by a 3D Gaussian function, onto a 3D grid. To ensure that our model accurately portraits the steady-state behavior of the ClyA, we these maps were computed for 50 coordinate sets extracted from the last \SI{5}{\ns} (i.e. every \SI{100}{\ps}) of a \SI{30}{\ns} explicit solvent molecular dynamics simulation. Both maps where then converted from 3D to 2D by radially averaging them along the z-axis. The geometry of ClyA was defined as the \SI{25}{\percent} contourline of the atomic density.
+
+In the final simulated system (\cref{fig:model_geometry_zoom,fig:model_geometry}), the nanopore was embedded in a lipid bilayer ($h=\SI{2.8}{\nm}$), both represented as impermeable dielectric blocks, and placed at the center of a large spherical electrolyte reservoir ($R=\SI{250}{\nm}$). The bilayer splits the reservoir into a \cis\ (top) and a \trans\ (bottom) compartement, whose external boundaries are respectively grounded and kept at a fixed bias voltage.
 
 
 \subsection{Transport of ions through ClyA}\label{sect:ion_transport}
