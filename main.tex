@@ -122,7 +122,8 @@
 %% supplied. These should be set up here, and will be printed after
 %% the title and author information, if needed.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\keywords{biological nanopore; cytolysin A; continuum simulation; Poisson-Nernst-Planck and Navier-Stokes equations; single molecule}
+\keywords{biological nanopore; cytolysin A; continuum simulation;
+Poisson-Nernst-Planck and Navier-Stokes equations; single molecule}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -157,7 +158,13 @@ scale of the electrophoretic forces inside it is currently lacking. From this pe
 compute the flux of ions and water through the pore. To achieve this we developed an extended version of the
 steady-state Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations that makes use of self-consistent
 concentration- and positional-dependencies for the ion diffusion coefficients and mobilities, as well as the
-solvent density, viscosity and relative permittivity. In this study we show that our model is able to reproduce the experimentally observed ionic currents over a wide range of ionic strengths and applied voltages. We further describe the influence of these latter two parameters on various quantities of interest, including the cation and anion concentrations inside the pore, the shape of the electrostatic potential landscape and the magnitude and direction of the electro-osmotic flow. Our work shows that continuum models of biological nanopores -- if the appropriate corrections are applied -- can make both qualitatively and quantitatively meaningful predictions.
+solvent density, viscosity and relative permittivity. In this study we show that our model is able to
+reproduce the experimentally observed ionic currents over a wide range of ionic strengths and applied
+voltages. We further describe the influence of these latter two parameters on various quantities of interest,
+including the cation and anion concentrations inside the pore, the shape of the electrostatic potential
+landscape and the magnitude and direction of the electro-osmotic flow. Our work shows that continuum models of
+biological nanopores -- if the appropriate corrections are applied -- can make both qualitatively and
+quantitatively meaningful predictions.
 \end{abstract}
 
 
@@ -181,7 +188,9 @@ Nivala-2013,Ho-2015,Laszlo-2017}
 Nanopores are generally operated in the resistive-pulse mode where fluctuations of their ionic conductance are
 monitored over time.\cite{Bayley-2001,Dekker-2007,Maglia-2010,Venkatesan-2011} This conductance is measured by
 placing the nanopore between two electrolyte compartments and applying a constant DC (or AC) voltage
-(\SIrange{0.001}{1}{\volt}) across them. Due to the high resistance of the nanopore, virtually the full potential change occurs near and within the pore, resulting in a strong electrical field (\SIrange{1e7}{1e8}{\mV\per\nm}) that electrophoretically drives ions and water molecules through the
+(\SIrange{0.001}{1}{\volt}) across them. Due to the high resistance of the nanopore, virtually the full
+potential change occurs near and within the pore, resulting in a strong electrical field
+(\SIrange{1e7}{1e8}{\mV\per\nm}) that electrophoretically drives ions and water molecules through the
 pore.\cite{Wong-2007,Mao-2014,Haywood-2014,Laohakunakorn-2015} Hence, analyte molecules such as DNA or
 proteins are driven towards and often \emph{through} the nanopore by a combination of Coulombic
 (electrophoretic) and hydrodynamic (electro-osmotic) forces.\cite{Wong-2007,Grosberg-2010,Muthukumar-2010,
@@ -286,133 +295,140 @@ imbalance. Next we describe ClyA's electrostatic potential landscape and link th
 valleys to the ionic current rectification and ion selectivity. We conclude with a characterization of the
 concentration and voltage dependency of the electro-osmotic flow.
 
-% Experimental reviews:
-% Simulation reviews: Maffeo-2012,Thomas-2014,Kim-2015
-
-% Continuum modelling nanopores
-%   Mostly used for solid state nanopores
-%     SS ref: Cervera-2005
-%   Modelling of biological nanopores derived from work on ion channels \cite{Maffeo-2012}
-%   Ion channels: Gillespie-2002, Lynden-Bell-1996,
-%   Alpha-hemolysin:
-%     Molecular dynamics: \cite{Aksimentiev-2005,Bhattacharya-2011,Wong-Ekkabut-2016}
-%     Brownian dynamics:  \cite{Noskov-2004,Pederson-2015}
-%     Continuum: \cite{Simakov-2010,Pederson-2015}
-
-% EOF: Haywood-2014
-% Confinement:Joly-2006,Saugey-2005
-% non-uniform charge distribution: Ramirez-2007
-% rectification: Constantin-2007
-% relative permittivities\cite{Li-2014}.
+\input{fig_model_concept.tex}
 
 \section{Results and discussion}\label{sect:results}
 
-\subsection{Model and equations}
+\subsection{Governing equations}
 
-\input{fig_model_concept.tex}
+The use of \emph{continuum} or \emph{mean-field} representations for both the nanopore and the electrolyte
+enables us to efficiently computate the steady-state ion and water fluxes under almost any condition. The
+dynamical behavior of our complete system is described by the coupled Poisson, Nernst-Planck and Navier-Stokes
+(PNP-NS) equations, a set of well-known partial differential equations that describe the electrostatic field,
+the total ionic flux and the fluid flow, respectively.\cite{Eisenberg-1996,Cervera-2005,Lu-2012}
 
-\paragraph{Extended Poisson-Nernst-Planck Navier-Stokes equations.}
+To improve quantitative accuracy of the PNP-NS equations for nanopores, we developed an \emph{extended}
+version of these equations (ePNP-NS) that self-consistently takes into account 1) the finite size of the
+ions,\cite{Borukhov-1997,Lu-2011} 2) the reduction of ion and water motility close to the nanopore
+walls,\cite{Makarov-1998,Noskov-2004, Pronk-2014,Pederson-2015,Vo-2016} and 3) the concentration dependency of
+ion diffusion coefficients and electrophoretic mobilities, as well as electrolyte viscosity, density and
+relative permittivity.\cite{Mills-1989,Hai-Lang-1996,Gavish-2016}
 
-% Nanofluidics
-
-To describe the ion and water transport mechanisms within ClyA, we created a computational model of the fluid
-based on a set of well-known partial-differential equations called the coupled
-Poisson-Nernst-Planck and Navier-Stokes (PNP-NS) equations.\cite{Eisenberg-1996,Cervera-2005,Lu-2012}
-
-Even though these equations have proven to be excellent tools for studying ion and water transport in both
-solid-state\cite{Daiguji-2004,Lu-2012,Chaudhry-2014,Rempfer-2016,Lin-2016} and biological
-nanopores\cite{Eisenberg-1996,Simakov-2010,Pederson-2015}, the underlying continuum assumption does not hold
-at the nanoscale ($r_{\text{pore}}<\SI{2.5}{\nm}$) under all circumstances, particularly at material
-interfaces\cite{Vo-2016} and in regions of high charge density\cite{Corry-2000}. To address these concerns
-and to improve the accuracy of our model, we propose a modified version of these equations, that we will
-refer to as extended PNP-NS (ePNP-NS), which takes into account the finite size of the
-ions\cite{Borukhov-1997,Lu-2011} and the reduction of ion and water motility near protein
-interfaces.\cite{Makarov-1998, Pronk-2014} Because the diffusion coefficients\cite{Mills-1989},
-mobilities\cite{Baldessari-2008-1}, viscosity\cite{Axelsson-2015,Hai-Lang-1996}, density\cite{Axelsson-2015,
-Hai-Lang-1996} and relative permittivity\cite{Gavish-2016} deviate significantly from the traditional infinite dilution values at experimentally relevant concentrations, we implemented a self-consistent dependency on the average ion concentration for all these parameters.
-
-The final set of equations consist of the Poisson equation to compute the electrostatics\cite{Lu-2012}
+\paragraph{Electrostatic field.}
+As mentioned above, the electrostatic potential is evaluated using Poisson's equation
 \begin{align}
   \label{eq:poisson}
   \nabla \cdot \left(\absperm \relperm \nabla \potential \right) = -\left( \scdpore + \scdion \right)
-  \text{ ,}
+  \text{\,,}
 \end{align}
-with $\potential$ the electric potential, $\absperm$ the vacuum permittivity
-($8.85419\times10^{-12}\text{~F\,m}^{-1}$), $\relperm=\relperm^0 \relperm^c$ the local relative permittivity, with $\relperm^0$ the value at infinite dilution and $\relperm^c$ an empirical function that depends on the average ion concentration (see methods for detailed expressions).\cite{Gavish-2016} $\scdpore$ and $\scdion$ represent the fixed -- due to charged groups on the pore -- and the mobile -- due to a charge imbalance in the liquid -- charge distributions, respectively.
+with electric potential $\potential$, vacuum permittivity $\absperm=\SI{8.85419e-12}{\farad\per\meter}$ and
+local relative permittivity $\relperm$. The charge densities $\scdpore$ and $\scdion$ represent the nanopore's
+\emph{fixed} and the electrolyte's \emph{ionic} charge densities, respectively. In the fluid the relative
+permittity is given by
+\begin{align}
+  \relperm(\avionconc)=\relperm^0 \relperm^c(\avionconc) \text{\,,}
+\end{align}
+with $\avionconc=\frac{1}{n}\sum_{i}^{n}\concentration_{i}$the average ion concencentration, $\relperm^0$ the
+relative permittity at infinite dilution and $\relperm^c$ an empirical equation fitted to experimental data of
+the relative permittivity at various \ce{NaCl} concentrations (cfr. methods).\cite{Gavish-2016}
+
+\paragraph{Ionic flux.}
+The the ionic flux $\flux_{i}$ of each ion $i$ at steady state is given by the size-modified Nernst-Planck equation\cite{Lu-2011}
+\begin{align}
+  \label{eq:sm-nernst-planck}
+  \displaystyle\frac{\delta \concentration_{i}}{\delta t} ={}& - \nabla \cdot \flux_{i} = 0 \\
+  \flux_{i} ={}&
+    \diffusion_{i} \nabla \concentration_{i}
+    + \chargen_{i} \mobility_{i} \concentration_{i} \nabla \potential
+    - \velocity \concentration_{i}
+    + \vec{\beta_{i}} \concentration_{i} \\
+  &\text{where }
+  \vec{\beta_{i}} ={}
+      \frac{ \ionsize_{i}^3 / \ionsize_{0}^3 \displaystyle\sum_{j} \ionsize_{j}^3 \nabla \concentration_{j} }
+      { 1 - \displaystyle\sum_{j} \avogadro \ionsize_{j}^3 \concentration_{j} }
+  \text{\,,}
+\end{align}
+with ion diffusion coefficient $\diffusion_{i}$, concentration $\concentration_{i}$, charge number
+$\chargen_{i}$, electrophoretic mobility $\mobility_{i}$, electrostatic potential $\potential$, fluid velocity
+$\velocity$, Avogadro's constant $\avogadro = \SI{6.022e23}{\per\mole}$ and \emph{steric} ion and water
+diameters $\ionsize_{i}$ and $\ionsize_{0}$. Because currently there are no experimentally verified values
+available for $\ionsize_{i}$ and $\ionsize_{0}$, we set them to \SI{0.5}{\nm} and \SI{0.311}{\nm}, such that
+their limiting concentrations correspond to \SI{13.3}{\Molar} and \SI{55.2}{\Molar},
+respectively.\cite{Bazant-2009}
+
+\paragraph{Fluid flow.}
+The fluid flow and pressure are given by the Navier-Stokes equations for incompressible fluids\cite{Axelsson-2015}
+\begin{align}
+  \label{eq:navier-stokes-variable}
+  \velocity \cdot \nabla \density  ={}& 0\\
+  \left( \velocity \cdot \nabla \right) \left( \density\velocity \right)
+  + \nabla \cdot \hydrostresstensor ={}& \vec{\force} \\
+  \left( \velocity \cdot \nabla \right) \left( \density\velocity \right)
+  \nabla \cdot \left( \density\velocity \right) - \velocity \cdot \nabla \density ={}& 0 \\
+  \text{where }
+  \hydrostresstensor =
+  \pressure\identity - \viscosity\left[\nabla\velocity+\left(\nabla\velocity \right)^\mathsf{T}\right]\notag
+  \text{\,,}
+\end{align}
+with fluid velocity $\velocity$, density $\density$, hydrodynamic stress tensor $\hydrostresstensor$, viscosity $\viscosity$, pressure $\pressure$ and body force $\vec{\force}$.
+
+Note that because density and the viscosity of the fluid fluid density is not a constant, it's spatial derivative must be
+
+
+%The $\avionconc=\frac{1}{n}\sum_{i}^{n}\concentration_{i}$
+% =\relperm^0 \relperm^c
+% =\diffusion_{i}^0\diffusion_{i}^c\diffusion_{i}^w
+% =\mobility_{i}^0\mobility_{i}^c\mobility_{i}^w
+
+% with $\relperm^0$ the value at infinite dilution and $\relperm^c$ an empirical function that depends on the
+% average ion concentration (see methods for detailed expressions).\cite{Gavish-2016}
 
 % \viscosity     		&= \left[ \viscosity^c(\dconc) \times \viscosity^w\left(\dwall\right)\right]
 % \times \SI{e-4}{\pascal\second}, \label{eq:viscosity}\\
 % \density 	   		&= \density(\dconc) \times\SI{e3}{\kg\per\cubic\meter}, \label{eq:density}\\
 
-The the ionic fluxes $\flux_{i}$ were computed with the size-modified Nernst-Planck equation of Lu et al.\cite{Lu-2012}
-\begin{multline}
-  \label{eq:smnp}
-  \nabla\cdot\flux_{i} = \nabla \cdot
-  \left(
-    \diffusion_{i}\nabla\concentration_{i} \right. \\
-    + \chargen_{i}\mobility_{i} \concentration_{i} \nabla\potential
-    \left.
-    + \vec{\beta_{i}} \concentration_{i}
-    - \velocity \concentration_{i}
-  \right)
-\end{multline}
-with ion diffusion coefficient $\diffusion_{i}=\diffusion_{i}^0\diffusion_{i}^c\diffusion_{i}^w$, concentration $\concentration_{i}$, charge number $\chargen_{i}$, mobility
-$\mobility_{i}=\mobility_{i}^0\mobility_{i}^c\mobility_{i}^w$, electrostatic potential $\potential$, steric saturation factor $\beta_{i}$ and fluid velocity $\velocity$. The values of $\diffusion_{i}$, $\mobility_{i}$ and $\beta_{i}$ are
-\begin{align}
-  \diffusion_{i} =
-  \begin{cases}
-    \diffusion_{i}^0, & \text{for PNP-NS} \\
-    \diffusion_{i}^0 \diffusion_{i}^c(\dconc) \diffusion_{i}^w\left(\dwall\right)& \text{for ePNP-NS,}
-  \end{cases}\notag \\
-  \mobility_{i} =
-  \begin{cases}
-    \mobility_{i}^0, & \text{for PNP-NS} \\
-    \mobility_{i}^0 \mobility_{i}^c(\dconc) \mobility_{i}^w\left(\dwall\right)& \text{for ePNP-NS,}
-  \end{cases}\notag \\
-  \vec{\beta_{i}} =
-  \begin{cases}
-    0, & \text{for PNP-NS} \\
-    \frac{\ionsize_{i}^3/\ionsize_{0}^3 \displaystyle\sum_{j} \ionsize_{j}^3 \nabla \concentration_{j}}
-         {1 - \displaystyle\sum_{j} \avogadro \ionsize_{j}^3 \concentration_{j}} & \text{for ePNP-NS,}
-  \end{cases}\notag
-\end{align}
-where superscript $0$ indicate the values at infite dilution, and $c$ and $w$ represent the empirical
-correction functions for concentration and wall distance, respectively (see below and SI). $\avogadro$ is
-Avogadro's constant ($6.022\times10^{23}\text{~mol}^{-1}$) and $\ionsize_{i}=0.5$~nm (13.3~M) and
-$\ionsize_{0}=0.311$~nm (55.2~M) are the limiting cubic diameters for ions and water, respectively.
 
-The fluid was modeled with the variable density and viscosity Navier-Stokes equation for
-incompressible fluids\cite{Axelsson-2015}
-\begin{align}
-  \label{eq:ns_density_continuity}
-  \velocity \cdot \nabla \density ={}& 0 \\
-  \label{eq:ns_conservation}
-  \left( \velocity \cdot \nabla \right) \left( \density\velocity \right)
-  + \nabla \cdot \hydrostresstensor ={}& \vec{\force} \\
-  \label{eq:ns_velocity_continuity}
-  \nabla \cdot \left( \density\velocity \right) - \velocity \cdot \nabla \density ={}& 0 \\
-  \text{\quad with }
-  \hydrostresstensor =
-  \pressure\identity - \viscosity\left[\nabla\velocity+\left(\nabla\velocity \right)^\mathsf{T}\right]\notag
-\end{align}
-with fluid velocity $\velocity$, density $\density$, hydrodynamic stress tensor $\hydrostresstensor$,
-viscosity $\viscosity$, pressure $\pressure$ and body force $\vec{\force}$. $\density$ and $\viscosity$ are
-defined as
-\begin{align}
-  \density =&{}
-  \begin{cases}
-    \density^0, & \text{for PNP-NS} \\
-    \density^0 \density(\dconc) & \text{for ePNP-NS,}
-  \end{cases}\notag \\
-  \viscosity =&{}
-  \begin{cases}
-    \viscosity^0, & \text{for PNP-NS} \\
-    \viscosity^0 \viscosity^c(\dconc) \viscosity^w\left(\dwall\right) & \text{for ePNP-NS,}
-  \end{cases}\notag
-\end{align}
+% The values of $\diffusion_{i}$, $\mobility_{i}$ and $\beta_{i}$ are
+% \begin{align}
+%   \diffusion_{i} =
+%   \begin{cases}
+%     \diffusion_{i}^0, & \text{for PNP-NS} \\
+%     \diffusion_{i}^0 \diffusion_{i}^c(\dconc) \diffusion_{i}^w\left(\dwall\right)& \text{for ePNP-NS,}
+%   \end{cases}\notag \\
+%   \mobility_{i} =
+%   \begin{cases}
+%     \mobility_{i}^0, & \text{for PNP-NS} \\
+%     \mobility_{i}^0 \mobility_{i}^c(\dconc) \mobility_{i}^w\left(\dwall\right)& \text{for ePNP-NS,}
+%   \end{cases}\notag \\
+%   \vec{\beta_{i}} =
+%   \begin{cases}
+%     0, & \text{for PNP-NS} \\
+%     \frac{\ionsize_{i}^3/\ionsize_{0}^3 \displaystyle\sum_{j} \ionsize_{j}^3 \nabla \concentration_{j}}
+%          {1 - \displaystyle\sum_{j} \avogadro \ionsize_{j}^3 \concentration_{j}} & \text{for ePNP-NS,}
+%   \end{cases}\notag
+% \end{align}
+% where superscript $0$ indicate the values at infite dilution, and $c$ and $w$ represent the empirical
+% correction functions for concentration and wall distance, respectively (see below and SI). $\avogadro$ is
+% Avogadro's constant ($6.022\times10^{23}\text{~mol}^{-1}$) and $\ionsize_{i}=0.5$~nm (13.3~M) and
+% $\ionsize_{0}=0.311$~nm (55.2~M) are the limiting cubic diameters for ions and water, respectively.
+%
+%  $\density$ and $\viscosity$ are
+% defined as
+% \begin{align}
+%   \density =&{}
+%   \begin{cases}
+%     \density^0, & \text{for PNP-NS} \\
+%     \density^0 \density(\dconc) & \text{for ePNP-NS,}
+%   \end{cases}\notag \\
+%   \viscosity =&{}
+%   \begin{cases}
+%     \viscosity^0, & \text{for PNP-NS} \\
+%     \viscosity^0 \viscosity^c(\dconc) \viscosity^w\left(\dwall\right) & \text{for ePNP-NS,}
+%   \end{cases}\notag
+% \end{align}
 
 
-\paragraph{A 2D-axisymmetric continuum model of ClyA-AS.}
+\subsection{A 2D-axisymmetric model}
 ClyA is a relatively large protein nanopore that self-assembles on lipid bilayers to form $14$~nm long
 hydrophilic channels. The interior of the pore can be divided into roughly two cylindrical compartments
 (\cref{fig:clya_side}): the \cis\ lumen ($\approx6$~nm diameter, $\approx10$~nm height), and the \trans\
@@ -943,18 +959,6 @@ element method (FEM) as provided by the commercial software COMSOL Multiphysics 
 \href{www.comsol.com}{www.comsol.com}).
 
 \paragraph{Poisson Equation}
-The Poisson equation (PE) relates the electrostatic potential to the charges present in a system
-and is given by
-\begin{align}
-\label{eq:poisson}
-\nabla\cdot\left(\absperm\relperm \nabla\potential\right) = - \scdpore - \scdion,
-\end{align}
-with $\potential$ the electric potential, $\absperm$ the vacuum permittivity
-(\SI{8.85419e-12}{\farad\per\meter}), and $\relperm$ the local relative permittivity of the medium listed in
-\cref{tab:pnpns_parameters}. The total charge density on the right hand side of \cref{eq:poisson}
-consists of a fixed contribution $\scdpore$ due to charges of the nanopore of \cref{eq:scdpore}, and an ion
-concentration dependent component $\scdion$ caused by local non-electroneutralities in the fluid
-(cf.\cref{eq:scdion}).
 
 Dirichlet boundary conditions are applied to the boundaries of the \cis\ and \trans\ reservoirs. The
 potential at the \cis\ boundary is set to $\potential = 0$ whereas at the \trans\ boundary it is set to
@@ -962,19 +966,6 @@ $\potential = \vbias$. Neumann boundary conditions apply at the bilayer-boundary
 
 \input{tab_pnpns_parameters.tex}
 
-
-\paragraph{Nernst-Planck Equation}
-The Nernst-Plack equation (NPE) describes the flux $\flux_{i}$ of each ion species $i$ under the influence of
-a chemical gradient (diffusion), a non-zero electrical field (electromigration) and a laminar fluid flow
-(convection) and is given by
-\begin{multline}\label{eq:nernst-planck}
-\nabla\cdot\flux_{i} = \nabla \cdot \left[ -\diffusion_{i}\nabla\concentration_{i} -
-\chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential + \velocity\concentration_{i}\right] = 0
-\end{multline}
-with $\concentration_{i}$ the concentration, $\diffusion_{i}$ the diffusion coefficient, $\chargen_{i}$ the
-charge number, $\mobility_{i}$ the electrophoretic mobility, and $\velocity$ the fluid velocity. The relevant
-parameters for \ce{NaCl} are listed in \cref{tab:pnpns_parameters}.
-The NPE is coupled to the PE by the electric potential $\potential$ and the ion space charge density
 \begin{align}
 \label{eq:scdion}
 \scdion = \faraday\displaystyle\sum_{i}\chargen_{i}\concentration_{i},
@@ -985,23 +976,12 @@ The ion concentration at both reservoir boundaries was fixed using a Dirichlet b
 ($\concentration_i = \cbulk$). At the fluid-protein and fluid-bilayer interface Neumann
 boundary conditions apply, i.e.~no current can flow in or out of the protein or the bilayer.
 
-
-\paragraph{Navier-Stokes Equation}
-The Navier-Stokes equation (NSE) for laminar flow of an incompressible fluid with variable density and
-variable viscosity used to describe the fluid velocity field $\velocity$ is given by\cite{Axelsson-2015}
-\begin{multline}\label{eq:navier-stokes}
-\density\left(\velocity\cdot\nabla\right)\velocity =
-\nabla\cdot\left[-\pressure\identity +
-\viscosity\left(\nabla\velocity + \left(\nabla\velocity\right)^{\rm T}\right)\right]+\volumeforce,
-\end{multline}
-together with the continuity equation
 \begin{align}
-\label{eq:navier-stokes-contin}
-\density\nabla\cdot\left(\velocity\right) = 0,
+\relperm(\dconc) = \permittivity_{r,0} - \left(\permittivity_{r,0} - \permittivity_{r,ms}\right) L \left( \dfrac{3\alpha}{\permittivity_{r,0} - \permittivity_{r,ms}} \dconc \right)
 \end{align}
-where $\density$ and $\viscosity$ are the fluid's density and dynamic viscosity, respectively. For \ce{NaCl}
-the parameters are given in \cref{tab:pnpns_parameters}. The driving force that generates the electro-osmotic
-flow
+
+
+For \ce{NaCl} the parameters are given in \cref{tab:pnpns_parameters}. The driving force that generates the electro-osmotic flow
 \begin{align}
 \volumeforce = \echarge\avogadro\scdion\efield,
 \end{align}
