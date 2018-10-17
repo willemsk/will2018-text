@@ -2,89 +2,108 @@
 
 \footnotesize
 \renewcommand{\arraystretch}{1.2}
-\caption{Summary of the equations used for the concentration and wall distance dependent model properties.}
+\caption{Summary of the parameters and fitting equations used in the ePNP-NS equations.}
 \centering
 \label{tab:corrections_equations}
 
-\begin{tabularx}{16.5cm}{>{\raggedright\hsize=3.5cm}X >{\hsize=1cm}c >{\hsize=1cm}c >{\hsize=7cm}X >{\hsize=3cm}l}
+\begin{tabularx}{16.5cm}{>{\raggedright\hsize=3cm}X >{\hsize=1cm}l >{\hsize=6.5cm}X >{\hsize=2cm}l}
 	\toprule
-	Property					& Dep.\textsuperscript{\emph{a}}	& Function 						& Fitting function\textsuperscript{\emph{b}}	& Source \\
+
+	Property
+    & Parameter$^\text{\emph{a}}$
+      & Infinite dilution value$^\text{\emph{b}}$/Fitting function$^\text{\emph{c}}$
+      & Reference \\
+
 	\midrule
-	\multirow{2}{3.5cm}{Ion self-diffusion coefficient}	& $\dconc$	& $\diffusion_{i}^c(\dconc)$	& $P_0/\left( 1 + P_1\dconc^{0.5} + P_2\dconc + P_3\dconc^{1.5} + P_4\dconc^2 \right)$ & This work \\
-														& $\dwall$	& $\diffusion_{i}^w(\dwall)$	& 
-														$1-\exp{\left(-P_1(\dwall+P_2)\right)}$	& \citenum{Makarov-1998,Simakov-2010} 
-														\vspace{0.25cm} \\
-	
-    \multirow{2}{3cm}{Ion electrophoretic mobility}		& $\dconc$	& $\mobility_{i}^c(\dconc)$		& $P_0/\left( 1 + P_1\dconc^{0.5} + P_2\dconc + P_3\dconc^{1.5} + P_4\dconc^2 \right)$	& This work \\
-														& $\dwall$	& $\mobility_{i}^w(\dwall)$		& 
-														$1-\exp{\left(-P_1(\dwall+P_2)\right)}$	& \citenum{Makarov-1998,Simakov-2010}	
-														\vspace{0.25cm} \\
-	
-	Ion transport number								& $\dconc$	& $\transportn_{i}(\dconc)$		& $P_0/\left( 1 + P_1\dconc^{0.5} + P_2\dconc + P_3\dconc^{1.5} + P_4\dconc^2 \right)$& This work \vspace{0.25cm} \\
-	
-    \multirow{2}{*}{Dynamic viscosity}					& $\dconc$	& $\viscosity^c(\dconc)$		& $P_0 \left( 1 + P_1 \dconc^{0.5} + P_2 \dconc + P_3 \dconc^2 + P_4 \dconc^{3.5} \right)$	& This work \\
-														& $\dwall$	& $\viscosity^w(\dwall)$		& $1+\exp{\left(-P_1(\dwall-P_2) 
-														\right)}$	& \citenum{Pronk-2014}	\vspace{0.25cm} \\
-	
-	Fluid density										& $\dconc$	& $\density(\dconc)$			& $P_0 \left( 1 + P_1 \dconc + P_2 \dconc^2 \right)$	& This work \vspace{0.25cm} \\	
-	
-	Fluid relative permittivity							& $\dconc$	& $\permittivity_{w}(\dconc)$	& $P_0 - \left(P_0 - 
-	P_1\right) L \left( \dfrac{3P_2}{P_0 - P_1} \dconc \right)$	& \citenum{Gavish-2016} \\
+
+	\multirow{4}{*}{Relative permittivity}
+    & $\permittivity_{r,\text{p}}$
+      & \num{20}
+      & \citenum{Li-2013} \\
+    & $\permittivity_{r,\text{m}}$
+      & \num{3.2}
+      & \citenum{Gramse-2013} \\
+    & $\permittivity_{r,\text{f}}^0$
+      & \num{78.15}
+      & \citenum{Gavish-2016} \\
+    & $\permittivity_{w}(\dconc)$
+      & $1 - \left(1 -	\dfrac{P_1}{P_0}\right) L \left( \dfrac{3P_2}{P_0 - P_1} \dconc \right)$
+      & \citenum{Gavish-2016} \\
+	\multirow{4}{3cm}{Ion self-diffusion coefficient}
+    & $\diffusion_{\Na}^0$
+      & \SI{1.334e-9}{\square\meter\per\second}
+      & \citenum{Mills-1989} \\
+    & $\diffusion_{\Cl}^0$
+      & \SI{2.032e-9}{\square\meter\per\second}
+      & \citenum{Mills-1989} \\
+    & $\diffusion_{i}^c(\dconc)$
+      & $\left( 1 + P_1\dconc^{0.5} + P_2\dconc + P_3\dconc^{1.5} + P_4\dconc^2 \right)^{-1}$
+      & This work \\
+    & $\diffusion_{i}^w(\dwall)$
+      & $1-\exp{\left(-P_1(\dwall+P_2)\right)}$
+      & \citenum{Makarov-1998,Simakov-2010} \vspace{0.25cm} \\
+
+  \multirow{4}{3cm}{Ion electrophoretic mobility}
+    & $\mobility_{\Na}^0$
+      & \SI{5.192e-4}{\square\meter\per\second\per\volt}
+      & \citenum{Bianchi-1989} \\
+    & $\mobility_{\Cl}^0$
+      & \SI{7.909e-4}{\square\meter\per\second\per\volt}
+      & \citenum{Bianchi-1989} \\
+    & $\mobility_{i}^c(\dconc)$
+      & $\left( 1 + P_1\dconc^{0.5} + P_2\dconc + P_3\dconc^{1.5} + P_4\dconc^2 \right)^{-1}$
+      & This work \\
+    & $\mobility_{i}^w(\dwall)$
+      & $1-\exp{\left(-P_1(\dwall+P_2)\right)}$
+      & \citenum{Makarov-1998,Simakov-2010} \vspace{0.25cm} \\
+
+	\multirow{2}{3cm}{Ion transport number}
+    & $\transportn_{\Na}^0$
+      & 0.396
+      & \citenum{Bianchi-1989} \\
+    & $\transportn_{\Na}(\dconc)$
+      & $\left( 1 + P_1\dconc^{0.5} + P_2\dconc + P_3\dconc^{1.5} + P_4\dconc^2 \right)^{-1}$
+      & This work \vspace{0.25cm} \\
+
+  \multirow{3}{*}{Dynamic viscosity}
+    & $\viscosity^0$
+      & \SI{8.904}{\pascal\second}
+      & \citenum{Hai-Lang-1996} \\
+    & $\viscosity^c(\dconc)$
+      & $ 1 + P_1 \dconc^{0.5} + P_2 \dconc + P_3 \dconc^2 + P_4 \dconc^{3.5}$
+      & This work \\
+    & $\viscosity^w(\dwall)$
+      & $1 + \exp{ \left( -P_1(\dwall-P_2) \right) }$
+      & \citenum{Pronk-2014} \vspace{0.25cm} \\
+
+  \multirow{2}{*}{Fluid density}
+    & $\density^0$
+      & \SI{997}{\kilogram\per\cubic\meter}
+      & \citenum{Hai-Lang-1996} \\
+    & $\density(\dconc)$
+      & $1 + P_1 \dconc + P_2 \dconc^2$
+      & This work \vspace{0.25cm} \\
+
 	\bottomrule
 \end{tabularx}
 \begin{flushleft}
-	\textsuperscript{\emph{a}}Dependencies on either $\dconc = \avionconc/1$~M (dimensionless average ion 
+	$^\text{\emph{a}}$Dependencies on either $\dconc = \avionconc/1$~M (dimensionless average ion
 	concentration) and $\dwall = \walldistance/1$~nm (dimensionless distance from the nanopore wall);
-	\textsuperscript{\emph{b}}These functions are empirical and hence have no physical meaning.
-	The values of the fitting parameters $P_x$ of each property can be found in Table~\ref{suppinfo:tab:corrections_parameters}.
+  $^\text{\emph{b}}$Values at infinite dilution for a system temperature of \SI{291.15}{\kelvin};
+	$^\text{\emph{c}}$These functions are empirical and hence have no physical meaning.
+	The values of the fitting parameters $P_x$ of each property can be found in \cref{suppinfo:tab:corrections_parameters} and graphs of the fits in \cref{suppinfo:fig:corrections}.
 \end{flushleft}
-
-
-
-%\begin{tabularx}{16.5cm}{>{\raggedright\hsize=3.5cm}X >{\hsize=9cm}X >{\hsize=4cm}l}
-%	\toprule
-%	Property	&  Equation\textsuperscript{\emph{a}}\textsuperscript{\emph{b}}	& Equation source \\
-%	\midrule
-%	\multirow[t]{3}{3.5cm}{Ion self-diffusion coefficient}
-%		& $\diffusion_{i}(\concentration,d) = \left[ \diffusion_{i}^1(\concentration) \times \diffusion_{i}^2(d) \right]$ $\times\SI{e-9}{\square\meter\per\second}$
-%			& This work (empirical) \\
-%		&  \hspace*{0.25cm} $\diffusion_{i}^1(\concentration) = P_0/(1 + P_1 c^{0.5} + P_2 c + P_3 c^{1.5} +P_4 c^{2})$
-%			& This work (empirical) \\
-%		&  \hspace*{0.25cm} $\diffusion_{i}^2(d) = 1-\exp(-P_1(d+P_2))$
-%			& \citenum{makarov1998, simakov2010} \vspace{0.25cm} \\
-%	
-%	\multirow[t]{3}{3cm}{Ion electrophoretic mobility}
-%		& $\mobility_{i}(\concentration,d) = \faraday \left[ \mobility_{i,r} \times (\concentration)\mobility_{i,r}(d) \right]$ $\times\SI{e-4}{\square\meter\per\second\per\volt}$
-%			& This work (empirical) \\
-%		&  \hspace*{0.25cm} $\mobility_{i,r}(\concentration) = P_0/(1 + P_1 c^{0.5} + P_2 c + P_3 c^{1.5} +P_4 c^{2})$
-%			& This work (empirical) \\
-%		&  \hspace*{0.25cm} $\mobility_{i,r}(d) = 1-\exp(-P_1(d+P_2))$
-%			& \citenum{makarov1998, simakov2010}	\vspace{0.25cm} \\
-%	
-%	Ion transfer number			
-%		& $\transportn_{i}(\concentration) = P_0/(1 + P_1 c^{0.5} + P_2 c + P_3 c^{1.5} +P_4 c^{2})$
-%			& This work	(empirical) \vspace{0.25cm}\\
-%	
-%	\multirow[t]{3}{*}{Dynamic viscosity}
-%		& $\viscosity(\concentration,d) = \left[ \viscosity^1(\concentration) \times \viscosity^2(d)\right]$ $\times\SI{e-4}{\pascal\second}$ 
-%			& This work (empirical) \\
-%		&  \hspace*{0.25cm} $\viscosity^1(\concentration) = P_0 \left( 1 + P_1 c^{0.5} + P_2 c + P_3 c^{2} + P_4 c^{3.5} \right)$ 
-%			& \textbf{TODO} \\
-%		&  \hspace*{0.25cm} $\viscosity^2(d) = 1+e^{-P_1(d-P_2)}$
-%			& \citenum{pronk2013}	\vspace{0.25cm} \\
-%	
-%	Fluid density
-%		&  $\density(\concentration) = P_0 \left( 1 + P_1 c + P_2 c^{2} \right)$ $\times\SI{e3}{\kg\per\cubic\meter}$
-%			& \textbf{TODO} \vspace{0.25cm} \\	
-%	
-%	Fluid relative permittivity	
-%		&  $\permittivity(\concentration) = P_0 - \left(P_0 - P_1\right) L \left( \dfrac{3P_2}{P_0 - P_1} c \right)$
-%			& \citenum{gavish2016} \\
-%	\bottomrule
-%\end{tabularx}
-%\begin{flushleft}
-%\textsuperscript{\emph{a}}Here $\concentration = \avionconc$ (average ion concentration) and $\walldistance$ is the distance from the nanopore wall;
-%\textsuperscript{\emph{b}}The values of the fitting parameters $P_x$ of each property can be found in Table~\ref{tab:corrections_parameters}.
-%\end{flushleft}
-
 \end{table*}
+
+    % $T$                        & \SI{298.15}{\kelvin} & System temperature\\
+    % $\permittivity_\text{p}^0$ & \num{20} & Relative permittivity of pore\cite{Li-2013}\\
+    % $\permittivity_\text{m}^0$ & \num{3.2} & Relative permittivity of bilayer\cite{Gramse-2013} \\
+    % $\permittivity_\text{f}^0$ & \num{78.15} & Relative permittivity of fluid \\
+    % $\density^0$               & \SI{997}{\kilogram\per\cubic\meter} & Density of fluid\\
+    % $\viscosity^0$             & \SI{8.904}{\pascal\second} & Dynamic viscosity\\
+    % $\chargen_{\Na}$           & \num{+1} & charge number of \Na \\
+    % $\chargen_{\Cl}$           & \num{-1} & charge number of \Cl \\
+    % $\diffusion_{\Na}^0$       & \SI{1.334e-9}{\square\meter\per\second} & Diffusion coefficient of \Na\ \\
+    % $\diffusion_{\Cl}^0$       & \SI{2.032e-9}{\square\meter\per\second} & Diffusion coefficient of \Cl\ \\
+    % $\mobility_{\Na}^0$        & \SI{5.192e-4}{\square\meter\per\second\per\volt} & Mobility of \Na\ \\
+    % $\mobility_{\Cl}^0$        & \SI{7.909e-4}{\square\meter\per\second\per\volt} & Mobility of \Cl\ \\
