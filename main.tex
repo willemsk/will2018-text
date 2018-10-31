@@ -187,15 +187,14 @@ Nivala-2013,Ho-2015,Laszlo-2017}
 
 Nanopores are generally operated in the resistive-pulse mode where fluctuations of their ionic conductance are
 monitored over time.\cite{Bayley-2001,Dekker-2007,Maglia-2010,Venkatesan-2011} This conductance is measured by
-placing the nanopore between two electrolyte compartments and applying a constant DC (or AC) voltage
-(\SIrange{0.001}{1}{\volt}) across them. Due to the high resistance of the nanopore, virtually the full
-potential change occurs near and within the pore, resulting in a strong electrical field
-(\SIrange{1e7}{1e8}{\mV\per\nm}) that electrophoretically drives ions and water molecules through the
-pore.\cite{Wong-2007,Mao-2014,Haywood-2014,Laohakunakorn-2015} Hence, analyte molecules such as DNA or
-proteins are driven towards and often \emph{through} the nanopore by a combination of Coulombic
-(electrophoretic) and hydrodynamic (electro-osmotic) forces.\cite{Wong-2007,Grosberg-2010,Muthukumar-2010,
-Muthukumar-2014} If successful such a translocation is observed as a temporal fluctuation in the ionic
-conductance of the pore and serves as a unique molecular fingerprint with which the molecule can be
+placing the nanopore between two electrolyte compartments and applying a constant voltage across them. Due to
+the high resistance of the nanopore, virtually the full potential change occurs near and within the pore,
+resulting in a strong electrical field (\SIrange{1e7}{1e8}{\mV\per\nm}) that electrophoretically drives ions
+and water molecules through the pore.\cite{Wong-2007,Mao-2014,Haywood-2014,Laohakunakorn-2015} Hence, analyte
+molecules such as DNA or proteins are driven towards and often \emph{through} the nanopore by a combination of
+Coulombic (electrophoretic) and hydrodynamic (electro-osmotic) forces.\cite{Wong-2007,Grosberg-2010,
+Muthukumar-2010,Muthukumar-2014} If successful such a translocation is observed as a temporal fluctuation in
+the ionic conductance of the pore and serves as a unique molecular fingerprint with which the molecule can be
 identified.\cite{Yusko-2017} The frequency, magnitude, duration and even noise levels of these events depend
 on the properties of both the analyte molecule and the nanopore itself, making them notoriously difficult to
 interpret efficiently without a full understanding of the nanofluidic phenomena that underlie them.
@@ -205,8 +204,8 @@ nanopores comprise not only \emph{discrete} methods such as molecular dynamics (
 Allen-1999,Aksimentiev-2005,Luan-2008,Bhattacharya-2011,Zhang-2014,DiMarino-2015,Belkin-2016} and Brownian
 dynamics (BD),\cite{Schirmer-1999,Im-2002,Noskov-2004,Millar-2008,Egwolf-2010,DeBiase-2015,Pederson-2015} but
 also \emph{mean-field} methods such as the Poisson-Boltzmann (PB) equations\cite{Grochowski-2008,
-Baldessari-2008-1} and Poisson-Nernst-Planck (PNP) equations,\cite{Eisenberg-1996,Gillespie-2002,
-Simakov-2010}. The latter can be coupled with the Navier-Stokes (NS) equation to include the electro-osmotic
+Baldessari-2008-1} and Poisson-Nernst-Planck (PNP) equations.\cite{Eisenberg-1996,Gillespie-2002,
+Simakov-2010} The latter can be coupled with the Navier-Stokes (NS) equation to include the electro-osmotic
 flow.\cite{Lu-2012,Pederson-2015} The PNP(-NS) equations are of particular interest due to their low
 computational cost and  analytical tractability. However, great care must be taken when using them to compute
 fluxes and fields for ion channels and small nanopores due to the breakdown of the continuum assumption below
@@ -233,17 +232,16 @@ PNP equations.\cite{Kilic-2007} To allow for non-identical ion sizes and more th
 was later extended by Lu et al., who used it to probe the effect of finite ion size on the rate coefficients
 of enzymes.\cite{Lu-2011}
 
-The interaction of ions or small molecules like water with the heavy atoms of proteins or DNA results in a
-strong reduction of their motility, as observed in MD simulations\cite{Makarov-1998,Pronk-2014} Since these
-effects happen only for distances \SI{\le1}{\nm}, they can usually be neglected for macroscopic simulations.
-However, in small nanopores ($\le10$~nm radius), they comprise a significant fraction of the total nanopore
-radius and hence must be taken into account.\cite{Noskov-2004,Simakov-2010,Pederson-2015,McMullen-2017} In
+As observed in MD simulations, the interaction of ions or small molecules like water with the heavy atoms of proteins or DNA results in a strong reduction of their motility.\cite{Makarov-1998,Pronk-2014} Since these
+effects occur at distances \SI{\le1}{\nm}, they can usually be neglected for macroscopic simulations.
+However, in small nanopores ($\le10$~nm diameter), they comprise a significant fraction of the total nanopore
+volume and hence must be taken into account.\cite{Noskov-2004,Simakov-2010,Pederson-2015,McMullen-2017} In
 continuum simulations, this can be corrected for by using a positional-dependent ion diffusion coefficients;
 as was implemented in the so-called `soft-repulsion PNP' developed by Simakov and Kurnikova\cite{Simakov-2010,
 Simakov-2018} to predict the ionic conductance of the $\alpha$-hemolysin nanopore. Similar reductions in ion
 diffusion coefficients have been proposed to improve PNP theory's estimations of the ionic conductance of ion
 channels.\cite{Furini-2006,Liu-2015} The motility of water molecules is expressed by the NS equations as the
-fluid`s he viscosity. Hence, as also observed in MD simulations for water molecules near
+fluid's he viscosity. Hence, as also observed in MD simulations for water molecules near
 proteins\cite{Pronk-2014} and confined in hydrophilic nanopores,\cite{Vo-2016,Hsu-2017} the water-solid
 interaction leads to a viscosity several times higher compared to the bulk values. Note that this is likely
 only valid for hydrophilic interfaces, as the lack of interaction with hydrophobic interfaces, such as carbon
@@ -311,14 +309,13 @@ dynamical behavior of our complete system is described by the coupled Poisson, N
 the total ionic flux and the fluid flow, respectively.\cite{Eisenberg-1996,Cervera-2005,Lu-2012}
 
 To improve quantitative accuracy of the PNP-NS equations for nanopores, we developed an \emph{extended}
-version of these equations (ePNP-NS) using the commmerical finite element solver COMSOL Multiphysics
-(www.comsol.com) that self-consistently takes into account 1) the finite size of the
+version of these equations (ePNP-NS) which self-consistently takes into account 1) the finite size of the
 ions,\cite{Borukhov-1997,Lu-2011} 2) the reduction of ion and water motility close to the nanopore
 walls,\cite{Makarov-1998,Noskov-2004,Pronk-2014,Pederson-2015,Vo-2016} and 3) the concentration dependency of
 ion diffusion coefficients and electrophoretic mobilities, as well as electrolyte viscosity, density and
 relative permittivity.\cite{Mills-1989,Hai-Lang-1996,Gavish-2016} Most of these corrections were implemented
 using emperical functions fitted to experimental data, which can be found in \cref{tab:corrections_equations}
-and \cref{suppinfo:tab:corrections_parameters}, respectively.
+and \cref{suppinfo:tab:corrections_parameters}, respectively. The ePNP-NS equations were numerically solved with finite element method as implemented by the COMSOL Multiphysics software package (www.comsol.com).
 
 \paragraph{Electrostatic field.}
 As mentioned above, the electrostatic potential is evaluated using Poisson's equation
@@ -444,7 +441,8 @@ given by
 with $\efield = \nabla \potential$ the electrical field vector.
 
 As with the previous equations, we introduced a concentration dependency and wall distance dependencies for
-$\viscosity$ and a concentration dependeny for the $\density$ by replacing their constant values by
+$\viscosity$ and a concentration dependeny for the $\density$ by replacing their constant values with the
+following expressions
 \begin{align}
   \viscosity(\avionconc,\walldistance) ={}&
     \viscosity^0 \viscosity^c(\avionconc) \viscosity^w(\walldistance) \\
@@ -457,13 +455,16 @@ parameterized via fitting to experimental\cite{Hai-Lang-1996} and molecular dyna
 obtained from literature.
 
 \paragraph{Note on the concentration dependencies.}
-All concentration dependent parameters use the average local ion concentration rather than their individual
-concentrations. While valid for \emph{electroneutral} bulk solutions, this approximation no longer holds
-inside the electrical double layer, i.e. near charged surfaces or inside small nanopores, where local
-electroneutrality is violated. The main reasons for making this simplification are the lack of non-bulk
-experimental data and the absence of a tractable analytical model. Nevertheless, we will see that the current
-concentration dependent functions will lead to an excellent agreement with the experimental data in all but
-the most extreme cases, justifying our choice \textit{a posteriori}.
+All concentration dependent functions (\cref{tab:corrections_equations}) were parametrized by fitting of a
+polynomial function to experimental data obtained through bulk measurements
+(\cref{suppinfo:tab:corrections_parameters} and \cref{suppinfo:fig:corrections}). Hence, out use of the
+average local ion concentration rather than their individual concentrations is certainly valid for
+\emph{electroneutral} bulk solutions, its applicability for regions where local electroneutrality is violated,
+i.e. inside (overlapping) electrical double layers, is questionable. The main reasons for making this
+simplification are the lack of non-bulk experimental data and the absence of a tractable analytical model.
+Nevertheless, we will see that the current concentration dependent functions will lead to an excellent
+agreement with the experimental data in all but the most extreme cases, justifying our choice \textit{a
+posteriori}.
 
 \paragraph{PNP-NS vs. ePNP-NS}
 The ePNP-NS equations can be converted with ease into the regular PNP-NS equations disabling the steric flux,
@@ -522,8 +523,8 @@ features, and accurately portrait all relevant transport phenomena. The paramete
 processes depend on the local conditions inside the electrolyte, such as the ion concentrations and proximity
 to the nanopore, and hence require position dependent values. We implemented such a self-consistent
 parametrization in our ePNP-NS model with dependencies on both the average ion concentration $\avionconc$ and
-distance from the pore wall $\walldistance$. We compared the simulated ionic transport properties -- in terms
-of current, conductance, rectification and ion selectivity -- with those obtained experimentally through
+distance from the pore wall $\walldistance$. We compared the simulated ionic transport properties --- in terms
+of current, conductance, rectification and ion selectivity --- with those obtained experimentally through
 single channel recordings.
 
 %(i.e. shape and charge distribution),
