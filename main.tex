@@ -209,8 +209,8 @@ Baldessari-2008-1} and Poisson-Nernst-Planck (PNP) equations,\cite{Eisenberg-199
 Simakov-2010}. The latter can be coupled with the Navier-Stokes (NS) equation to include the electro-osmotic
 flow.\cite{Lu-2012,Pederson-2015} Due to their explicit atomic or particle nature, MD and BD simulations are
 considered to yield the most accurate results. However, the large computational cost of simulating a complete
-biological nanopore system (\SIrange{100K}{1M}{atoms}) 100s of nanoseconds still necessitates the use of
-supercomputers.\cite{Aksimentiev-2004,Bhattacharya-2011} The PNP(-NS) equations, on the other hand, are of
+biological nanopore system (100K--1M atoms) 100s of nanoseconds still necessitates the use of
+supercomputers.\cite{Aksimentiev-2005,Bhattacharya-2011} The PNP(-NS) equations, on the other hand, are of
 particular interest due to their low computational cost and  analytical tractability. In a continuum approach,
 all materials are represented by structureless media whose behavior is parameterized by material properties
 such as relative permittivity, diffusion coefficient, electrophoretic mobility, viscosity and density. Because
@@ -334,7 +334,7 @@ local relative permittivity $\relperm$.
 
 The pore's \emph{fixed} charge distribution $\scdpore$ was derived directly from the full atom model of
 ClyA-AS (cfr. \cref{eq:scdpore}) and the \emph{ionic} charge density in the fluid is given by
-\begin{align}
+\begin{align}\label{eq:scdion}
   \scdion = \faraday\sum_{i}\chargen_{i}\concentration_{i}
   \text{\,,}
 \end{align}
@@ -527,23 +527,30 @@ electro-osmotic flow.
 
 \input{fig_conductance.tex}
 
+\paragraph{Ionic current and conductance.} The ionic conductance of a nanopore---a quantity that can be
+measured experimentally with relative ease---is determined not only by the its geometry and charge
+distribution, but also depends non-trivially on the magnitude of the bias voltage and the ionic strength.
+Hence, the nanopore conductance \emph{landscape}, i.e. it value as a function of bulk ionic strength and
+applied bias voltage, can serve as a powerful benchmark to gauge the ability of our model to reproduce the
 
+To verify whether our model provides quantitative results for any condition, we performed steady-state simulations of ClyA over a wide range of conditions and compared them directly with a set of experimentally determined values (\cref{fig:current-voltage_curves}). ($\cbulk=\text{\num{0.005} to \SI{5}{\Molar}}$ \ce{NaCl} and $\vbias=\text{\num{-500} to \SI[retain-explicit-plus]{+500}{\mV}}$) using both the classical PNP-NS and our new ePNP-NS equations  ($\cbulk=\text{0.05, 0.15, 0.5, 1 and \SI{3}{\Molar}}$ \ce{NaCl} and \SIrange[retain-explicit-plus]{-150}{+150}{\mV}  . The ionic current was computed by integration and summation of the total ionic flux over the \cis\ reservoir boundary
+\begin{equation}
+  \currentsim = \faraday\int_{S}\left(\dsum_{i}\chargen_{i}\normvec\cdot\vec{\flux}_{i}\right)dS
+\end{equation}
+with $\chargen_{i}$ the charge number and $\vec{\flux}_{i}$ the total flux of each ion $i$ across the
+reservoir boundary $S$, $\faraday$ the Faraday constant (\SI{96485}{\coulomb\per\mole}) and $\normvec$ the
+normal vector.
 
-%(i.e. shape and charge distribution),
-%(i.e. diffusion, electromigration and convection).
-%(i.e. ion diffusion coefficients and mobilities; solvent viscosity, density and relative permittivity)
-
-\paragraph{Ionic current.}
-Using both PNP-NS and ePNP-NS, we simulated the current-voltage (IV) curves of ClyA and compared it with the
-experimentally measured values for applied bias voltages between $-150$ and $+150$~mV and for reservoir salt
-concentrations of $0.05$, $0.15$, $0.5$, $1$ and $3$~M (\cref{fig:current-voltage_curves}). Over the entire
-investigated concentration range, the IVs from the ePNP-NS model closely corresponded to the measured values
-($<5\%$ error). In contrast, the PNP-NS equations significantly overestimate the ionic current for all
-measured concentrations. The PNP-NS model performs the worst at high salt concentrations, as is to be
-expected since it uses parameters that are only valid at `infinite dilution'. For ePNP-NS the error is
-largest at lower salt concentrations, with smaller and larger currents at negative and positive bias
-voltages, respectively. Their cause is likely to be found in the under- and overestimation of the cation
-concentration at these respective voltages.\todo{ref} It is also possible that the mobility we use, which is parameterized using electroneutral `bulk' values for unconfined ions, begins to break down under these
+ We c. Over the entire investigated
+concentration range, the IVs from the ePNP-NS model closely corresponded to the measured values ($<5\%$
+error). In contrast, the PNP-NS equations significantly overestimate the ionic current for all measured
+concentrations, particularly at high salt concentrations where most parameters deviate significantly from
+their `infinite dilution' values (\cref{suppinfo:fig:corrections}). Interestingly, while the ePNP-NS equations
+show virtually no error at high ionic strengths (\SI{\ge0.5}{\Molar}), a minor overestimation () of the ionic
+current is oblarger for lower salt concentrations, with smaller and larger currents at negative and positive
+bias voltages, respectively. Their cause is likely to be found in the under- and overestimation of the cation
+concentration at these respective voltages.\todo{ref} It is also possible that the mobility we use, which is
+parameterized using electroneutral `bulk' values for unconfined ions, begins to break down under these
 conditions.\cite{Duan-2010}
 
 Regardless of these minor discrepancies, it is clear that our simplified, 2D-axisymmetric model, in
@@ -1011,16 +1018,6 @@ $\transportn_{i}$ before it can be fitted\cite{ContrerasAburto-2013-1}
 \transportn_{i}(\concentration),
 \end{align}
 where $\specmolarconductivity_{i}(\concentration)$ is the specific molar conductivity of ion $i$.
-
-
-\paragraph{Computation of simulated ionic current.}\todo{finish him}
-The simulated ionic currents were computed from the ionic flux under steady-state conditions using
-\begin{equation}
-\currentsim = \faraday\int_{S}\left(\dsum_{i}\chargen_{i}\normvec\cdot\vec{\flux}_{i}\right)dS
-\end{equation}
-with $\chargen_{i}$ the charge number and $\vec{\flux}_{i}$ the total flux of each ion $i$ across the
-reservoir boundary $S$, $\faraday$ the Faraday constant (\SI{96485}{\coulomb\per\mole}) and $\normvec$ the
-normal vector.
 
 \paragraph{ClyA expression and purification.}
 ClyA-AS monomers were expressed, purified and oligomerized using methods described in detail
