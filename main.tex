@@ -437,8 +437,8 @@ and the fluid velocity
   \text{\,,}
 \end{align}
 with fluid velocity $\velocity$, density $\density$, hydrodynamic stress tensor $\hydrostresstensor$,
-viscosity $\viscosity$ and pressure $\pressure$. The external force $\vec{\force}$ that acts on the fluid is
-given by
+viscosity $\viscosity$ and pressure $\pressure$. The external body force density $\vec{\force}$ that acts on
+the fluid is given by
 \begin{align}
 \vec{\force} = \echarge\avogadro\scdion\efield
 \text{\,,}
@@ -520,50 +520,46 @@ terms of current, conductance, rectification and ion selectivity, of both the cl
 developed ePNP-NS equations. After validation, we proceed with describing the influence of bias voltage and
 bulk ionic strengths on the local ion concentrations inside the pore and the resulting electrical double
 layer. This is followed by a characterization of the electrostatic potential and the electrostatic energy
-landscape within ClyA for both cations and anions. We conclude by discussing the properties of the
-electro-osmotic flow.
+landscape within ClyA for both cations and anions. We will conclude this section by discussing the properties
+of the electro-osmotic flow.
 
 \subsection{Transport of ions through ClyA}\label{sec:ion_transport}
 
 \input{fig_conductance.tex}
 
-\paragraph{Ionic current and conductance.} The ionic conductance of a nanopore---a quantity that can be
-measured experimentally with relative ease---is determined not only by the its geometry and charge
-distribution, but also depends non-trivially on the magnitude of the bias voltage and the ionic strength.
-Hence, the nanopore conductance \emph{landscape}, i.e. it value as a function of bulk ionic strength and
-applied bias voltage, can serve as a powerful benchmark to gauge the ability of our model to reproduce the
+\paragraph{Ionic current.} The ionic current-voltage (IV) relationship of a ClyA---and that of many nanopores
+ingeneral--- often deviates significantly from Ohm's law. This is because the ionic flux results from a
+complex interplay between the pore's geometry (size, shape and charge distribution), the properties of the
+surrounding electrolyte (salt concentration/type, viscosity, ...) and any externally applied conditions (bias
+voltage, temperature, pressure, ...). Hence, if a computational model is capable of quantitatively predicting
+the ionic current of a nanopore over a wide range of bias voltages and salt concentrations, this is a strongly
+indicates that it captures the essential physics governing the nanopore.
 
-To verify whether our model provides quantitative results for any condition, we performed steady-state simulations of ClyA over a wide range of conditions and compared them directly with a set of experimentally determined values (\cref{fig:current-voltage_curves}). ($\cbulk=\text{\num{0.005} to \SI{5}{\Molar}}$ \ce{NaCl} and $\vbias=\text{\num{-500} to \SI[retain-explicit-plus]{+500}{\mV}}$) using both the classical PNP-NS and our new ePNP-NS equations  ($\cbulk=\text{0.05, 0.15, 0.5, 1 and \SI{3}{\Molar}}$ \ce{NaCl} and \SIrange[retain-explicit-plus]{-150}{+150}{\mV}  . The ionic current was computed by integration and summation of the total ionic flux over the \cis\ reservoir boundary
-\begin{equation}
-  \currentsim = \faraday\int_{S}\left(\dsum_{i}\chargen_{i}\normvec\cdot\vec{\flux}_{i}\right)dS
-\end{equation}
-with $\chargen_{i}$ the charge number and $\vec{\flux}_{i}$ the total flux of each ion $i$ across the
-reservoir boundary $S$, $\faraday$ the Faraday constant (\SI{96485}{\coulomb\per\mole}) and $\normvec$ the
-normal vector.
-
- We c. Over the entire investigated
+To gauge the accuracy of our 2D-axisymmetric ClyA-AS model, we experimentally measured the current--voltage
+(IV) curves of single ClyA-AS nanopores (between \SIrange[retain-explicit-plus]{-150}{+150}{\mV} and at 0.05,
+0.15, 0.5, 1 and \SI{3}{\Molar} \ce{NaCl}) and compared them directly to the values obtained from steady-state
+simulations using both the classical PNP-NS and the new ePNP-NS equations (\cref{fig:current-voltage_curves},
+cfr. \nameref{sec:methods} for experimental and computational details). Over the entire investigated
 concentration range, the IVs from the ePNP-NS model closely corresponded to the measured values ($<5\%$
 error). In contrast, the PNP-NS equations significantly overestimate the ionic current for all measured
 concentrations, particularly at high salt concentrations where most parameters deviate significantly from
-their `infinite dilution' values (\cref{suppinfo:fig:corrections}). Interestingly, while the ePNP-NS equations
-show virtually no error at high ionic strengths (\SI{\ge0.5}{\Molar}), a minor overestimation () of the ionic
-current is oblarger for lower salt concentrations, with smaller and larger currents at negative and positive
-bias voltages, respectively. Their cause is likely to be found in the under- and overestimation of the cation
-concentration at these respective voltages.\todo{ref} It is also possible that the mobility we use, which is
-parameterized using electroneutral `bulk' values for unconfined ions, begins to break down under these
-conditions.\cite{Duan-2010}
-
-Regardless of these minor discrepancies, it is clear that our simplified, 2D-axisymmetric model, in
-conjunction with the ePNP-NS equations, is able to accurately compute the ionic current through ClyA. Hence,
-this methodology should be applicable to other small nanopores ($r_{\text{pore}}\approx1.5$~nm) with complex
-geometries and charge distributions, over the entire experimentally accessible concentration and voltage
-ranges.
+their `infinite dilution' values (\cref{suppinfo:fig:corrections}). Interestingly, the opposite behavior is
+observed for ePNP-NS, with virtually no error at high ionic strengths and minor discrepancies at lower salt
+concentrations (\SI{<0.5}{\Molar}). At low ionic strengths, the electrical double layers inside the pore are
+likely to overlap, resulting in nanopore occupied predominantly by cations. Because our ionic mobilities are
+derived from bulk ionic conductances, i.e. for unconfined ions in a locally \emph{electroneutral} environment,
+it is likely that our mobility model begins to break down under these conditions.\cite{Duan-2010} Regardless
+of these minor discrepancies, it is clear that our simplified, 2D-axisymmetric model, in conjunction with the
+ePNP-NS equations, is able to accurately compute the ionic current through ClyA. Hence, this methodology
+should be applicable to other small nanopores ($r_{\text{pore}}\approx1.5$~nm) with complex geometries and
+charge distributions, over the entire experimentally accessible concentration and voltage ranges.
 
 % Difference in conductance mechanism between high and low salt
-\paragraph{Ionic conductance.}
-To further investigate ClyA's ionic transport mechanism, we computed the ionic conductance
-$\conductance=\current / \vbias$ and the resulting concentration-voltage landscape can be found in
-\cref{fig:conductance_contourmap_epnp}. The straight slopes of the concentration-conductivity log-log plot at
+\paragraph{Ionic conductance.} To further our understanding of ClyA's ionic transport properties, we computed
+its ionic conductance $\conductance=\current / \vbias$ between \num{0.005} to \SI{5}{\Molar} \ce{NaCl} and
+\num{-200} to \SI[retain-explicit-plus]{+200}{\mV} (\cref{fig:conductance_contourmap_epnp}). The high degree of electrostatic screening at high salt concentrations ($>\SI{1}{\Molar}$) results in a conductance that is virtually independent of the applied bias voltage. t lower ionic strengths, the conductance begins to lower as the nanopore's charges become sufficiently shielded as not to influence conductance is independent of bias voltage
+
+The straight slopes of the concentration-conductivity log-log plot at
 $-150$~mV exhibit a clear `kink' at $\approx0.15$~M, suggesting the presence of two different conductance
 regimes. At low ionic strengths ($0.005\le\cbulk\le0.15$~M) and high negative bias voltages ($>-100$~mV)
 fitting with the power law function $\conductance(\cbulk)=a\cbulk^{\gamma}$ yields an exponent that
@@ -571,8 +567,6 @@ asymptotically approaches $\gamma=1/2$. This suggests that the transport mechani
 density inside the pore, which is determined by the electrical double layer which as well has a square-root
 dependence on the bulk concentration $\cbulk$.\cite{Uematsu-2018} Under all other conditions, $\gamma$ yields
 values between $0.5$ and $?$
-
-
 
 ($0.3\le\cbulk\le1.5$~M)
  yielded exponents $\gamma$ of
@@ -1018,6 +1012,14 @@ $\transportn_{i}$ before it can be fitted\cite{ContrerasAburto-2013-1}
 \transportn_{i}(\concentration),
 \end{align}
 where $\specmolarconductivity_{i}(\concentration)$ is the specific molar conductivity of ion $i$.
+
+\paragraph{Computing the simulated ionic current.} The simulated ionic current $\currentsim$ at steady-state was computed by
+\begin{equation}
+  \currentsim = \faraday\int_{S}\left(\dsum_{i}\chargen_{i}\normvec\cdot\vec{\flux}_{i}\right)dS
+\end{equation}
+with $\chargen_{i}$ the charge number and $\vec{\flux}_{i}$ the total flux of each ion $i$ across \cis\ reservoir boundary $S$, $\faraday$ the Faraday constant (\SI{96485}{\coulomb\per\mole}) and $\normvec$ the
+unit vector normal to $S$.
+
 
 \paragraph{ClyA expression and purification.}
 ClyA-AS monomers were expressed, purified and oligomerized using methods described in detail
