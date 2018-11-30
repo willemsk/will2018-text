@@ -8,11 +8,16 @@
 % Units
 \DeclareSIUnit{\molar}{\mole\per\cubic\deci\metre}
 \DeclareSIUnit{\Molar}{\textsc{M}}
+\DeclareSIUnit{\Molar}{\textsc{M}}
 \newcommand{\mM}{\milli\Molar}
 \newcommand{\mV}{\milli\volt}
+\newcommand{\um}{\micro\meter}
 \newcommand{\nm}{\nano\meter}
 \newcommand{\ns}{\nano\second}
 \newcommand{\ps}{\pico\second}
+\newcommand{\fs}{\femto\second}
+\newcommand{\pN}{\pico\newton}
+\newcommand{\ec}{\elementarycharge}
 \newcommand{\dC}{\degree C}
 \newcommand{\mps}{\meter\per\second}
 \newcommand{\cnmpnspv}{\cubic\nano\meter\per\nano\second\per\volt}
@@ -37,16 +42,16 @@
 \newcommand{\echarge}{e}
 
 % Field variables
-\newcommand{\vel}{u}
-\newcommand{\force}{F}
+\newcommand{\vel}{u}                  % Fluid velocity
+\newcommand{\force}{F}                % A force
 \newcommand{\potential}{\varphi}			% Electrostatic potential
-\newcommand{\varpotential}{V}				% Electrostatic potential
+\newcommand{\varpotential}{V}				  % Electrostatic potential
 \newcommand{\concentration}{c}				% Ion concentration
 \newcommand{\velocity}{\vec{u}}				% Fluid velocity
-\newcommand{\pressure}{p}					% Fluid pressure
-\newcommand{\efield}{\vec{E}}				% Electrical field
-\newcommand{\displacement}{\vec{D}} % Electrical displacement fiedl
-\newcommand{\walldistance}{d}				% Wall distance
+\newcommand{\pressure}{p}					    % Fluid pressure
+\newcommand{\efield}{\vec{E}}         % Electrical field
+\newcommand{\displacement}{\vec{D}}   % Electrical displacement field
+\newcommand{\walldistance}{d}				  % Wall distance
 
 % Dimensionless variables
 \newcommand{\dconc}{\bar{\concentration}}		% Dimensionless concentration
@@ -56,19 +61,19 @@
 \newcommand{\permittivity}{\varepsilon}
 \newcommand{\absperm}{\permittivity_0}				% Permittivity of vacuum
 \newcommand{\relperm}{\permittivity_r}				% Relative permittivity
-\newcommand{\dielectric}{\relperm}				% Relative permittivity
-\newcommand{\diffusion}{\mathcal{D}}			% Diffusion coefficient
-\newcommand{\mobility}{\mu}						% Electrophoretic mobility
-\newcommand{\transportn}{t}						% Transport number
-\newcommand{\chargen}{z}						% Ion charge number
-\newcommand{\ionsize}{a}						% Ion size for smPNP
-\newcommand{\density}{\varrho}						% Fluid density
-\newcommand{\viscosity}{\eta}					% Fluid viscosity
+\newcommand{\dielectric}{\relperm}				    % Relative permittivity
+\newcommand{\diffusion}{\mathcal{D}}		     	% Diffusion coefficient
+\newcommand{\mobility}{\mu}				         		% Electrophoretic mobility
+\newcommand{\transportn}{t}				         		% Transport number
+\newcommand{\chargen}{z}				          		% Ion charge number
+\newcommand{\ionsize}{a}					           	% Ion size for smPNP
+\newcommand{\density}{\varrho}			     			% Fluid density
+\newcommand{\viscosity}{\eta}				         	% Fluid viscosity
 
-\newcommand{\iondiffusion}[1]{\diffusion_{#1}}	% Ion Diffusion coefficient
-\newcommand{\ionmobility}[1]{\mobility_{#1}}	% Ion electrophoretic mobility
-\newcommand{\iontransportn}[1]{\transportn{#1}}	% Ion transport number
-\newcommand{\avionconc}{\langle\concentration\rangle}
+\newcommand{\iondiffusion}[1]{\diffusion_{#1}}	        % Ion Diffusion coefficient
+\newcommand{\ionmobility}[1]{\mobility_{#1}}	          % Ion electrophoretic mobility
+\newcommand{\iontransportn}[1]{\transportn{#1}}	        % Ion transport number
+\newcommand{\avionconc}{\langle\concentration\rangle}   % Average ion concentration
 
 \newcommand{\tna}{\transportn_{\ce{Na+}}}
 

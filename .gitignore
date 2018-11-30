@@ -331,3 +331,4 @@ ENV/
 # expex forward references with \gathertags
 *-tags.tex
 notebook/
+.directory
