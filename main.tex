@@ -190,20 +190,20 @@ Niedzwiecki-2013,VanMeervelt-2014,Huang-2017,Liu-2018,Galenkamp-2018} to the fun
 enzymatic reactions at the single molecular level.\cite{Willems-VanMeervelt-2017,Lieberman-2010,
 Nivala-2013,Ho-2015,Laszlo-2017}
 
-Nanopores are generally operated in the resistive-pulse mode where fluctuations of their ionic conductance are
-monitored over time.\cite{Bayley-2001,Dekker-2007,Maglia-2010,Venkatesan-2011} This conductance is measured by
-placing the nanopore between two electrolyte compartments and applying a constant DC (or AC) voltage
-(\SIrange{0.001}{1}{\volt}) across them. Due to the high resistance of the nanopore, virtually the full
-potential change occurs near and within the pore, resulting in a strong electrical field
-(\SIrange{1e7}{1e8}{\mV\per\nm}) that electrophoretically drives ions and water molecules through the
-pore.\cite{Wong-2007,Mao-2014,Haywood-2014,Laohakunakorn-2015} Hence, analyte molecules such as DNA or
-proteins are driven towards and often \emph{through} the nanopore by a combination of Coulombic
-(electrophoretic) and hydrodynamic (electro-osmotic) forces.\cite{Wong-2007,Grosberg-2010,Muthukumar-2010,
-Muthukumar-2014} If successful such a translocation is observed as a temporal fluctuation in the ionic
-conductance of the pore and serves as a unique molecular fingerprint with which the molecule can be
-identified.\cite{Yusko-2017} The frequency, magnitude, duration and even noise levels of these events depend
-on the properties of both the analyte molecule and the nanopore itself, making them notoriously difficult to
-interpret efficiently without a full understanding of the nanofluidic phenomena that underlie them.
+Nanopores are typically operated in the resistive-pulse mode, i.e. by monitoring the fluctuations of their
+ionic conductance over time.\cite{Bayley-2001,Dekker-2007,Maglia-2010,Venkatesan-2011} Experimentally, this is
+achieved by placing the nanopore between two electrolyte compartments and applying a constant DC (or AC)
+voltage (\SIrange{0.001}{1}{\volt}) across them. Due to the high resistance of the nanopore, virtually the
+full potential change occurs within (and around) the pore, resulting in a strong electrical field
+(\SIrange{1e7}{1e8}{\mV\per\nm}) that electrophoretically drives ions and water molecules through
+it.\cite{Wong-2007,Mao-2014,Haywood-2014,Laohakunakorn-2015} Hence, analyte molecules such as DNA or proteins
+are driven towards, and often \emph{through}, the nanopore by a combination of Coulombic (electrophoretic) and
+hydrodynamic (electro-osmotic) forces.\cite{Wong-2007,Grosberg-2010,Muthukumar-2010, Muthukumar-2014} If
+successful, such a translocation is observed as a temporal fluctuation in the ionic conductance of the pore
+that serves as a unique molecular `fingerprint' with which the molecule can be identified.\cite{Yusko-2017}
+Because the frequency, magnitude, duration and even noise levels of these events depend on the properties of
+both the analyte molecule and the nanopore itself, they are notoriously difficult to interpret efficiently
+without a full understanding of the nanofluidic phenomena that underlie them.
 
 The computational approaches most widely used to study nanofluidic transport in ion channels or biological
 nanopores comprise \emph{discrete} methods such as molecular dynamics (MD)\cite{Lynden-Bell-1996,
@@ -214,9 +214,9 @@ Baldessari-2008-1} and Poisson-Nernst-Planck (PNP) equations,\cite{Eisenberg-199
 Simakov-2010}. The latter can be coupled with the Navier-Stokes (NS) equation to include the electro-osmotic
 flow.\cite{Lu-2012,Pederson-2015} Due to their explicit atomic or particle nature, MD and BD simulations are
 considered to yield the most accurate results. However, the large computational cost of simulating a complete
-biological nanopore system (100K--1M atoms) 100s of nanoseconds still necessitates the use of
+biological nanopore system (100K--1M atoms) for 100s of nanoseconds still necessitates the use of
 supercomputers.\cite{Aksimentiev-2005,Bhattacharya-2011} The PNP(-NS) equations, on the other hand, are of
-particular interest due to their low computational cost and  analytical tractability. In a continuum approach,
+particular interest due to their low computational cost and analytical tractability. In a continuum approach,
 all materials are represented by structureless media whose behavior is parameterized by material properties
 such as relative permittivity, diffusion coefficient, electrophoretic mobility, viscosity and density. Because
 these properties can only emerge from the collective behavior or interactions between small groups of atoms,
@@ -235,8 +235,8 @@ viscosity and density.
 The steric ion-ion interactions can be accounted for by computing the excess in chemical potential
 ($\mu_{i}^\text{ex}$) resulting from the finite size of the ions.\cite{Eisenberg-1996,Bazant-2009,
 Daiguji-2010} Gillespie et al. combined PNP and density functional theory -- where $\mu_{i}^\text{ex}$ was
-split up in ideal, hard-sphere and electrostatic components -- to successfully predicted the selectivity and
-current of ion channels.\cite{Gillespie-2002} In another approach Kilic et al. derived a set of modified PNP
+split up in ideal, hard-sphere and electrostatic components -- to successfully predict the selectivity and
+current of ion channels.\cite{Gillespie-2002} In another approach, Kilic et al. derived a set of modified PNP
 equations -- based on the free energy functional of the Borukhov's modified PB model\cite{Borukhov-1997} --
 and observed significantly more realistic concentrations for high surface potentials compared to the classical
 PNP equations.\cite{Kilic-2007} To allow for non-identical ion sizes and more than two ion species, this model
@@ -248,16 +248,17 @@ strong reduction of their motility, as observed in MD simulations\cite{Makarov-1
 effects happen only for distances \SI{\le1}{\nm}, they can usually be neglected for macroscopic simulations.
 However, in small nanopores ($\le10$~nm radius), they comprise a significant fraction of the total nanopore
 radius and hence must be taken into account.\cite{Noskov-2004,Simakov-2010,Pederson-2015,McMullen-2017} In
-continuum simulations, this can be corrected for by using a positional-dependent ion diffusion coefficients;
-as was implemented in the so-called `soft-repulsion PNP' developed by Simakov and Kurnikova\cite{Simakov-2010,
-Simakov-2018} to predict the ionic conductance of the $\alpha$-hemolysin nanopore. Similar reductions in ion
-diffusion coefficients have been proposed to improve PNP theory's estimations of the ionic conductance of ion
-channels.\cite{Furini-2006,Liu-2015} The motility of water molecules is expressed by the NS equations as the
-fluid's viscosity. Hence, as also observed in MD simulations for water molecules near
-proteins\cite{Pronk-2014} and confined in hydrophilic nanopores,\cite{Qiao_Aluru-2003,Vo-2016,Hsu-2017} the
-water-solid interaction leads to a viscosity several times higher compared to the bulk values. Note that this
-is valid for hydrophilic interfaces only, as the lack of interaction with hydrophobic interfaces, such as
-carbon nanotubes, leads to a lower viscosity.\cite{Ye-2011}
+continuum simulations, this can be taken into account by using positional-dependent ion diffusion
+coefficients; as was implemented in the so-called `soft-repulsion PNP' developed by Simakov and
+Kurnikova\cite{Simakov-2010, Simakov-2018} to predict the ionic conductance of the $\alpha$-hemolysin
+nanopore. Similar reductions in ion diffusion coefficients have been proposed to improve PNP theory's
+estimations of the ionic conductance of ion channels.\cite{Furini-2006,Liu-2015} The motility of water
+molecules is expressed by the NS equations as the fluid's viscosity. Hence, as also observed in MD simulations
+for water molecules near proteins\cite{Pronk-2014} and confined in hydrophilic
+nanopores,\cite{Qiao_Aluru-2003,Vo-2016,Hsu-2017} the water-solid interaction leads to a viscosity several
+times higher compared to the bulk values. Note that this is valid for hydrophilic interfaces only, as the lack
+of interaction with hydrophobic interfaces, such as carbon nanotubes, leads to a lower
+viscosity.\cite{Ye-2011}
 
 It is well known that the self-diffusion coefficient $\diffusion_{i}$ and electrophoretic mobility
 $\mobility_{i}$ of an ion $i$ depends on the local concentrations of all the ions in the
@@ -274,10 +275,11 @@ non-linear, ion density-dependent mobilities and diffusion coefficients that pro
 realistic results for ion channels.\cite{Burger-2012} Note that other electrolyte properties, such as its
 viscosity,\cite{Hai-Lang-1996} density\cite{Hai-Lang-1996} and relative permittivity,\cite{Gavish-2016} also
 significantly affect the ion and water flux. To better compute the charge flux in ion channels, Chen derived a
-new PNP framework that includes a water-ion interactions in the form of a concentrations-dependent relative
-permittivity and an additional ion-water interaction energy term.\cite{Chen-2016} Axelsson et al. derived a
-set of NS equations that allowed for an incompressible fluid with a variable density and
-viscosity.\cite{Axelsson-2015}
+new PNP framework that includes water-ion interactions in the form of a concentration-dependent relative
+permittivity and an additional ion-water interaction energy term.\cite{Chen-2016}
+% Axelsson et al. derived a
+% set of NS equations that allowed for an incompressible fluid with a variable density and
+% viscosity.\cite{Axelsson-2015}
 
 To the best of our knowledge, no attempt has been made to consolidate the corrections discussed above into a
 single framework. Hence, we propose an extended set of PNP-NS (ePNP-NS) equations, which improves the
