@@ -150,21 +150,26 @@ Poisson-Nernst-Planck and Navier-Stokes equations; single molecule}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
 \footnotesize
-Cytolysin A (ClyA) is a protein nanopore that has become a valuable tool for the detection, characterization
-and analysis of bio-markers, proteins and nucleic acids at the single-molecule level. While ClyA has been
-engineered extensively towards these applications, a full understanding of its transport properties and the
-scale of the electrophoretic forces inside it is currently lacking. From this perspective we have built a
-2D-axisymmetric model of ClyA that accurately captures its geometry and charge distribution to numerically
-compute the flux of ions and water through the pore. To achieve this we developed an extended version of the
-steady-state Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations that makes use of self-consistent
-concentration- and positional-dependencies for the ion diffusion coefficients and mobilities, as well as the
-solvent density, viscosity and relative permittivity. In this study we show that our model is able to
-reproduce the experimentally observed ionic currents over a wide range of ionic strengths and applied
-voltages. We further describe the influence of these latter two parameters on various quantities of interest,
-including the cation and anion concentrations inside the pore, the shape of the electrostatic potential
-landscape and the magnitude and direction of the electro-osmotic flow. Our work shows that continuum models of
-biological nanopores -- if the appropriate corrections are applied -- can make meaningful predictions both
-qualitatively and quantitatively.
+In recent years, the protein nanopore cytolysin A (ClyA) has become a valuable tool for the detection,
+characterization and quantification of biomarkers, proteins and nucleic acids at the single-molecule level.
+Despite this extensive experimental utilization, a comprehensive computational study of ion and water
+transport through ClyA is currently lacking. Such a study yields a wealth of information on the electrolytic
+conditions inside the pore and the scale the electrophoretic forces that drive molecular transport, and hence
+could be invaluable for both the design of nanopore experiments and the interpretation of its results.
+%
+From this perspective, we have built a computationally efficient continuum model of ClyA which, together with
+an extended version of Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations, faithfully reproduces its ionic
+conductance over a wide range of salt concentrations. These ePNP-NS equations mitigate the shortcomings
+of the traditional PNP-NS models by self-consistently taking into account the influence of both the ionic
+strength and the nanoscopic scale of the pore on all relevant electrolyte properties.
+%i.e. the diffusion coefficients, mobilities and size of the ions, and the density, viscosity and relative
+%permittivity of the solvent.
+%
+In this study,  we give both a detailed description of our ePNP-NS model and apply it to the ClyA nanopore to
+gain a deeper insight into the influence of ionic strength and applied voltage on the ionic conductance
+through ClyA and a plethora of quantities difficult to assess experimentally, including the cation and anion
+concentrations inside the pore, the shape of the electrostatic potential landscape and the magnitude of the electro-osmotic flow. Our work shows that continuum models of biological nanopores -- if the
+appropriate corrections are applied -- can make meaningful predictions both qualitatively and quantitatively.
 \end{abstract}
 
 
@@ -626,7 +631,7 @@ contribution of \Cl\ to the ionic current.
 
 \subsection{Ion concentration distribution}\label{sec:ionc}
 \input{fig_concentration.tex}
-To further elucidate the origin of the current rectification and ion selectivity, we evaluated  the effect of
+The ionic current results from the flux of ions through pore, whose magnitudes are proportional to the local concentrations inside the pore. To further elucidate the origin of the current rectification and ion selectivity, we evaluated the distribution of both cations and anions inside ClyA the effect of
 reservoir salt concentration and the bias voltage on the distribution of cation and anion densities inside
 ClyA (\cref{fig:concentration}) and the accumulation of mobile charges as a result of their asymmetry
 (\cref{fig:ion_charge_density}).
@@ -688,7 +693,7 @@ ions in the surface layer rises (to \SI{+58}{\ec} at \SI{5}{\Molar}), while that
 \SIrange{+10}{+15}{\ec} higher at \SI{+150}{\mV} compared to \SI{-150}{\mV}.
 
 
-\subsection{Electrostatic potential}\label{sect:esp}
+\subsection{Equilibrium electrostatic potential}\label{sect:esp}
 
 \input{fig_potential.tex}
 
@@ -731,7 +736,7 @@ Their magnitude increases approximately three-fold at \SI{0.005}{\Molar}, and dr
 \SI{\approx10}{\percent} at \SI{5}{\Molar}. A summary of these values can be found in
 \cref{suppinfo:tab:radial_potential}.
 
-\subsection{Electrostatic energy}\label{sec:ese}
+\subsection{Non-equilibrium electrostatic potential}\label{sec:ese}
 
 and to link it back to the observed ionic conductance properties through the average electrostatic energy of
 cations and anions (\cref{fig:potential_energy}).
