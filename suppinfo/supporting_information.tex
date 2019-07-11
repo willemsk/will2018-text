@@ -63,7 +63,7 @@
 %-------------------------------------------------------------------------------
 % TITLE AND AUTHOR LIST
 %-------------------------------------------------------------------------------
-\title{Modelling of Ion and Water Transport in the Biological Nanopore ClyA}
+\title{Modeling of Ion and Water Transport in the Biological Nanopore ClyA}
 \input{../shared/authors.tex}
 
 
@@ -81,28 +81,37 @@
 
 \subsection{Fitting of the electrolyte properties}
 \input{fig_corrections.tex}
-The parameters of the fitting functions used to interpolate the experimental ion diffusion coefficients,
-mobilities and transport numbers, and the electrolyte viscosity, density and relative permittivity are given
-in \cref{tab:corrections_parameters} and the resulting curves are plotted in \cref{fig:corrections}. Note
-that since most of these functions are merely empirical fits with no physical meaning, and that they are
-solely used to interpolate and represent the experimental data.
+The parameters of the fitting functions used to interpolate the experimental ion
+diffusion coefficients, mobilities and transport numbers, and the electrolyte
+viscosity, density and relative permittivity are given in
+\cref{tab:corrections_parameters} and the resulting curves are plotted in
+\cref{fig:corrections}. Note that since most of these functions are merely
+empirical fits with no physical meaning, and that they are solely used to
+interpolate and represent the experimental data.
 
-Finally, for the concentration dependence of the relative permittivity we made use of the model proposed by Gavish et al.\cite{Gavish-2016}
+Finally, for the concentration dependence of the relative permittivity we made
+use of the model proposed by Gavish et al.\cite{Gavish-2016}
+%
 \begin{align}
 \relperm(\dconc) = \permittivity_{r,0} - \left(\permittivity_{r,0} - \permittivity_{r,ms}\right) L \left( \dfrac{3\alpha}{\permittivity_{r,0} - \permittivity_{r,ms}} \dconc \right)
 \end{align}
+%
 \input{tab_corrections_parameters.tex}
 
 \newpage
 \subsection{Surface integration to compute pore averaged values}
+
 The average pore values for quantity of interest $X$ was computed by
+%
 \begin{align}
   \left< X \right>_{\alpha} =
     \displaystyle\frac{\displaystyle\iint_{V_{\alpha}} \beta_{\alpha} X \,dr\,dz}
                       {\displaystyle\iint_{V_{\alpha}} \beta_{\alpha} \,dr\,dz}
   \text{ ,}
 \end{align}
+%
 where
+%
 \begin{equation}
   \alpha=
   \begin{cases}
@@ -111,7 +120,9 @@ where
     \text{s}, & d \le 0.5\text{~nm} \text{, average over the pore `surface' }
   \end{cases}
 \end{equation}
+%
 and
+%
 \begin{align}
   \beta_{\text{p}} &=
   \begin{cases}
@@ -129,19 +140,22 @@ and
   0, & \text{otherwise}
   \end{cases}
 \end{align}
+%
 with $d$ the distance from the nanopore wall and $r_\text{p}(z)$ is the radius of the pore at height $z$.
 
 
 \newpage
 \subsection{Weak forms of the ePNP-NS equations}
-To solve partial differential equations with the finite element method, we must be derive their weak form.
-This is achieved through multiplication of the equation with an arbitrary test function and integration over
-their relevant domains and boundaries (\cref{fig:domains_an_boundaries}). The full computational domain of
-our model ($\Omega$) is subdivided into domains for the pore ($\Omega_p$), the lipid bilayer ($\Omega_m$) and
-the electrolyte reservoir ($\Omega_w$). The relevant boundaries of these domains are also indicated, i.e. the
-reservoir's exterior edges at the \cis\ $\Gamma_{w,c}$) and \trans\ $\Gamma_{w,t}$) sides, the outer edge of
-the lipid bilayer ($\Gamma_{m}$) and the interface of the fluid with the nanopore and the bilayer
-($\Gamma_{p+m}$).
+To solve partial differential equations with the finite element method, we must
+be derive their weak form. This is achieved through multiplication of the
+equation with an arbitrary test function and integration over their relevant
+domains and boundaries (\cref{fig:domains_an_boundaries}). The full
+computational domain of our model ($\Omega$) is subdivided into domains for the
+pore ($\Omega_p$), the lipid bilayer ($\Omega_m$) and the electrolyte reservoir
+($\Omega_w$). The relevant boundaries of these domains are also indicated, i.e.
+the reservoir's exterior edges at the \cis\ $\Gamma_{w,c}$) and \trans\
+$\Gamma_{w,t}$) sides, the outer edge of the lipid bilayer ($\Gamma_{m}$) and
+the interface of the fluid with the nanopore and the bilayer ($\Gamma_{p+m}$).
 
 The following paragraphs detail the equations that were used in this paper, together with their corresponding
 weak forms.
@@ -149,7 +163,10 @@ weak forms.
 \input{fig_domains_and_boundaries.tex}
 
 \paragraph{Poisson equation.}
-The global potential distribution is described by the Poisson equation (PE)\cite{Lu-2012}
+%
+The global potential distribution is described by the Poisson equation
+(PE)\cite{Lu-2012}
+%
 \begin{align}
 \label{eq:poisson}
 \nabla \cdot \displacement = -\left( \scdpore + \scdion \right)
@@ -157,13 +174,16 @@ The global potential distribution is described by the Poisson equation (PE)\cite
 \displacement = \absperm \relperm \nabla \potential
 \text{ ,}
 \end{align}
-with $\displacement$ the electrical displacement field, $\potential$ the electric potential, $\absperm$ the
-vacuum permittivity ($8.85419\times10^{-12}\text{~F\,m}^{-1}$), and $\relperm$ the local relative
-permittivity of the medium. $\scdpore$ and $\scdion$ are the fixed (due to the pore) and mobile (due to the
-ions) charge distributions, respectively.
+%
+with $\displacement$ the electrical displacement field, $\potential$ the
+electric potential, $\absperm$ the vacuum permittivity
+($8.85419\times10^{-12}\text{~F\,m}^{-1}$), and $\relperm$ the local relative
+permittivity of the medium. $\scdpore$ and $\scdion$ are the fixed (due to the
+pore) and mobile (due to the ions) charge distributions, respectively.
 
-Multiplication of \cref{eq:poisson} with the potential test function $\psi$ and integration over the entire
-model $\Omega=\Omega_w+\Omega_p+\Omega_m$ gives
+Multiplication of \cref{eq:poisson} with the potential test function $\psi$ and
+integration over the entire model $\Omega=\Omega_w+\Omega_p+\Omega_m$ gives
+%
 \begin{align}
 \displaystyle\int_{\Omega}
 \left[
@@ -173,7 +193,10 @@ model $\Omega=\Omega_w+\Omega_p+\Omega_m$ gives
 ={}&
 - \displaystyle\int_{\Omega} \left[ \scdpore + \scdion \right] \psi \,d\Omega \text{ ,}
 \end{align}
-which, after applying the Gauss divergence theorem, yields the final weak formulation
+%
+which, after applying the Gauss divergence theorem, yields the final weak
+formulation
+%
 \begin{align}
 \displaystyle\int_{\Omega}
 \left[
@@ -191,14 +214,18 @@ which, after applying the Gauss divergence theorem, yields the final weak formul
 \displaystyle\int_{\Omega} \left[ \psi \scdion \right] \,d\Omega
 \text{ ,}
 \end{align}
-with boundaries $\Gamma_\text{PE}=\Gamma_{w,c}+\Gamma_{w,t}+\Gamma_m$ and $\vec{n}$ their normal vector. The
-boundary integrals at $\Gamma_{w,c}$ and $\Gamma_{w,t}$ are evaluated using the Dirichlet boundary conditions
-(BCs) $\potential=0$ and $\potential=\vbias$, respectively. A zero charge BC, $\vec{n} \cdot \displacement =
-0$, is used for the integral at $\Gamma_{m}$.
+%
+with boundaries $\Gamma_\text{PE}=\Gamma_{w,c}+\Gamma_{w,t}+\Gamma_m$ and
+$\vec{n}$ their normal vector. The boundary integrals at $\Gamma_{w,c}$ and
+$\Gamma_{w,t}$ are evaluated using the Dirichlet boundary conditions (BCs)
+$\potential=0$ and $\potential=\vbias$, respectively. A zero charge BC, $\vec{n}
+\cdot \displacement = 0$, is used for the integral at $\Gamma_{m}$.
 
 \paragraph{Size-modified Nernst-Planck equation.}
-The total ionic flux $\flux_{i}$ of ion $i$ at steady-state is expressed by the size-modified Nernst-Planck
-equation (smNPE)\cite{Lu-2012}
+%
+The total ionic flux $\flux_{i}$ of ion $i$ at steady-state is expressed by the
+size-modified Nernst-Planck equation (smNPE)\cite{Lu-2012}
+%
 \begin{equation}
 \label{eq:smnp}
 \pd{\concentration_{i}}{t} = - \nabla\cdot\flux_{i} = - \nabla \cdot
@@ -211,15 +238,18 @@ equation (smNPE)\cite{Lu-2012}
 \text{\quad with }
 \vec{\beta_{i}} =
   \frac{\ionsize_{i}^3/\ionsize_{0}^3 \displaystyle\sum_{j} \ionsize_{j}^3 \nabla \concentration_{j}}
-       {1 - \displaystyle\sum_{j} \avogadro \ionsize_{j}^3 \concentration_{j}}
+      {1 - \displaystyle\sum_{j} \avogadro \ionsize_{j}^3 \concentration_{j}}
 \text{ ,}
 \end{equation}
-with ion diffusion coefficient $\diffusion_{i}$, concentration $\concentration_{i}$, charge number
-$\chargen_{i}$, mobility $\mobility_{i}$, electrostatic potential $\potential$, steric saturation factor
-$\beta_{i}$ and fluid velocity $\velocity$. $\avogadro$ is Avogadro's constant
-($6.022\times10^{23}\text{~mol}^{-1}$) and $\ionsize_{i}$ and $\ionsize_{0}$ are the limiting cubic diameters
-for ions and water, respectively. Using the ion concentration test function $d_i$, the weak form of
-\cref{eq:smnp} becomes
+%
+with ion diffusion coefficient $\diffusion_{i}$, concentration
+$\concentration_{i}$, charge number $\chargen_{i}$, mobility $\mobility_{i}$,
+electrostatic potential $\potential$, steric saturation factor $\beta_{i}$ and
+fluid velocity $\velocity$. $\avogadro$ is Avogadro's constant
+($6.022\times10^{23}\text{~mol}^{-1}$) and $\ionsize_{i}$ and $\ionsize_{0}$ are
+the limiting cubic diameters for ions and water, respectively. Using the ion
+concentration test function $d_i$, the weak form of \cref{eq:smnp} becomes
+%
 \begin{align}
 % Raw integral
 \displaystyle\int_{\Omega_w} \left[ \pd{\concentration_{i}}{t} \right] d_{i} \,d\Omega_w ={}&
@@ -258,13 +288,18 @@ for ions and water, respectively. Using the ion concentration test function $d_i
 \,d\Gamma_\text{NP}
 \text{ .}
 \end{align}
-The integrals on the boundaries $\Gamma_\text{NP} = \Gamma_{w,c}+\Gamma_{w,t}+\Gamma_{p+m}$ are evaluated
-using the Dirichlet boundary condition $\concentration_{i} = \cbulk$ for $\Gamma_{w,c}$ and $\Gamma_{w,t}$,
-and the no flux boundary condition $\vec{n} \cdot \flux_{i} = 0$ for $\Gamma_{p+m}$
+%
+The integrals on the boundaries $\Gamma_\text{NP} =
+\Gamma_{w,c}+\Gamma_{w,t}+\Gamma_{p+m}$ are evaluated using the Dirichlet
+boundary condition $\concentration_{i} = \cbulk$ for $\Gamma_{w,c}$ and
+$\Gamma_{w,t}$, and the no flux boundary condition $\vec{n} \cdot \flux_{i} = 0$
+for $\Gamma_{p+m}$
 
 \paragraph{Variable density and viscosity Navier-Stokes equation.}
-The steady-state, laminar fluid flow of an incompressible fluid with a variable density and viscosity is
-given by the system of equations\cite{Axelsson-2015}
+%
+The steady-state, laminar fluid flow of an incompressible fluid with a variable
+density and viscosity is given by the system of equations\cite{Axelsson-2015}
+%
 \begin{align}
 \label{eq:ns_density_continuity}
 \velocity \cdot \nabla \density ={}& 0 \\
@@ -278,9 +313,12 @@ given by the system of equations\cite{Axelsson-2015}
 \nabla \cdot \left( \density\velocity \right) - \velocity \cdot \nabla \density ={}& 0
 \text { ,}
 \end{align}
-with fluid velocity $\velocity$, density $\density$, hydrodynamic stress tensor $\hydrostresstensor$,
-viscosity $\viscosity$, pressure $\pressure$ and body force $\vec{\force}$.
-The pressure test function $q$ is used to derive the weak forms of \cref{eq:ns_density_continuity}
+%
+with fluid velocity $\velocity$, density $\density$, hydrodynamic stress tensor
+$\hydrostresstensor$, viscosity $\viscosity$, pressure $\pressure$ and body
+force $\vec{\force}$. The pressure test function $q$ is used to derive the weak
+forms of \cref{eq:ns_density_continuity}
+%
 \begin{align}
 % Density continuity
 \displaystyle\int_{\Omega_w} \left[ \velocity \cdot \nabla \density \right] q \,d\Omega_w ={}&
@@ -308,7 +346,10 @@ and \cref{eq:ns_velocity_continuity}
 \left[ q \velocity \cdot \nabla \density \right] \,d\Omega_w \notag
 \text{ ,}
 \end{align}
-while for \cref{eq:ns_conservation} we use the velocity test function $\vec{v}=\left[v_r, v_\phi, v_z\right]$
+%
+while for \cref{eq:ns_conservation} we use the velocity test function
+$\vec{v}=\left[v_r, v_\phi, v_z\right]$
+%
 \begin{align}
 \displaystyle\int_{\Omega_w}
 \left[
@@ -340,22 +381,26 @@ while for \cref{eq:ns_conservation} we use the velocity test function $\vec{v}=\
 ={}& \displaystyle\int_{\Omega_w} \vec{\force} \cdot \vec{v} \,d\Omega_w \notag
 \text{ ,}
 \end{align}
-with boundaries $\Gamma_\text{NS} = \Gamma_{w,c}+\Gamma_{w,t}+\Gamma_{p+m}$. The no-slip Dirichlet BC
-$\velocity = 0$ is applied to $\Gamma_{p+m}$, and the no normal stress $\hydrostresstensor\vec{n}=0$ is used
-for $\Gamma_{w,c}$ and $\Gamma_{w,t}$.
+%
+with boundaries $\Gamma_\text{NS} = \Gamma_{w,c}+\Gamma_{w,t}+\Gamma_{p+m}$. The
+no-slip Dirichlet BC $\velocity = 0$ is applied to $\Gamma_{p+m}$, and the no
+normal stress $\hydrostresstensor\vec{n}=0$ is used for $\Gamma_{w,c}$ and
+$\Gamma_{w,t}$.
 
 \newpage
-\section{Extented results}
+\section{Extended results}
 
 \subsection{Peak values of the radial potential profiles inside ClyA}
-The peak values of the radial electrostatic potential $\radpot$ at the \cis\ entry, middle of the lumen and
-the \trans\ constriction for $0.005$, $0.05$, $0.15$, $0.5$ and $5$~M \ce{NaCl} are summarized in
-\cref{tab:radial_potential}.
+
+The peak values of the radial electrostatic potential $\radpot$ at the \cis\
+entry, middle of the lumen and the \trans\ constriction for $0.005$, $0.05$,
+$0.15$, $0.5$ and $5$~M \ce{NaCl} are summarized in \cref{tab:radial_potential}.
 \input{tab_radial_potential.tex}
 
 \subsection{Pressure distribution inside ClyA}
-The electro-osmotic pressure distribution inside ClyA, as a consequence of the strong local enhancement of
-the ion concentration, is given in \cref{fig:pressure}.
+The electro-osmotic pressure distribution inside ClyA, as a consequence of the
+strong local enhancement of the ion concentration, is given in
+\cref{fig:pressure}.
 \input{fig_pressure.tex}
 
 

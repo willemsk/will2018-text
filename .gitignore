@@ -332,3 +332,4 @@ ENV/
 *-tags.tex
 notebook/
 .directory
+.vscode
