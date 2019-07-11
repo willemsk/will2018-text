@@ -32,7 +32,7 @@
 	\sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
 	\sisetup{list-units=single}
   \sisetup{range-units=single}
-  \sisetup{list-final-separator={and }}
+  \sisetup{list-final-separator={ and }}
   \sisetup{retain-explicit-plus=true}
 
 \usepackage{float}
@@ -432,6 +432,8 @@ concentration, $\relperm^0$ the relative permittivity at infinite dilution and
 $\relperm^c(\avionconc)$ a concentration dependent empirical function
 parameterized with experimental data.
 
+\input{tab_corrections_equations.tex}
+
 \paragraph{Ionic flux.}
 %
 The total ionic flux $\flux_{i}$ of each ion $i$ is given by the size-modified
@@ -566,8 +568,8 @@ the $\density$ by replacing their constant values by
     \density^0 \density^c(\avionconc)
 \end{align}
 %
-where $\viscosity^0$ and $\density^0$ are the values at infinite dilution, \ie{}~
-pure water, $\viscosity^c(\avionconc)$, $\density^c(\avionconc)$ and
+where $\viscosity^0$ and $\density^0$ are the values at infinite dilution,
+\ie{}~ pure water, $\viscosity^c(\avionconc)$, $\density^c(\avionconc)$ and
 $\viscosity^w(\walldistance)$ are empirical functions parameterized via fitting
 to experimental\cite{Hai-Lang-1996} and molecular dynamics\cite{Pronk-2014} data
 obtained from literature.
@@ -609,8 +611,6 @@ concentration and wall distance functions to unity, such that $\relperm =
 \relperm^0$, $\diffusion_{i} = \diffusion_{i}^0$, $\mobility_{i} =
 \mobility_{i}^0$, $\viscosity = \viscosity^0$ and $\density = \density^0$.
 
-\input{tab_corrections_equations.tex}
-
 
 \section{Results and discussion}\label{sec:results}
 
@@ -642,36 +642,46 @@ conclude this section by discussing the properties of the electroosmotic flow.
 %
 To gauge the accuracy of our 2D-axisymmetric ClyA-AS model, we experimentally
 measured the current--voltage (IV) curves of single ClyA-AS nanopores (between
-\SIrange{-150}{+150}{\mV} and at \SIlist{0.05;0.15;0.5;1;3}{\Molar} \ce{NaCl}) and compared them directly to the values obtained from
-steady-state simulations using both the classical PNP-NS and the new ePNP-NS
-equations (\cref{fig:current-voltage_curves}, cf.~\nameref{sec:methods} for
-experimental and computational details). Over the entire investigated
-concentration range, the IVs from the ePNP-NS model closely corresponded to the
-measured values ($<5\%$ error). In contrast, the PNP-NS equations significantly
-overestimate the ionic current for all measured concentrations, particularly at
-high salt concentrations where most parameters deviate significantly from their
-`infinite dilution' values (\cref{suppinfo:fig:corrections}). Interestingly, the
-opposite behavior is observed for ePNP-NS, with virtually no error at high ionic
+\SIrange{-150}{+150}{\mV} and at \SIlist{0.05;0.15;0.5;1;3}{\Molar} \ce{NaCl})
+and compared them directly to the values obtained from steady-state simulations
+using both the classical PNP-NS and the new ePNP-NS equations
+(\cref{fig:current-voltage_curves}, cf.~\nameref{sec:methods} for experimental
+and computational details). Over the entire investigated concentration range,
+the IVs from the ePNP-NS model closely corresponded to the measured values
+($<5\%$ error). In contrast, the PNP-NS equations significantly overestimate the
+ionic current for all measured concentrations, particularly at high salt
+concentrations where most parameters deviate significantly from their `infinite
+dilution' values (\cref{suppinfo:fig:corrections}). Interestingly, the opposite
+behavior is observed for ePNP-NS, with virtually no error at high ionic
 strengths and minor discrepancies at lower salt concentrations
 (\SI{<0.5}{\Molar}). At low ionic strengths, the electrical double layers inside
 the pore are likely to overlap, resulting in nanopore occupied predominantly by
 cations. Because our ionic mobilities are derived from bulk ionic conductances,
 \ie{}~for unconfined ions in a locally \emph{electroneutral} environment, it is
 likely that our mobility model begins to break down under these
-conditions.\cite{Duan-2010} Regardless of these minor discrepancies, it is clear
-that our simplified, 2D-axisymmetric model, in conjunction with the ePNP-NS
-equations, is able to accurately compute the ionic current through ClyA. Hence,
-this methodology should be applicable to other small nanopores
-($r_{\text{pore}}\approx\SI{1.5}{\nm}$) with complex geometries and charge
-distributions.
+conditions.\cite{Duan-2010} Nevertheless, our simplified 2D-axisymmetric model,
+in conjunction with the ePNP-NS equations, is able to accurately predict the
+ionic current through ClyA for a wide range of ionic strengths and applied bias
+voltages. This suggests that the computed values underlying proper
+
+% this methodology should be applicable to other small nanopores
+% ($r_{\text{pore}}\approx\SI{1.5}{\nm}$) with complex geometries and charge
+% distributions.
 
 % Difference in conductance mechanism between high and low salt
-\paragraph{Ionic conductance.}
+\paragraph{Ionic conductance and rectification.}
 %
-To further our understanding of ClyA's ionic transport properties, we computed
-its ionic conductance $\conductance=\current / \vbias$ between \num{0.005} to
-\SI{5}{\Molar} \ce{NaCl} and from \num{-200} to
-\SI{+200}{\mV}.
+The ionic conductance of ClyA is a measure for it's ability to conduct ions and can be computed directly from the ionic current
+using
+%
+\begin{equation}
+  \conductance=\dfrac{\current}{\vbias}
+  \quad\text{.}
+\end{equation}
+
+we computed
+its ionic conductance $\conductance=\current / \vbias$ between
+\SIlist{0.005;5}{\Molar} \ce{NaCl} and from \num{-200} to \SI{+200}{\mV}.
 
 The near horizontal contour lines of the conductance heatmap
 (\cref{fig:conductance_contourmap_epnp}, left) at high salt concentration
