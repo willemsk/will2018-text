@@ -634,9 +634,92 @@ is followed by a characterization of the electrostatic potential and the
 electrostatic energy landscape within ClyA for both cations and anions. We will
 conclude this section by discussing the properties of the electroosmotic flow.
 
-\subsection{Transport of ions through ClyA}\label{sec:iont}
 
-\input{fig_conductance.tex}
+\begin{figure*}[!p]
+  \centering
+  \begin{minipage}[l]{16cm}
+    \begin{minipage}[h]{5cm}
+      \begin{subfigure}[t]{4.5cm}
+        \centering
+        \caption{}\vspace{-3mm}\label{fig:current-voltage_curves}
+        \includegraphics[scale=1]{../figures/conductance/current_vs_voltage_all_multiplot}
+      \end{subfigure}
+    \end{minipage}
+    %
+    \begin{minipage}[h]{5cm}
+      \begin{subfigure}[t]{5cm}
+        \centering
+        \caption{}\vspace{0mm}\label{fig:conductance_contourmap_epnp}
+        \includegraphics[scale=1]{../figures/conductance/conductance_contourmap_epnp}
+      \end{subfigure}
+      \end{minipage}
+      \\
+      \begin{subfigure}[t]{5cm}
+        \centering
+        \caption{}\vspace{0mm}\label{fig:conductance_loglog_exp_pnp_epnp}
+        \includegraphics[scale=1]{../figures/conductance/conductance_loglog_exp_pnp_epnp}
+      \end{subfigure}
+    %
+    \begin{minipage}[h]{5cm}
+      \begin{subfigure}[t]{5cm}
+        \centering
+        \caption{}\vspace{0mm}\label{fig:transport_number_contourmap_epnp}
+        \includegraphics[scale=1]{../figures/conductance/transport_number_contourmap_epnp}
+      \end{subfigure}
+      \\
+      \begin{subfigure}[t]{5cm}
+        \centering
+        \caption{}\vspace{0mm}\label{fig:transport_number_vs_concentration_bulk_pnp_epnp}
+        \includegraphics[scale=1]{../figures/conductance/transport_number_vs_concentration_bulk_pnp_epnp}
+      \end{subfigure}
+    \end{minipage}
+  \end{minipage}
+\caption{%
+  %
+  \textbf{Measured and simulated ionic conductance, rectification and cation
+  selectivity of single ClyA nanopores.}
+  %
+  (\subref{fig:current-voltage_curves})
+  %
+  Comparison of the simulated (PNP-NS and ePNP-NS) and experimentally
+  (expt.) measured current-voltage (IV) curves of ClyA-AS at \SI{25\pm1}{\dC}
+  between $\vbias=\text{\SIrange{-200}{+200}{\mV}}$, and for
+  $\cbulk=\text{\SIlist{0.05;0.15;0.5;1;3}{\Molar}}$ \ce{NaCl}. Experimental
+  errors ($n=3$) were smaller than the symbol size and hence not shown.
+  %
+  %
+  (\subref{fig:conductance_contourmap_epnp})
+  %
+  Contourplot of the simulated (ePNP-NS) ionic conductance $\conductance =
+  \current /\vbias$.
+  %
+  (\subref{fig:conductance_loglog_exp_pnp_epnp})
+  Ionic conductance of the simulated, experimental and bulk conductances at
+  \SI{+150}{\mV} (top) and \SI{-150}{\mV} (bottom). The bulk conductance of the
+  nanopore was calculated by modelling the nanopore as two resistors in series\cite{Soskine-2013,Kowalczyk-2011}
+  $\conductance_{\text{bulk}} = \dfrac{\sigma}{4\pi}
+  \left( \dfrac{ l_{\text{trans}} }{ d_{\text{trans}}^2 } +
+  \dfrac{ l_{\text{cis}} }{ d_{\text{cis}}^2 }  \right)
+  $ with $\sigma$ the bulk \ce{NaCl} conductivity, l_{\text{trans}
+  
+  
+  to generate concentration-voltage
+  heatmaps (left) and cross-sections at characteristic voltages (right) of
+   the ionic conductance , (\subref{fig:conductance_rectification_contourmap_epnp})
+  the ionic conductance rectification $\icr(\vbias) = \conductance(+\vbias) /
+  \conductance(-\vbias)$ and (\subref{fig:transport_number_contourmap_epnp}) the
+  \Na\ transport number $\transportn_{\Na}=\conductance_{\Na}/\conductance$.
+  While the $\conductance$ simply represents ClyA's ability to transport ions as
+  a function of the bulk reservoir concentration, $\icr$ describes the magnitude
+  of the ionic flux at positive vs. negative bias voltages. Finally,
+  $\transportn_{\Na}$ reveals how much of the current is carrier by \Na\ ions,
+  i.e. the cation-selectivity of the pore.
+  %
+  }\label{fig:conductance}
+\end{figure*}
+
+
+\subsection{Transport of ions through ClyA}\label{sec:iont}
 
 \paragraph{Ionic current.}
 %
@@ -706,16 +789,17 @@ determined by the electrical double layer which as well has a square-root
 dependence on the bulk concentration $\cbulk$.\cite{Uematsu-2018} Under all
 other conditions, $\gamma$ yields values between $0.5$ and $?$
 
-($0.3\le\cbulk\le1.5$~M)
- yielded exponents $\gamma$ of
-\num{0.4984} and \num{1.000}, respectively. while the linear dependency on $\cbulk$
-is commonly observed at high salt concentrations\todo{ref}, the square-root dependency at low salt suggests a
-transport mode dominated by the surface charge density due to the overlapping of the electrical double
-layers. These mechanisms are less well defined at high positive bias voltages, however, as
-fitting yielded $\gamma$ value of $0.614$~$\text{M}^{-1}$ and $0.787$~$\text{M}^{-1}$ for low and high
-concentrations, respectively. Hence, while there are clearly two distinct ion transport modes at high
-negative bias voltages, the converging exponents at high positive voltages suggest a `hybrid' mode with
-characteristics of both regimes.
+($0.3\le\cbulk\le1.5$~M) yielded exponents $\gamma$ of \num{0.4984} and
+ \num{1.000}, respectively. while the linear dependency on $\cbulk$ is commonly
+ observed at high salt concentrations\todo{ref}, the square-root dependency at
+ low salt suggests a transport mode dominated by the surface charge density due
+ to the overlapping of the electrical double layers. These mechanisms are less
+ well defined at high positive bias voltages, however, as fitting yielded
+ $\gamma$ value of $0.614$~$\text{M}^{-1}$ and $0.787$~$\text{M}^{-1}$ for low
+ and high concentrations, respectively. Hence, while there are clearly two
+ distinct ion transport modes at high negative bias voltages, the converging
+ exponents at high positive voltages suggest a `hybrid' mode with
+ characteristics of both regimes.
 
 \paragraph{Ionic current rectification.}
 %
@@ -771,12 +855,12 @@ for $-150$ and $+150$~mV, respectively.
 \todo{What do these different slopes mean?}
 At low concentrations and high applied bias voltages (below $10$~mM and $50$~mM
 for $+150$ and $-150$~mV, respectively), $\tna$ is observed to exceed unity.
-Under these conditions, the convective flux of \Cl{} becomes slightly larger than
-its opposing electromigratory flux, resulting in an overall negative
+Under these conditions, the convective flux of \Cl{} becomes slightly larger
+than its opposing electromigratory flux, resulting in an overall negative
 contribution of \Cl{} to the ionic current.
 
 
-\subsection{Ion concentration distribution}\label{sec:ionc}
+\subsection{Ion Concentration Distribution}\label{sec:ionc}
 %
 \input{fig_concentration.tex}
 The ionic current results from the flux of ions through pore, whose magnitudes
@@ -827,7 +911,7 @@ steady-state simulation, and hence represent a time-averaged situation
 % cneg
 % a=3.236±0.166, b=0.778±0.015
 
-\paragraph{Ion charge density.}
+\paragraph{Ion Charge Density.}
 %
 \input{fig_ion_charge_density.tex}
 The formation of an electrical double layer inside the pore and the resulting
@@ -863,7 +947,7 @@ the applied bias voltage, as it is \SIrange{+10}{+15}{\ec} higher at
 \SI{+150}{\mV} compared to \SI{-150}{\mV}.
 
 
-\subsection{Equilibrium electrostatic potential}\label{sect:esp}
+\subsection{Equilibrium Electrostatic Potential}\label{sect:esp}
 
 \input{fig_potential.tex}
 
@@ -1158,15 +1242,18 @@ nanoscale.}
 bias voltages.}
 
 \subsection{ClyA's ion selectivity is highly concentration and voltage dependent.}
-While the ion selectivity can be estimated experimentally using the Goldman-Hodgkin-Katz
-equation (GHKe),\cite{Franceschini-2016,Huang-2017} the asymmetric salt concentrations used to determine the
-nanopore's reversal potential raises the question for which salt concentration this ion selectivity is valid.
-Moreover, the many assumptions and simplifications used to derive the GHKe (Nernst-Einstein relation, no
-convective transport, uniform electrical field over the pore) suggest that the ion selectivity calculated for
-larger pores should be considered as a rough estimation only.
+While the ion selectivity can be estimated experimentally using the
+Goldman-Hodgkin-Katz equation (GHKe),\cite{Franceschini-2016,Huang-2017} the
+asymmetric salt concentrations used to determine the nanopore's reversal
+potential raises the question for which salt concentration this ion selectivity
+is valid. Moreover, the many assumptions and simplifications used to derive the
+GHKe (Nernst-Einstein relation, no convective transport, uniform electrical
+field over the pore) suggest that the ion selectivity calculated for larger
+pores should be considered as a rough estimation only.
 
-\subsection{The electroosmotic flow exhibits a maximum at 0.5~M due to two competing concentration-dependent
-effects.}
+
+\subsection{The electroosmotic flow exhibits a maximum at 0.5~M due to two
+competing concentration-dependent effects.}
 
 \begin{itemize}
   \item Reduced double layer overlap and the appearance of alternating positive and negative space charge
@@ -1212,7 +1299,7 @@ nanopores of comparable size can be treated analogously and their properties
 could likely be mapped out systematically using our ePNP-NS model.
 
 
-\section{Materials and methods}\label{sec:methods}
+\section{Materials and Methods}\label{sec:methods}
 
 \paragraph{ClyA-AS homology model.}
 %
