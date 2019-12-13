@@ -387,6 +387,31 @@ no-slip Dirichlet BC $\velocity = 0$ is applied to $\Gamma_{p+m}$, and the no
 normal stress $\hydrostresstensor\vec{n}=0$ is used for $\Gamma_{w,c}$ and
 $\Gamma_{w,t}$.
 
+%
+\subsection{Estimating the bulk conductance of ClyA}
+%
+A rough estimate of a nanopore's ionic conductance can be obtained by modelling it as a fluidic resistor,
+represented by a cylinder.\cite{Kowalczyk-2011} ClyA's asymmetric shape can be approximated by a tall, wide
+cylinder (\cisi{} \textit{lumen}) on top of a narrow short cylinder (\transi{} constriction), resulting in two
+resistors in series\cite{Soskine-2013}
+%
+\begin{align}
+  \label{eq:bulk_nanopore_conductance}
+  \conductance_{\text{bulk}} = 
+      \dfrac{\sigma}{4\pi}
+      \left( 
+          \dfrac{ l_{\text{cis}} }{ d_{\text{cis}}^2 } +
+          \dfrac{ l_{\text{trans}} }{ d_{\text{trans}}^2 }
+      \right)
+      \text{ ,}
+\end{align}
+%
+with $\sigma$ the bulk electrolyte conductivity, $l_{\text{cis}}=\text{\SI{10}{\nm}}$ and
+$l_{\text{trans}}=\text{\SI{4}{\nm}}$ the heights and $d_{\text{cis}}=\text{\SI{10}{\nm}}$ and
+$d_{\text{trans}}=\text{\SI{4}{\nm}}$ the diameters of the \cisi{} and \transi{} chambers,
+respectively.\cite{Soskine-2013}
+
+
 \newpage
 \section{Extended results}
 

@@ -638,7 +638,7 @@ conclude this section by discussing the properties of the electroosmotic flow.
 \begin{figure*}[!p]
   \centering
   \begin{minipage}[l]{16cm}
-    \begin{minipage}[h]{5cm}
+    \begin{minipage}[t]{5cm}
       \begin{subfigure}[t]{4.5cm}
         \centering
         \caption{}\vspace{-3mm}\label{fig:current-voltage_curves}
@@ -646,21 +646,21 @@ conclude this section by discussing the properties of the electroosmotic flow.
       \end{subfigure}
     \end{minipage}
     %
-    \begin{minipage}[h]{5cm}
+    \begin{minipage}[t]{5cm}
       \begin{subfigure}[t]{5cm}
         \centering
         \caption{}\vspace{0mm}\label{fig:conductance_contourmap_epnp}
         \includegraphics[scale=1]{../figures/conductance/conductance_contourmap_epnp}
       \end{subfigure}
-      \end{minipage}
       \\
       \begin{subfigure}[t]{5cm}
         \centering
         \caption{}\vspace{0mm}\label{fig:conductance_loglog_exp_pnp_epnp}
         \includegraphics[scale=1]{../figures/conductance/conductance_loglog_exp_pnp_epnp}
       \end{subfigure}
+    \end{minipage}
     %
-    \begin{minipage}[h]{5cm}
+    \begin{minipage}[t]{5cm}
       \begin{subfigure}[t]{5cm}
         \centering
         \caption{}\vspace{0mm}\label{fig:transport_number_contourmap_epnp}
@@ -674,48 +674,43 @@ conclude this section by discussing the properties of the electroosmotic flow.
       \end{subfigure}
     \end{minipage}
   \end{minipage}
-\caption{%
-  %
-  \textbf{Measured and simulated ionic conductance, rectification and cation
-  selectivity of single ClyA nanopores.}
-  %
-  (\subref{fig:current-voltage_curves})
-  %
-  Comparison of the simulated (PNP-NS and ePNP-NS) and experimentally
-  (expt.) measured current-voltage (IV) curves of ClyA-AS at \SI{25\pm1}{\dC}
-  between $\vbias=\text{\SIrange{-200}{+200}{\mV}}$, and for
-  $\cbulk=\text{\SIlist{0.05;0.15;0.5;1;3}{\Molar}}$ \ce{NaCl}. Experimental
-  errors ($n=3$) were smaller than the symbol size and hence not shown.
-  %
-  %
-  (\subref{fig:conductance_contourmap_epnp})
-  %
-  Contourplot of the simulated (ePNP-NS) ionic conductance $\conductance =
-  \current /\vbias$.
-  %
-  (\subref{fig:conductance_loglog_exp_pnp_epnp})
-  Ionic conductance of the simulated, experimental and bulk conductances at
-  \SI{+150}{\mV} (top) and \SI{-150}{\mV} (bottom). The bulk conductance of the
-  nanopore was calculated by modelling the nanopore as two resistors in series\cite{Soskine-2013,Kowalczyk-2011}
-  $\conductance_{\text{bulk}} = \dfrac{\sigma}{4\pi}
-  \left( \dfrac{ l_{\text{trans}} }{ d_{\text{trans}}^2 } +
-  \dfrac{ l_{\text{cis}} }{ d_{\text{cis}}^2 }  \right)
-  $ with $\sigma$ the bulk \ce{NaCl} conductivity, l_{\text{trans}
-  
-  
-  to generate concentration-voltage
-  heatmaps (left) and cross-sections at characteristic voltages (right) of
-   the ionic conductance , (\subref{fig:conductance_rectification_contourmap_epnp})
-  the ionic conductance rectification $\icr(\vbias) = \conductance(+\vbias) /
-  \conductance(-\vbias)$ and (\subref{fig:transport_number_contourmap_epnp}) the
-  \Na\ transport number $\transportn_{\Na}=\conductance_{\Na}/\conductance$.
-  While the $\conductance$ simply represents ClyA's ability to transport ions as
-  a function of the bulk reservoir concentration, $\icr$ describes the magnitude
-  of the ionic flux at positive vs. negative bias voltages. Finally,
-  $\transportn_{\Na}$ reveals how much of the current is carrier by \Na\ ions,
-  i.e. the cation-selectivity of the pore.
-  %
-  }\label{fig:conductance}
+  \caption{%
+    %
+    \textbf{Measured and simulated ionic conductance, rectification and cation selectivity of single ClyA nanopores.}
+    %
+    (\subref{fig:current-voltage_curves})
+    %
+    Comparison of the simulated (PNP-NS and ePNP-NS) and experimentally (expt.) measured current-voltage (IV)
+    curves of ClyA-AS at \SI{25\pm1}{\dC} between $\vbias=\text{\SIrange{-200}{+200}{\mV}}$, and for
+    $\cbulk=\text{\SIlist{0.05;0.15;0.5;1;3}{\Molar}}$ \ce{NaCl}. Experimental errors ($n=3$) were smaller
+    than the symbol size and hence not shown.
+    %
+    (\subref{fig:conductance_contourmap_epnp})
+    %
+    Contourplot of the simulated (ePNP-NS) ionic conductance $\conductance = \current /\vbias$ as a function
+    of $\vbias$ and $\cbulk$.
+    %
+    (\subref{fig:conductance_loglog_exp_pnp_epnp})
+    %
+    Log-log plots of $\cbulk$ as a function of $\cbulk$ at \SI{+150}{\mV} (top) and \SI{-150}{\mV}
+    (bottom)---comparing experimental (expt.), simulated (PNP-NS and ePNP-NS), and bulk pore conductances. The
+    latter was calculated by modelling the nanopore as two ionic resistors in series
+    (\cref{suppinfo:eq:bulk_nanopore_conductance}).\cite{Soskine-2013,Kowalczyk-2011}
+    %
+    (\subref{fig:transport_number_contourmap_epnp})
+    %
+    Contourplot of the \Na{} transport number $\transportn_{\Na}=\conductance_{\Na}/\conductance$, computed
+    from the individual ionic conductances in the ePNP-NS simulation, as a function of $\vbias$ and $\cbulk$.
+    $\transportn_{\Na}$ expresses the fraction of the ionic current is carried by \Na{} ions, i.e. the cation
+    selectivity.
+    %
+    (\subref{fig:transport_number_vs_concentration_bulk_pnp_epnp})
+    %
+    Comparision between the simulated (PNP-NS and ePNP-NS) and bulk $\transportn_{\Na}$ as a function of
+    $\cbulk$ for \SI{+150}{\mV} (top) and \SI{-150}{\mV} (bottom). The solid grey line indicates the
+    \SI{50}{\percent} selectivity ration.
+    %
+    }\label{fig:conductance}
 \end{figure*}
 
 
