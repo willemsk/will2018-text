@@ -69,7 +69,25 @@
 
 % SUPPORTING INFO
 \usepackage{xr}
-\externaldocument[suppinfo:]{../suppinfo/supporting_information}
+
+% Source:
+% https://www.overleaf.com/learn/how-to/Cross_referencing_with_the_xr_package_in_Overleafmak
+
+\makeatletter
+\newcommand*{\addFileDependency}[1]{% argument=file name and extension
+  \typeout{(#1)}
+  \@addtofilelist{#1}
+  \IfFileExists{#1}{}{\typeout{No file #1.}}
+}
+\makeatother
+ 
+\newcommand*{\myexternaldocument}[2]{%
+    \externaldocument[#1]{#2}%
+    \addFileDependency{#2.tex}%
+    \addFileDependency{#2.aux}%
+}
+
+\myexternaldocument{suppinfo:}{suppinfo}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% If issues arise when submitting your manuscript, you may want to
@@ -87,9 +105,9 @@
 
 \renewcommand*{\bibfont}{\normalfont\small}
 
-\input{../shared/additional_commands.tex}
+\input{shared/additional_commands.tex}
 
-\input{../shared/authors.tex}
+\input{shared/authors.tex}
 
 
 \title{Modeling of Ion and Water Transport in the Biological Nanopore ClyA}
@@ -276,13 +294,13 @@ in \emph{\nameref{sec:conclusions}} and describe our protocols in more detail in
 			\centering
 			\caption{}\label{fig:clya_side}
       \vspace{-5mm}
-			\includegraphics[scale=1]{../figures/concept/clya_side}
+			\includegraphics[scale=1]{figures/concept/clya_side}
 		\end{subfigure}
    	\begin{subfigure}[t]{5cm}
       \centering
       \caption{}\label{fig:clya_top}
       \vspace{-5mm}
-      \includegraphics[scale=1]{../figures/concept/clya_top}
+      \includegraphics[scale=1]{figures/concept/clya_top}
     \end{subfigure}
 	\end{minipage}
   \hspace{-0.25cm}
@@ -293,13 +311,13 @@ in \emph{\nameref{sec:conclusions}} and describe our protocols in more detail in
           \centering
           \caption{}\label{fig:model_geometry_vs_wedge}
           \vspace{-3mm}
-          \includegraphics[scale=1]{../figures/concept/model_geometry_vs_wedge}
+          \includegraphics[scale=1]{figures/concept/model_geometry_vs_wedge}
         \end{subfigure}
         \begin{subfigure}[t]{2.5cm}
           \centering
           \caption{}\label{fig:model_charge_density}
           \vspace{-3mm}
-          \includegraphics[scale=1]{../figures/concept/model_charge_density}
+          \includegraphics[scale=1]{figures/concept/model_charge_density}
         \end{subfigure}
       \end{minipage}
       \begin{subfigure}[t]{5.5cm}
@@ -307,7 +325,7 @@ in \emph{\nameref{sec:conclusions}} and describe our protocols in more detail in
         \vspace{0.5cm}
         \caption{}\label{fig:model_geometry_zoom}
         \vspace{-1cm}
-        \includegraphics[scale=1]{../figures/concept/model_geometry_zoom}
+        \includegraphics[scale=1]{figures/concept/model_geometry_zoom}
         %\vspace{0.25cm}
       \end{subfigure}
     \end{minipage}
@@ -315,7 +333,7 @@ in \emph{\nameref{sec:conclusions}} and describe our protocols in more detail in
     \begin{subfigure}[t]{5.5cm}
       \centering
       \caption{}\label{fig:model_geometry}
-      \includegraphics[scale=1]{../figures/concept/model_geometry}
+      \includegraphics[scale=1]{figures/concept/model_geometry}
     \end{subfigure}
   \end{minipage}
 
@@ -382,7 +400,7 @@ sets of atomic coordinates (\ie~every \SI{100}{\ps}) for ClyA. For each of these
 2D atomic density\cite{Li-2013} and charge\cite{Aksimentiev-2005} map (see~\cref{sec:methods} for details).
 Both the density and the charge maps were averaged to capture the movements of the side chains. The geometry
 of the nanopore was then defined as the \SI{25}{\percent} contour line of the density map, which closely
-follows the outline of a \SI{30}{\degree} wedge of the full atom structure
+follows the outline of a \SI{30}{\degree} `wedge' of the full atom structure
 (\cref{fig:model_geometry_vs_wedge}). The equilibrium charge map (\cref{fig:model_charge_density}) was loaded
 directly into our solver as an interpolated function ($\scdpore$) and applied to the entire computational
 domain.
@@ -444,7 +462,103 @@ with $\avionconc=\frac{1}{n}\sum_{i}^{n}\concentration_{i}$ the average ion conc
 relative permittivity at infinite dilution and $\relperm^c(\avionconc)$ a concentration dependent empirical
 function parameterized with experimental data.
 
-\input{tab_corrections_equations.tex}
+%
+\begin{table*}[p]
+  \footnotesize
+  \renewcommand{\arraystretch}{1.2}
+  \caption{Summary of the parameters and fitting equations used in the ePNP-NS equations.}
+  \centering
+  \label{tab:corrections_equations}
+  
+  \begin{tabularx}{16.5cm}{>{\raggedright\hsize=3cm}X >{\hsize=1cm}l >{\hsize=6.5cm}X >{\hsize=2cm}l}
+    \toprule
+  
+    Property
+      & Parameter$^\text{\emph{a}}$
+        & Infinite dilution value$^\text{\emph{b}}$/Fitting function$^\text{\emph{c}}$
+        & Reference \\
+  
+    \midrule
+  
+    \multirow{4}{*}{Relative permittivity}
+      & $\permittivity_{r,\text{p}}$
+        & \num{20}
+        & \citenum{Li-2013} \\
+      & $\permittivity_{r,\text{m}}$
+        & \num{3.2}
+        & \citenum{Gramse-2013} \\
+      & $\permittivity_{r,\text{f}}^0$
+        & \num{78.15}
+        & \citenum{Gavish-2016} \\
+      & $\permittivity_{w}(\dconc)$
+        & $1 - \left(1 -	\dfrac{P_1}{P_0}\right) L \left( \dfrac{3P_2}{P_0 - P_1} \dconc \right)$
+        & \citenum{Gavish-2016} \\
+    \multirow{4}{3cm}{Ion self-diffusion coefficient}
+      & $\diffusion_{\Na}^0$
+        & \SI{1.334e-9}{\square\meter\per\second}
+        & \citenum{Mills-1989} \\
+      & $\diffusion_{\Cl}^0$
+        & \SI{2.032e-9}{\square\meter\per\second}
+        & \citenum{Mills-1989} \\
+      & $\diffusion_{i}^c(\dconc)$
+        & $\left( 1 + P_1\dconc^{0.5} + P_2\dconc + P_3\dconc^{1.5} + P_4\dconc^2 \right)^{-1}$
+        & This work \\
+      & $\diffusion_{i}^w(\dwall)$
+        & $1-\exp{\left(-P_1(\dwall+P_2)\right)}$
+        & \citenum{Makarov-1998,Simakov-2010} \vspace{0.25cm} \\
+  
+    \multirow{4}{3cm}{Ion electrophoretic mobility}
+      & $\mobility_{\Na}^0$
+        & \SI{5.192e-4}{\square\meter\per\second\per\volt}
+        & \citenum{Bianchi-1989} \\
+      & $\mobility_{\Cl}^0$
+        & \SI{7.909e-4}{\square\meter\per\second\per\volt}
+        & \citenum{Bianchi-1989} \\
+      & $\mobility_{i}^c(\dconc)$
+        & $\left( 1 + P_1\dconc^{0.5} + P_2\dconc + P_3\dconc^{1.5} + P_4\dconc^2 \right)^{-1}$
+        & This work \\
+      & $\mobility_{i}^w(\dwall)$
+        & $1-\exp{\left(-P_1(\dwall+P_2)\right)}$
+        & \citenum{Makarov-1998,Simakov-2010} \vspace{0.25cm} \\
+  
+    \multirow{2}{3cm}{Ion transport number}
+      & $\transportn_{\Na}^0$
+        & 0.396
+        & \citenum{Bianchi-1989} \\
+      & $\transportn_{\Na}(\dconc)$
+        & $\left( 1 + P_1\dconc^{0.5} + P_2\dconc + P_3\dconc^{1.5} + P_4\dconc^2 \right)^{-1}$
+        & This work \vspace{0.25cm} \\
+  
+    \multirow{3}{*}{Dynamic viscosity}
+      & $\viscosity^0$
+        & \SI{8.904}{\pascal\second}
+        & \citenum{Hai-Lang-1996} \\
+      & $\viscosity^c(\dconc)$
+        & $ 1 + P_1 \dconc^{0.5} + P_2 \dconc + P_3 \dconc^2 + P_4 \dconc^{3.5}$
+        & This work \\
+      & $\viscosity^w(\dwall)$
+        & $1 + \exp{ \left( -P_1(\dwall-P_2) \right) }$
+        & \citenum{Pronk-2014} \vspace{0.25cm} \\
+  
+    \multirow{2}{*}{Fluid density}
+      & $\density^0$
+        & \SI{997}{\kilogram\per\cubic\meter}
+        & \citenum{Hai-Lang-1996} \\
+      & $\density(\dconc)$
+        & $1 + P_1 \dconc + P_2 \dconc^2$
+        & This work \vspace{0.25cm} \\
+    
+    \bottomrule
+  \end{tabularx}
+  \begin{flushleft}
+    $^\text{\emph{a}}$Dependencies on either $\dconc = \avionconc/1$~M (dimensionless average ion
+    concentration) and $\dwall = \walldistance/1$~nm (dimensionless distance from the nanopore wall);
+    $^\text{\emph{b}}$Values at infinite dilution for a system temperature of \SI{291.15}{\kelvin};
+    $^\text{\emph{c}}$These functions are empirical and hence have no physical meaning.
+    The values of the fitting parameters $P_x$ of each property can be found in \cref{suppinfo:tab:corrections_parameters} and graphs of the fits in \cref{suppinfo:fig:corrections}.
+  \end{flushleft}
+\end{table*}
+%
 
 \paragraph{Ionic flux.}
 %
@@ -606,20 +720,21 @@ The ePNP-NS equations revert into the regular PNP-NS equations disabling the ste
 
 \section{Results and discussion}\label{sec:results}
 
-The current-voltage (IV) relationships of many nanopores, ClyA included, often deviate significantly from
-Ohm's law. This is because the ionic flux results from a complex interplay between the pore's geometry (size,
-shape and charge distribution), the properties of the surrounding electrolyte (\eg~salt concentration
-viscosity and relative permittivity) and the externally applied conditions (\eg~bias voltage, temperature and
-pressure). The ability of a computational model to quantitatively predict the ionic current of a nanopore over
-a wide range of bias voltages and salt concentrations strongly indicates that it captures the essential
-physics governing the nanofluidic transport. Hence, to validate our model, we experimentally measured the
-single channel ionic conductance of ClyA at a wide range of salt concentrations and bias voltages and compared
-them with the simulated ionic transport properties in terms of current, conductance, rectification and ion
-selectivity, of both the classical PNP-NS and the newly developed ePNP-NS equations. After validation, we
-proceed with describing the influence of bias voltage and bulk ionic strengths on the local ion concentrations
-inside the pore and the resulting electrical double layer. This is followed by a characterization of the
-electrostatic potential and the electrostatic energy landscape within ClyA for both cations and anions. We
-will conclude this section by discussing the properties of the electroosmotic flow.
+The current--voltage (IV) relationships of many nanopores, ClyA included, often deviate significantly from
+Ohm's law. This is because the ionic flux results from a complex interplay between the pore's geometry
+(\eg~size, shape and charge distribution), the properties of the surrounding electrolyte (\eg~salt
+concentration viscosity and relative permittivity) and the externally applied conditions (\eg~bias voltage,
+temperature and pressure). The ability of a computational model to quantitatively predict the ionic current of
+a nanopore over a wide range of bias voltages and salt concentrations strongly indicates that it captures the
+essential physics governing the nanofluidic transport. Hence, to validate our model, we experimentally
+measured the single channel ionic conductance of ClyA at a wide range of experimentally relevant salt
+concentrations and bias voltages and compared them with the simulated ionic transport properties in terms of
+current, conductance, rectification and ion selectivity, of both the classical PNP-NS and the newly developed
+ePNP-NS equations. After validation, we proceed with describing the influence of bias voltage and bulk ionic
+strengths on the local ion concentrations inside the pore and the resulting electrical double layer. This is
+followed by a characterization of the electrostatic potential and the electrostatic energy landscape within
+ClyA for both cations and anions. We will conclude this section by discussing the properties of the
+electroosmotic flow and a brief reflection of the key findings in this work.
 
 
 \begin{figure*}[!p]
@@ -629,7 +744,7 @@ will conclude this section by discussing the properties of the electroosmotic fl
       \begin{subfigure}[t]{4.5cm}
         \centering
         \caption{}\vspace{-3mm}\label{fig:current-voltage_curves}
-        \includegraphics[scale=1]{../figures/conductance/current_vs_voltage_all_multiplot}
+        \includegraphics[scale=1]{figures/conductance/current_vs_voltage_all_multiplot}
       \end{subfigure}
     \end{minipage}
     %
@@ -637,13 +752,13 @@ will conclude this section by discussing the properties of the electroosmotic fl
       \begin{subfigure}[t]{5cm}
         \centering
         \caption{}\vspace{0mm}\label{fig:conductance_contourmap_epnp}
-        \includegraphics[scale=1]{../figures/conductance/conductance_contourmap_epnp}
+        \includegraphics[scale=1]{figures/conductance/conductance_contourmap_epnp}
       \end{subfigure}
       \\
       \begin{subfigure}[t]{5cm}
         \centering
         \caption{}\vspace{0mm}\label{fig:conductance_loglog_exp_pnp_epnp}
-        \includegraphics[scale=1]{../figures/conductance/conductance_loglog_exp_pnp_epnp}
+        \includegraphics[scale=1]{figures/conductance/conductance_loglog_exp_pnp_epnp}
       \end{subfigure}
     \end{minipage}
     %
@@ -651,13 +766,13 @@ will conclude this section by discussing the properties of the electroosmotic fl
       \begin{subfigure}[t]{5cm}
         \centering
         \caption{}\vspace{0mm}\label{fig:transport_number_contourmap_epnp}
-        \includegraphics[scale=1]{../figures/conductance/transport_number_contourmap_epnp}
+        \includegraphics[scale=1]{figures/conductance/transport_number_contourmap_epnp}
       \end{subfigure}
       \\
       \begin{subfigure}[t]{5cm}
         \centering
         \caption{}\vspace{0mm}\label{fig:transport_number_vs_concentration_bulk_pnp_epnp}
-        \includegraphics[scale=1]{../figures/conductance/transport_number_vs_concentration_bulk_pnp_epnp}
+        \includegraphics[scale=1]{figures/conductance/transport_number_vs_concentration_bulk_pnp_epnp}
       \end{subfigure}
     \end{minipage}
   \end{minipage}
@@ -714,12 +829,12 @@ will conclude this section by discussing the properties of the electroosmotic fl
 The ability of our 2D-axisymmetric model, in conjunction with the ePNP-NS equations, to capture the ionic
 conductance of a biological nanopore over a wide range of experimentally relevant conditions (between
 \SIrange{-150}{+150}{\mV} and for \SIlist{0.05;0.15;0.5;1;3}{\Molar} \ce{NaCl}) can be seen in
-\cref{fig:current-voltage_curves}, in which we compare the measured and simulated current--voltage (IV)
-relationships of ClyA-AS. Where the classical PNP-NS equations consistently overestimated the ionic current,
-particularly at high salt concentrations, the predictions of the ePNP-NS equations corresponded closely to the
-measured values, \emph{especially} at high ionic strengths (\SI{>0.5}{\Molar}). At lower salt
-concentrations the ePNP-NS equations tended to minorly overestimate the ionic current, but the discrepancy was
-much smaller than that observed for PNP-NS. 
+\cref{fig:current-voltage_curves}, in which we compare the measured and simulated IV relationships of ClyA-AS.
+Where the classical PNP-NS equations consistently overestimated the ionic current, particularly at high salt
+concentrations, the predictions of the ePNP-NS equations corresponded closely to the measured values,
+\emph{especially} at high ionic strengths (\SI{>0.5}{\Molar}). At lower salt concentrations the ePNP-NS
+equations tended to minorly overestimate the ionic current, but the discrepancy was much smaller than that
+observed for PNP-NS. 
 
 The failure of the PNP-NS equations to predict ClyA's conductance at high salt concentrations was expected, as
 in this regime the model parameters (\eg~diffusivity, mobility and viscosity) begin to deviate significantly
@@ -832,18 +947,18 @@ contribution of \Cl{} to the ionic current.
   \begin{subfigure}[t]{8.2cm}
     \centering
     \caption{}\vspace{-3mm}\label{fig:concentration_pore_average_vs_concentration}
-    \includegraphics[scale=1]{../figures/concentration/concentration_pore_average_vs_concentration}
+    \includegraphics[scale=1]{figures/concentration/concentration_pore_average_vs_concentration}
   \end{subfigure}
   \begin{minipage}[t]{8.2cm}
   \begin{subfigure}[t]{8.2cm}
     \centering
     \caption{}\vspace{-3mm}\label{fig:concentration_contours}
-    \includegraphics[scale=1]{../figures/concentration/concentration_contours}
+    \includegraphics[scale=1]{figures/concentration/concentration_contours}
   \end{subfigure}
   \begin{subfigure}[t]{8.2cm}
     \centering
     \caption{}\vspace{-3mm}\label{fig:concentration_radial_profiles}
-    \includegraphics[scale=1]{../figures/concentration/concentration_radial_profiles}
+    \includegraphics[scale=1]{figures/concentration/concentration_radial_profiles}
   \end{subfigure}
   \end{minipage}
   
@@ -923,17 +1038,17 @@ represent a time-averaged situation (typically on the order of \SIrange{10}{100}
   \begin{subfigure}[t]{8.2cm}
     \centering
     \caption{}\vspace{-3mm}\label{fig:ion_charge_density_contours}
-    \includegraphics[scale=1]{../figures/charge_density/ion_charge_density_contours}
+    \includegraphics[scale=1]{figures/charge_density/ion_charge_density_contours}
   \end{subfigure}
   \begin{subfigure}[t]{8.2cm}
     \centering
     \caption{}\vspace{-3mm}\label{fig:ion_charge_density_radial_profiles}
-    \includegraphics[scale=1]{../figures/charge_density/ion_charge_density_radial_profiles}
+    \includegraphics[scale=1]{figures/charge_density/ion_charge_density_radial_profiles}
   \end{subfigure}
   \begin{subfigure}[t]{8.2cm}
     \centering
     \caption{}\vspace{-3mm}\label{fig:ion_charge_pore_bulk_surface_total_vs_concentration}
-    \includegraphics[scale=1]{../figures/charge_density/ion_charge_pore_bulk_surface_total_vs_concentration}
+    \includegraphics[scale=1]{figures/charge_density/ion_charge_pore_bulk_surface_total_vs_concentration}
   \end{subfigure}
   \end{minipage}
   
@@ -1001,19 +1116,19 @@ applied bias voltage, as it is \SIrange{+10}{+15}{\ec} higher at \SI{+150}{\mV} 
     \begin{subfigure}[t]{2.5cm}
       \centering
       \caption{}\vspace{-3mm}\label{fig:potential_clya_charges}
-      \includegraphics[scale=1]{../figures/potential/potential_clya_charges}
+      \includegraphics[scale=1]{figures/potential/potential_clya_charges}
     \end{subfigure}
     \hspace{-0.6cm}
     \begin{subfigure}[t]{11.5cm}
       \centering
       \caption{}\vspace{-3mm}\label{fig:potential_contours}
-      \includegraphics[scale=1]{../figures/potential/potential_contours_0mV}
+      \includegraphics[scale=1]{figures/potential/potential_contours_0mV}
     \end{subfigure}
     \hspace{-0.4cm}
     \begin{subfigure}[t]{4cm}
       \centering
       \caption{}\vspace{-3mm}\label{fig:potential_radial_averages}
-      \includegraphics[scale=1]{../figures/potential/potential_radial_averages_0mV}
+      \includegraphics[scale=1]{figures/potential/potential_radial_averages_0mV}
     \end{subfigure}
   \end{minipage}
 \centering
@@ -1118,12 +1233,12 @@ constriction ($\deltaEt$, \cref{fig:potential_energy_trans_barrier}).
   \begin{subfigure}[t]{8.25cm}
     \centering
     \caption{}\vspace{-5mm}\label{fig:potential_energy_radial_averages}
-    \includegraphics[scale=1]{../figures/potential_energy/potential_energy_radial_averages}
+    \includegraphics[scale=1]{figures/potential_energy/potential_energy_radial_averages}
   \end{subfigure}
   \begin{subfigure}[t]{8.25cm}
     \centering
     \caption{}\vspace{-3mm}\label{fig:potential_energy_trans_barrier}
-    \includegraphics[scale=1]{../figures/potential_energy/potential_energy_trans_barrier}
+    \includegraphics[scale=1]{figures/potential_energy/potential_energy_trans_barrier}
   \end{subfigure}
 
   \caption%
@@ -1263,40 +1378,40 @@ cation selectivities ($S_{i}=\transportn_{i}/(1-\transportn_{i})$).
     \begin{subfigure}[t]{5.5cm}
       \centering
       \caption{}\vspace{-3mm}\label{fig:flow_contour}
-      \includegraphics[scale=1]{../figures/flow/flow_contour_500mM}
+      \includegraphics[scale=1]{figures/flow/flow_contour_500mM}
     \end{subfigure}
     \begin{subfigure}[t]{5.5cm}
       \addtocounter{subfigure}{1}
       \vspace{3mm}
       \centering
       \caption{}\vspace{-3mm}\label{fig:flow_constriction_profiles}
-      \includegraphics[scale=1]{../figures/flow/flow_constriction_profiles}
+      \includegraphics[scale=1]{figures/flow/flow_constriction_profiles}
     \end{subfigure}
   \end{minipage}
   \begin{subfigure}[t]{4cm}
     \addtocounter{subfigure}{-2}
     \centering
     \caption{}\vspace{2mm}\label{fig:flow_constriction_contour}
-    \includegraphics[scale=1]{../figures/flow/flow_constriction_contour}
+    \includegraphics[scale=1]{figures/flow/flow_constriction_contour}
   \end{subfigure}
   \begin{minipage}[t]{4cm}
     \begin{subfigure}[t]{4cm}
       \addtocounter{subfigure}{1}
       \centering
       \caption{}\vspace{-5mm}\label{fig:flow_conductance_vs_voltage}
-      \includegraphics[scale=1]{../figures/flow/flow_conductance_vs_voltage}
+      \includegraphics[scale=1]{figures/flow/flow_conductance_vs_voltage}
     \end{subfigure}
     \begin{subfigure}[t]{4cm}
       \vspace{2mm}
       \centering
       \caption{}\vspace{-5mm}\label{fig:flow_conductance_vs_concentration}
-      \includegraphics[scale=1]{../figures/flow/flow_conductance_vs_concentration}
+      \includegraphics[scale=1]{figures/flow/flow_conductance_vs_concentration}
     \end{subfigure}
     \begin{subfigure}[t]{4cm}
       \vspace{2mm}
       \centering
       \caption{}\vspace{-5mm}\label{fig:flow_conductance_rectification_vs_concentration}
-      \includegraphics[scale=1]{../figures/flow/flow_conductance_rectification_vs_concentration}
+      \includegraphics[scale=1]{figures/flow/flow_conductance_rectification_vs_concentration}
     \end{subfigure}
   \end{minipage}
 \centering
@@ -1645,7 +1760,7 @@ authors thank Ujjal Barman and Chang Chen for their valuable feedback during dis
 	a table detailing the peak values of the radial electrostatic potential inside ClyA.
 \end{suppinfo}
 
-\bibliography{../shared/bibliography}
+\bibliography{shared/bibliography}
 
-%\includepdf{supporting_information}
+%\includepdf{suppinfo}
 \end{document}

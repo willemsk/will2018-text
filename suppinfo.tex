@@ -57,14 +57,14 @@
 %-------------------------------------------------------------------------------
 
 
-\input{../shared/additional_commands.tex}
+\input{shared/additional_commands.tex}
 
 
 %-------------------------------------------------------------------------------
 % TITLE AND AUTHOR LIST
 %-------------------------------------------------------------------------------
 \title{Modeling of Ion and Water Transport in the Biological Nanopore ClyA}
-\input{../shared/authors.tex}
+\input{shared/authors.tex}
 
 
 %===============================================================================
@@ -79,24 +79,163 @@
 \newpage
 \section{Extended materials and methods}
 
-\subsection{Fitting of the electrolyte properties}
-\input{fig_corrections.tex}
-The parameters of the fitting functions used to interpolate the experimental ion
-diffusion coefficients, mobilities and transport numbers, and the electrolyte
-viscosity, density and relative permittivity are given in
-\cref{tab:corrections_parameters} and the resulting curves are plotted in
-\cref{fig:corrections}. Note that since most of these functions are merely
-empirical fits with no physical meaning, and that they are solely used to
-interpolate and represent the experimental data.
+\subsection{ClyA-AS mutations w.r.t the wild-type}
 
-Finally, for the concentration dependence of the relative permittivity we made
-use of the model proposed by Gavish et al.\cite{Gavish-2016}
+\begin{table*}[h]
+	\renewcommand{\arraystretch}{1.5}
+	\scriptsize
+	\caption{Mutations of the ClyA-AS variant compared to the \textit{S. tyhpii} wild-type.}
+	\centering
+	\label{tab:clya_as_mutations}
+	\begin{tabular}{rll}
+		\toprule
+		Position	& WT	& AS \\
+		\midrule
+		8			& Lys	& Gln	\\
+		15			& Asn	& Ser	\\
+		38			& Gln	& Lys	\\
+		57			& Ala	& Glu 	\\
+		67			& Thr	& Val 	\\
+		87			& Cys	& Ala 	\\
+		90			& Ala	& Val	\\
+		95			& Ala	& Ser 	\\
+		99			& Leu	& Gln 	\\
+		103	 		& Glu	& Gly	\\
+		118			& Lys	& Arg 	\\
+		119			& Leu	& Ile	\\
+		124			& Ile	& Val	\\
+		125			& Thr	& Lys	\\
+		136			& Val	& Thr	\\
+		166			& Phe	& Tyr	\\
+		172			& Lys	& Arg	\\
+		185			& Val	& Ile	\\
+		212			& Lys	& Asn	\\
+		214			& Lys	& Arg	\\
+		217			& Ser	& Thr	\\
+		224			& Thr	& Ser	\\
+		227			& Asn	& Ala	\\
+		244			& Thr 	& Ala	\\
+		276			& Glu	& Gly	\\
+		285			& Cys	& Ser	\\
+		290			& Lys	& Gln	\\
+		\bottomrule
+	\end{tabular}
+\end{table*}
+
+\subsection{Fitting of the electrolyte properties}
+
+\begin{figure*}[!b]
+
+  \centering
+  \includegraphics[width=\textwidth]{figures/si/fig_corrections}
+
+  \caption%
+    [\textbf{Concentration and positional dependent electrolyte properties.}]
+    %
+    {%
+      \textbf{Concentration and positional dependent electrolyte properties.}
+      %
+      (a)
+      %
+      Dependency of the ion self-diffusion coefficients (top, \Na{}: \graphline{solid}{graphblue} and \Cl{}:
+      \graphline{solid}{graphred}) and the ion electrophoretic mobilities (bottom, \Na{}:
+      \graphline{dashed}{graphblue} and \Cl{}: \graphline{dashed}{graphred}) on the bulk \ce{NaCl}
+      concentration. Lines represent empirical fits to experimental literature data (markers). The number next
+      to the left and right axes correspond to the values at infinite dilution (\SI{0}{\Molar}) and saturation
+      (\SI{\approx5}{\Molar}), respectively.
+      %
+      (b)
+      %
+      Dependency of electrolyte density (top, \graphline{solid}{graphpurple}), viscosity (middle,
+      \graphline{dashed}{graphpurple}) and relative permittivity (bottom, \graphline{dotted}{graphpurple}) on
+      the bulk \ce{NaCl} concentration. Lines represent empirical fits to experimental literature data
+      (markers).
+      %
+      (c)
+      %
+      Dependency of the relative ion diffusion coefficient and the mobility (top,
+      \graphline{solid}{graphgreen}) and the relative viscosity (bottom, \graphline{dashed}{graphgreen}) on
+      the distance from the nanopore wall. The relative diffusion coefficient (and its mobility) declines
+      sharply when an ion approaches within \SI{\approx1.0}{\nm} of the protein wall. For water molecules,
+      this phenomenon is modelled as a sharp increase of the fluid viscosity within \SI{\approx1.0}{\nm}
+      distance from the wall. The values for the diffusion coefficient were taken directly from ref.
+      \citenum{Simakov-2010}, who used an empirical fit on molecular dynamics data from ref.
+      \citenum{Makarov-1998}. The inverse relative viscosity data was taken directly from the molecular
+      dynamics study in ref. \citenum{Pronk-2014}, and fitted with a logistic function after offsetting for
+      the protein hydrodynamic radius.
+      %
+  }\label{fig:corrections}
+\end{figure*}
+
+The parameters of the fitting functions used to interpolate the experimental ion diffusion coefficients,
+mobilities and transport numbers, and the electrolyte viscosity, density and relative permittivity are given
+in \cref{tab:corrections_parameters} and the resulting curves are plotted in \cref{fig:corrections}. Note that
+since most of these functions are merely empirical fits with no physical meaning, and that they are solely
+used to interpolate and represent the experimental data.
+
+Finally, for the concentration dependence of the relative permittivity we made use of the model proposed by
+Gavish et al.\cite{Gavish-2016}
 %
 \begin{align}
 \relperm(\dconc) = \permittivity_{r,0} - \left(\permittivity_{r,0} - \permittivity_{r,ms}\right) L \left( \dfrac{3\alpha}{\permittivity_{r,0} - \permittivity_{r,ms}} \dconc \right)
 \end{align}
 %
-\input{tab_corrections_parameters.tex}
+
+%
+\begin{table*}[!htb]
+
+  \sisetup{inter-unit-product=\ensuremath{{}\cdot{}}}
+  
+  \renewcommand{\arraystretch}{1.5}
+  \scriptsize
+  \caption{Overview of the \ce{NaCl} fitting parameters used for interpolation.}
+  \centering
+  \label{tab:corrections_parameters}
+  \begin{tabular}{@{}
+          l
+          S[table-format=1.3]
+          S[table-format=-1.2(2)e-1]
+          S[table-format=-1.2(2)e-1]
+          S[table-format=-1.2(2)e-1]
+          S[table-format=-1.2(2)e-1]
+          S[table-format=>1.2]
+          l
+          @{}}
+    \toprule
+                & \multicolumn{5}{c}{Fitting parameters}									&		&	\\
+    \cmidrule{2-6}
+    Property				& $P_{0}$	& $P_{1}$		& $P_{2}$		& $P_{3}$		& $P_{4}$		& $R^{2}$	& References	\\
+    \midrule
+    $\diffusion_+(c)$		& 1.334		& 2.02(14)e-1	& -3.05(41)e-1	& 2.19(38)e-1	& -3.13(108)e-2	& >0.99		&
+    \citenum{Mills-1989}	\\
+    $\diffusion_-(c)$		& 2.032		& 1.49(30)e-1	& -4.94(904)e-2	& 3.40(826)e-2	& 1.43(230)e-2	& >0.99		&
+    \citenum{Mills-1989}	\\
+    $\mobility_+(c)$		& 5.192		& 7.91(6)e-1	& -3.53(17)e-1	& 1.46(15)e-1	& 9.23(389)e-3	& >0.99		&
+    \citenum{Bianchi-1989,Currie-1960,Goldsack-1976,DellaMonica-1979}	\\
+    $\mobility_-(c)$		& 7.909		& 6.29(6)e-1	& -4.29(17)e-1	& 2.12(14)e-1	& -1.07(37)e-2	& >0.99		&
+    \citenum{Bianchi-1989,Currie-1960,Goldsack-1976,DellaMonica-1979}	\\
+    $\transportn_+(c)$		& 0.3963	& 9.38(164)e-2 	& 2.86(324)e-3	& -1.88(652)e-2	& 4.51(275)e-3	& 0.98		&
+    \citenum{Panopoulos-1986,Currie-1960,Smits-1966,Schonert-2013,DellaMonica-1979}	\\
+    $\viscosity(c)$			& 0.8904	& 7.56(27)e-3	& 7.77(4)e-2	& 1.19(1)e-2	& 5.95(35)e-4	& >0.99		&
+    \citenum{Hai-Lang-1996}	\\
+    $\density(c)$			& 0.997		& 4.06(1)e-2	& -6.39(16)e-4	& 				& 				& >0.99		&
+    \citenum{Hai-Lang-1996}	\\
+    $\permittivity(c)$		& 78.15		& 3.08(0)e1		& 1.15(0)e1		& 				& 				&			&
+    \citenum{Gavish-2016}	\\
+    $\diffusion_+(d)$		&			& 6.2 			& 0.01			& 				& 				&			&
+    \citenum{Makarov-1998,Simakov-2010,Pederson-2015}	\\
+    $\diffusion_-(d)$	 	& 			& 6.2			& 0.01			& 				& 				&			&
+    \citenum{Makarov-1998,Simakov-2010,Pederson-2015}	\\
+    $\mobility_+(d)$		& 			& 6.2			& 0.01			& 				& 				&			&
+    \citenum{Makarov-1998,Simakov-2010,Pederson-2015}	\\
+    $\mobility_-(d)$		& 			& 6.2			& 0.01			& 				& 				&			&
+    \citenum{Makarov-1998,Simakov-2010,Pederson-2015}	\\
+    $\viscosity(d)$			& 			& 3.36(23)		& 1.47(23)e-1 	& 				& 				& 0.97		&
+    \citenum{Pronk-2014}	\\
+    \bottomrule
+  \end{tabular}
+\end{table*}
+%  
 
 \newpage
 \subsection{Surface integration to compute pore averaged values}
@@ -145,22 +284,41 @@ with $d$ the distance from the nanopore wall and $r_\text{p}(z)$ is the radius o
 
 
 \newpage
+%
 \subsection{Weak forms of the ePNP-NS equations}
-To solve partial differential equations with the finite element method, we must
-be derive their weak form. This is achieved through multiplication of the
-equation with an arbitrary test function and integration over their relevant
-domains and boundaries (\cref{fig:domains_an_boundaries}). The full
-computational domain of our model ($\Omega$) is subdivided into domains for the
-pore ($\Omega_p$), the lipid bilayer ($\Omega_m$) and the electrolyte reservoir
-($\Omega_w$). The relevant boundaries of these domains are also indicated, i.e.
-the reservoir's exterior edges at the \cis\ $\Gamma_{w,c}$) and \trans\
-$\Gamma_{w,t}$) sides, the outer edge of the lipid bilayer ($\Gamma_{m}$) and
-the interface of the fluid with the nanopore and the bilayer ($\Gamma_{p+m}$).
+%
+To solve partial differential equations with the finite element method, we must be derive their weak form.
+This is achieved through multiplication of the equation with an arbitrary test function and integration over
+their relevant domains and boundaries (\cref{fig:domains_an_boundaries}). The full computational domain of our
+model ($\Omega$) is subdivided into domains for the pore ($\Omega_p$), the lipid bilayer ($\Omega_m$) and the
+electrolyte reservoir ($\Omega_w$). The relevant boundaries of these domains are also indicated, i.e. the
+reservoir's exterior edges at the \cis\ $\Gamma_{w,c}$) and \trans\ $\Gamma_{w,t}$) sides, the outer edge of
+the lipid bilayer ($\Gamma_{m}$) and the interface of the fluid with the nanopore and the bilayer
+($\Gamma_{p+m}$).
 
 The following paragraphs detail the equations that were used in this paper, together with their corresponding
 weak forms.
 
-\input{fig_domains_and_boundaries.tex}
+%
+\begin{figure*}[!b]
+  \centering
+  \includegraphics[scale=1]{figures/si/domains_and_boundaries.pdf}
+  % caption
+  \caption
+  %
+  [\textbf{Computational domains and boundaries.}]
+  %
+  {%
+    %
+    \textbf{Computational domains and boundaries.}
+    %
+    The full computational domain ($\Omega$) of the model is subdivided into various subdomains ($\Omega_x$)
+    and their limiting boundaries ($\Gamma_x$).
+    %
+  }\label{fig:domains_an_boundaries}
+\end{figure*}
+%
+
 
 \paragraph{Poisson equation.}
 %
@@ -420,18 +578,79 @@ respectively.\cite{Soskine-2013}
 The peak values of the radial electrostatic potential $\radpot$ at the \cis\
 entry, middle of the lumen and the \trans\ constriction for $0.005$, $0.05$,
 $0.15$, $0.5$ and $5$~M \ce{NaCl} are summarized in \cref{tab:radial_potential}.
-\input{tab_radial_potential.tex}
+
+%
+\begin{table}[!hbt]
+  \footnotesize
+  \caption[]{Peak radial potential.}\label{tab:radial_potential}
+  \centering
+  \begin{tabularx}{8cm}{SSSS}
+    \toprule
+    & \multicolumn{3}{c}{$\radpot$ (mV)} \\
+    \cmidrule{2-4}
+    & {\cis}      & {lumen}    & {\trans}  \\
+    {$\cbulk$ (\si{\Molar})} & {$z\approx\SI{10}{\nm}$} & {$z\approx\SI{5}{\nm}$} & {$z\approx\SI{0}{\nm}$} \\
+    \midrule
+    0.005          & -80         & -108       & -144   \\
+    0.05           & -34         &  -50       &  -86   \\
+    0.15           & -19         &  -29       &  -57   \\
+    0.5            &  -9.3       &  -14       &  -30   \\
+    5              &  -1.9       &   -1.7     &   -4.2 \\
+    \bottomrule
+  \end{tabularx}
+\end{table}
+%
 
 \subsection{Pressure distribution inside ClyA}
 The electro-osmotic pressure distribution inside ClyA, as a consequence of the
 strong local enhancement of the ion concentration, is given in
 \cref{fig:pressure}.
-\input{fig_pressure.tex}
 
+%
+\begin{figure*}[!htb]
+
+  \centering
+  \begin{minipage}[t]{10.75cm}
+    \begin{subfigure}[t]{5.5cm}
+      \centering
+      \caption{}\vspace{-3mm}\label{fig:pressure_contour}
+      \includegraphics[scale=1]{figures/pressure/pressure_contour_150mM_+000mV}
+    \end{subfigure}
+    \hspace{-5mm}
+    \begin{subfigure}[t]{2.5cm}
+      \centering
+      \caption{}\vspace{-3mm}\label{fig:pressure_radial_averages}
+      \includegraphics[scale=1]{figures/pressure/pressure_radial_averages_+000mV}
+    \end{subfigure}
+  \end{minipage}
+
+  \caption%
+    [\textbf{Pressure distribution inside ClyA.}]
+    %
+    {%
+      %
+      \textbf{Pressure distribution inside ClyA.}
+      %
+      (\subref{fig:pressure_contour})
+      %
+      Contourmap of the pressure at $\cbulk=\SI{0.15}{\Molar}$ and $\vbias=\SI{0}{\mV}$, showing that the
+      \Na{} concentration `hotspots' near the pore wall result in build-up of electro-osmotic pressure
+      (\SIrange{5}{30}{\atm}) inside the  confined fluid. Pressure drops of such magnitude over the course of
+      a few nanometers could potentially exert a significant force on a captured
+      protein.\cite{Hoogerheide-2014}
+      %
+      (\subref{fig:pressure_radial_averages})
+      %
+      The axial pressure profile and averaged along the the entire radius of the pore at $\vbias=\SI{0}{\mV}$.
+      %At concentrations $\ge0.5$~M, a negative pressure develops in the `bulk' of the lumen due to the
+      %
+  }\label{fig:pressure}
+\end{figure*}
+%
 
 %-------------------------------------------------------------------------------
 % SUPPORTING INFORMATION
 %-------------------------------------------------------------------------------
-\bibliography{../shared/bibliography}
+\bibliography{shared/bibliography}
 
 \end{document}
