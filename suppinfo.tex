@@ -3,6 +3,14 @@
 %-------------------------------------------------------------------------------
 \documentclass[journal=ancac3, manuscript=suppinfo, etalmode=truncate,maxauthors=0]{achemso}
 \setkeys{acs}{etalmode=truncate,maxauthors=0}
+\SectionNumbersOn % Enable section numbers for SI
+\renewcommand*{\theequation}{S\arabic{equation}}
+\AtBeginDocument
+{%
+  \renewcommand*{\citenumfont}[1]{#1}%
+  \renewcommand*{\bibnumfmt}[1]{(#1)}%
+}
+
 
 % PACKAGES
 \usepackage[utf8]{inputenc}
@@ -77,9 +85,15 @@
 \maketitle
 
 \newpage
+
+\tableofcontents
+
+\newpage
+
+\newpage
 \section{Extended materials and methods}
 
-\subsection{ClyA-AS mutations w.r.t the wild-type}
+\subsection{ClyA-AS mutations w.r.t. the wild-type}
 
 \begin{table*}[h]
 	\renewcommand{\arraystretch}{1.5}
@@ -322,8 +336,7 @@ weak forms.
 
 \paragraph{Poisson equation.}
 %
-The global potential distribution is described by the Poisson equation
-(PE)\cite{Lu-2012}
+The global potential distribution is described by the Poisson equation (PE)\cite{Lu-2012}
 %
 \begin{align}
 \label{eq:poisson}
@@ -333,14 +346,13 @@ The global potential distribution is described by the Poisson equation
 \text{ ,}
 \end{align}
 %
-with $\displacement$ the electrical displacement field, $\potential$ the
-electric potential, $\absperm$ the vacuum permittivity
-($8.85419\times10^{-12}\text{~F\,m}^{-1}$), and $\relperm$ the local relative
-permittivity of the medium. $\scdpore$ and $\scdion$ are the fixed (due to the
-pore) and mobile (due to the ions) charge distributions, respectively.
+with $\displacement$ the electrical displacement field, $\potential$ the electric potential, $\absperm$ the
+vacuum permittivity ($8.85419\times10^{-12}\text{~F\,m}^{-1}$), and $\relperm$ the local relative permittivity
+of the medium. $\scdpore$ and $\scdion$ are the fixed (due to the pore) and mobile (due to the ions) charge
+distributions, respectively.
 
-Multiplication of \cref{eq:poisson} with the potential test function $\psi$ and
-integration over the entire model $\Omega=\Omega_w+\Omega_p+\Omega_m$ gives
+Multiplication of \cref{eq:poisson} with the potential test function $\psi$ and integration over the entire
+model $\Omega=\Omega_w+\Omega_p+\Omega_m$ gives
 %
 \begin{align}
 \displaystyle\int_{\Omega}
@@ -352,8 +364,7 @@ integration over the entire model $\Omega=\Omega_w+\Omega_p+\Omega_m$ gives
 - \displaystyle\int_{\Omega} \left[ \scdpore + \scdion \right] \psi \,d\Omega \text{ ,}
 \end{align}
 %
-which, after applying the Gauss divergence theorem, yields the final weak
-formulation
+which, after applying the Gauss divergence theorem, yields the final weak formulation
 %
 \begin{align}
 \displaystyle\int_{\Omega}
@@ -373,16 +384,15 @@ formulation
 \text{ ,}
 \end{align}
 %
-with boundaries $\Gamma_\text{PE}=\Gamma_{w,c}+\Gamma_{w,t}+\Gamma_m$ and
-$\vec{n}$ their normal vector. The boundary integrals at $\Gamma_{w,c}$ and
-$\Gamma_{w,t}$ are evaluated using the Dirichlet boundary conditions (BCs)
-$\potential=0$ and $\potential=\vbias$, respectively. A zero charge BC, $\vec{n}
-\cdot \displacement = 0$, is used for the integral at $\Gamma_{m}$.
+with boundaries $\Gamma_\text{PE}=\Gamma_{w,c}+\Gamma_{w,t}+\Gamma_m$ and $\vec{n}$ their normal vector. The
+boundary integrals at $\Gamma_{w,c}$ and $\Gamma_{w,t}$ are evaluated using the Dirichlet boundary conditions
+(BCs) $\potential=0$ and $\potential=\vbias$, respectively. A zero charge BC, $\vec{n} \cdot \displacement =
+0$, is used for the integral at $\Gamma_{m}$.
 
 \paragraph{Size-modified Nernst-Planck equation.}
 %
-The total ionic flux $\flux_{i}$ of ion $i$ at steady-state is expressed by the
-size-modified Nernst-Planck equation (smNPE)\cite{Lu-2012}
+The total ionic flux $\flux_{i}$ of ion $i$ at steady-state is expressed by the size-modified Nernst-Planck
+equation (smNPE)\cite{Lu-2012}
 %
 \begin{equation}
 \label{eq:smnp}
@@ -400,13 +410,12 @@ size-modified Nernst-Planck equation (smNPE)\cite{Lu-2012}
 \text{ ,}
 \end{equation}
 %
-with ion diffusion coefficient $\diffusion_{i}$, concentration
-$\concentration_{i}$, charge number $\chargen_{i}$, mobility $\mobility_{i}$,
-electrostatic potential $\potential$, steric saturation factor $\beta_{i}$ and
-fluid velocity $\velocity$. $\avogadro$ is Avogadro's constant
-($6.022\times10^{23}\text{~mol}^{-1}$) and $\ionsize_{i}$ and $\ionsize_{0}$ are
-the limiting cubic diameters for ions and water, respectively. Using the ion
-concentration test function $d_i$, the weak form of \cref{eq:smnp} becomes
+with ion diffusion coefficient $\diffusion_{i}$, concentration $\concentration_{i}$, charge number
+$\chargen_{i}$, mobility $\mobility_{i}$, electrostatic potential $\potential$, steric saturation factor
+$\beta_{i}$ and fluid velocity $\velocity$. $\avogadro$ is Avogadro's constant
+($6.022\times10^{23}\text{~mol}^{-1}$) and $\ionsize_{i}$ and $\ionsize_{0}$ are the limiting cubic diameters
+for ions and water, respectively. Using the ion concentration test function $d_i$, the weak form of
+\cref{eq:smnp} becomes
 %
 \begin{align}
 % Raw integral
@@ -447,16 +456,14 @@ concentration test function $d_i$, the weak form of \cref{eq:smnp} becomes
 \text{ .}
 \end{align}
 %
-The integrals on the boundaries $\Gamma_\text{NP} =
-\Gamma_{w,c}+\Gamma_{w,t}+\Gamma_{p+m}$ are evaluated using the Dirichlet
-boundary condition $\concentration_{i} = \cbulk$ for $\Gamma_{w,c}$ and
-$\Gamma_{w,t}$, and the no flux boundary condition $\vec{n} \cdot \flux_{i} = 0$
-for $\Gamma_{p+m}$
+The integrals on the boundaries $\Gamma_\text{NP} = \Gamma_{w,c}+\Gamma_{w,t}+\Gamma_{p+m}$ are evaluated
+using the Dirichlet boundary condition $\concentration_{i} = \cbulk$ for $\Gamma_{w,c}$ and $\Gamma_{w,t}$,
+and the no flux boundary condition $\vec{n} \cdot \flux_{i} = 0$ for $\Gamma_{p+m}$
 
 \paragraph{Variable density and viscosity Navier-Stokes equation.}
 %
-The steady-state, laminar fluid flow of an incompressible fluid with a variable
-density and viscosity is given by the system of equations\cite{Axelsson-2015}
+The steady-state, laminar fluid flow of an incompressible fluid with a variable density and viscosity is given
+by the system of equations\cite{Axelsson-2015}
 %
 \begin{align}
 \label{eq:ns_density_continuity}
@@ -472,10 +479,9 @@ density and viscosity is given by the system of equations\cite{Axelsson-2015}
 \text { ,}
 \end{align}
 %
-with fluid velocity $\velocity$, density $\density$, hydrodynamic stress tensor
-$\hydrostresstensor$, viscosity $\viscosity$, pressure $\pressure$ and body
-force $\vec{\force}$. The pressure test function $q$ is used to derive the weak
-forms of \cref{eq:ns_density_continuity}
+with fluid velocity $\velocity$, density $\density$, hydrodynamic stress tensor $\hydrostresstensor$,
+viscosity $\viscosity$, pressure $\pressure$ and body force $\vec{\force}$. The pressure test function $q$ is
+used to derive the weak forms of \cref{eq:ns_density_continuity}
 %
 \begin{align}
 % Density continuity
@@ -505,8 +511,7 @@ and \cref{eq:ns_velocity_continuity}
 \text{ ,}
 \end{align}
 %
-while for \cref{eq:ns_conservation} we use the velocity test function
-$\vec{v}=\left[v_r, v_\phi, v_z\right]$
+while for \cref{eq:ns_conservation} we use the velocity test function $\vec{v}=\left[v_r, v_\phi, v_z\right]$
 %
 \begin{align}
 \displaystyle\int_{\Omega_w}
@@ -540,10 +545,9 @@ $\vec{v}=\left[v_r, v_\phi, v_z\right]$
 \text{ ,}
 \end{align}
 %
-with boundaries $\Gamma_\text{NS} = \Gamma_{w,c}+\Gamma_{w,t}+\Gamma_{p+m}$. The
-no-slip Dirichlet BC $\velocity = 0$ is applied to $\Gamma_{p+m}$, and the no
-normal stress $\hydrostresstensor\vec{n}=0$ is used for $\Gamma_{w,c}$ and
-$\Gamma_{w,t}$.
+with boundaries $\Gamma_\text{NS} = \Gamma_{w,c}+\Gamma_{w,t}+\Gamma_{p+m}$. The no-slip Dirichlet BC
+$\velocity = 0$ is applied to $\Gamma_{p+m}$, and the no normal stress $\hydrostresstensor\vec{n}=0$ is used
+for $\Gamma_{w,c}$ and $\Gamma_{w,t}$.
 
 %
 \subsection{Estimating the bulk conductance of ClyA}
@@ -572,6 +576,56 @@ respectively.\cite{Soskine-2013}
 
 \newpage
 \section{Extended results}
+
+\subsection{Ionic current rectification}\label{sec:icr}
+
+The ionic current rectification (ICR, $\icr$, \cref{fig:icr}) represents the relative conductivity of the
+nanopore at identical, but opposing bias voltages
+%
+\begin{align*}
+  \icr(\vbias)  = \dfrac{\conductance(+\vbias)}{\conductance (-\vbias)}
+  \text{  , with } \vbias \ge 0 \text{ .}
+\end{align*}
+%
+Hence, for $\icr > 0$, the current is higher at positive bias voltages, and vice versa for $\icr < 0$. The ICR
+phenomenon results from an asymmetry in the ionic conductance pathways (\eg~moving from \cisi{} to \trans{} is
+not equivalent as moving from \transi{} to \cisi{}). In turn, this stems from the intrinsic asymmetries of the
+nanopore itself (\ie~geometry and charge distribution) or its response to the electric field (\ie~gating or
+electrostriction).
+
+\begin{figure*}
+
+  \begin{subfigure}[t]{5cm}
+    \centering
+    \caption{}\vspace{0mm}\label{fig:icr_contourmap_epnp}
+    \includegraphics[scale=1]{figures/conductance/icr_contourmap_epnp}
+  \end{subfigure}
+  \begin{subfigure}[t]{5cm}
+    \centering
+    \caption{}\vspace{0mm}\label{fig:icr_vs_concentration_epnp}
+    \includegraphics[scale=1]{figures/conductance/icr_vs_concentration_epnp}
+  \end{subfigure}
+
+  \caption%
+  %
+  [\textbf{Measured and simulated ionic rectification of single ClyA nanopores.}]
+  %
+  {%
+    %
+    \textbf{Measured and simulated ionic rectificationof single ClyA nanopores.}
+    %
+    (\subref{fig:icr_contourmap_epnp})
+    %
+    Contourplot of the ionic current rectification $\icr = \conductance(+\vbias)/\conductance (-\vbias)$, computed from the ionic conductances in the {ePNP-NS} simulation, as a function of $\vbias$ and $\cbulk$.
+    %
+    (\subref{fig:icr_vs_concentration_epnp})
+    %
+    Comparision between the simulated (ePNP-NS) and measured (expt.) $\icr$ as a function of
+    $\cbulk$ for \SIlist{50;100;150}{\mV}.
+    %
+  }\label{fig:icr}
+\end{figure*}
+
 
 \subsection{Peak values of the radial potential profiles inside ClyA}
 

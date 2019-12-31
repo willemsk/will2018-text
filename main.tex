@@ -613,9 +613,9 @@ with the following expressions
 %
 where $\diffusion_{i}^0$ and $\mobility_{i}^0$ represent the values at infinite dilution. The concentration
 dependent factors $\diffusion_{i}^c(\avionconc)$ and $\mobility_{i}^c(\avionconc)$ are empirical functions
-fitted to experimental data of respectively the ion self-diffusion coefficient and the electrophoretic
-mobility for solutions between \SIrange{0}{5}{\Molar} \ce{NaCl}.\cite{Mills-1989,Bianchi-1989,
-Currie-1960,Goldsack-1976,DellaMonica-1979} Likewise, the factors $\diffusion_{i}^w(\walldistance)$ and
+fitted to experimental data of respectively the ion self-diffusion coefficients\cite{Mills-1989} and the
+electrophoretic mobilities\cite{Bianchi-1989,Currie-1960,Goldsack-1976,DellaMonica-1979} for solutions
+between \SIrange{0}{5}{\Molar} \ce{NaCl}. Likewise, the factors $\diffusion_{i}^w(\walldistance)$ and
 $\mobility_{i}^w(\walldistance)$ are empirical functions that introduce a spatial dependency on the distance
 from the nanopore wall $\walldistance$, and were parameterized by fitting to molecular dynamics
 data.\cite{Noskov-2004,Simakov-2010,Makarov-1998}
@@ -779,12 +779,11 @@ electroosmotic flow and a brief reflection of the key findings in this work.
 
   \caption%
   %
-  [\textbf{Measured and simulated ionic conductance, rectification and cation selectivity of single ClyA
-  nanopores.}]
+  [\textbf{Measured and simulated ionic conductance and cation selectivity of single ClyA nanopores.}]
   %
   {%
     %
-    \textbf{Measured and simulated ionic conductance, rectification and cation selectivity of single ClyA nanopores.}
+    \textbf{Measured and simulated ionic conductance and cation selectivity of single ClyA nanopores.}
     %
     (\subref{fig:current-voltage_curves})
     %
@@ -903,15 +902,17 @@ ratio between the conductance at positive and negative bias voltages of equal ma
 ICR is a phenomenon often observed in nanopores that are both charged and contain a degree of geometrical
 asymmetry along the central axis of the pore. With it's high negative charge (\SI{-72}{\ec} at pH~7.5) and
 different \cis{} (\SI{\approx3.3}{\nm}) and \trans{} (\SI{\approx6}{\nm}) entry diameters, ClyA fulfills both
-conditions and hence exhibits a strong degree of rectification. The simulated concentration-voltage landscape
-of $\icr$ was plotted in \cref{fig:conductance_rectification_contourmap_epnp} (left), together with
-cross-sections at \SIlist{50;100;150}{\mV} (right) for comparison with the experimentally measured values.
-Starting at \SI{0.005}{\Molar}, $\icr$ rises rapidly with concentration until a maximum is reached at
-$\approx0.15$~M, after which it falls towards unity at \SI{5}{\Molar}. Even though good qualitative agreement
-is found with the experimental data over the entire range, $\icr$ matches quantitatively only for $\cbulk >
-\SI{0.5}{\Molar}$. In general, the simulation overestimates the rectification, particularly at the maximum and
-at high bias voltages, with $\icr$ values of $1.20$, $1.43$ and $1.69$ for the simulation and $1.14$, $1.28$
-and $1.46$ for the experiment at \SIlist{50;100;150}{\mV}, respectively.
+conditions and hence exhibits a strong degree of rectification.
+
+The heatmap of the simulated (ePNP-NS) $\icr$ (\cref{suppinfo:fig:icr_contourmap_epnp}) reveals that $\icr>0$
+between \SIrange{0}{200}{\mV} and \SIrange{0.005}{5}{\Molar}. It increases monotonically with increasing bias
+voltage and exhibits a maximum as a function of salt concentration at \SI{\approx0.15}{\Molar}. The
+concentration dependency of $\icr$ at \SIlist{50;100;150}{\mV} (\cref{suppinfo:fig:icr_vs_concentration_epnp})
+shows that it increases monotonically with $\cbulk$ until it reaches a peak value, after which it decreases to
+approach unity ($\icr = 1$) at saturating salt concentrations ($\cbulk \approx \text{\SI{5}{\Molar}}$). Even
+though the values produced by the ePNP-NS simulations do not fully match quantitatively to the experimental
+results, at least for $\cbulk < \text{\SI{0.5}{\Molar}}$, they do 1) reproduce the observed trends
+qualitatively and 2) exhibit much smaller errors relative to the PNP-NS results (data not shown).
 
 \paragraph{Ion selectivity.}
 %
