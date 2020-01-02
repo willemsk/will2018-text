@@ -806,16 +806,16 @@ electroosmotic flow and a brief reflection of the key findings in this work.
     %
     (\subref{fig:transport_number_contourmap_epnp})
     %
-    Contour plot of the \Na{} transport number $\transportn_{\Na}=\conductance_{\Na}/\conductance$, computed
-    from the individual ionic conductances in the ePNP-NS simulation, as a function of $\vbias$ and $\cbulk$.
-    $\transportn_{\Na}$ expresses the fraction of the ionic current is carried by \Na{} ions, i.e. the cation
-    selectivity.
+    Contour plot of the \Na{} transport number $\tna = \gna / \conductance$, computed from the individual
+    ionic conductances in the ePNP-NS simulation, as a function of $\vbias$ and $\cbulk$. $\tna$ expresses the
+    fraction of the ionic current is carried by \Na{} ions, i.e. the cation selectivity.
     %
     (\subref{fig:transport_number_vs_concentration_bulk_pnp_epnp})
     %
-    Comparision between the simulated (PNP-NS and ePNP-NS) and bulk $\transportn_{\Na}$ as a function of
-    $\cbulk$ for \SI{+150}{\mV} (top) and \SI{-150}{\mV} (bottom). The solid grey line represents
-    \SI{50}{\percent} selectivity.
+    Simulated (PNP-NS and ePNP-NS) values of $\tna$ as a function of $\cbulk$ for \SI{+150}{\mV} (top) and
+    \SI{-150}{\mV} (bottom). Here, the `bulk' line indicates the bulk \ce{NaCl} cation transport number,
+    represented by its empirical function $\tna(\cbulk)$ (see \cref{tab:corrections_equations} and
+    \cref{suppinfo:tab:corrections_parameters}). The solid grey line represents $\tna = 0.5$.
     %
   }\label{fig:conductance}
 \end{figure*}
@@ -893,34 +893,59 @@ Nevertheless, our simplified 2D-axisymmetric model, in conjunction with the ePNP
 accurately predict the ionic current flowing through ClyA for a wide range of experimentally relevant ionic
 strengths and bias voltages. This suggests that we managed to capture the essential physical phenomena that
 drive the ion and water transport through the nanopore both qualitatively and quantitatively. Hence, we expect
-the distribution of the resulting properties (\eg~the ion concentrations, electric field and water velocity)
-to closely match their real values.
+the distribution of the resulting properties (\eg~ion concentrations, ion fluxes, electric field and water
+velocity) to closely match their real values.
 
-\paragraph{Ion selectivity.}
+\paragraph{Cation selectivity.}
 %
 The ion selectivity of a nanopore determines the preference with which it transports one ion type over the
-other. Here, we represent the ClyA's ion selectivity by the apparent \Na{} transport number
-%
-\begin{align*}
-  \transportn_{\ce{Na+}} =
-  \dfrac{\conductance_{\ce{Na+}}}{\conductance} =
-  \dfrac{\conductance_{\ce{Na+}}}{\conductance_{\ce{Na+}} + \conductance_{\ce{Cl-}}},
-\end{align*}
-%
-\ie~the fraction of the total current that is carried by \Na{} ions
-(\cref{fig:transport_number_contourmap_epnp}). As expected from its negatively charged interior, ClyA is
-cation selective ($\tna > 0.5$) for all investigated voltages up to a reservoir salt concentration of
-$\approx2$~M, after which it drops below $0.5$ to a minimum value of $0.45$ at $5$~M. The latter is
-$\approx1.27\times$ its value in bulk, indicating that even at saturation ClyA is preferential towards
-cations. Between $0.05 < \cbulk < 1$~M, $\tna$ decays logarithmically ($\tna(\cbulk)=a+b\log\cbulk$) with
-slopes $b=-0.40$ and $-0.29$ for $-150$ and $+150$~mV, respectively.
-\todo{What do these different slopes mean?}
-At low concentrations and high applied bias voltages (below $10$~mM and $50$~mM
-for $+150$ and $-150$~mV, respectively), $\tna$ is observed to exceed unity.
-Under these conditions, the convective flux of \Cl{} becomes slightly larger
-than its opposing electromigratory flux, resulting in an overall negative
-contribution of \Cl{} to the ionic current.
+other. Experimentally, it is often determined by placing the pore in a salt gradient (\ie~different salt
+concentrations in the \cisi{} and \transi{} reservoirs) and measuring the potential at which the nanopore
+current is zero (reversal potential, $\revpot$).\cite{Soskine-2013,Franceschini-2016} The Goldman-Hodkin-Katz
+(GHK) equation can then be used to convert $\revpot$ into the permeability ratio $\pna = \gna / \gcl$. Here,
+we represent the ClyA's ion selectivity by the fraction of the total current that is carried by \Na{} ions:
+the apparent \Na{} transport number $\tna = \gna / (\gna + \gcl) = \pna / (\pna + 1)$
+(\cref{fig:transport_number_contourmap_epnp,fig:transport_number_vs_concentration_bulk_pnp_epnp}). 
 
+Due its negatively charged interior, we dound ClyA to be cation selective (\ie~$\tna > 0.5$) for all
+investigated voltages up to a bulk salt concentration of $\cbulk \approx \text{\SI{2}{\Molar}}$ (0.5 contour
+line in \cref{fig:transport_number_contourmap_epnp}). Above \SI{2}{\Molar} \ce{NaCl}, $\tna$ falls to a
+minimum of value of 0.45 at $\cbulk \approx \text{\SI{5}{\Molar}}$, which is still \num{\approx1.27} times its
+value in the bulk electrolyte (0.35) at that concentration. This indicates that---even at saturation---ClyA
+remains preferential towards cations. Below \SI{2}{\Molar}, the ion selectivity increases logarithmically with
+decreasing salt concentrations, but also becomes more sensitive to the direction and magnitude of the electric
+field, with higher ion selectivities at negative bias voltages
+(\cref{fig:transport_number_vs_concentration_bulk_pnp_epnp}). For example, to reach a selectivity of $\tna
+\approx 0.9$, the salt concentration must fall to \SI{0.05}{\Molar} at \SI{+150}{\mV} and to only
+\SI{0.125}{\Molar} at \SI{-150}{\mV}.
+
+Using the reversal potential method, Franceschini \etal{}\cite{Franceschini-2016} found ClyA's ion selectivity
+to be $\tna = 0.66$ ($\pna = 1.9$). This value corresponds the selectivity at \SI{0.5}{\Molar}, as computed
+using our ePNP-NS simulation at $\vbias = \text{\SI{0}{\mV}}$, and lies in between the \cisi{}
+(\SI{1}{\Molar}, $\tna = 0.57$, $\pna = 1.3$) and \transi{} (\SI{0.15}{\Molar}, $\tna = 0.84$, $\pna = 5.4$))
+concentrations used in their experiment. Even though measuring the reversal potential can give valuable
+insights into the selectivity ion channels and small nanopores, it should be used with caution for larger
+nanopores such as ClyA. The GHK equation does not consider the ionic flux due to the electro-osmotic flow and
+assumes that the Nernst-Einstein relation holds for all used concentrations. These two effects should be
+ignored as they contribute significantly to the nanopore's total conductance. Furthermore, because the ion
+selectivity depends strongly on the ionic strength, the measured reversal potential will necessarily be
+influenced by the chosen gradient and represent the selectivity at an undetermined intermediate concentration.
+
+% 0.15 M, 0 mV
+% Tna = 0.84299
+% Pna = 5.36904
+
+% 1.0 M, 0 mV
+% Tna = 0.57429
+% Pna = 1.34899
+
+% 0.05 M, +150 mV
+% Tna = 0.90583
+% Pna = 9.61941
+
+% 0.125 M, -150 mV
+% Tna = 0.90359
+% Pna = 9.37234
 
 \subsection{Ion Concentration Distribution}\label{sec:ionc}
 %
@@ -1006,11 +1031,6 @@ clearly show the formation of the electrical double layer.
 Note that the figures given above were obtained from a nanoscale continuum steady-state simulation, and hence
 represent a time-averaged situation (typically on the order of \SIrange{10}{100}{\ns}).\todo{REF}
 
-% power law slopes at 0 mV (0.005 to 0.05M)
-% cpos
-% a=0.276±0.014, b=-0.910±0.010
-% cneg
-% a=3.236±0.166, b=0.778±0.015
 
 \paragraph{Ion Charge Density.}
 %
