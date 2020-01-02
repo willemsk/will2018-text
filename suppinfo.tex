@@ -552,15 +552,21 @@ for $\Gamma_{w,c}$ and $\Gamma_{w,t}$.
 %
 \subsection{Estimating the bulk conductance of ClyA}
 %
-A rough estimate of a nanopore's ionic conductance can be obtained by modelling it as a fluidic resistor,
-represented by a cylinder.\cite{Kowalczyk-2011} ClyA's asymmetric shape can be approximated by a tall, wide
-cylinder (\cisi{} \textit{lumen}) on top of a narrow short cylinder (\transi{} constriction), resulting in two
-resistors in series\cite{Soskine-2013}
+The ionic current flowing through a nanopore can be computed using Ohm's law
 %
-\begin{align}
-  \label{eq:bulk_nanopore_conductance}
-  \conductance_{\text{bulk}} = 
-      \dfrac{\sigma}{4\pi}
+\begin{align}\label{eq:bulk_nanopore_current}
+  \current(\cbulk,\vbias) = \conductance_{\text{bulk}}(\cbulk) \vbias
+\end{align}
+%
+with $\conductance_{\text{bulk}}$ the nanopore conductance. A naive estimate of $\conductance_{\text{bulk}}$
+can be obtained by modelling it as a fluidic resistor, represented by a fluid-filled
+cylinder.\cite{Kowalczyk-2011} Because ClyA has an asymmetric shape, it is best approximated by a two
+resistors in series: a tall, wide cylinder (\cisi{} \textit{lumen}) on top of a narrow short cylinder
+(\transi{} constriction).\cite{Soskine-2013} Hence,
+%
+\begin{align}\label{eq:bulk_nanopore_conductance}
+  \conductance_{\text{bulk}(\cbulk)} = 
+      \dfrac{\sigma}{4\pi}(\cbulk)
       \left( 
           \dfrac{ l_{\text{cis}} }{ d_{\text{cis}}^2 } +
           \dfrac{ l_{\text{trans}} }{ d_{\text{trans}}^2 }
@@ -568,10 +574,10 @@ resistors in series\cite{Soskine-2013}
       \text{ ,}
 \end{align}
 %
-with $\sigma$ the bulk electrolyte conductivity, $l_{\text{cis}}=\text{\SI{10}{\nm}}$ and
-$l_{\text{trans}}=\text{\SI{4}{\nm}}$ the heights and $d_{\text{cis}}=\text{\SI{10}{\nm}}$ and
-$d_{\text{trans}}=\text{\SI{4}{\nm}}$ the diameters of the \cisi{} and \transi{} chambers,
-respectively.\cite{Soskine-2013}
+with $\sigma$ the (concentration dependent) bulk electrolyte conductivity. The \cisi{} and \transi{} chambers
+have have heights and diameters of $l_{\text{cis}}=\text{\SI{10}{\nm}}$ and
+$l_{\text{trans}}=\text{\SI{4}{\nm}}$, and $d_{\text{cis}}=\text{\SI{10}{\nm}}$ and
+$d_{\text{trans}}=\text{\SI{4}{\nm}}$, respectively.\cite{Soskine-2013}
 
 
 \newpage

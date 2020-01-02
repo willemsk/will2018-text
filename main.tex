@@ -787,10 +787,13 @@ electroosmotic flow and a brief reflection of the key findings in this work.
     %
     (\subref{fig:current-voltage_curves})
     %
-    Comparison of the simulated (PNP-NS and ePNP-NS) and experimentally (expt.) measured current-voltage (IV)
-    curves of ClyA-AS at \SI{25\pm1}{\dC} between $\vbias=\text{\SIrange{-200}{+200}{\mV}}$, and for
-    $\cbulk=\text{\SIlist{0.05;0.15;0.5;1;3}{\Molar}}$ \ce{NaCl}. Experimental errors ($n=3$) were smaller
-    than the symbol size and hence not shown.
+    Comparison between the experimentally (expt.) measured, bulk pore model (bulk) and the simulated (PNP-NS
+    and ePNP-NS) current-voltage (IV) curves of ClyA-AS at \SI{25\pm1}{\dC} between
+    $\vbias=\text{\SIrange{-200}{+200}{\mV}}$, and for $\cbulk=\text{\SIlist{0.05;0.15;0.5;1;3}{\Molar}}$
+    \ce{NaCl}. The bulk current was calculated by \cref{suppinfo:eq:bulk_nanopore_current} by modeling ClyA as
+    two series resistors (\cref{suppinfo:eq:bulk_nanopore_conductance}),\cite{Soskine-2013,Kowalczyk-2011}
+    using the bulk \ce{NaCl} conductivity at the given concentrations. Experimental errors ($n=3$) were
+    smaller than the symbol size and hence not shown.
     %
     (\subref{fig:conductance_contourmap_epnp})
     %
@@ -800,9 +803,7 @@ electroosmotic flow and a brief reflection of the key findings in this work.
     (\subref{fig:conductance_loglog_exp_pnp_epnp})
     %
     Log-log plots of $\cbulk$ as a function of $\cbulk$ at \SI{+150}{\mV} (top) and \SI{-150}{\mV}
-    (bottom)---comparing experimental (expt.), simulated (PNP-NS and ePNP-NS), and bulk pore conductances. The
-    latter was calculated by modelling the nanopore as two ionic resistors in series
-    (\cref{suppinfo:eq:bulk_nanopore_conductance}).\cite{Soskine-2013,Kowalczyk-2011}
+    (bottom)---comparing experimental (expt.), simulated (PNP-NS and ePNP-NS), and bulk pore conductances.
     %
     (\subref{fig:transport_number_contourmap_epnp})
     %
@@ -829,18 +830,18 @@ The ability of our model to reproduce the ionic current of a biological nanopore
 experimentally relevant conditions (between \SIrange{-150}{+150}{\mV} and for
 \SIlist{0.05;0.15;0.5;1;3}{\Molar} \ce{NaCl}) can be seen in \cref{fig:current-voltage_curves}. In this figure
 we compare IV relationships of ClyA-AS as measured experimentally (`expt.'), simulated using our
-2D-axisymmetric model (`PNP-NS' and `ePNP-NS') and naively estimated using an analytic
-model\cite{Soskine-2013,Kowalczyk-2011} based on the bulk electrolyte conductivity and the simplified geometry
-of the pore (`bulk', \cref{suppinfo:eq:bulk_nanopore_conductance}). Whereas the classical PNP-NS equations
-consistently overestimated the ionic current, particularly at high salt concentrations, the predictions of the
-ePNP-NS equations corresponded closely to the measured values, \emph{especially} at high ionic strengths
-(\SI{>0.5}{\Molar}). The failure of the classical PNP-NS equations to correctly estimate the current is
-expected however, as in this regime the model parameters (\eg~diffusivity, mobility and viscosity, ...) begin
-to deviate significantly from their `infinite dilution' values (see~\cref{suppinfo:fig:corrections}). At lower
-salt concentrations the ePNP-NS equations tended to minorly overestimate the ionic current, but the
-discrepancies were much smaller than those observed for PNP-NS. Finally, the bulk model managed to capture the
-currents suprisingly well at high salt concentrations and positive bias voltages, but faltered in the negative
-voltage regime. 
+2D-axisymmetric model (`PNP-NS' and `ePNP-NS') and naively analytically estimated (`bulk') using a resistor
+model of the pore (\cref{suppinfo:eq:bulk_nanopore_current,suppinfo:eq:bulk_nanopore_conductance}),
+\cite{Soskine-2013,Kowalczyk-2011} and on the bulk \ce{NaCl} conductivity. Whereas the classical PNP-NS
+equations consistently overestimated the ionic current, particularly at high salt concentrations, the
+predictions of the ePNP-NS equations corresponded closely to the measured values, \emph{especially} at high
+ionic strengths (\SI{>0.5}{\Molar}). The failure of the classical PNP-NS equations to correctly estimate the
+current is expected however, as in this regime the model parameters (\eg~diffusivity, mobility and viscosity,
+...) begin to deviate significantly from their `infinite dilution' values
+(see~\cref{suppinfo:fig:corrections}). At lower salt concentrations the ePNP-NS equations tended to minorly
+overestimate the ionic current, but the discrepancies were much smaller than those observed for PNP-NS.
+Finally, the bulk model managed to capture the currents suprisingly well at high salt concentrations and
+positive bias voltages, but faltered in the negative voltage regime. 
 
 The ability of a nanopore to conduct ions can be best expressed by its conductance: $\conductance = \current /
 \vbias$. We computed ClyA's conductance with the ePNP-NS equations as a function of bias voltage
