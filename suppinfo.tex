@@ -593,6 +593,16 @@ not equivalent as moving from \transi{} to \cisi{}). In turn, this stems from th
 nanopore itself (\ie~geometry and charge distribution) or its response to the electric field (\ie~gating or
 electrostriction).
 
+The heatmap of the simulated (ePNP-NS) $\icr$ (\cref{fig:icr_contourmap_epnp}) reveals that $\icr>0$ between
+\SIrange{0}{200}{\mV} and \SIrange{0.005}{5}{\Molar}. It increases monotonically with increasing bias voltage
+and exhibits a maximum as a function of salt concentration at \SI{\approx0.15}{\Molar}. The concentration
+dependency of $\icr$ at \SIlist{50;100;150}{\mV} (\cref{fig:icr_vs_concentration_epnp}) shows that it
+increases monotonically with $\cbulk$ until it reaches a peak value, after which it decreases to approach
+unity ($\icr = 1$) at saturating salt concentrations ($\cbulk \approx \text{\SI{5}{\Molar}}$). Even though the
+values produced by the ePNP-NS simulations do not fully match quantitatively to the experimental results, at
+least for $\cbulk < \text{\SI{0.5}{\Molar}}$, they do 1) reproduce the observed trends qualitatively and 2)
+exhibit much smaller errors relative to the PNP-NS results (data not shown).
+
 \begin{figure*}
 
   \begin{subfigure}[t]{5cm}
