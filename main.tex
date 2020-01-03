@@ -143,7 +143,7 @@ Poisson-Nernst-Planck and Navier-Stokes equations; single molecule}
   a deeper insight into the influence of ionic strength and applied voltage on the ionic conductance through
   ClyA and a plethora of quantities difficult to assess experimentally. The latter includes the cation and
   anion concentrations inside the pore, the shape of the electrostatic potential landscape and the magnitude
-  of the electroosmotic flow. Our work shows that continuum models of biological nanopores---if the
+  of the electro-osmotic flow. Our work shows that continuum models of biological nanopores---if the
   appropriate corrections are applied---can make both qualitatively and quantitatively meaningful predictions
   that could be valuable tool to aid in both the design and interpretation of nanopore experiments.
 \end{abstract}
@@ -171,11 +171,11 @@ Nanopores are typically operated in the resistive-pulse mode, \ie~by monitoring 
 ionic conductance over time.\cite{Bayley-2001,Dekker-2007,Maglia-2010,Venkatesan-2011} Experimentally, this is
 achieved by placing the nanopore between two electrolyte compartments and applying a constant DC (or AC)
 voltage across them. Due to the high resistance of the nanopore, virtually the full potential change occurs
-within (and around) the pore, resulting in a strong electrical field (\SIrange{1e7}{1e8}{\mV\per\nm}) that
+within (and around) the pore, resulting in a strong electric field (\SIrange{1e7}{1e8}{\mV\per\nm}) that
 electrophoretically drives ions and water molecules through
 it.\cite{Wong-2007,Mao-2014,Haywood-2014,Laohakunakorn-2015} Hence, analyte molecules such as DNA or proteins
 are driven towards, and often \emph{through}, the nanopore by a combination of Coulombic (electrophoretic) and
-hydrodynamic (electroosmotic) forces.\cite{Wong-2007,Grosberg-2010,Muthukumar-2010, Muthukumar-2014} If
+hydrodynamic (electro-osmotic) forces.\cite{Wong-2007,Grosberg-2010,Muthukumar-2010, Muthukumar-2014} If
 successful, a translocation event is observed as a temporal fluctuation in the ionic conductance of the pore
 that serves as a unique molecular `fingerprint' with which the molecule can be identified.\cite{Yusko-2017}
 Because the frequency, magnitude, duration and even noise levels of these events depend on the properties of
@@ -190,7 +190,7 @@ and Brownian dynamics
 \emph{mean-field} (continuum) methods based on solving the Poisson-Boltzmann (PB)
 equations\cite{Grochowski-2008, Baldessari-2008-1} and Poisson-Nernst-Planck (PNP)
 equations,\cite{Eisenberg-1996,Gillespie-2002, Simakov-2010}. The latter can be coupled with the Navier-Stokes
-(NS) equation to include the electroosmotic flow.\cite{Lu-2012,Pederson-2015} Due to their explicit atomic or
+(NS) equation to include the electro-osmotic flow.\cite{Lu-2012,Pederson-2015} Due to their explicit atomic or
 particle nature, MD and BD simulations are considered to yield the most accurate results. However, the large
 computational cost of simulating a complete biological nanopore system (100K--1M atoms) for hundreds of
 nanoseconds still necessitates the use of supercomputers.\cite{Aksimentiev-2005,Bhattacharya-2011} The
@@ -234,7 +234,7 @@ nanopore. Similar reductions in ion diffusion coefficients have been proposed to
 estimations of the ionic conductance of ion channels.\cite{Furini-2006,Liu-2015} The motility of water
 molecules is expressed by the NS equations as the fluid's viscosity. Hence, as also observed in MD simulations
 for water molecules near proteins\cite{Pronk-2014} and confined in hydrophilic
-nanopores,\cite{Qiao_Aluru-2003,Vo-2016,Hsu-2017} the water-solid interaction leads to a viscosity several
+nanopores,\cite{Qiao-Aluru-2003,Vo-2016,Hsu-2017} the water-solid interaction leads to a viscosity several
 times higher compared to the bulk values. Note that this is valid for hydrophilic interfaces only, as the lack
 of interaction with hydrophobic interfaces, such as carbon nanotubes, leads to a lower
 viscosity.\cite{Ye-2011}
@@ -282,7 +282,7 @@ governing our ePNP-NS framework and detail the construction of the 2D-axisymmetr
 \emph{\nameref{sec:results}}, we validate our model by direct comparison of simulated ionic conductance with
 experimentally measured values. We then proceed to characterize the influence of the bulk ionic strength and
 applied bias voltage on cation and anion concentrations inside the pore, the electrostatic potential
-distribution and magnitude of the electroosmotic flow. Finally, we touch upon our key finding and their impact
+distribution and magnitude of the electro-osmotic flow. Finally, we touch upon our key finding and their impact
 in \emph{\nameref{sec:conclusions}} and describe our protocols in more detail in \emph{\nameref{sec:methods}}.
 
 
@@ -667,12 +667,12 @@ with fluid velocity $\velocity$, density $\density$, hydrodynamic stress tensor 
 viscosity $\viscosity$ and pressure $\pressure$. The external body force density $\vec{\force}$ that acts on
 the fluid is given by
 %
-\begin{align}
-\vec{\force} = \echarge\avogadro\scdion\efield
-\text{\,,}
+\begin{align}\label{eq:ion_force_density}
+  \vec{\force} = \echarge\avogadro\scdion\efield
+  \text{\,,}
 \end{align}
 %
-with $\efield = - \nabla \potential$ the electrical field vector.
+with $\efield = - \nabla \potential$ the electric field vector.
 
 As with the previous equations, we introduced a concentration dependency and wall distance dependencies for
 $\viscosity$ and a concentration dependency for the $\density$ by replacing their constant values by
@@ -731,10 +731,10 @@ measured the single channel ionic conductance of ClyA at a wide range of experim
 concentrations and bias voltages and compared them with the simulated ionic transport properties in terms of
 current, conductance, rectification and ion selectivity, of both the classical PNP-NS and the newly developed
 ePNP-NS equations. After validation, we proceed with describing the influence of bias voltage and bulk ionic
-strengths on the local ion concentrations inside the pore and the resulting electrical double layer. This is
-followed by a characterization of the electrostatic potential and the electrostatic energy landscape within
-ClyA for both cations and anions. We will conclude this section by discussing the properties of the
-electroosmotic flow and a brief reflection of the key findings in this work.
+strengths on the local ion concentrations inside the pore and the resulting electrical double layer (EDL).
+This is followed by a characterization of the electrostatic potential and the electrostatic energy landscape
+within ClyA for both cations and anions. We will conclude this section by discussing the properties of the
+electro-osmotic flow and a brief reflection of the key findings in this work.
 
 
 \begin{figure*}[!p]
@@ -822,7 +822,7 @@ electroosmotic flow and a brief reflection of the key findings in this work.
 \end{figure*}
 
 
-\subsection{Transport of ions through ClyA}\label{sec:iont}
+\subsection{Transport of Ions Through ClyA}\label{sec:iont}
 
 \paragraph{Ionic current and conductance.}
 %
@@ -880,7 +880,7 @@ saturating salt concentrations.
 The results and comparisons discussed above indicate that ClyA's conductivity is dominated by the bulk
 electrolyte conductivity above physiological salt concentrations ($\cbulk > \text{\SI{0.15}{\Molar}}$). The
 breakdown of this simple dependency at lower ionic strengths is particularly evident at negative bias voltages
-and is likely caused by the overlapping of the electrical double layer (EDL) inside the pore. This effectively
+and is likely caused by the overlapping of the electrical double layer inside the pore. This effectively
 excludes the co-ions---\Cl{} in the case---from the interior of the pore, preventing them from contributing to
 total ionic conductance and resulting in a conductance dominated by the surface charge.\cite{Uematsu-2018} The
 presence of only a single ion type inside the pore may also offer an explanation as to why the ePNP-NS
@@ -1089,7 +1089,7 @@ represent a time-averaged situation (typically on the order of \SIrange{10}{100}
 
 The formation of an electrical double layer inside the pore and the resulting asymmetry in the cation and
 anion concentrations results in a net charge density inside the pore ($\scdion$, \cref{eq:scdion}). At
-reservoir concentrations \SI{\le0.5}{\Molar}, the electrical double layer (EDL) inside the pore is very
+reservoir concentrations \SI{\le0.5}{\Molar}, the electrical double layer inside the pore is very
 diffuse and overlaps significantly (\cref{fig:ion_charge_density_contours}, 3 leftmost panels). Moreover, the
 absence of anions prevents the formation of any significant negative charge densities next to the few
 positively charged residues lining the pore walls. The situation at high salt concentrations
@@ -1356,26 +1356,10 @@ cation selectivities ($S_{i}=\transportn_{i}/(1-\transportn_{i})$).
 % 5.00 : -0.07 = -1.8 mV
 %
 
-\subsection{electroosmotic flow}\label{sec:eof}
-
-% electroosmotic flow
-% * Introduction to EOF.
-%   - What is electroosmotic flow?
-%   - Why is it important?
-%   - What would we like to know about it from simulations?
-% * EOF in ClyA.
-%   - Description of the EOF
-%     + In which direction does it flow?
-%     + What does the velocity profile look like?
-%   - What is the effect of ...
-%     + ... salt concentration?
-%     + ... bias voltage?
-% * Conclusions on EOF in ClyA.
-%   - Key findings.
-%   - Link back to published experimental data.
+\subsection{Transport of Water Through ClyA}\label{sec:eof}
 
 
-\begin{figure*}[!htb]
+\begin{figure*}[!tbp]
   \centering
   \hspace{-2cm}
   \begin{minipage}[t]{5.5cm}
@@ -1402,14 +1386,14 @@ cation selectivities ($S_{i}=\transportn_{i}/(1-\transportn_{i})$).
     \begin{subfigure}[t]{4cm}
       \addtocounter{subfigure}{1}
       \centering
-      \caption{}\vspace{-5mm}\label{fig:flow_conductance_vs_voltage}
-      \includegraphics[scale=1]{figures/flow/flow_conductance_vs_voltage}
+      \caption{}\vspace{-5mm}\label{fig:flow_conductance_vs_concentration}
+      \includegraphics[scale=1]{figures/flow/flow_conductance_vs_concentration}
     \end{subfigure}
     \begin{subfigure}[t]{4cm}
       \vspace{2mm}
       \centering
-      \caption{}\vspace{-5mm}\label{fig:flow_conductance_vs_concentration}
-      \includegraphics[scale=1]{figures/flow/flow_conductance_vs_concentration}
+      \caption{}\vspace{-5mm}\label{fig:flow_conductance_vs_voltage}
+      \includegraphics[scale=1]{figures/flow/flow_conductance_vs_voltage}
     \end{subfigure}
     \begin{subfigure}[t]{4cm}
       \vspace{2mm}
@@ -1420,7 +1404,7 @@ cation selectivities ($S_{i}=\transportn_{i}/(1-\transportn_{i})$).
   \end{minipage}
 \centering
 
-  \caption%
+\caption%
   %
   [\textbf{Concentration and voltage dependency of the electro-osmotic flow inside ClyA.}]
   %
@@ -1430,10 +1414,10 @@ cation selectivities ($S_{i}=\transportn_{i}/(1-\transportn_{i})$).
     %
     (\subref{fig:flow_contour})
     %
-    Contour plot of the electroosmotic flow (EOF) velocity $\velocity$ at \SI{0.5}{\Molar} and \SI{-100}{\mV}
+    Contour plot of the electro-osmotic flow (EOF) velocity $\velocity$ at \SI{0.5}{\Molar} and \SI{-100}{\mV}
     bias voltage. The arrows  on the streamlines indicate the direction of the flow. As observed
     experimentally\cite{Soskine-2013} and  expected from a negatively charged conical nanopore, the EOF
-    follows the direction of the cation, i.e. from  \cis\ to \trans\ under negative bias voltages and vice
+    follows the direction of the cation, \ie~from \cisi{} to \transi{} under negative bias voltages and vice
     versa for positive ones.
     %
     (\subref{fig:flow_constriction_contour})
@@ -1447,141 +1431,131 @@ cation selectivities ($S_{i}=\transportn_{i}/(1-\transportn_{i})$).
     that at high salt concentrations (\SI{>1}{\Molar}), the velocity profile exhibits two `lobes' close to the
     nanopore walls and hence deviates from the parabolic shape observed at lower ionic strengths.
     %
-    (\subref{fig:flow_conductance_vs_voltage})
-    %
-    and
-    %
     (\subref{fig:flow_conductance_vs_concentration})
     %
-    the electroosmotic conductance $G_{\text{eo}} = Q_{\text{eo}}/V$, with $Q_{\text{eo}}$ the total flow
-    rate through the pore, plotted against bias voltage and bulk salt concentration, respectively. In the low
-    concentration regime, $G_{\text{eo}}$ increases rapidly between \SIlist{0.005;0.5}{\Molar} after which it
-    decreases logarithmically for higher concentrations.
+    Concentration
+    %  and
+    % %
+    % (\subref{fig:flow_conductance_vs_voltage})
+    % %
+    % voltage 
+    dependence of the electro-osmotic conductance $\flowcond = \flowrate / \vbias$, with $\flowrate$
+    the total flow rate through the pore (\cref{eq:flowrate}). In the low concentration regime, $\flowcond$
+    increases rapidly between \SIlist{0.005;0.5}{\Molar} after which it decreases logarithmically for higher
+    concentrations.
+    % $\flowcond$ depends only weakly on the applied bias voltage.
     %
     (\subref{fig:flow_conductance_rectification_vs_concentration})
     %
-    The rectification of the electroosmotic flow rate
-    ($\alpha_{\text{eo}} = G_{\text{eo}(}+V)/Q_{\text{eo}}(-V)$) plotted against the concentration.
-    $\alpha_{\text{eo}}$ shows a maximum between \SIlist{0.04;0.05}{\Molar}, after which it falls rapidly to
-    reach unity at approximately \SI{\approx0.45}{\Molar}, regardless of the applied bias. A minimum is then
-    reached at \SI{\approx1}{\Molar}, followed by a gradual approach towards unity.
+    The rectification of the electro-osmotic conductance ($\eor = \flowcond (+V) / \flowcond (-V)$) plotted
+    against the bulk salt concentration. $\eor$ increases with bias voltage and exhibits an inversion point at
+    \SI{\approx 0.45}{\Molar}.
     %
   }\label{fig:flow}
 
 \end{figure*}
 
 
-
-The charged nature of many nanopores results in formation of an electroosmotic flow (EOF), \ie~a net flux of
-water through the pore. This flow does not only influence the transport of ions and When investigating
-macromolecules with nanopores, the EOF cannot be ignored as it exerts The EOF allows for the capture of
-nucleic acids\cite{Wong-2007}, peptides\cite{Huang-2017} and proteins
-\cite{Soskine-2012,Soskine-2013,VanMeervelt-2014,Soskine-Biesemans-2015,Biesemans-Soskine-2015,Wloka-2017}
-irrespective of their charge.
-
-The EOF is caused by two closely related mechanisms: 1) the excess transport of hydration water due to the
-pore's ion selectivity, and 2) the viscous drag exerted by the unidirectional movement of the electrical
-double layer inside the pore.
-
-
-The first mechanism likely dominates in pores with a diameter close to that of the hydrated ions
-(\SI{\le1}{\nm}) such as \ahl\cite{} or FraC,\cite{Huang-2017} while the second is expected to be stronger for
-larger pores (\SI{>1}{\nm}), such as ClyA\cite{Soskine-2012} or most solid-state nanopores.
-
-
-When investigating macromolecules with nanopores, the EOF cannot be ignored as
-it exerts The EOF allows for the capture of nucleic acids\cite{Wong-2007},
-peptides\cite{Huang-2017} and proteins
-\cite{Soskine-2012,Soskine-2013,VanMeervelt-2014,Soskine-Biesemans-2015,Biesemans-Soskine-2015,Wloka-2017}
-irrespective of their charge.
-
-
-In the following section we aim to quantitatively and a qualitatively describe the influence of bias voltage
-and salt concentration on the EOF inside ClyA.
-
-
-\paragraph{Direction and magnitude of the EOF.}
+\paragraph{Origin and relevance of the electro-osmotic flow (EOF) in ClyA.}
 %
-The predominantly negative charges lining the interior walls of ClyA result in net water flow flow \cis{} to
-\trans{} at negative bias voltages and \textit{vice versa} at positive applied potentials.  Due to the
-conservation of mass, the velocity $\velocity$ is predominantly a function of the nanopore radius. Hence, it
-is lowest in the lumen of the pore and highest inside the \trans{} constriction (\cref{fig:flow_contour}). At
-the center of the pore, $\velocity$ reaches values of \SI{\approx0.07}{\mps} in the lumen and
-\SI{\approx0.21}{\mps} in the constriction (for $\cbulk=\SI{0.5}{\Molar}$ and $\vbias=\SI{-100}{\mV}$).
+The charged nature of many nanopores gives rise to a net flux of water through the pore, called the
+electro-osmotic flow (EOF).\cite{Qiao-Aluru-2003,Thompson-2003,Mao-2014} The EOF not only contributes
+significantly to the ionic current, the magnitude of the viscous drag force it exerts is often of the same
+order as the Coulombic electrophoretic force (EPF). Hence, it strongly influences the capture and
+translocation of biomolecules including nucleic acids,\cite{Wong-2007,Luan-2008,Firnkes-2010}
+peptides,\cite{Huang-2017,Li-2018,Huang-2019} and
+proteins\cite{Soskine-2012,Soskine-2013,VanMeervelt-2014,Soskine-Biesemans-2015,Biesemans-Soskine-2015,Wloka-2017,Galenkamp-2018,Willems-Ruic-Biesemans-2019}.
+Because the drag exerted by the EOF depends primarily on the size and shape of the biomolecule of interest and
+not on its charge,\cite{Willems-Ruic-Biesemans-2019} it can be harnassed to capture molecules even against the
+electric field.\cite{Soskine-2012} The EOF is a consequence of interaction between the fixed charges on the
+nanopore walls and mobile charges in the electrolyte. It can be described by two closely related mechanisms:
+1) the excess transport of the hydration shell water molecules in one direction due to the pore's ion
+selectivity, and 2) the viscous drag exerted by the unidirectional movement of the electrical double layer
+inside the pore. The first mechanism likely dominates in pores with a diameter close to that of the hydrated
+ions (\SI{\le1}{\nm}) such as \ahl or FraC,\cite{Huang-2017,Huang-2019} while the second is expected to be
+stronger for larger pores (\SI{>1}{\nm}), such as ClyA\cite{Soskine-2012,Willems-Ruic-Biesemans-2019} or most
+solid-state nanopores.\cite{Mao-2014,Laohakunakorn-2015} In our simulation, the EOF follows the coupling of
+the Navier-Stokes and the Poisson-Nernst-Planck equations through a volume force term
+(\cref{eq:ion_force_density}), which dictates that the electric field exerts a net force on the fluid if it
+contains a net charge density---as is the case for the electrical double layer lining the walls of ClyA
+(\cref{fig:ion_charge_density}). In the following section we aim to quantitatively and a qualitatively
+describe the properties of the water velocity inside ClyA and how it is influenced by the bulk ionic strength
+and the applied bias voltage (\cref{fig:flow}).
 
-\paragraph{Influence of bulk ionic strength.}
+
+\paragraph{Direction, magnitude and distribution of the water velocity.}
 %
-At low bulk ionic strengths ($\cbulk<0.5$~M), the velocity profile along the radius of the pore has a
-parabolic shape (\cref{fig:flow_constriction_contour,fig:flow_constriction_profiles}), resulting from the
-overlapping electrical double layer in the \trans{} constriction at the these concentrations (\cref{fig:}).
-The primary reason for this is the presence of a net charge density along the entire considerable overlap of
-the electrical double layer inside the nanopore, particularly in the constriction,
+As expected given ClyA's negatively charged interior surface and the resulting positively charged electrical
+double layer (\cref{fig:ion_charge_density}), the direction of the net water flow inside ClyA follows the
+electric field, \ie~from the \cisi{} to the \transi{} at negative bias voltages (\cref{fig:flow_contour}).
+This corresponds to observations and analysis of single-molecule protein capture\cite{Soskine-2013} and
+trapping\cite{Soskine-Biesemans-2015,Biesemans-Soskine-2015,Willems-Ruic-Biesemans-2019} experiments using the
+ClyA-AS nanopore. Along the longitudinal axis ($z$) of the pore, the water velocity is governed by the
+conservation of mass, meaning it is lowest in the wide \cisi{} \textit{lumen} and highest in the narrow
+\transi{} constriction (\cref{fig:flow_contour}). For example, at $\vbias = \text{\SI{-100}{\mV}}$ and $\cbulk
+= \text{\SI{0.5}{\Molar}}$ the velocity at the center of the pore is \SI{\approx0.07}{\mps} in the
+\textit{lumen} and \SI{\approx0.21}{\mps} in the constriction.
 
+Along the radial axis ($r$), $\velocity$ has a parabolic profile with the highest value at the center of the
+pore and the lowest at the wall due to the no-slip boundary condition
+(\cref{fig:flow_constriction_contour,fig:flow_constriction_profiles}). Such a parabolic profile contrasts the
+expected `plug flow' for an EOF, but follows logically from the overlap of the electrical double layer inside
+the pore (see~\cref{fig:ion_charge_density}) and the resulting uniform volume force---analogous to a gravity-
+or pressure-driven Stokes flow. At concentrations higher than \SI{0.5}{\Molar}, however, the increasing degree
+of confinement of the double layer---and its charge---to the nanopore walls
+(\cref{fig:ion_charge_pore_bulk_surface_total_vs_concentration}) results in a flattening of the central
+maximum and hence a plug flow profile. Interestingly, at very high salt concentrations ($\cbulk\ge1$~M) the
+velocity profile in the constriction exhibits a dimple at the center of the pore. This is the result of a
+self-induced pressure gradient caused by the expansion of the EOF as it exits the pore.\cite{Melnikov-2017}
 
-resulting in a nat these inside the pore result a parabolic radial velocity, similarly to a pressure driven
-flow \todo{ref} . As the ionic charge density $\scdion$ becomes increasingly confined to nanopore walls
-($0.5\le\cbulk<1$~M, \cref{fig:ion_charge_density}), the central maximum flattens out, resulting in the `plug'
-flow profile typically observed for electroosmotically driven flows \todo{ref}. Interestingly, at high salt
-concentrations ($\cbulk\ge1$~M) the velocity at the center of the pore becomes lower than that at the walls.
-\todo{why? lack of charge density in the lumen, complete confinement of charges to the wall?}
-
-\paragraph{Water conductance and rectification.}
+\paragraph{Influence of bulk ionic strength and bias voltage on the electro-osmotic conductance.}
 %
-To more easily compare the total amount of water transported by ClyA between conditions, we computed the
-electroosmotic conductance $G_{\text{eo}} = Q_{\text{eo}}/V$ with $Q_{\text{eo}}$ the volumetric flow rate
-obtained by integrating the water velocity over the reservoir boundary. \todo{voltage dependency}
-$G_{\text{eo}}$ does not decrease monotonically with increasing salt concentrations, but rather exhibits a
-maximum of \SI{\approx11.5}{\cnmpnspv} at $\approx0.5$~M. Tshow the expected monotonical depends
+In analogy to the ionic conductance, the ease with which ClyA transports ions can be expressed by the
+electro-osmotic conductance $\flowcond = \flowrate / \vbias$ (\cref{fig:flow_conductance_vs_concentration}).
+Here, $\flowrate$ is the net volumetric flow rate of water through the pore and computed by integrating the
+net water flow across the reservoir boundary (\cref{eq:flowrate}), similarly to the ionic current. The
+strength of the EOF depends strongly and non-monotonically on the bulk ionic strength: $\flowcond$ rapidly
+increases with ionic strength until a peak value is reached at \SI{\approx0.5}{\Molar}, followed by a gradual
+logarithmic decline (\cref{fig:flow_conductance_vs_concentration}). For example, at \SI{-150}{\mV},
+$\flowcond$ changes from \SIlist[list-final-separator = { to }]{1.85;11.3;4.00}{\cubic\nm\per\ns\per\volt} at
+bulk salt concentrations \SIlist{0.005;0.5;5}{\Molar}, respectively.
 
-\cite{Mao-2014,Laohakunakorn-2015}
+In analogy to the ionic current, the sensitivity of the EOF to the magnitude and sign of the bias voltage is
+best expressed by the electro-osmotic conductance rectification $\eor = \flowcond (+V) / \flowcond (-V)$
+(\cref{fig:flow_conductance_rectification_vs_concentration}). For all voltages magnitudes, $\eor$ shows a
+maximum between \SIlist{0.04;0.05}{\Molar}, after which it falls rapidly to reach unity ($\eor = 1$) at
+approximately \SI{\approx0.45}{\Molar}. A minimum is then reached at \SI{\approx1}{\Molar}, followed by a
+gradual approach towards unity at \SI{5}{\Molar}.
 
 
+\paragraph{Comparison with the previously published experimental model.}
+%
+\cite{Willems-Ruic-Biesemans-2019}
 
-\cref{fig:flow_conductance_vs_voltage}
-\cref{fig:flow_conductance_vs_concentration}
-
-
-\cref{fig:flow_conductance_rectification_vs_concentration}
-
-\paragraph{electroosmotic pressure.}
+\paragraph{Electro-osmotic pressure.}
+% 
 \cref{suppinfo:fig:pressure}
 \cite{Hoogerheide-2014}
 
+
 % Inter-figure observations and discussion
+\subsection{Summary of the Key Findings and Results}
 
-\subsection{The extended PNP-NS equations significantly improve the accuracy of continuum simulations at the
-nanoscale.}
+\paragraph{The most important corrections.}
+%
+The extended PNP-NS equations significantly improve the accuracy of continuum simulations at the
+nanoscale.
+% * concentration dependent ion diffusion coefficient and mobilities
+% * wall distance
 
-\begin{itemize}
-  \item Most important `corrections':
-  \subitem concentration dependent ion diffusion coefficient and mobilities
-  \subitem wall distance
-\end{itemize}
+\paragraph{Origin of ClyA's ion selectivity.}
 
-\subsection{Ionic current rectification is caused by depletion of anions in the nanopore lumen at negative
-bias voltages.}
+% Ionic current rectification is caused by depletion of anions in the nanopore lumen at negative
+% bias voltages.
 
-\subsection{ClyA's ion selectivity is highly concentration and voltage dependent.}
-
-While the ion selectivity can be estimated experimentally using the Goldman-Hodgkin-Katz equation
-(GHKe),\cite{Franceschini-2016,Huang-2017} the asymmetric salt concentrations used to determine the nanopore's
-reversal potential raises the question for which salt concentration this ion selectivity is valid. Moreover,
-the many assumptions and simplifications used to derive the GHKe (Nernst-Einstein relation, no convective
-transport, uniform electrical field over the pore) suggest that the ion selectivity calculated for larger
-pores should be considered as a rough estimation only.
+\paragraph{??}
 
 
-\subsection{The electroosmotic flow exhibits a maximum at 0.5~M due to two
-competing concentration-dependent effects.}
-
-\begin{itemize}
-  \item Reduced double layer overlap and the appearance of alternating positive and negative space charge
-  densities at the nanopore walls results in reduced electroosmotic flow at higher salt concentrations.
-  \item Poor electro-static screening of the highly negatively charged \trans{} constriction
-  results in an body force that opposes the bulk flow of the nanopore and hence a diminishes the
-  electroosmotic flow magnitude at low salt concentrations.
-  \item Both effect are weakest at $\approx0.5$~M, resulting in maximum at that concentration.
-\end{itemize}
 
 \section{Conclusions}\label{sec:conclusions}
 
@@ -1651,16 +1625,17 @@ Next, we computed and averaged the 3D-dimensional molecular density maps of all 
 \SI{0.5}{\angstrom} resolution grid using the Gaussian function\cite{Li-2013}
 %
 \begin{align}\label{eq:denspore}
-  \rho_\text{mol} = 1 - \displaystyle\prod_{i} \left[ 1 -
-        \exp{\left(-\dfrac{-d_i^2}{(\stdev\atomradius_{i})^2}\right)} \right]
-\end{align} where for each atom $i$,
+  \rho_\text{mol} = 1 - \displaystyle\prod_{i} \left[ 1 - 
+    \exp{\left(-\dfrac{-d_i^2}{(\stdev\atomradius_{i})^2}\right)} \right]
+    \text{\,,}
+\end{align}
 %
-$R_i$ is its Van der Waals radius, $d_i=\sqrt{(x-x_i)^2 + (y-y_i)^2 + (z-z_i)^2}$ is the distance of grid
-coordinates $(x, y, z)$ from the atom center $(x_i, y_i, z_i)$ and $\stdev = 0.93$ is a width factor. The
-resulting 3D density map was then radially averaged along the z-axis, relative to the center of the pore to
-obtain a 2D-axisymmetric density map. The contourline at \SI{25}{\percent} density was used as the nanopore
-simulation geometry, after manual removal of overlapping and superfluous vertices to improve the quality of
-the final computational mesh.
+where for each atom $i$, $R_i$ is its Van der Waals radius, $d_i=\sqrt{(x-x_i)^2 + (y-y_i)^2 + (z-z_i)^2}$ is
+the distance of grid coordinates $(x, y, z)$ from the atom center $(x_i, y_i, z_i)$ and $\stdev = 0.93$ is a
+width factor. The resulting 3D density map was then radially averaged along the z-axis, relative to the center
+of the pore to obtain a 2D-axisymmetric density map. The contourline at \SI{25}{\percent} density was used as
+the nanopore simulation geometry, after manual removal of overlapping and superfluous vertices to improve the
+quality of the final computational mesh.
 
 \paragraph{Axially symmetric charge density.}
 %
@@ -1674,11 +1649,12 @@ averaged 2D-axisymmetric model. That means we effectively spread the charge over
 symmetry. Following that, we assume a Gaussian distribution of the space charge density of each atom $i$
 around its respective 2D-axisymmetric coordinates $(r_i,z_i)$ is
 %
-\begin{multline}
+\begin{align}
 \label{eq:scdpore}
-  \scdpore(r,z) = \\ \dsum_{i} \dfrac{\echarge\partialcharge_{i}}{\pi(\stdev\atomradius_{i})^2}
+  \scdpore(r,z) = \dsum_{i} \dfrac{\echarge\partialcharge_{i}}{\pi(\stdev\atomradius_{i})^2}
             \exp{\left(-\dfrac{(r-r_i)^2 + (z-z_i)^2}{(\stdev\atomradius_{i})^2}\right)}
-\end{multline}
+  \text{\,,}
+\end{align}
 %
 where $\atomradius_{i}$ is the atom radius, $\sigma = \num{0.5}$ is the sharpness factor and $\echarge$ is the
 elementary charge. To embed $\scdpore$ with sufficient detail yet efficiently into a numeric solver, the
@@ -1695,25 +1671,32 @@ $\transportn_{i}$ before it can be fitted\cite{ContrerasAburto-2013-1}
 %
 \begin{align}
 \label{eq:conductivity-to-mobility}
-\mobility_{i}(\concentration) = \frac{\specmolarconductivity_{i}(\concentration)}{\chargen_{i}\faraday}
-\quad\text{with}\quad \specmolarconductivity_{i}(\concentration) = \molarconductivity(\concentration)
-\transportn_{i}(\concentration),
+  \mobility_{i}(\concentration) = \frac{\specmolarconductivity_{i}(\concentration)}{\chargen_{i}\faraday}
+  \quad\text{with}\quad \specmolarconductivity_{i}(\concentration) = \molarconductivity(\concentration)
+  \transportn_{i}(\concentration)
+  \text{\,,}
 \end{align}
 %
 where $\specmolarconductivity_{i}(\concentration)$ is the specific molar conductivity of ion $i$.
 
-\paragraph{Computing the simulated ionic current.}
+\paragraph{Computing the simulated ionic current and electro-osmotic flow rate.}
 %
 The simulated ionic current $\currentsim$ at steady-state was computed by
 %
-\begin{equation}
+\begin{align}\label{eq:currentsim}
   \currentsim = \faraday\int_{S}\left(\dsum_{i}\chargen_{i}\normvec\cdot\vec{\flux}_{i}\right)dS
-\end{equation}
+  \text{\,,}
+\end{align}
 %
 with $\chargen_{i}$ the charge number and $\vec{\flux}_{i}$ the total flux of each ion $i$ across \cis{}
 reservoir boundary $S$, $\faraday$ the Faraday constant (\SI{96485}{\coulomb\per\mole}) and $\normvec$ the
-unit vector normal to $S$.
-
+unit vector normal to $S$. Similarly, the volumetric flow rate, \ie~the volume of water passing through the pore per unit time, is given by
+%
+\begin{align}\label{eq:flowrate}
+  \flowrate = \int_{S}\left(\dsum_{i}\normvec\cdot\vec{\velocity}\right)dS
+  \text{\,.}
+\end{align}
+%
 
 \paragraph{ClyA expression and purification.}
 %
@@ -1760,7 +1743,7 @@ authors thank Ujjal Barman and Chang Chen for their valuable feedback during dis
 	The supplementary info contains the Extended materials and methods, with details on the fitting of the
 	electrolyte properties and the calculation of the pore averaged values, and the weak forms of the ePNP-NS
 	equations. It also contains additional results, including a figures about the voltage dependency of the
-	power-law exponent of the conductance fits and the electroosmotic pressure distribution inside the pore, and
+	power-law exponent of the conductance fits and the electro-osmotic pressure distribution inside the pore, and
 	a table detailing the peak values of the radial electrostatic potential inside ClyA.
 \end{suppinfo}
 
