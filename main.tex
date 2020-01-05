@@ -198,8 +198,8 @@ PNP(-NS) equations, on the other hand, are of particular interest due to their l
 analytical tractability. In a continuum approach, all materials are represented by structureless media whose
 behavior is parameterized by material properties such as relative permittivity, diffusion coefficient,
 electrophoretic mobility, viscosity and density. Because these properties can only emerge from the collective
-behavior or interactions between small groups of atoms (\ie~the mean-field approximation), great care must
-be taken when using them to compute fluxes and fields at the nanoscale.\cite{Corry-2000,Collins-2012}
+behavior or interactions between small groups of atoms (\ie~the mean-field approximation), great care must be
+taken when using them to compute fluxes and fields at the nanoscale.\cite{Corry-2000,Collins-2012}
 Nevertheless, the PNP equations have been used extensively for the simulation of ion
 channels,\cite{Im-2002,Furini-2006,Liu-2015} biological
 nanopores\cite{Simakov-2010,Pederson-2015,Aguilella-Arzo-2017,Simakov-2018} and their solid-state
@@ -386,18 +386,18 @@ the system of governing equations.
 %
 ClyA is a relatively large protein nanopore that self-assembles on lipid bilayers to form \SI{14}{\nm} long
 hydrophilic channels. The interior of the pore can be divided into roughly two cylindrical compartments
-(\cref{fig:clya_side}): the \cis{} lumen (\SI{\approx6}{\nm} diameter, \SI{\approx10}{\nm} height), and the
-\trans{} constriction (\SI{\approx3.3}{\nm} diameter, \SI{\approx4}{\nm} height). Because ClyA consists of 12
-identical subunits (\cref{fig:clya_top}), it exhibits a high degree of radial symmetry, a geometrical feature
-that can be exploited to obtain meaningful results at a much lower computational
+(\cref{fig:clya_side}): the \cis{} \lumeni{} (\SI{\approx6}{\nm} diameter, \SI{\approx10}{\nm} height), and
+the \trans{} constriction (\SI{\approx3.3}{\nm} diameter, \SI{\approx4}{\nm} height). Because ClyA consists of
+12 identical subunits (\cref{fig:clya_top}), it exhibits a high degree of radial symmetry, a geometrical
+feature that can be exploited to obtain meaningful results at a much lower computational
 cost.\cite{Cervera-2005,Lu-2012, Pederson-2015} However, this requires the reduction of the full 3D atomic
 structure and charge distribution into a realistic 2D-axisymmetric model. To this end, we constructed a
 full-atom homology model of ClyA-AS type I---a dodecameric variant of the wild type ClyA from \textit{S.
 Typhii} artificially evolved for improved stability\cite{Soskine-2013}---and equilibrated it at
 \SI{298.15}{\kelvin} for \SI{30}{\ns} in an explicit solvent with harmonic contraints on the protein backbone
-atoms (see~\cref{sec:methods} for details). From the final \SI{5}{\ns} of this trajectory, we extracted 50
-sets of atomic coordinates (\ie~every \SI{100}{\ps}) for ClyA. For each of these structures, we computed a
-2D atomic density\cite{Li-2013} and charge\cite{Aksimentiev-2005} map (see~\cref{sec:methods} for details).
+atoms (see~\nameref{sec:methods} for details). From the final \SI{5}{\ns} of this trajectory, we extracted 50
+sets of atomic coordinates (\ie~every \SI{100}{\ps}) for ClyA. For each of these structures, we computed a 2D
+atomic density\cite{Li-2013} and charge\cite{Aksimentiev-2005} map (see~\nameref{sec:methods} for details).
 Both the density and the charge maps were averaged to capture the movements of the side chains. The geometry
 of the nanopore was then defined as the \SI{25}{\percent} contour line of the density map, which closely
 follows the outline of a \SI{30}{\degree} `wedge' of the full atom structure
@@ -809,7 +809,7 @@ electro-osmotic flow and a brief reflection of the key findings in this work.
     %
     Contour plot of the \Na{} transport number $\tna = \gna / \conductance$, computed from the individual
     ionic conductances in the ePNP-NS simulation, as a function of $\vbias$ and $\cbulk$. $\tna$ expresses the
-    fraction of the ionic current is carried by \Na{} ions, i.e. the cation selectivity.
+    fraction of the ionic current is carried by \Na{} ions, \ie~the cation selectivity.
     %
     (\subref{fig:transport_number_vs_concentration_bulk_pnp_epnp})
     %
@@ -927,10 +927,11 @@ using our ePNP-NS simulation at $\vbias = \text{\SI{0}{\mV}}$, and lies in betwe
 concentrations used in their experiment. Even though measuring the reversal potential can give valuable
 insights into the selectivity ion channels and small nanopores, it should be used with caution for larger
 nanopores such as ClyA. The GHK equation does not consider the ionic flux due to the electro-osmotic flow and
-assumes that the Nernst-Einstein relation holds for all used concentrations. These two effects should be
+assumes that the Nernst-Einstein relation holds for all used concentrations. These two effects should not be
 ignored as they contribute significantly to the nanopore's total conductance. Furthermore, because the ion
 selectivity depends strongly on the ionic strength, the measured reversal potential will necessarily be
-influenced by the chosen gradient and represent the selectivity at an undetermined intermediate concentration.
+influenced by the chosen salt gradient and represent the selectivity at an undetermined intermediate
+concentration.
 
 % 0.15 M, 0 mV
 % Tna = 0.84299
@@ -953,24 +954,46 @@ influenced by the chosen gradient and represent the selectivity at an undetermin
 
 \begin{figure}[!htb]
   \centering
-  \begin{subfigure}[t]{8.2cm}
-    \centering
-    \caption{}\vspace{-3mm}\label{fig:concentration_pore_average_vs_concentration}
-    \includegraphics[scale=1]{figures/concentration/concentration_pore_average_vs_concentration}
-  \end{subfigure}
-  \begin{minipage}[t]{8.2cm}
-  \begin{subfigure}[t]{8.2cm}
-    \centering
-    \caption{}\vspace{-3mm}\label{fig:concentration_contours}
-    \includegraphics[scale=1]{figures/concentration/concentration_contours}
-  \end{subfigure}
-  \begin{subfigure}[t]{8.2cm}
-    \centering
-    \caption{}\vspace{-3mm}\label{fig:concentration_radial_profiles}
-    \includegraphics[scale=1]{figures/concentration/concentration_radial_profiles}
-  \end{subfigure}
+  \begin{minipage}[t]{8cm}
+    \begin{subfigure}[t]{8cm}
+      \centering
+      \caption{}\vspace{-3mm}\label{fig:concentration_pore_average_vs_cbulk}
+      \includegraphics[scale=1]{figures/concentration/concentration_pore_average_vs_concentration}
+    \end{subfigure}
+    \\
+    \begin{subfigure}[t]{8cm}
+      \centering
+      \caption{}\vspace{-3mm}\label{fig:concentration_contours}
+      \includegraphics[scale=1]{figures/concentration/concentration_contours}
+    \end{subfigure}
+    \\
+    \begin{subfigure}[t]{8cm}
+      \centering
+      \caption{}\vspace{-3mm}\label{fig:concentration_radial_profiles}
+      \includegraphics[scale=1]{figures/concentration/concentration_radial_profiles}
+    \end{subfigure}
   \end{minipage}
-  
+  %\hspace{-1mm}
+  \begin{minipage}[t]{8cm}
+    \begin{subfigure}[t]{8cm}
+      \centering
+      \caption{}\vspace{-3mm}\label{fig:ion_charge_dist_vs_cbulk}
+      \includegraphics[scale=1]{figures/charge_density/ion_charge_pore_bulk_surface_total_vs_concentration}
+    \end{subfigure}
+    \\
+    \begin{subfigure}[t]{8cm}
+      \centering
+      \caption{}\vspace{-3mm}\label{fig:ion_scd_contours}
+      \includegraphics[scale=1]{figures/charge_density/ion_charge_density_contours}
+    \end{subfigure}
+    \\
+    \begin{subfigure}[t]{8cm}
+      \centering
+      \caption{}\vspace{-3mm}\label{fig:ion_scd_radial_profiles}
+      \includegraphics[scale=1]{figures/charge_density/ion_charge_density_radial_profiles}
+    \end{subfigure}
+  \end{minipage}
+
   \caption%
   %
   [\textbf{Ion concentration distribution inside ClyA.}]
@@ -979,157 +1002,150 @@ influenced by the chosen gradient and represent the selectivity at an undetermin
     %
     \textbf{Ion concentration distribution inside ClyA.}
     %
-    (\subref{fig:concentration_pore_average_vs_concentration})
+    (\subref{fig:concentration_pore_average_vs_cbulk})
     %
-    Relative \Na{} and \Cl{} concentrations averaged over the entire pore volume ($\pav{\ci/\cbulk}{p}$) as a
-    function of the reservoir salt concentration ($\cbulk=\text{\SIrange{0.005}{5}{\Molar}}$) and bias voltage
-    ($\vbias=\text{\SIrange{-200}{+200}{\mV}}$).
+    Relative \Na{} and \Cl{} concentrations averaged over the entire pore volume ($\pavi$) as a function of
+    the reservoir salt concentration ($\cbulk = \text{\SIrange{0.005}{5}{\Molar}}$) and bias voltage ($\vbias
+    = \text{\SIrange{-200}{+200}{\mV}}$).
     %
     (\subref{fig:concentration_contours})
     %
-    Contour plots of the relative ion concentration ($\ci/\cbulk$) for both \Na{} and \Cl{} for
-    $\cbulk=\SI{0.15}{\Molar}$ and at $\vbias=\text{\SIlist{-100;+100}{\mV}}$.
+    Contour plots of the relative ion concentration ($\ci/\cbulk$) for both \Na{} and \Cl{} for $\cbulk =
+    \text{\SI{0.15}{\Molar}}$ and at $\vbias = \text{\SIlist{-150;+150}{\mV}}$.
     %
     (\subref{fig:concentration_radial_profiles})
     %
     The relative \Na{} and \Cl{} concentration profiles along the radius of the pore, through the middle of
-    the constriction ($z=\SI{-0.3}{\nm}$) and the lumen ($z=\SI{5}{\nm}$), as indicated by the arrows in
-    (\subref{fig:concentration_contours}).
+    the constriction ($z = \text{\SI{-0.3}{\nm}}$) and the \lumeni{} ($z = \text{\SI{5}{\nm}}$), as indicated by
+    the arrows in (\subref{fig:concentration_contours}).
     %
-  }\label{fig:concentration}
-  \end{figure}
-
-The ionic current results from the flux of ions through pore, whose magnitudes are proportional to the local
-concentrations inside the pore. To further elucidate the origin of the current rectification and ion
-selectivity, we evaluated the distribution of both cations and anions inside ClyA the effect of reservoir salt
-concentration and the bias voltage on the distribution of cation and anion densities inside ClyA
-(\cref{fig:concentration}) and the accumulation of mobile charges as a result of their asymmetry
-(\cref{fig:ion_charge_density}).
-
-\paragraph{Relative cation and anion concentrations.}
-%
-At high reservoir concentrations ($\cbulk > 1$~M), the lumen of the pore becomes fully screened from the
-negative charges that line it, leading to bulk-like conditions ($\pav{\ci/\cbulk}{p}\approx1$) for both
-positive and negative ions. At lower concentrations however, the reduced screening gives rise to an
-overlapping electrical double layer, which results in the enhancement of cations and the depletion of anions.
-The magnitude of these effects appears to follow a power law at low concentrations
-($\cbulk=\SIrange{0.005}{5}{\Molar}$), with exponents of $-0.910\pm0.010$ and $0.778\pm0.015$ for \Na{} and
-\Cl{}, respectively. The \Na{} concentrations exhibit at most a 2 to 3-fold increase when $\vbias$ changes
-from $\vbias=-150$ to $+150$~mV. In contrast, the number of \Cl{} ions inside pore between those 2 bias
-voltages can differ more than 10-fold at reservoir concentrations below $0.1$~M, with a high degree of
-depletion at negative voltages.
-
-The contour plots of the relative ion concentrations ($\ci/\cbulk$) at $\cbulk=0.15$~M
-(\cref{fig:concentration_contours}) reveal that the \trans{} constriction ($1.85\text{~nm}<z<1.60\text{~nm}$)
-remains depleted of anions and enhanced in cations for both $\vbias=-100$ and $+100$~mV. This is not the case
-in the lumen ($1.60\text{~nm}<z<12.25\text{~nm}$), where the \Na{} concentration is bulk-like and enhanced for
-$\vbias<0$ and $\vbias>0$, respectively. Conversely, the number of \Cl{} ions becomes more and more depleted
-in the lumen for increasing negative bias magnitudes, and it is virtually bulk-like at higher positive bias
-voltages. This is further exemplified by the radial profiles through the middle of the constriction
-($z=\SI{-0.3}{\nm}$) and the lumen ($z=\SI{5}{\nm}$) (\cref{fig:concentration_radial_profiles}) which also
-clearly show the formation of the electrical double layer.
-
-Note that the figures given above were obtained from a nanoscale continuum steady-state simulation, and hence
-represent a time-averaged situation (typically on the order of \SIrange{10}{100}{\ns}).\todo{REF}
-
-
-\paragraph{Ion Charge Density.}
-%
-
-\begin{figure}[!htb]
-  \centering
-  \begin{minipage}[t]{8.2cm}
-  \begin{subfigure}[t]{8.2cm}
-    \centering
-    \caption{}\vspace{-3mm}\label{fig:ion_charge_density_contours}
-    \includegraphics[scale=1]{figures/charge_density/ion_charge_density_contours}
-  \end{subfigure}
-  \begin{subfigure}[t]{8.2cm}
-    \centering
-    \caption{}\vspace{-3mm}\label{fig:ion_charge_density_radial_profiles}
-    \includegraphics[scale=1]{figures/charge_density/ion_charge_density_radial_profiles}
-  \end{subfigure}
-  \begin{subfigure}[t]{8.2cm}
-    \centering
-    \caption{}\vspace{-3mm}\label{fig:ion_charge_pore_bulk_surface_total_vs_concentration}
-    \includegraphics[scale=1]{figures/charge_density/ion_charge_pore_bulk_surface_total_vs_concentration}
-  \end{subfigure}
-  \end{minipage}
-  
-  \caption%
-  %
-  [\textbf{Ion space charge density distribution inside ClyA.}]
-  %
-  {%
-    %
-    \textbf{Ion space charge density distribution inside ClyA.}
-    %
-    (\subref{fig:ion_charge_density_contours})
-    %
-    Cross-section contour plots of the ion space charge density ($\scdion$), expressed as number of elementary
-    charges per \si{\cubic\nano\meter}, at \SI{0}{\mV} applied bias voltage and for salt concentrations
-    \SIlist{0.005;0.05;0.5;5}{\Molar}.
-    %
-    (\subref{fig:ion_charge_density_radial_profiles})
-    %
-    Radial cross-sections of the $\scdion$ at the center of the constriction ($z=\SI{-0.3}{\nm}$) and the
-    lumen ($z=\SI{5}{\nm}$) of ClyA. The vertical line represents the the division between ions in the `bulk'
-    ($d>\SI{0.5}{\nm}$) of the pore and those located near its surface ($d\le\SI{0.5}{\nm}$).
-    %
-    (\subref{fig:ion_charge_pore_bulk_surface_total_vs_concentration})
+    (\subref{fig:ion_charge_dist_vs_cbulk})
     %
     The average number of ionic charges inside the pore $\pav{\Qion}{p}$, is distributed between the those
     close to the pore's surface $\pav{\Qion}{s}$, \ie~within \SI{0.5}{\nm} of the wall, and those in the
     `bulk' of the pore's interior $\pav{\Qion}{b}$.
     %
-  }\label{fig:ion_charge_density}
-  
-\end{figure}  
+    (\subref{fig:ion_scd_contours})
+    %
+    Cross-section contour plots of the ion space charge density ($\scdion$), expressed as number of elementary
+    charges per \si{\cubic\nano\meter}, at \SI{0}{\mV} applied bias voltage and for salt concentrations
+    \SIlist{0.05;0.15;0.5;5}{\Molar}.
+    %
+    (\subref{fig:ion_scd_radial_profiles})
+    %
+    Radial cross-sections of the $\scdion$ at the center of the constriction ($z = \text{\SI{-0.3}{\nm}}$) and
+    the \lumeni{} ($z = \text{\SI{5}{\nm}}$) of ClyA. The vertical line represents the the division between ions
+    in the `bulk' ($\walldistance > \text{\SI{0.5}{\nm}}$) of the pore and those located near its surface
+    ($\walldistance \le \text{\SI{0.5}{\nm}}$).
+    %
+  }\label{fig:concentration_and_scd}
+  \end{figure}
+
+Following the validation of the model in preceding section, we now proceed by describing the local ionic
+concentrations inside ClyA. Detailed knowlegde of the ionic environment can be valuable to experimentalists
+who seek to trap and study single enzymes with
+ClyA.\cite{Soskine-Biesemans-2015,VanMeervelt-2017,Galenkamp-2018} Moreover, it gives insight into the origin
+of the ion current rectification, ion selectivity and the electro-osmotic flow. We evaluated the distribution
+of both cations and anions inside ClyA and investigated the effect of bulk salt concentration and the bias
+voltage on the distribution of their respective concentrations
+(\cref{fig:concentration_pore_average_vs_cbulk,fig:concentration_contours,fig:concentration_radial_profiles})
+and the accumulation of mobile charges as a result of their asymmetric enhancement or depletion
+(\cref{fig:ion_charge_dist_vs_cbulk,fig:ion_scd_contours,fig:ion_scd_radial_profiles}).
+
+\paragraph{Relative cation and anion concentrations.}
+%
+The relative ion concentration averaged over the entire volume of the pore as a function of bulk concentration
+and voltage ($\pavi$, \cref{fig:concentration_pore_average_vs_cbulk}), gives a good measure for global
+situation inside the pore. At low ionic strengths ($\cbulk < \text{\SI{0.05}{\Molar}}$), our simulation
+predicts a strong enhancement of the cation (\Na) concentration ($\pavNa$) and a strong depletion of the anion
+(\Cl)concentration ($\pavCl$) inside the pore. This effect, however, dimishes rapidly with increasing ionic
+strengths. This behavior can be explained by need for the electrolyte to screen the negative charges lining
+the walls of ClyA (\ie~the electrical double layer). At low bulk concentrations the number of ions in the bulk
+is sparse, leading to the attraction and repulsion of respectively as many \Na{} and \Cl{} ions as the
+chemical potential allows. As the concentration increases, availibiity of ions improves and the extreme
+concentration differences between the pore and the bulk are no longer necessary to offset ClyA's fixed
+charges. For example, changing the bulk concentration from \SIrange{0.005}{0.05}{\Molar} under equilibrium
+conditions ($\vbias = \text{\SI{0}{\mV}}$), causes the relative \Na{} and \Cl{} concentrations to fall and
+rise from \numrange{34}{4.4} and from \numrange{0.05}{0.31}, respectively. At physiological concentrations
+(\SI{0.15}{\Molar}), the values still differ significantly from bulk ($\pavNa = 2.1$ and $\pavCl = 0.58$), but
+they fall back to \SI{<15}{\percent} of unity at \SI{1}{\Molar} ($\pavNa = 1.14$ and $\pavCl = 0.89$).
+
+We also observed a stark difference between their sensitivities to the applied bias voltage, particularly at
+concentrations (\cref{fig:concentration_pore_average_vs_cbulk}, left of \SI{<0.15}{\Molar} line). Whereas the
+\Na{} concentration shows only a limited response, the \Cl{} concentration changes much more dramatically. For
+example, at $\cbulk = \text{\SI{0.15}{\Molar}}$ and from \SIrange{-150}{+150}{\mV}, $\pavNa$ and $\pavCl$ rise
+\num{\approx 1.7}-fold (\numrange{1.6}{2.7}) and \num{\approx 3.8}-fold (\numrange{0.28}{1.06}), respectively.
+This difference is clearly visualized by the contour plots of the relative ion concentrations ($\ci/\cbulk$)
+at $\cbulk = \text{\SI{0.15}{\Molar}}$ and for $\vbias = \text{\SIlist{-150;+150}{\mV}}$
+(\cref{fig:concentration_contours}). They reveal that the \transi{} constriction ($\num{-1.85} < z <
+\text{\SI{1.6}{\nm}}$) remains depleted of \Cl{} and enhanced in \Na{} for both $\vbias =
+\text{\SI{-150}{\mV}}$ and $\vbias = \text{\SI{+150}{\mV}}$. This is not the case in the \lumeni{}
+($\num{1.6} < z < \text{\SI{12.25}{\nm}}$), in which the \Na{} concentration is bulk-like for $\vbias <
+\text{\SI{0}{\mV}}$ and enhanced for $\vbias > \text{\SI{0}{\mV}}$. Conversely, the number of \Cl{} ions
+becomes more and more depleted in the \lumeni{} for increasing negative bias magnitudes, and it is virtually
+bulk-like at higher positive bias voltages. This is further exemplified by the radial profiles through the
+middle of the constriction ($z = \text{\SI{-0.3}{\nm}}$) and the \lumeni{} ($ z = \text{\SI{5}{\nm}}$)
+(\cref{fig:concentration_radial_profiles}) which also clearly the electrical double layer.
+
+% Note that the figures given above were obtained from a nanoscale continuum steady-state simulation, and
+% hence represent a time-averaged situation (typically on the order of \SIrange{10}{100}{\ns}).
 
 
-The formation of an electrical double layer inside the pore and the resulting asymmetry in the cation and
-anion concentrations results in a net charge density inside the pore ($\scdion$, \cref{eq:scdion}). At
-reservoir concentrations \SI{\le0.5}{\Molar}, the electrical double layer inside the pore is very
-diffuse and overlaps significantly (\cref{fig:ion_charge_density_contours}, 3 leftmost panels). Moreover, the
-absence of anions prevents the formation of any significant negative charge densities next to the few
+\paragraph{Ion Charge Density.}
+%
+The formation of an electrical double layer inside the pore, and the resulting asymmetry in the cation and
+anion concentrations, gives rise to a net charge density inside the pore ($\scdion$, \cref{eq:scdion}). To
+investigate the distribution of these charges within ClyA, we divided the interior volume of the pore into a
+`surface' and a `bulk' region. The bulk region encompasses a cylindrical volume at the center of the pore up
+until \SI{0.5}{\nm} distance from the wall ($\walldistance \ge \text{\SI{0.5}{\nm}}$), and the surface region
+includes the remaining volume between the bulk and the nanopore wall ($\walldistance < \text{\SI{0.5}{\nm}}$).
+Integration of $\scdion$ over these regions the `surface' and `bulk' yields respectively $\pav{\Qion}{b}$ and
+$\pav{\Qion}{s}$, or the average number of mobile charges present inside those locations
+(\cref{fig:ion_charge_dist_vs_cbulk}). Although the total number of charges inside the pore $\pav{\Qion}{p} =
+\pav{\Qion}{b} + \pav{\Qion}{s}$ rises appreciatively with increasing reservoir concentration, the majority of
+these additional charges are confined to the surface of the pore. Up until \SI{\approx 0.15}{\Molar},
+$\pav{\Qion}{p}$ is distributed equally between the surface and bulk layers (\SI{\approx+27}{\ec} and
+\SI{\approx+22}{\ec}, respectively). At higher concentrations, the number of charges in the surface layer
+rises ($\pav{\Qion}{s} = \text{\SI{+58}{\ec}}$ at \SI{5}{\Molar}), and those in the bulk of the pore diminish
+($\pav{\Qion}{b} \approx \text{\SI{0}{\ec}}$ at \SI{5}{\Molar}). The total number of mobile charges
+$\pav{\Qion}{p}$ also depend on the applied bias voltage. As can be seen from our simulation results for three
+different voltages (\cref{fig:ion_charge_dist_vs_cbulk}), $\pav{\Qion}{p}$ is approximately
+\SIrange{+10}{+15}{\ec} higher as compared to \SI{-150}{\mV} for the full range of ion concentrations.
+Interestingly, for the higher concentrations, this increased charge density with voltage is fully accounted
+for by the surface charges. Indeed, the charge density in the bulk is not changing with the applied voltage.
+
+The cross-section contour plots of the $\scdion$ distribution inside ClyA for four different bulk
+concentrations (\SIlist{0.05;0.15;0.5;5}{\Molar}) reveal in more detail the redistribution on the mobile
+charges with increasing ionic strength. Up until a bulk concentration of \SI{\le0.5}{\Molar}, the electrical
+double layer inside the pore overlaps significantly with itself (\cref{fig:ion_scd_contours}, 3 leftmost
+panels), giving rise to a net positive charge spread diffusively throughout the entire pore. Moreover, the
+absence of \Cl{} ions prevents the formation of any significant negative charge densities next to the few
 positively charged residues lining the pore walls. The situation at high salt concentrations
-(\eg~\SI{5}{\Molar}) is very different, with almost no charge density within the `bulk' of the pore lumen
-($\walldistance\ge\SI{0.5}{\nm}$), but with pockets of highly charged and alternating pockets of positive and
-negative charge densities close to the nanopore wall (\cref{fig:ion_charge_density_contours}, rightmost
-panel). This sharp confinement is shown clearly by the radial density profiles
-(\cref{fig:ion_charge_density_radial_profiles}) through the constriction ($z=-\SI{0.3}{\nm}$) and the lumen
-($z=\SI{5}{\nm}$).
-
-Integration of $\scdion$ over `bulk' ($d\ge\SI{0.5}{\nm}$) and surface ($d<\SI{0.5}{\nm}$) volumes inside the
-pore yields respectively $\pav{\Qion}{b}$ and $\pav{\Qion}{s}$, \ie~the average number of mobile charges
-present inside those locations (\cref{fig:ion_charge_pore_bulk_surface_total_vs_concentration}). Even though
-the total number of charges inside the pore $\pav{\Qion}{p} = \pav{\Qion}{b} + \pav{\Qion}{s}$ rises
-appreciatively with increasing reservoir concentration, the majority of these additional charges are confined
-to the surface of the pore. Up until \SI{0.1}{\Molar}, $\pav{\Qion}{p}$ is distributed equally between the
-surface and bulk layers (\SI{\approx+27}{\ec} and \SI{\approx+22}{\ec} , respectively). At higher
-concentrations, the number of charges in the surface layer rises (to \SI{+58}{\ec} at \SI{5}{\Molar}), and
-those in the bulk pore diminish (\SI{+0}{\ec}  at \SI{5}{\Molar}). $\pav{\Qion}{p}$ also depends on the
-applied bias voltage, as it is \SIrange{+10}{+15}{\ec} higher at \SI{+150}{\mV} compared to \SI{-150}{\mV}.
-
+(\eg~\SI{5}{\Molar}) is very different, with almost no charge density within the `bulk' of the pore \lumeni{}
+($\walldistance \ge \text{\SI{0.5}{\nm}}$), but with pockets of highly charged and alternating positive and
+negative charge densities close to the nanopore wall (\cref{fig:ion_scd_contours}, rightmost panel). This
+sharp confinement is shown clearly by the radial density profiles (\cref{fig:ion_scd_radial_profiles}) through
+the constriction ($z = \text{\SI{-0.3}{\nm}}$, purple triangles) and the \lumeni{} ($z = \text{\SI{5}{\nm}}$,
+green triangles).
 
 \subsection{Equilibrium Electrostatic Potential}\label{sect:esp}
 
 \begin{figure*}[!htb]
   \centering
-  \begin{minipage}[t]{18.25cm}
+  \begin{minipage}[t]{16cm}
     \begin{subfigure}[t]{2.5cm}
       \centering
       \caption{}\vspace{-3mm}\label{fig:potential_clya_charges}
       \includegraphics[scale=1]{figures/potential/potential_clya_charges}
     \end{subfigure}
     \hspace{-0.6cm}
-    \begin{subfigure}[t]{11.5cm}
+    \begin{subfigure}[t]{10cm}
       \centering
       \caption{}\vspace{-3mm}\label{fig:potential_contours}
       \includegraphics[scale=1]{figures/potential/potential_contours_0mV}
     \end{subfigure}
     \hspace{-0.4cm}
-    \begin{subfigure}[t]{4cm}
+    \begin{subfigure}[t]{3.5cm}
       \centering
       \caption{}\vspace{-3mm}\label{fig:potential_radial_averages}
       \includegraphics[scale=1]{figures/potential/potential_radial_averages_0mV}
@@ -1139,33 +1155,35 @@ applied bias voltage, as it is \SIrange{+10}{+15}{\ec} higher at \SI{+150}{\mV} 
 
   \caption%
   %
-  [\textbf{Electrostatic potential inside ClyA.}]
+  [\textbf{Equilibrium electrostatic potential inside ClyA.}]
   %
   {%
     %
-    \textbf{Electrostatic potential inside ClyA.}
+    \textbf{Equilibrium electrostatic potential inside ClyA.}
     %
     (\subref{fig:potential_clya_charges})
     %
     A single subunit of ClyA in which all amino acids with a net charge and whose side chains face the inside
-    of the pore, i.e. that contribute the most to the electrostatic potential, are highlighted. Negatively
+    of the pore, \ie~that contribute the most to the electrostatic potential, are highlighted. Negatively
     (Asp+Glu) and positively and positively (Lys+Arg) charged residues are colored in red and blue,
     respectively.
     %
     (\subref{fig:potential_contours})
     %
-    Electrostatic potential landscape inside ClyA due to its fixed charges (i.e. at $\vbias=\SI{0}{\mV}$) at
-    several key  concentrations ($\cbulk=\text{\SIlist{0.005;0.05;0.15;0.5;5}{\Molar}}$). Note that even at
-    physiological salt  concentrations ($\cbulk=\SI{0.15}{\Molar}$), the negative electrostatic potential
-    extends significantly inside the lumen ($1.60<z<\SI{12.25}{\nm}$), and even more so inside the \trans\
-    constriction ($1.85<z<\SI{1.60}{\nm}$). For the former, localized influential negative `hotspots' can be
-    found in the middle ($4<z<\SI{6}{\nm}$) and at the \cis\ entry ($10<z<\SI{12}{\nm}$).
+    Electrostatic potential landscape inside ClyA due to its fixed charges (\ie~at $\vbias =
+    \text{\SI{0}{\mV}}$) at several key  concentrations ($\cbulk =
+    \text{\SIlist{0.005;0.05;0.15;0.5;5}{\Molar}}$). Note that even at physiological salt concentrations
+    ($\cbulk = \text{\SI{0.15}{\Molar}}$), the negative electrostatic potential extends significantly inside
+    the \lumeni{} ($\num{1.6} < z < \text{\SI{12.25}{\nm}}$), and even more so inside the \transi{}
+    constriction ($\num{1.85} < z < \text{\SI{1.6}{\nm}}$). For the former, localized influential negative
+    `hotspots' can be found in the middle ($\num{4} < z < \text{\SI{6}{\nm}}$) and at the \cisi{} entry
+    ($\num{10} < z < \text{\SI{12}{\nm}}$).
     %
     (\subref{fig:potential_radial_averages})
     %
     Radial average of the electrostatic potential along the length of the pore ($\radpot$) for the same
-    concentrations as in \subref{fig:potential_contours}. Even though the lumen of the pore becomes almost
-    fully screened for $\cbulk>\SI{0.5}{\Molar}$, the constriction still retains some of its negative
+    concentrations as in \subref{fig:potential_contours}. Even though the \lumeni{} of the pore becomes almost
+    fully screened for $\cbulk > \text{\SI{0.5}{\Molar}}$, the constriction still retains some of its negative
     influence at \SI{5}{\Molar}.
     %
   }\label{fig:potential}
@@ -1182,16 +1200,17 @@ entire investigated concentration range.
 %
 The electrostatic potential distribution at $\vbias=\SI{0}{\mV}$ clearly shows the influence of the nanopore's
 fixed charge distribution (\cref{fig:potential_contours}). At low ionic strengths ($\cbulk <
-\SI{0.15}{\Molar}$), the lack of sufficient ionic screening results in relatively uniform negative potentials
-in both the lumen and the constriction of the pore (\SI{-90}{\mV} and \SI{-53}{\mV} at respectively
-\SI{0.005}{\Molar} and \SI{0.05}{\Molar}). These values significantly exceed the single ion thermal voltage
-$\kTe=\SI{25.7}{\mV}$ and hence effectively prohibit anions from entering the pore. At intermediary
-concentrations, ($0.15 \le \cbulk < \SI{1}{\Molar}$) the influence of the negative charges increasingly
-confines itself to several `hotspots' near the nanopore walls, most notably at entry of the pore
-($10<z<\SI{12}{\nm}$), in the middle of the lumen ($4<z<\SI{6}{\nm}$). Even though the potential at the center
-of the pore is close to \SI{\approx0}{\mV} for the lumen, it remains uniformly negative for the constriction.
-Finally, at high concentrations ($\cbulk \ge \SI{1}{\Molar}$) the potential drops to \SI{\approx0}{\mV} over
-the entire lumen of the pore, with only a small negative potential inside the constriction.
+\text{\SI{0.15}{\Molar}}$), the lack of sufficient ionic screening results in relatively uniform negative
+potentials in both the \lumeni{} and the constriction of the pore (\SI{-90}{\mV} and \SI{-53}{\mV} at
+respectively \SI{0.005}{\Molar} and \SI{0.05}{\Molar}). These values significantly exceed the single ion
+thermal voltage $\kTe = \text{\SI{25.7}{\mV}}$ and hence effectively prohibit anions from entering the pore.
+At intermediary concentrations, ($\num{0.15} \le \cbulk < \text{\SI{1}{\Molar}}$) the influence of the
+negative charges increasingly confines itself to several `hotspots' near the nanopore walls, most notably at
+entry of the pore ($\num{10} < z < \text{\SI{12}{\nm}}$), in the middle of the \lumeni{} ($\num{4} < z <
+\text{\SI{6}{\nm}}$). Even though the potential at the center of the pore is close to \SI{\approx0}{\mV} for
+the \lumeni{}, it remains uniformly negative for the constriction. Finally, at high concentrations ($\cbulk
+\ge \text{\SI{1}{\Molar}}$) the potential drops to \SI{\approx0}{\mV} over the entire \lumeni{} of the pore,
+with only a small negative potential inside the constriction.
 
 \paragraph{Radially averaged potential profile.}
 %
@@ -1199,22 +1218,22 @@ We further quantified the electrostatic potential at \SI{0}{\mV} applied bias vo
 length by computing its radial average
 %
 \begin{align}
-\radpot=\dfrac{1}{\pi R(z)^2}\int_{0}^{R(z)}\potential(r,z) \;2 \pi r \; dr \text{,}
+\radpot=\dfrac{1}{\pi R(z)^2}\int_{0}^{R(z)}\potential(r,z) \;2 \pi r \; dr \text{\,,}
 \end{align}
 %
-where $R(z)$ is taken as the pore radius for $-1.85\le z \le \SI{12.25}{\nm}$, \SI{2}{\nm} for
-$z<\SI{-1.85}{\nm}$ and \SI{4}{\nm} for $z>\SI{12.25}{\nm}$ (\cref{fig:potential_radial_averages}). The
-electrostatic potential at the \cis{} entry ($z \approx \SI{10}{\nm}$) is dominated by the acidic residues
-D114, D121 and D122, resulting in a rapid reduction of $\radpot$ upon entering the pore. Next, $\radpot$
-remains approximately constant up until the middle of the lumen ($z \approx \SI{5}{\nm}$), where the next set
-of negative residues, namely E53, E57 and D64, reduce the potential even further. After a brief rise,
-$\radpot$ then attains its maximum amplitude inside the \trans{} constriction ($z \approx \SI{0}{\nm}$) due to
-the close proximity of the amino acids E7, E11, E18, D21 and D25. For example, at physiological salt
-concentrations ($0.15$~M), $\radpot$ has values of \SIlist{-19;-29;-57}{\mV}
-(\numlist{-0.74;-1.1;-2.2}~$\kTe$) at the \cis{} entry, lumen center and \trans{} constriction, respectively.
-Their magnitude increases approximately three-fold at \SI{0.005}{\Molar}, and drops to
-\SI{\approx10}{\percent} at \SI{5}{\Molar}. A summary of these values can be found in
-\cref{suppinfo:tab:radial_potential}.
+where $R(z)$ is taken as the pore radius for $\num{-1.85} \le z \le \text{\SI{12.25}{\nm}}$, \SI{2}{\nm} for
+$z < \text{\SI{-1.85}{\nm}}$ and \SI{4}{\nm} for $z > \text{\SI{12.25}{\nm}}$
+(\cref{fig:potential_radial_averages}). The electrostatic potential at the \cisi{} entry ($z \approx
+\SI{10}{\nm}$) is dominated by the acidic residues D114, D121 and D122, resulting in a rapid reduction of
+$\radpot$ upon entering the pore. Next, $\radpot$ remains approximately constant up until the middle of the
+\lumeni{} ($z \approx \text{\SI{5}{\nm}}$), where the next set of negative residues, namely E53, E57 and D64,
+reduce the potential even further. After a brief rise, $\radpot$ then attains its maximum amplitude inside the
+\transi{} constriction ($z \approx \text{\SI{0}{\nm}}$) due to the close proximity of the amino acids E7, E11,
+E18, D21 and D25. For example, at physiological salt concentrations (\SI{0.15}{\Molar}), $\radpot$ has values
+of \SIlist{-19;-29;-57}{\mV} (\SIlist{-0.74;-1.1;-2.2}{\kTe}) at the \cisi{} entry, \lumeni{} center and
+\transi{} constriction, respectively. Their magnitude increases approximately three-fold at
+\SI{0.005}{\Molar}, and drops to \SI{\approx10}{\percent} at \SI{5}{\Molar}. A summary of these values can be
+found in \cref{suppinfo:tab:radial_potential}.
 
 \subsection{Non-equilibrium electrostatic potential}\label{sec:ese}
 
@@ -1262,10 +1281,11 @@ constriction ($\deltaEt$, \cref{fig:potential_energy_trans_barrier}).
     %
     (\subref{fig:potential_energy_trans_barrier})
     %
-    Height of the electrostatic energy barrier ($\Delta E_{\text{B},i}$) at the \trans\ constriction. Note
+    Height of the electrostatic energy barrier ($\Delta E_{\text{B},i}$) at the \transi{} constriction. Note
     that $\Delta E_{\text{B},i}$ is much higher for negative voltages and rises logarithmically at lower
-    concentrations. The divergence between \SI{+0}{\mV} and \SI{-0}{\mV} for $\cbulk<\SI{0.3}{\Molar}$
-    highlights the difference in barrier height when traversing the pore from \cis\ to \trans\ or vice versa.
+    concentrations. The divergence between \SI{+0}{\mV} and \SI{-0}{\mV} for $\cbulk <
+    \text{\SI{0.3}{\Molar}}$ highlights the difference in barrier height when traversing the pore from \cisi{}
+    to \transi{} or vice versa.
     %
   }\label{fig:potential_energy}
 \end{figure}
@@ -1273,62 +1293,62 @@ constriction ($\deltaEt$, \cref{fig:potential_energy_trans_barrier}).
 
 \paragraph{Energy landscape at $\mathbf{+150}$~mV.}
 %
-At positive bias voltages, cations traverse the pore from \trans{} to \cis{}
-(\cref{fig:potential_energy_radial_averages}, top left). Upon entering the \trans{} constriction, the
+At positive bias voltages, cations traverse the pore from \transi{} to \cisi{}
+(\cref{fig:potential_energy_radial_averages}, top left). Upon entering the \transi{} constriction, the
 electrostatic energy drops dramatically, followed by a relatively flat energy landscape with a small barrier
-for entry in the lumen at $z\approx\SI{1.6}{\nm}$. At very low ionic strengths ($\cbulk<\SI{0.025}{\Molar}$),
-the energy at \trans{} is significantly lower than that the final energy in the \cis{} compartment
-(\eg~$\Delta\radenergy > \SI{2}{\kT}$ at \SI{0.005}{\Molar}), forcing the ions to accumulate inside the
-pore. At higher concentrations ($\cbulk > \SI{0.05}{\Molar}$), the increased screening smooths out the
-potential drop inside the pore, allowing the cations to migrate unhindered across the entire length of the
-pore.
+for entry in the \lumeni{} at $z \approx \text{\SI{1.6}{\nm}}$. At very low ionic strengths ($\cbulk <
+\text{\SI{0.025}{\Molar}}$), the energy at \transi{} is significantly lower than that the final energy in the
+\cisi{} compartment (\eg~$\Delta\radenergy > \text{\SI{2}{\kT}}$ at \SI{0.005}{\Molar}), forcing the ions to
+accumulate inside the pore. At higher concentrations ($\cbulk > \text{\SI{0.05}{\Molar}}$), the increased
+screening smooths out the potential drop inside the pore, allowing the cations to migrate unhindered across
+the entire length of the pore.
 
-Anions traveling from \cis{} to \trans{} must overcome energy barriers when both entering and exiting the pore
-(\cref{fig:potential_energy_radial_averages}, bottom right). The former prevents \Cl{} ions from entering the
-pore, but is only relevant at lower ionic strengths ($\cbulk<0.05$~M), since its magnitude is attenuated
+Anions traveling from \cisi{} to \transi{} must overcome energy barriers when both entering and exiting the
+pore (\cref{fig:potential_energy_radial_averages}, bottom right). The former prevents \Cl{} ions from entering
+the pore, but is only relevant at lower ionic strengths ($\cbulk<0.05$~M), since its magnitude is attenuated
 strongly with increasing salt concentration (from \SI{\approx1.7}{\kT} at \SI{0.005}{\Molar} to
 \SI{\approx0.5}{\kT} at \SI{0.05}{\Molar}). Once inside the lumen, anions can move relatively unencumbered to
-the \trans{} constriction, where they face the second, more significant energy barrier, which prevents them
+the \transi{} constriction, where they face the second, more significant energy barrier, which prevents them
 from fully translocating and causes them to accumulate inside the lumen. Ions that do pass the final barrier
 are rewarded with a large reduction of their electrostatic energy, as the bulk of the voltage drop occurs only
-after the \trans{} constriction. As with the cations, an increase in the ionic strength significantly reduces
+after the \transi{} constriction. As with the cations, an increase in the ionic strength significantly reduces
 the
 
 \paragraph{Energy landscape at $\mathbf{-150}$~mV.}
 %
-The electrostatic energy of cations traversing the pore at negative voltages (\cis{} to \trans{}) drops
-gradually throughout the lumen of the pore up until the \trans{} constriction
+The electrostatic energy of cations traversing the pore at negative voltages (\cisi{} to \transi{}) drops
+gradually throughout the \lumeni{} of the pore up until the \transi{} constriction
 (\cref{fig:potential_energy_radial_averages}, top right). This their efficient removal of cations from the
-pore lumen, and results in a lower concentration compared to positive voltages (\cref{fig:concentration}). To
-fully exit from the pore, however, cations must overcome a large energy barrier, which reduces the nanopore's
-ability to conduct cations compared to positive potentials and hence contributes to the ion current
-rectification.
+pore lumen, and results in a lower concentration compared to positive voltages
+(\cref{fig:concentration_pore_average_vs_cbulk}). To fully exit from the pore, however, cations must overcome
+a large energy barrier, which reduces the nanopore's ability to conduct cations compared to positive
+potentials and hence contributes to the ion current rectification.
 
-The situation for anions at negative bias voltages (\trans{} to \cis{}) is very different as they must travel
-from (\cref{fig:potential_energy_radial_averages}, bottom left), where they must overcoming the large energy
-barrier at the constriction (\cref{fig:potential_energy_trans_barrier}, red curves). This effectively prevents
-them from entering the pore, explaining why ClyA is more ion selective at negative bias voltages. Once across
-the barrier, the continuous drop of electrostatic energy towards the \cis{} entry serves as a strong driving
-force to deplete the entire lumen of anions, resulting in much lower concentrations compared to positive
-voltages.
+The situation for anions at negative bias voltages (\transi{} to \cisi{}) is very different as they must
+travel from (\cref{fig:potential_energy_radial_averages}, bottom left), where they must overcoming the large
+energy barrier at the constriction (\cref{fig:potential_energy_trans_barrier}, red curves). This effectively
+prevents them from entering the pore, explaining why ClyA is more ion selective at negative bias voltages.
+Once across the barrier, the continuous drop of electrostatic energy towards the \cisi{} entry serves as a
+strong driving force to deplete the entire \lumeni{} of anions, resulting in much lower concentrations
+compared to positive voltages.
 
-\paragraph{Concentration and voltage dependencies of the \trans{} energy barrier.}
+\paragraph{Concentration and voltage dependencies of the \transi{} energy barrier.}
 %
 Many biological nanopores contain constrictions that play crucial roles in shaping their ionic conductance
 properties.\cite{Maglia-2008,Franceschini-2016,Huang-2017} The reason for this is two-fold, 1) the narrowest
 part dominates the overall resistance of the pore and 2) confinement of charged residues results in much large
-electrostatic energy barriers. With its highly negatively charged \trans{} constriction, ClyA's affinity for
+electrostatic energy barriers. With its highly negatively charged \transi{} constriction, ClyA's affinity for
 transport of anions is diminished and that for cations in enhanced, even at high ionic strengths
 (\cref{fig:transport_number_contourmap_epnp}).\cite{Soskine-2013} To further elucidate the significance of the
-\trans{} electrostatic barrier ($\deltaEt$), we quantified its height of at positive and negative voltages as
+\transi{} electrostatic barrier ($\deltaEt$), we quantified its height of at positive and negative voltages as
 a function of the salt concentration (\cref{fig:potential_energy_trans_barrier}).
 
 We estimated the magnitude of the For concentrations between \SIlist{0.01}{1}{\Molar}, however, there is a
 clear difference in ion selectivity between positive and negative bias voltages. At \SI{0.1}{\Molar}, for
-example, the ion selectivity $\transportn_{\Na}$ increases $3.3$-fold from \num{5.7} at \SI{+150}{\mV} to
-\num{19} at \SI{-150}{\mV}. The energy barriers under these conditions are This observation can be explained
-by the difference in electrostatic energy barrier height in the constriction at positive and negative voltages
-(\cref{fig:potential_energy_trans_barrier}). Again, at \SI{0.1}{\Molar} the
+example, the ion selectivity $\transportn_{\Na}$ increases \num{3.3}-fold from \num{5.7} at \SI{+150}{\mV} to
+\num{19}-fold at \SI{-150}{\mV}. The energy barriers under these conditions are This observation can be
+explained by the difference in electrostatic energy barrier height in the constriction at positive and
+negative voltages (\cref{fig:potential_energy_trans_barrier}). Again, at \SI{0.1}{\Molar} the
 
 
 cation selectivities ($S_{i}=\transportn_{i}/(1-\transportn_{i})$).
@@ -1389,12 +1409,12 @@ cation selectivities ($S_{i}=\transportn_{i}/(1-\transportn_{i})$).
       \caption{}\vspace{-5mm}\label{fig:flow_conductance_vs_concentration}
       \includegraphics[scale=1]{figures/flow/flow_conductance_vs_concentration}
     \end{subfigure}
-    \begin{subfigure}[t]{4cm}
-      \vspace{2mm}
-      \centering
-      \caption{}\vspace{-5mm}\label{fig:flow_conductance_vs_voltage}
-      \includegraphics[scale=1]{figures/flow/flow_conductance_vs_voltage}
-    \end{subfigure}
+    % \begin{subfigure}[t]{4cm}
+    %   \vspace{2mm}
+    %   \centering
+    %   \caption{}\vspace{-5mm}\label{fig:flow_conductance_vs_voltage}
+    %   \includegraphics[scale=1]{figures/flow/flow_conductance_vs_voltage}
+    % \end{subfigure}
     \begin{subfigure}[t]{4cm}
       \vspace{2mm}
       \centering
@@ -1478,7 +1498,7 @@ solid-state nanopores.\cite{Mao-2014,Laohakunakorn-2015} In our simulation, the 
 the Navier-Stokes and the Poisson-Nernst-Planck equations through a volume force term
 (\cref{eq:ion_force_density}), which dictates that the electric field exerts a net force on the fluid if it
 contains a net charge density---as is the case for the electrical double layer lining the walls of ClyA
-(\cref{fig:ion_charge_density}). In the following section we aim to quantitatively and a qualitatively
+(\cref{fig:ion_charge_dist_vs_cbulk}, ). In the following section we aim to quantitatively and a qualitatively
 describe the properties of the water velocity inside ClyA and how it is influenced by the bulk ionic strength
 and the applied bias voltage (\cref{fig:flow}).
 
@@ -1486,9 +1506,9 @@ and the applied bias voltage (\cref{fig:flow}).
 \paragraph{Direction, magnitude and distribution of the water velocity.}
 %
 As expected given ClyA's negatively charged interior surface and the resulting positively charged electrical
-double layer (\cref{fig:ion_charge_density}), the direction of the net water flow inside ClyA follows the
-electric field, \ie~from the \cisi{} to the \transi{} at negative bias voltages (\cref{fig:flow_contour}).
-This corresponds to observations and analysis of single-molecule protein capture\cite{Soskine-2013} and
+double layer, the direction of the net water flow inside ClyA follows the electric field, \ie~from the \cisi{}
+to the \transi{} at negative bias voltages (\cref{fig:flow_contour}). This corresponds to observations and
+analysis of single-molecule protein capture\cite{Soskine-2013} and
 trapping\cite{Soskine-Biesemans-2015,Biesemans-Soskine-2015,Willems-Ruic-Biesemans-2019} experiments using the
 ClyA-AS nanopore. Along the longitudinal axis ($z$) of the pore, the water velocity is governed by the
 conservation of mass, meaning it is lowest in the wide \cisi{} \textit{lumen} and highest in the narrow
@@ -1500,13 +1520,14 @@ Along the radial axis ($r$), $\velocity$ has a parabolic profile with the highes
 pore and the lowest at the wall due to the no-slip boundary condition
 (\cref{fig:flow_constriction_contour,fig:flow_constriction_profiles}). Such a parabolic profile contrasts the
 expected `plug flow' for an EOF, but follows logically from the overlap of the electrical double layer inside
-the pore (see~\cref{fig:ion_charge_density}) and the resulting uniform volume force---analogous to a gravity-
-or pressure-driven Stokes flow. At concentrations higher than \SI{0.5}{\Molar}, however, the increasing degree
-of confinement of the double layer---and its charge---to the nanopore walls
-(\cref{fig:ion_charge_pore_bulk_surface_total_vs_concentration}) results in a flattening of the central
-maximum and hence a plug flow profile. Interestingly, at very high salt concentrations ($\cbulk\ge1$~M) the
-velocity profile in the constriction exhibits a dimple at the center of the pore. This is the result of a
-self-induced pressure gradient caused by the expansion of the EOF as it exits the pore.\cite{Melnikov-2017}
+the pore and the resulting uniform volume force---analogous to a gravity- or pressure-driven Stokes flow. At
+concentrations higher than \SI{0.5}{\Molar}, however, the increasing degree of confinement of the double
+layer---and its charge---to the nanopore walls
+(see~\cref{fig:ion_charge_dist_vs_cbulk}, $\pav{\Qion}{s}$) results in a flattening
+of the central maximum and hence a plug flow profile. Interestingly, at very high salt concentrations ($\cbulk
+\ge \text{\SI{1}{\Molar}}$) the velocity profile in the constriction exhibits a dimple at the center of the
+pore. This is the result of a self-induced pressure gradient caused by the expansion of the EOF as it exits
+the pore.\cite{Melnikov-2017}
 
 \paragraph{Influence of bulk ionic strength and bias voltage on the electro-osmotic conductance.}
 %
