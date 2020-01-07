@@ -333,3 +333,4 @@ ENV/
 notebook/
 .directory
 .vscode
+release
