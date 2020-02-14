@@ -589,7 +589,7 @@ where
 and at steady state
 %
 \begin{align}
-  \dfrac{\partial \concentration_{i}}{\partial \time} ={}& - \nabla \cdot \flux_{i} = 0
+  \dfrac{\partial \concentration_{i}}{\partial \timedim} ={}& - \nabla \cdot \flux_{i} = 0
   \text{\,,}
 \end{align}
 %
@@ -634,7 +634,7 @@ As derived by Axelsson \etal{},\cite{Axelsson-2015} the fluid flow and pressure 
 %
 \begin{align}
   \label{eq:navier-stokes-variable}
-  \dfrac{\partial \left( \density \velocity \right) }{\partial \time}
+  \dfrac{\partial \left( \density \velocity \right) }{\partial \timedim}
   \left( \velocity \cdot \nabla \right) \left( \density\velocity \right)
   + \nabla \cdot \hydrostresstensor = \vec{\force}
   \text{\,,}
@@ -652,7 +652,7 @@ together with the continuity equations for the fluid density
 %
 \begin{align}
   \label{eq:continuity-density}
-  \dfrac{\partial \density}{\partial \time} + \velocity \cdot \nabla \density  = 0
+  \dfrac{\partial \density}{\partial \timedim} + \velocity \cdot \nabla \density  = 0
   \text{\,,}
 \end{align}
 %
@@ -675,11 +675,11 @@ $\vec{\force}$ that acts on the fluid is given by
 %
 with $\efield = - \nabla \potential$ the electric field vector.
 
-At steady-state, the partial derivates w.r.t. time in \cref{eq:navier-stokes-variable,eq:continuity-density}
+At steady-state, the partial derivatives w.r.t. time in \cref{eq:navier-stokes-variable,eq:continuity-density}
 become equal to zero:
 \begin{align}
-  \dfrac{\partial \left( \density \velocity \right) }{\partial \time} ={}& 0 \\
-  \dfrac{\partial \density}{\partial \time} ={}& = 0
+  \dfrac{\partial \left( \density \velocity \right) }{\partial \timedim} ={}& 0 \\
+  \dfrac{\partial \density}{\partial \timedim} ={}& = 0
   \text{\,.}
 \end{align}
 
@@ -1778,9 +1778,9 @@ unit vector normal to $S$. Similarly, the volumetric flow rate, \ie~the volume o
 ClyA-AS monomers were expressed, purified and oligomerized using methods described in detail
 elsewhere.\cite{Soskine-2012,Soskine-2013} Briefly, \textit{E. cloni} EXPRESS BL21 (DE3) cells (Lucigen
 Corporation, Middleton, USA) were transformed with a pT7 plasmid containing the ClyA-AS gene, followed by
-overexpression after induction with $1$~mM isopropyl \textbeta-D-1-thiogalactopyranoside (Sigma-Aldrich,
+overexpression after induction with $1$~mM isopropyl \textbeta{}-D-1-thiogalactopyranoside (Sigma-Aldrich,
 Zwijndrecht, The Netherlands). The ClyA monomers were purified using \ce{Ni+}-NTA affinity chromatography and
-oligomerized by incubation in $0.2$~\%\ D-maltoside n-dodecyl-\textbeta-D-maltopyranoside (Sigma-Aldrich,
+oligomerized by incubation in $0.2$~\%\ D-maltoside n-dodecyl-\textbeta{}-D-maltopyranoside (Sigma-Aldrich,
 Zwijndrecht, The Netherlands) for 30~minutes at 37\textdegree C. Pure ClyA-AS type-I (12-mer) nanopores were
 obtained using native PAGE on a $4$-$15$\%\ gradient gel (Bio-Rad, Veenendaal, The Netherlands) and subsequent
 excision of the correct oligomer band.
