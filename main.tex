@@ -228,7 +228,7 @@ strong reduction of their motility, as observed in MD simulations.\cite{Makarov-
 effects happen only at distances \SI{\le1}{\nm}, they can usually be neglected for macroscopic simulations.
 However, in small nanopores ($\le10$~nm radius), they comprise a significant fraction of the total nanopore
 radius and hence must be taken into account.\cite{Noskov-2004,Simakov-2010,Pederson-2015,McMullen-2017} In
-continuum simulations, this can be achieved with the use pf positional-dependent ion diffusion coefficients.
+continuum simulations, this can be achieved with the use of positional-dependent ion diffusion coefficients.
 An example implementation is the `soft-repulsion PNP' developed by Simakov and Kurnikova,\cite{Simakov-2010,
 Simakov-2018} who used it to predict the ionic conductance of the $\alpha$-hemolysin nanopore. Similar
 reductions in ion diffusion coefficients have been proposed to improve PNP theory's estimations of the ionic
@@ -274,7 +274,7 @@ applied it directly to a 2D-axisymmetric model of Cytolysin A (ClyA), a large pr
 contains 12 subunits\cite{Mueller-2009} or more\cite{Soskine-2013} and has been extensively used in
 experimental studies of both proteins\cite{Soskine-2013,VanMeervelt-2014,Soskine-Biesemans-2015,
 Biesemans-Soskine-2015,Wloka-2017,VanMeervelt-2017,Galenkamp-2018} and DNA.\cite{Franceschini-2013,
-Franceschini-2016}. This allowed us to gauge the qualitative and quantitative performance of the ePNP-NS
+Franceschini-2016} This allowed us to gauge the qualitative and quantitative performance of the ePNP-NS
 equations and simultaneously elucidate previously unaccessible details about the environment inside the pore.
 
 The remainder of this paper is organized as follows. In \emph{\nameref{sec:model}} we describe the equations
@@ -424,7 +424,7 @@ account 1) the finite size of the ions,\cite{Borukhov-1997,Lu-2011} 2) the reduc
 close to the nanopore walls,\cite{Makarov-1998,Noskov-2004,Pronk-2014,Pederson-2015,Vo-2016} and 3) the
 concentration dependency of ion diffusion coefficients and electrophoretic mobilities, as well as electrolyte
 viscosity, density and relative permittivity.\cite{Mills-1989,Hai-Lang-1996,Gavish-2016} Most of these
-corrections make use of using empirical functions that were fitted to experimental data
+corrections make use of empirical functions that were fitted to experimental data, as explained below
 (\cref{tab:corrections_equations,suppinfo:tab:corrections_parameters}).
 
 \paragraph{Electrostatic field.}
@@ -441,8 +441,8 @@ with $\potential$ the electric potential, $\absperm$ the vacuum permittivity
 (\SI{8.85419e-12}{\farad\per\meter}) and $\relperm$ local relative permittivity
 (\cref{suppinfo:tab:corrections_parameters}).
 
-The pore's \emph{fixed} charge distribution, $\scdpore$, (see~\cref{eq:scdpore}) was derived directly from the
-full atom model of ClyA-AS. The \emph{ionic} charge density in the fluid is given by
+The pore's \emph{fixed} charge distribution, $\scdpore$,  was derived directly from the full atom model of
+ClyA-AS (see~\cref{eq:scdpore}). The \emph{ionic} charge density in the fluid is given by
 %
 \begin{align}\label{eq:scdion}
   \scdion = \faraday\sum_{i}\chargen_{i}\concentration_{i}
@@ -589,7 +589,7 @@ where
 and at steady state
 %
 \begin{align}
-  \dfrac{\delta \concentration_{i}}{\delta t} ={}& - \nabla \cdot \flux_{i} = 0
+  \dfrac{\partial \concentration_{i}}{\partial \time} ={}& - \nabla \cdot \flux_{i} = 0
   \text{\,,}
 \end{align}
 %
@@ -630,11 +630,11 @@ questionable.\cite{Anderson-1972,Deen-1987}
 
 \paragraph{Fluid flow.}
 %
-The fluid flow and pressure are given by the Navier-Stokes equations for incompressible
-fluids\cite{Axelsson-2015}
+As derived by Axelsson \etal{},\cite{Axelsson-2015} the fluid flow and pressure field inside an incompressible fluid with a variable density and variable viscosity is given by the Navier-Stokes equations:
 %
 \begin{align}
   \label{eq:navier-stokes-variable}
+  \dfrac{\partial \left( \density \velocity \right) }{\partial \time}
   \left( \velocity \cdot \nabla \right) \left( \density\velocity \right)
   + \nabla \cdot \hydrostresstensor = \vec{\force}
   \text{\,,}
@@ -651,7 +651,8 @@ where
 together with the continuity equations for the fluid density
 %
 \begin{align}
-  \velocity \cdot \nabla \density  = 0
+  \label{eq:continuity-density}
+  \dfrac{\partial \density}{\partial \time} + \velocity \cdot \nabla \density  = 0
   \text{\,,}
 \end{align}
 %
@@ -673,6 +674,14 @@ $\vec{\force}$ that acts on the fluid is given by
 \end{align}
 %
 with $\efield = - \nabla \potential$ the electric field vector.
+
+At steady-state, the partial derivates w.r.t. time in \cref{eq:navier-stokes-variable,eq:continuity-density}
+become equal to zero:
+\begin{align}
+  \dfrac{\partial \left( \density \velocity \right) }{\partial \time} ={}& 0 \\
+  \dfrac{\partial \density}{\partial \time} ={}& = 0
+  \text{\,.}
+\end{align}
 
 As with the previous equations, we introduced a concentration dependency and wall distance dependencies for
 $\viscosity$ and a concentration dependency for the $\density$ by replacing their constant values by
