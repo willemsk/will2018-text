@@ -110,7 +110,7 @@
 \input{shared/authors.tex}
 
 
-\title{Modeling of Ion and Water Transport in the Biological Nanopore ClyA}
+\title{Extended PNP-NS Equations for Accurate Modelling of Ion and Water Transport in the Biological Nanopore ClyA}
 
 \keywords{biological nanopore; cytolysin A; continuum simulation; Poisson-Nernst-Planck and Navier-Stokes
 equations; single molecule}
@@ -129,24 +129,41 @@ equations; single molecule}
 
 \begin{abstract}
   \footnotesize
-  In recent years, the protein nanopore cytolysin A (ClyA) has become a valuable tool for the detection,
-  characterization and quantification of biomarkers, proteins and nucleic acids at the single-molecule level.
-  Despite this extensive experimental utilization, a comprehensive computational study of ion and water
-  transport through ClyA is currently lacking. Such a study yields a wealth of information on the electrolytic
-  conditions inside the pore and on the scale the electrophoretic forces that drive molecular transport. To
-  this end we have built a computationally efficient continuum model of ClyA which, together with an extended
-  version of Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations, faithfully reproduces its ionic
-  conductance over a wide range of salt concentrations. These ePNP-NS equations aim to tackle the shortcomings
-  of the traditional PNP-NS models by self-consistently taking into account the influence of both the ionic
-  strength and the nanoscopic scale of the pore on all relevant electrolyte properties. In this study, we give
-  both a detailed description of our ePNP-NS model and apply it to the ClyA nanopore. This enabled us to gain
-  a deeper insight into the influence of ionic strength and applied voltage on the ionic conductance through
-  ClyA and a plethora of quantities difficult to assess experimentally. The latter includes the cation and
-  anion concentrations inside the pore, the shape of the electrostatic potential landscape and the magnitude
-  of the electro-osmotic flow. Our work shows that continuum models of biological nanopores---if the
-  appropriate corrections are applied---can make both qualitatively and quantitatively meaningful predictions
-  that could be valuable tool to aid in both the design and interpretation of nanopore experiments.
+  Biological nanopores are emerging as powerful instruments for the identification, quantification and characterization of biomarkers, proteins and nucleic acids at the single-molecule level. 
+  Despite their broad experimental utilization, a fast and accurate simulation methodology to investigate the nanofluidic properties and ionic composition of biological nanopores is currently unavailable. Even though molecular dynamics simulations have become significantly faster in recent years, the large atomic structure of biological nanopores makes the collection of statistically meaningful amount of data highly computationally expensive. Continuum methods are orders of magnitude faster, but they are unable to accurately model the nanofluidic properties of complex molecular structures.
+  Here, we describe an method, termed the extended Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations, to significantly improve the accuracy of continuum methods at the nanoscale and beyond infinite dilution. The ePNP-NS equations self-consistently take into account the influence of both the ionic
+  strength and the nanoscopic scale of the pore on all relevant electrolyte properties, including the diffusion coefficients, mobilities and finite size of the ions, and the density, viscosity and relative permittivity of the solvent To demonstrate the power of our approach, we applied the ePNP-NS framework to a condensed, 2D-axisymmetric model of the Cytolysin A (ClyA) biological nanopore. Strikingly, the model faithfully reproduces the nanopore’s ionic conductance for a wide range of ionic strengths and bias potentials. It also quantitatively describes many characteristics that are not directly experimentally accessible, including the ion selectivity, the distribution of ions and the electric potential inside the nanopore and, the magnitude of the electro-osmotic flow.
+  In summary, our work aims to bring the power of computationally inexpensive continuum simulations that are both qualitatively and quantitatively meaningful, into the hands of biological nanopore researchers. We believe our method could not only be an effective tool for the interpretation of nanopore experiments but may also provide a means to rationally design the properties of biological nanopores.
+
+  % In recent years, the protein nanopores have become a valuable tool for the detection,
+  % characterization and quantification of biomarkers, proteins and nucleic acids at the single-molecule level.
+  % Despite this extensive experimental utilization, a comprehensive computational study of ion and water
+  % transport through ClyA is currently lacking. Such a study yields a wealth of information on the electrolytic
+  % conditions inside the pore and on the scale the electrophoretic forces that drive molecular transport. To
+  % this end we have built a computationally efficient continuum model of ClyA which, together with an extended
+  % version of Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations, faithfully reproduces its ionic
+  % conductance over a wide range of salt concentrations. These ePNP-NS equations aim to tackle the shortcomings
+  % of the traditional PNP-NS models by self-consistently taking into account the influence of both the ionic
+  % strength and the nanoscopic scale of the pore on all relevant electrolyte properties. In this study, we give
+  % both a detailed description of our ePNP-NS model and apply it to the ClyA nanopore. This enabled us to gain
+  % a deeper insight into the influence of ionic strength and applied voltage on the ionic conductance through
+  % ClyA and a plethora of quantities difficult to assess experimentally. The latter includes the cation and
+  % anion concentrations inside the pore, the shape of the electrostatic potential landscape and the magnitude
+  % of the electro-osmotic flow. Our work shows that continuum models of biological nanopores---if the
+  % appropriate corrections are applied---can make both qualitatively and quantitatively meaningful predictions
+  % that could be valuable tool to aid in both the design and interpretation of nanopore experiments.
 \end{abstract}
+
+
+
+Biological nanopores are emerging as powerful instruments for the identification, quantification and characterization of biomarkers, proteins and nucleic acids at the single-molecule level. 
+Despite their broad experimental utilization, a fast and accurate simulation methodology to investigate the nanofluidic properties and ionic composition of biological nanopores is currently unavailable. Even though molecular dynamics simulations have become significantly faster in recent years, the large atomic structure of biological nanopores makes the collection of statistically meaningful amount of data highly computationally expensive. Continuum methods are orders of magnitude faster, but they are unable to accurately model the nanofluidic properties of complex molecular structures.
+
+Here, we describe an method, termed the extended Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations, to significantly improve the accuracy of continuum methods at the nanoscale and beyond infinite dilution. The ePNP-NS equations self-consistently take into account the influence of both the ionic
+strength and the nanoscopic scale of the pore on all relevant electrolyte properties, including the diffusion coefficients and mobilities of the ions, and the density, viscosity and relative permittivity of the solvent To demonstrate the power of our approach, we applied the ePNP-NS framework to a condensed, 2D-axisymmetric model of the Cytolysin A (ClyA) biological nanopore. Strikingly, the model faithfully reproduces the nanopore’s ionic conductance for a wide range of ionic strengths and bias potentials. It also quantitatively describes many characteristics that are not directly experimentally accessible, including the ion selectivity, the distribution of ions and the electric potential inside the nanopore and, the magnitude of the electro-osmotic flow.
+
+In summary, our work aims to bring the power of computationally inexpensive continuum simulations that are both qualitatively and quantitatively meaningful, into the hands of biological nanopore researchers. We believe our method could not only be an effective tool for the interpretation of nanopore experiments but may also provide a means to rationally design the properties of biological nanopores.
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -205,7 +222,7 @@ molecules.\cite{Corry-2000,Collins-2012} Nevertheless, the PNP equations have be
 simulation of ion channels,\cite{Im-2002,Furini-2006,Liu-2015} biological
 nanopores\cite{Simakov-2010,Pederson-2015,Aguilella-Arzo-2017,Simakov-2018} and their solid-state
 counterparts\cite{Cervera-2005,White-2008,Chaudhry-2014,Laohakunakorn-2015}---often with excellent
-qualitative, if not quantitative results.\cite{Maffeo-2012,Thomas-2014,Kim-2015}
+qualitative results.\cite{Maffeo-2012,Thomas-2014,Kim-2015}
 
 To remedy the shortcomings of PNP and NS theory, a number of modifications have been proposed over the years.
 These include, among others, 1) steric ion-ion interactions, 2) the effect of protein-ion/water interactions
@@ -267,8 +284,8 @@ predictive power of the PNP-NS equations at the nanoscale and beyond infinite di
 takes into account the finite size of the ions using a size-modified PNP theory,\cite{Lu-2011} and implements
 spatial-dependencies for the solvent viscosity,\cite{Pronk-2014,Hsu-2017} the ion diffusion coefficients and
 their mobilities.\cite{Makarov-1998,Noskov-2004} It also includes self-consistent concentration-dependent
-properties (based on empirical fits to experimental data) for both all ions in terms of diffusion coefficients
-and mobilities,\cite{Baldessari-2008-1,Mills-1989} and the solvent in terms of density,
+properties---based on empirical fits to experimental data---for both all ions in terms of diffusion
+coefficients and mobilities,\cite{Baldessari-2008-1,Mills-1989} and the solvent in terms of density,
 viscosity\cite{Hai-Lang-1996} and relative permittivity\cite{Gavish-2016}. To validate our new framework, we
 applied it directly to a 2D-axisymmetric model of Cytolysin A (ClyA), a large protein nanopore that typically
 contains 12 subunits\cite{Mueller-2009} or more\cite{Soskine-2013} and has been extensively used in
