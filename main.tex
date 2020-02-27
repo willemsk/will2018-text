@@ -650,7 +650,7 @@ As derived by Axelsson \etal{},\cite{Axelsson-2015} the fluid flow and pressure 
 %
 \begin{align}
   \label{eq:navier-stokes-variable}
-  \dfrac{\partial \left( \density \velocity \right) }{\partial \timedim}
+  \dfrac{\partial}{\partial \timedim} \left( \density \velocity \right) +
   \left( \velocity \cdot \nabla \right) \left( \density\velocity \right)
   + \nabla \cdot \hydrostresstensor = \vec{\force}
   \text{\,,}
@@ -675,8 +675,10 @@ together with the continuity equations for the fluid density
 and the fluid velocity
 %
 \begin{align}
-  \left( \velocity \cdot \nabla \right) \left( \density\velocity \right)
-  \nabla \cdot \left( \density\velocity \right) - \velocity \cdot \nabla \density ={}& 0
+  % \left( \velocity \cdot \nabla \right) \left( \density\velocity \right)
+  % \nabla \cdot \left( \density\velocity \right) - \velocity \cdot \nabla \density ={}& 0
+  \velocity \cdot \nabla \left( \density\velocity \right)
+  - \velocity \cdot \nabla \density ={}& 0
   \text{\,,}
 \end{align}
 %
@@ -694,8 +696,8 @@ with $\efield = - \nabla \potential$ the electric field vector.
 At steady-state, the partial derivatives w.r.t. time in \cref{eq:navier-stokes-variable,eq:continuity-density}
 become equal to zero:
 \begin{align}
-  \dfrac{\partial \left( \density \velocity \right) }{\partial \timedim} ={}& 0 \\
-  \dfrac{\partial \density}{\partial \timedim} ={}& = 0
+  \dfrac{\partial}{\partial \timedim} \left( \density \velocity \right) ={}& 0 \\
+  \dfrac{\partial \density}{\partial \timedim} ={}& 0
   \text{\,.}
 \end{align}
 
