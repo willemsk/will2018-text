@@ -129,11 +129,28 @@ equations; single molecule}
 
 \begin{abstract}
   \footnotesize
-  Biological nanopores are emerging as powerful instruments for the identification, quantification and characterization of biomarkers, proteins and nucleic acids at the single-molecule level. 
-  Despite their broad experimental utilization, a fast and accurate simulation methodology to investigate the nanofluidic properties and \todo{ionic composition} of biological nanopores is currently unavailable. Even though molecular dynamics simulations have become significantly faster in recent years, the large atomic structure of biological nanopores makes the collection of statistically meaningful amount of data highly computationally expensive. Continuum methods are orders of magnitude faster, but they are unable to accurately model the nanofluidic properties of complex molecular structures.
-  Here, we describe a method, termed the extended Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations, to significantly improve the accuracy of continuum methods at the nanoscale and beyond infinite dilution. The ePNP-NS equations self-consistently take into account the influence of both the ionic
-  strength and the nanoscopic scale of the pore on all relevant electrolyte properties, including the diffusion coefficients, mobilities and finite size of the ions, and the density, viscosity and relative permittivity of the solvent To demonstrate the power of our approach, we applied the ePNP-NS framework to a condensed, 2D-axisymmetric model of the Cytolysin A (ClyA) biological nanopore. Strikingly, the model faithfully reproduces the nanopore’s ionic conductance for a wide range of ionic strengths and bias potentials. It also quantitatively describes many characteristics that are not directly experimentally accessible, including the ion selectivity, the distribution of ions and the electric potential inside the nanopore and, the magnitude of the electro-osmotic flow.
-  In summary, our work aims to bring the power of computationally inexpensive continuum simulations that are both qualitatively and quantitatively meaningful, into the hands of biological nanopore researchers. We believe our method could not only be an effective tool for the interpretation of nanopore experiments but may also provide a means to rationally design the properties of biological nanopores.
+  Biological nanopores are emerging as powerful instruments for the identification, quantification and
+  characterization of biomarkers, proteins and nucleic acids at the single-molecule level. Despite their broad
+  experimental utilization, a fast and accurate simulation methodology to investigate the nanofluidic
+  properties and \todo{ionic composition} of biological nanopores is currently unavailable. Even though
+  molecular dynamics simulations have become significantly faster in recent years, the large atomic structure
+  of biological nanopores makes the collection of statistically meaningful amount of data highly
+  computationally expensive. Continuum methods are orders of magnitude faster, but they are unable to
+  accurately model the nanofluidic properties of complex molecular structures. Here, we describe a method,
+  termed the extended Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations, to significantly improve the
+  accuracy of continuum methods at the nanoscale and beyond infinite dilution. The ePNP-NS equations
+  self-consistently take into account the influence of both the ionic strength and the nanoscopic scale of the
+  pore on all relevant electrolyte properties, including the diffusion coefficients, mobilities and finite
+  size of the ions, and the density, viscosity and relative permittivity of the solvent To demonstrate the
+  power of our approach, we applied the ePNP-NS framework to a condensed, 2D-axisymmetric model of the
+  Cytolysin A (ClyA) biological nanopore. Strikingly, the model faithfully reproduces the nanopore’s ionic
+  conductance for a wide range of ionic strengths and bias potentials. It also quantitatively describes many
+  characteristics that are not directly experimentally accessible, including the ion selectivity, the
+  distribution of ions and the electric potential inside the nanopore and, the magnitude of the
+  electro-osmotic flow. In summary, our work aims to bring the power of computationally inexpensive continuum
+  simulations that are both qualitatively and quantitatively meaningful, into the hands of biological nanopore
+  researchers. We believe our method could not only be an effective tool for the interpretation of nanopore
+  experiments but may also provide a means to rationally design the properties of biological nanopores.
 
   % In recent years, the protein nanopores have become a valuable tool for the detection,
   % characterization and quantification of biomarkers, proteins and nucleic acids at the single-molecule level.
@@ -153,16 +170,6 @@ equations; single molecule}
   % appropriate corrections are applied---can make both qualitatively and quantitatively meaningful predictions
   % that could be valuable tool to aid in both the design and interpretation of nanopore experiments.
 \end{abstract}
-
-
-
-Biological nanopores are emerging as powerful instruments for the identification, quantification and characterization of biomarkers, proteins and nucleic acids at the single-molecule level. 
-Despite their broad experimental utilization, a fast and accurate simulation methodology to investigate the nanofluidic properties and ionic composition of biological nanopores is currently unavailable. Even though molecular dynamics simulations have become significantly faster in recent years, the large atomic structure of biological nanopores makes the collection of statistically meaningful amount of data highly computationally expensive. Continuum methods are orders of magnitude faster, but they are unable to accurately model the nanofluidic properties of complex molecular structures.
-
-Here, we describe an method, termed the extended Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations, to significantly improve the accuracy of continuum methods at the nanoscale and beyond infinite dilution. The ePNP-NS equations self-consistently take into account the influence of both the ionic
-strength and the nanoscopic scale of the pore on all relevant electrolyte properties, including the diffusion coefficients and mobilities of the ions, and the density, viscosity and relative permittivity of the solvent To demonstrate the power of our approach, we applied the ePNP-NS framework to a condensed, 2D-axisymmetric model of the Cytolysin A (ClyA) biological nanopore. Strikingly, the model faithfully reproduces the nanopore’s ionic conductance for a wide range of ionic strengths and bias potentials. It also quantitatively describes many characteristics that are not directly experimentally accessible, including the ion selectivity, the distribution of ions and the electric potential inside the nanopore and, the magnitude of the electro-osmotic flow.
-
-In summary, our work aims to bring the power of computationally inexpensive continuum simulations that are both qualitatively and quantitatively meaningful, into the hands of biological nanopore researchers. We believe our method could not only be an effective tool for the interpretation of nanopore experiments but may also provide a means to rationally design the properties of biological nanopores.
 
 
 
@@ -196,8 +203,8 @@ hydrodynamic (electro-osmotic) forces.\cite{Wong-2007,Grosberg-2010,Muthukumar-2
 successful, a translocation event is observed as a temporal fluctuation in the ionic conductance of the pore
 that serves as a unique molecular `fingerprint' with which the molecule can be identified.\cite{Yusko-2017}
 Because the frequency, magnitude, duration and even noise levels of these events depend on the properties of
-both the analyte molecule and the nanopore itself\todo{REF}, they are notoriously difficult to interpret unambiguously
-without a full understanding of the nanofluidic phenomena that underlie them.
+both the analyte molecule and the nanopore itself\todo{REF}, they are notoriously difficult to interpret
+unambiguously without a full understanding of the nanofluidic phenomena that underlie them.
 
 The computational approaches most widely used to study nanofluidic transport in ion channels or biological
 nanopores comprise \emph{discrete} methods such as molecular dynamics
@@ -218,10 +225,11 @@ parameterized by material properties such as relative permittivity, diffusion co
 mobility, viscosity and density. Because these properties can only emerge from the collective behavior or
 interactions between small groups of atoms (\ie~the mean-field approximation), great care must be taken when
 using them to compute fluxes and fields at the nanoscale, where computational elements may only contain a few
-molecules.\cite{Corry-2000,Collins-2012} Nevertheless, even though the PNP equations have been used extensively for the
-qualitative simulation of ion channels,\cite{Im-2002,Furini-2006,Liu-2015} biological
+molecules.\cite{Corry-2000,Collins-2012} Nevertheless, even though the PNP equations have been used
+extensively for the qualitative simulation of ion channels,\cite{Im-2002,Furini-2006,Liu-2015} biological
 nanopores\cite{Simakov-2010,Pederson-2015,Aguilella-Arzo-2017,Simakov-2018} and their solid-state
-counterparts,\cite{Cervera-2005,White-2008,Chaudhry-2014,Laohakunakorn-2015} the extent of their quantitative accuracy is often challenged.\cite{Corry-2000,Collins-2012,Maffeo-2012,Thomas-2014,Kim-2015}
+counterparts,\cite{Cervera-2005,White-2008,Chaudhry-2014,Laohakunakorn-2015} the extent of their quantitative
+accuracy is often challenged.\cite{Corry-2000,Collins-2012,Maffeo-2012,Thomas-2014,Kim-2015}
 
 To remedy the shortcomings of PNP and NS theory, a number of modifications have been proposed over the years.
 These include, among others, 1) steric ion-ion interactions, 2) the effect of protein-ion/water interactions
@@ -646,7 +654,8 @@ questionable.\cite{Anderson-1972,Deen-1987}
 
 \paragraph{Fluid flow.}
 %
-As derived by Axelsson \etal{},\cite{Axelsson-2015} the fluid flow and pressure field inside an incompressible fluid with a variable density and variable viscosity is given by the Navier-Stokes equations:
+As derived by Axelsson \etal{},\cite{Axelsson-2015} the fluid flow and pressure field inside an incompressible
+fluid with a variable density and variable viscosity is given by the Navier-Stokes equations:
 %
 \begin{align}
   \label{eq:navier-stokes-variable}
@@ -755,9 +764,10 @@ temperature and pressure). The ability of a computational model to quantitativel
 a nanopore over a wide range of bias voltages and salt concentrations strongly indicates that it captures the
 essential physics governing the nanofluidic transport. Hence, to validate our model, we experimentally
 measured the single channel ionic conductance of ClyA at a wide range of experimentally relevant salt
-concentrations ($\cbulk$) and bias voltages ($\vbias$). We compared these experimental data with the simulated ionic transport
-properties in terms of current, conductance, rectification and ion selectivity, of both the classical PNP-NS
-and the newly developed ePNP-NS equations---finding a quantitative match between the experiment and the simulations.
+concentrations ($\cbulk$) and bias voltages ($\vbias$). We compared these experimental data with the simulated
+ionic transport properties in terms of current, conductance, rectification and ion selectivity, of both the
+classical PNP-NS and the newly developed ePNP-NS equations---finding a quantitative match between the
+experiment and the simulations.
 
 % After validation, we proceed with describing the influence of the
 % bias voltage ($\vbias$) and bulk salt concentration ($\cbulk$) on the local ion and charge distribution and
@@ -917,20 +927,23 @@ evidence for a change in the conductive properties of the pore.
 The results and comparisons discussed above indicate that ClyA's conductivity is dominated by the bulk
 electrolyte conductivity above physiological salt concentrations ($\cbulk > \text{\SI{0.15}{\Molar}}$). The
 breakdown of this simple dependency at lower ionic strengths is particularly evident at negative bias voltages
-and is likely caused by the overlapping of the electrical double layer inside the pore (\ie~at \SI{0.05}{\Molar} the EDL \SI{\approx1.4}{\nm}). This effectively
-excludes the co-ions---\Cl{} in the case---from the interior of the pore, preventing them from contributing to
-total ionic conductance and resulting in a conductance dominated by the surface charge.\cite{Uematsu-2018} The
-presence of only a single ion type inside the pore may also offer an explanation as to why the ePNP-NS
-equations are more accurate at higher ionic strengths (\SI{\ge0.15}{\Molar}). Because our ionic mobilities are derived from \emph{bulk} ionic
+and is likely caused by the overlapping of the electrical double layer inside the pore (\ie~at
+\SI{0.05}{\Molar} the EDL \SI{\approx1.4}{\nm}). This effectively excludes the co-ions---\Cl{} in the
+case---from the interior of the pore, preventing them from contributing to total ionic conductance and
+resulting in a conductance dominated by the surface charge.\cite{Uematsu-2018} The presence of only a single
+ion type inside the pore may also offer an explanation as to why the ePNP-NS equations are more accurate at
+higher ionic strengths (\SI{\ge0.15}{\Molar}). Because our ionic mobilities are derived from \emph{bulk} ionic
 conductances, \ie~for unconfined ions in a locally \emph{electroneutral} environment, it is likely that our
 mobility model begins to break down under conditions where only a single ion type is present.\cite{Duan-2010}
-Another cause of the discrepancies could be a slight narrowing of the nanopore at low salt concentrations, which cannot be captured by our simulation due to the static nature of its geometry and charge distributions. Nevertheless,
-our simplified 2D-axisymmetric model, in conjunction with the ePNP-NS equations, is able to accurately predict
-the ionic current flowing through ClyA for a wide range of experimentally relevant ionic strengths and bias
-voltages. This suggests that this continuum system can accurately capture the essential physical phenomena that drive the ion and
-water transport through the nanopore both qualitatively and quantitatively. Hence, we expect the distribution
-of the resulting properties (\eg~ion concentrations, ion fluxes, electric field and water velocity) to closely
-correspond to their true values. \todo{discuss more extensively}
+Another cause of the discrepancies could be a slight narrowing of the nanopore at low salt concentrations,
+which cannot be captured by our simulation due to the static nature of its geometry and charge distributions.
+Nevertheless, our simplified 2D-axisymmetric model, in conjunction with the ePNP-NS equations, is able to
+accurately predict the ionic current flowing through ClyA for a wide range of experimentally relevant ionic
+strengths and bias voltages. This suggests that this continuum system can accurately capture the essential
+physical phenomena that drive the ion and water transport through the nanopore both qualitatively and
+quantitatively. Hence, we expect the distribution of the resulting properties (\eg~ion concentrations, ion
+fluxes, electric field and water velocity) to closely correspond to their true values. \todo{discuss more
+extensively}
 
 \paragraph{Cation selectivity.}
 %
@@ -950,23 +963,25 @@ Due to its negatively charged interior, we found ClyA to be cation selective (\i
 investigated voltages up to a bulk salt concentration of $\cbulk \approx \text{\SI{2}{\Molar}}$ \ce{NaCl} (0.5
 contour line in \cref{fig:transport_number_contourmap_epnp}). Above this concentration, $\tna$ falls to a
 minimum of value of 0.45 at $\cbulk \approx \text{\SI{5}{\Molar}}$, which is still \num{\approx1.27} times its
-value in the bulk electrolyte (0.35). This shows that---even at saturating concentrations where the Debye length is \SI{<0.2}{\nm}---ClyA enhances the transport of cations. Below \SI{2}{\Molar}, the ion selectivity increases logarithmically with decreasing salt
-concentrations, but it also becomes more sensitive to the direction and magnitude of the electric field:  with
-negative bias voltages yielding higher ion selectivities
+value in the bulk electrolyte (0.35). This shows that---even at saturating concentrations where the Debye
+length is \SI{<0.2}{\nm}---ClyA enhances the transport of cations. Below \SI{2}{\Molar}, the ion selectivity
+increases logarithmically with decreasing salt concentrations, but it also becomes more sensitive to the
+direction and magnitude of the electric field:  with negative bias voltages yielding higher ion selectivities
 (\cref{fig:transport_number_vs_concentration_bulk_pnp_epnp}). For example, to reach a selectivity of $\tna
 \approx 0.9$, the salt concentration must fall to \SI{0.05}{\Molar} at \SI{+150}{\mV} and to only
 \SI{0.125}{\Molar} at \SI{-150}{\mV}.
 
 Using the reversal potential method, Franceschini \etal{}\cite{Franceschini-2016} found ClyA's ion selectivity
-to be $\tna = 0.66$ ($\pna = 1.9$). This corresponds well to the average between the \cisi{}
-(\SI{1}{\Molar}, $\tna = 0.57$, $\pna = 1.3$) and \transi{} (\SI{0.15}{\Molar}, $\tna = 0.84$, $\pna = 5.4$)
-reservoir concentrations used in their experiment. Therefore, this suggests that although measuring the reversal potential gives
-valuable insights into the selectivity ion channels and small nanopores, it does not actually describe the ion selectivity under \emph{symmetric} conditions. In addition, tThe GHK equation does not consider the ionic flux due to the electro-osmotic
-flow and assumes that the Nernst-Einstein relation holds for all used concentrations. These two effects should
-not be ignored as they contribute significantly to the total conductance of the pore. Furthermore, because the
-ion selectivity depends strongly on the ionic strength and often the applied bias voltage, the measured reversal potential will necessarily be
-influenced by the chosen salt gradient and represents the selectivity at an undetermined intermediate
-concentration.
+to be $\tna = 0.66$ ($\pna = 1.9$). This corresponds well to the average between the \cisi{} (\SI{1}{\Molar},
+$\tna = 0.57$, $\pna = 1.3$) and \transi{} (\SI{0.15}{\Molar}, $\tna = 0.84$, $\pna = 5.4$) reservoir
+concentrations used in their experiment. Therefore, this suggests that although measuring the reversal
+potential gives valuable insights into the selectivity ion channels and small nanopores, it does not actually
+describe the ion selectivity under \emph{symmetric} conditions. In addition, tThe GHK equation does not
+consider the ionic flux due to the electro-osmotic flow and assumes that the Nernst-Einstein relation holds
+for all used concentrations. These two effects should not be ignored as they contribute significantly to the
+total conductance of the pore. Furthermore, because the ion selectivity depends strongly on the ionic strength
+and often the applied bias voltage, the measured reversal potential will necessarily be influenced by the
+chosen salt gradient and represents the selectivity at an undetermined intermediate concentration.
 
 % 0.15 M, 0 mV
 % Tna = 0.84299
@@ -1068,8 +1083,8 @@ concentration.
     (\subref{fig:ion_scd_radial_profiles})
     %
     Radial cross-sections of the $\scdion$ at the center of the constriction ($z = \text{\SI{-0.3}{\nm}}$) and
-    the \lumeni{} ($z = \text{\SI{5}{\nm}}$) of ClyA. The vertical line represents the the division between ions
-    in the `bulk' ($\walldistance > \text{\SI{0.5}{\nm}}$) of the pore and those located near its surface
+    the \lumeni{} ($z = \text{\SI{5}{\nm}}$) of ClyA. The vertical line represents the the division between
+    ions in the `bulk' ($\walldistance > \text{\SI{0.5}{\nm}}$) of the pore and those located near its surface
     ($\walldistance \le \text{\SI{0.5}{\nm}}$).
     %
   }\label{fig:concentration_and_scd}
