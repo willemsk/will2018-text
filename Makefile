@@ -17,7 +17,7 @@ $(SUPP).pdf: $(SUPP).tex
 	latexmk -pdf -pdflatex="pdflatex -file-line-error" -use-make $<
 
 release: $(RELEASE)
-	mkdir release && zip $(RELEASE_TARGET) $(RELEASE)
+	if [ !-d release]; then mkdir release; fi && zip $(RELEASE_TARGET) $(RELEASE)
 
 clean_release: $(RELEASE_TARGET)
 	rm $(RELEASE_TARGET)
