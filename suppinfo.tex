@@ -306,8 +306,8 @@ This is achieved through multiplication of the equation with an arbitrary test f
 their relevant domains and boundaries (\cref{fig:domains_an_boundaries}). The full computational domain of our
 model ($\Omega$) is subdivided into domains for the pore ($\Omega_p$), the lipid bilayer ($\Omega_m$) and the
 electrolyte reservoir ($\Omega_w$). The relevant boundaries of these domains are also indicated, i.e. the
-reservoir's exterior edges at the \cis\ $\Gamma_{w,c}$) and \trans\ $\Gamma_{w,t}$) sides, the outer edge of
-the lipid bilayer ($\Gamma_{m}$) and the interface of the fluid with the nanopore and the bilayer
+reservoir's exterior edges at the \cisi{} $\Gamma_{w,c}$) and \transi{} $\Gamma_{w,t}$) sides, the outer edge
+of the lipid bilayer ($\Gamma_{m}$) and the interface of the fluid with the nanopore and the bilayer
 ($\Gamma_{p+m}$).
 
 The following paragraphs detail the equations that were used in this paper, together with their corresponding
@@ -339,15 +339,15 @@ weak forms.
 The global potential distribution is described by the Poisson equation (PE)\cite{Lu-2012}
 %
 \begin{align}
-\label{eq:poisson}
-\nabla \cdot \displacement = -\left( \scdpore + \scdion \right)
-\text{\quad with }
-\displacement = \absperm \relperm \nabla \potential
-\text{ ,}
+  \label{eq:poisson}
+  \nabla \cdot \displacement = -\left( \scdpore + \scdion \right)
+  \text{\quad with }
+  \displacement = \absperm \relperm \nabla \potential
+  \text{ ,}
 \end{align}
 %
 with $\displacement$ the electrical displacement field, $\potential$ the electric potential, $\absperm$ the
-vacuum permittivity ($8.85419\times10^{-12}\text{~F\,m}^{-1}$), and $\relperm$ the local relative permittivity
+vacuum permittivity (\SI{8.85419e-12}{\farad\per\meter}), and $\relperm$ the local relative permittivity
 of the medium. $\scdpore$ and $\scdion$ are the fixed (due to the pore) and mobile (due to the ions) charge
 distributions, respectively.
 
@@ -355,33 +355,33 @@ Multiplication of \cref{eq:poisson} with the potential test function $\psi$ and 
 model $\Omega=\Omega_w+\Omega_p+\Omega_m$ gives
 %
 \begin{align}
-\displaystyle\int_{\Omega}
-\left[
-  \nabla \cdot \displacement
-\right]
-\psi \,d\Omega
-={}&
-- \displaystyle\int_{\Omega} \left[ \scdpore + \scdion \right] \psi \,d\Omega \text{ ,}
+  \displaystyle\int_{\Omega}
+  \left[
+    \nabla \cdot \displacement
+  \right]
+  \psi \,d\Omega
+  ={}&
+  - \displaystyle\int_{\Omega} \left[ \scdpore + \scdion \right] \psi \,d\Omega \text{ ,}
 \end{align}
 %
 which, after applying the Gauss divergence theorem, yields the final weak formulation
 %
 \begin{align}
-\displaystyle\int_{\Omega}
-\left[
-  \nabla \psi \cdot \displacement
-\right]
-\,d\Omega
-- \displaystyle\int_{\Gamma_\text{PE}}
-\left[
-  \psi \displacement \cdot \vec{n}
-\right]
-\,d\Gamma_\text{PE}
-={}&
-\displaystyle\int_{\Omega} \left[ \psi \scdpore \right] \,d\Omega
-+
-\displaystyle\int_{\Omega} \left[ \psi \scdion \right] \,d\Omega
-\text{ ,}
+  \displaystyle\int_{\Omega}
+  \left[
+    \nabla \psi \cdot \displacement
+  \right]
+  \,d\Omega
+  - \displaystyle\int_{\Gamma_\text{PE}}
+  \left[
+    \psi \displacement \cdot \vec{n}
+  \right]
+  \,d\Gamma_\text{PE}
+  ={}&
+  \displaystyle\int_{\Omega} \left[ \psi \scdpore \right] \,d\Omega
+  +
+  \displaystyle\int_{\Omega} \left[ \psi \scdion \right] \,d\Omega
+  \text{ ,}
 \end{align}
 %
 with boundaries $\Gamma_\text{PE}=\Gamma_{w,c}+\Gamma_{w,t}+\Gamma_m$ and $\vec{n}$ their normal vector. The
@@ -395,65 +395,64 @@ The total ionic flux $\flux_{i}$ of ion $i$ at steady-state is expressed by the 
 equation (smNPE)\cite{Lu-2012}
 %
 \begin{equation}
-\label{eq:smnp}
-\pd{\concentration_{i}}{t} = - \nabla\cdot\flux_{i} = - \nabla \cdot
-\left(
-  \diffusion_{i}\nabla\concentration_{i}
-  + \chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential
-  + \vec{\beta_{i}} \concentration_{i}
-  - \velocity\concentration_{i}
-\right)
-\text{\quad with }
-\vec{\beta_{i}} =
-  \frac{\ionsize_{i}^3/\ionsize_{0}^3 \displaystyle\sum_{j} \ionsize_{j}^3 \nabla \concentration_{j}}
-      {1 - \displaystyle\sum_{j} \avogadro \ionsize_{j}^3 \concentration_{j}}
-\text{ ,}
-\end{equation}
-%
-with ion diffusion coefficient $\diffusion_{i}$, concentration $\concentration_{i}$, charge number
-$\chargen_{i}$, mobility $\mobility_{i}$, electrostatic potential $\potential$, steric saturation factor
-$\beta_{i}$ and fluid velocity $\velocity$. $\avogadro$ is Avogadro's constant
-($6.022\times10^{23}\text{~mol}^{-1}$) and $\ionsize_{i}$ and $\ionsize_{0}$ are the limiting cubic diameters
-for ions and water, respectively. Using the ion concentration test function $d_i$, the weak form of
-\cref{eq:smnp} becomes
-%
-\begin{align}
-% Raw integral
-\displaystyle\int_{\Omega_w} \left[ \pd{\concentration_{i}}{t} \right] d_{i} \,d\Omega_w ={}&
-\displaystyle\int_{\Omega_w} \left[ - \nabla \cdot \flux_{i} \right] d_{i} \,d\Omega_w \notag \\
-% Gauss divergence theorem
-\displaystyle\int_{\Omega_w} \left[ d_{i} \pd{\concentration_{i}}{t} \right] \,d\Omega_w ={}&
-\displaystyle\int_{\Omega_w} \left[\nabla d_{i} \cdot \flux_{i} \right]\,d\Omega_w
-- \displaystyle\int_{\Gamma_\text{NP}}
-\left[ d_{i} \flux_{i} \cdot \vec{n} \right]\,d\Gamma_\text{NP} \notag \\
-% Fill in fluc components
-={}&
-% Domain
-\displaystyle\int_{\Omega_w}
-\left[
-  \nabla d_{i} \cdot
+  \label{eq:smnp}
+  \pd{\concentration_{i}}{t} = - \nabla\cdot\flux_{i} = - \nabla \cdot
   \left(
     \diffusion_{i}\nabla\concentration_{i}
     + \chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential
     + \vec{\beta_{i}} \concentration_{i}
-    - \velocity \concentration_{i}
+    - \velocity\concentration_{i}
   \right)
-\right]
-\,d\Omega_w \notag \\
-% Boundary
-& - \displaystyle\int_{\Gamma_\text{NP}}
-\left[
-  d_{i}
-  \left(
-    \diffusion_{i} \nabla \concentration_{i}
-    + \chargen_{i} \mobility_{i} \concentration_{i} \nabla \potential
-    + \vec{\beta_{i}} \concentration_{i}
-    - \velocity \concentration_{i}
-  \right)
-  \cdot \vec{n}
-\right]
-\,d\Gamma_\text{NP}
-\text{ .}
+  \text{\quad with }
+  \vec{\beta_{i}} =
+    \frac{\ionsize_{i}^3/\ionsize_{0}^3 \displaystyle\sum_{j} \ionsize_{j}^3 \nabla \concentration_{j}}
+        {1 - \displaystyle\sum_{j} \avogadro \ionsize_{j}^3 \concentration_{j}}
+  \text{ ,}
+\end{equation}
+%
+with ion diffusion coefficient $\diffusion_{i}$, concentration $\concentration_{i}$, charge number
+$\chargen_{i}$, mobility $\mobility_{i}$, electrostatic potential $\potential$, steric saturation factor
+$\beta_{i}$ and fluid velocity $\velocity$. $\avogadro$ is Avogadro's constant (\SI{6.022e23}{\per\mole}) and
+$\ionsize_{i}$ and $\ionsize_{0}$ are the limiting cubic diameters for ions and water, respectively. Using the
+ion concentration test function $d_i$, the weak form of \cref{eq:smnp} becomes
+%
+\begin{align}
+  % Raw integral
+  \displaystyle\int_{\Omega_w} \left[ \pd{\concentration_{i}}{t} \right] d_{i} \,d\Omega_w ={}&
+  \displaystyle\int_{\Omega_w} \left[ - \nabla \cdot \flux_{i} \right] d_{i} \,d\Omega_w \notag \\
+  % Gauss divergence theorem
+  \displaystyle\int_{\Omega_w} \left[ d_{i} \pd{\concentration_{i}}{t} \right] \,d\Omega_w ={}&
+  \displaystyle\int_{\Omega_w} \left[\nabla d_{i} \cdot \flux_{i} \right]\,d\Omega_w
+  - \displaystyle\int_{\Gamma_\text{NP}}
+  \left[ d_{i} \flux_{i} \cdot \vec{n} \right]\,d\Gamma_\text{NP} \notag \\
+  % Fill in fluc components
+  ={}&
+  % Domain
+  \displaystyle\int_{\Omega_w}
+  \left[
+    \nabla d_{i} \cdot
+    \left(
+      \diffusion_{i}\nabla\concentration_{i}
+      + \chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential
+      + \vec{\beta_{i}} \concentration_{i}
+      - \velocity \concentration_{i}
+    \right)
+  \right]
+  \,d\Omega_w \notag \\
+  % Boundary
+  & - \displaystyle\int_{\Gamma_\text{NP}}
+  \left[
+    d_{i}
+    \left(
+      \diffusion_{i} \nabla \concentration_{i}
+      + \chargen_{i} \mobility_{i} \concentration_{i} \nabla \potential
+      + \vec{\beta_{i}} \concentration_{i}
+      - \velocity \concentration_{i}
+    \right)
+    \cdot \vec{n}
+  \right]
+  \,d\Gamma_\text{NP}
+  \text{ .}
 \end{align}
 %
 The integrals on the boundaries $\Gamma_\text{NP} = \Gamma_{w,c}+\Gamma_{w,t}+\Gamma_{p+m}$ are evaluated
@@ -466,83 +465,83 @@ The steady-state, laminar fluid flow of an incompressible fluid with a variable 
 by the system of equations\cite{Axelsson-2015}
 %
 \begin{align}
-\label{eq:ns_density_continuity}
-\velocity \cdot \nabla \density ={}& 0 \\
-\label{eq:ns_conservation}
-\left( \velocity \cdot \nabla \right) \left( \density\velocity \right)
-+ \nabla \cdot \hydrostresstensor ={}& \vec{\force} \text{\quad with }
-\hydrostresstensor =
-  \pressure\identity - \viscosity\left[\nabla\velocity+\left(\nabla\velocity \right)^\mathsf{T}\right]
-\\
-\label{eq:ns_velocity_continuity}
-\nabla \cdot \left( \density\velocity \right) - \velocity \cdot \nabla \density ={}& 0
-\text { ,}
+  \label{eq:ns_density_continuity}
+  \velocity \cdot \nabla \density ={}& 0 \\
+  \label{eq:ns_conservation}
+  \left( \velocity \cdot \nabla \right) \left( \density\velocity \right)
+  + \nabla \cdot \hydrostresstensor ={}& \volumeforce \text{\quad with }
+  \hydrostresstensor =
+    \pressure\identity - \viscosity\left[\nabla\velocity+\left(\nabla\velocity \right)^\mathsf{T}\right]
+  \\
+  \label{eq:ns_velocity_continuity}
+  \nabla \cdot \left( \density\velocity \right) - \velocity \cdot \nabla \density ={}& 0
+  \text { ,}
 \end{align}
 %
 with fluid velocity $\velocity$, density $\density$, hydrodynamic stress tensor $\hydrostresstensor$,
-viscosity $\viscosity$, pressure $\pressure$ and body force $\vec{\force}$. The pressure test function $q$ is
+viscosity $\viscosity$, pressure $\pressure$ and body force $\volumeforce$. The pressure test function $q$ is
 used to derive the weak forms of \cref{eq:ns_density_continuity}
 %
 \begin{align}
-% Density continuity
-\displaystyle\int_{\Omega_w} \left[ \velocity \cdot \nabla \density \right] q \,d\Omega_w ={}&
-\displaystyle\int_{\Omega_w} \left[ q \velocity \cdot \nabla \density \right] \,d\Omega_w = 0 \text{ ,}
+  % Density continuity
+  \displaystyle\int_{\Omega_w} \left[ \velocity \cdot \nabla \density \right] q \,d\Omega_w ={}&
+  \displaystyle\int_{\Omega_w} \left[ q \velocity \cdot \nabla \density \right] \,d\Omega_w = 0 \text{ ,}
 \end{align}
 and \cref{eq:ns_velocity_continuity}
 \begin{align}
-% Velocity continuity
-\displaystyle\int_{\Omega_w}
-\left[\nabla \cdot \left( \density \velocity \right) - \velocity \cdot \nabla \density \right] q
-\,d\Omega_w ={}&
-\displaystyle\int_{\Omega_w}
-\left[\nabla \cdot \left( \density \velocity \right) \right] q \,d\Omega_w
--
-\displaystyle\int_{\Omega_w}
-\left[ q \velocity \cdot \nabla \density \right] \,d\Omega_w \\
-={}&
-\displaystyle\int_{\Omega_w}
-\left[\nabla q \cdot \left( \density \velocity \right) \right] \,d\Omega_w
--
-\displaystyle\int_{\Gamma_\text{NS}}
-\left[ q \left( \density \velocity \right) \cdot \vec{n} \right] \,d\Gamma_\text{NS}
--
-\displaystyle\int_{\Omega_w}
-\left[ q \velocity \cdot \nabla \density \right] \,d\Omega_w \notag
-\text{ ,}
+  % Velocity continuity
+  \displaystyle\int_{\Omega_w}
+  \left[\nabla \cdot \left( \density \velocity \right) - \velocity \cdot \nabla \density \right] q
+  \,d\Omega_w ={}&
+  \displaystyle\int_{\Omega_w}
+  \left[\nabla \cdot \left( \density \velocity \right) \right] q \,d\Omega_w
+  -
+  \displaystyle\int_{\Omega_w}
+  \left[ q \velocity \cdot \nabla \density \right] \,d\Omega_w \\
+  ={}&
+  \displaystyle\int_{\Omega_w}
+  \left[\nabla q \cdot \left( \density \velocity \right) \right] \,d\Omega_w
+  -
+  \displaystyle\int_{\Gamma_\text{NS}}
+  \left[ q \left( \density \velocity \right) \cdot \vec{n} \right] \,d\Gamma_\text{NS}
+  -
+  \displaystyle\int_{\Omega_w}
+  \left[ q \velocity \cdot \nabla \density \right] \,d\Omega_w \notag
+  \text{ ,}
 \end{align}
 %
 while for \cref{eq:ns_conservation} we use the velocity test function $\vec{v}=\left[v_r, v_\phi, v_z\right]$
 %
 \begin{align}
-\displaystyle\int_{\Omega_w}
-\left[
-  \left( \velocity \cdot \nabla \right) \left( \density\velocity \right) + \nabla \cdot \hydrostresstensor
-\right]
-\cdot \vec{v} \,d\Omega_w
-={}&
-\displaystyle\int_{\Omega_w} \vec{\force} \cdot \vec{v} \,d\Omega_w \\
-% Conservation
-\displaystyle\int_{\Omega_w}
-\left[
-  \left( \velocity \cdot \nabla \right) \left( \density\velocity \right) \cdot\vec{v}
-\right]
-\,d\Omega_w
--
-\displaystyle\int_{\Omega_w}
-\left[
-\hydrostresstensor \cdot \nabla\vec{v}
-\right]
-\,d\Omega_w
-+
-\displaystyle\int_{\Gamma_\text{NS}}
-\left[
-\vec{v} \cdot
-\hydrostresstensor
-\cdot\vec{n}
-\right]
-\,d\Gamma_\text{NS}
-={}& \displaystyle\int_{\Omega_w} \vec{\force} \cdot \vec{v} \,d\Omega_w \notag
-\text{ ,}
+  \displaystyle\int_{\Omega_w}
+  \left[
+    \left( \velocity \cdot \nabla \right) \left( \density\velocity \right) + \nabla \cdot \hydrostresstensor
+  \right]
+  \cdot \vec{v} \,d\Omega_w
+  ={}&
+  \displaystyle\int_{\Omega_w} \vec{\force} \cdot \vec{v} \,d\Omega_w \\
+  % Conservation
+  \displaystyle\int_{\Omega_w}
+  \left[
+    \left( \velocity \cdot \nabla \right) \left( \density\velocity \right) \cdot\vec{v}
+  \right]
+  \,d\Omega_w
+  -
+  \displaystyle\int_{\Omega_w}
+  \left[
+  \hydrostresstensor \cdot \nabla\vec{v}
+  \right]
+  \,d\Omega_w
+  +
+  \displaystyle\int_{\Gamma_\text{NS}}
+  \left[
+  \vec{v} \cdot
+  \hydrostresstensor
+  \cdot\vec{n}
+  \right]
+  \,d\Gamma_\text{NS}
+  ={}& \displaystyle\int_{\Omega_w} \vec{\force} \cdot \vec{v} \,d\Omega_w \notag
+  \text{ ,}
 \end{align}
 %
 with boundaries $\Gamma_\text{NS} = \Gamma_{w,c}+\Gamma_{w,t}+\Gamma_{p+m}$. The no-slip Dirichlet BC
@@ -594,10 +593,10 @@ nanopore at identical, but opposing bias voltages
 \end{align*}
 %
 Hence, for $\icr > 0$, the current is higher at positive bias voltages, and vice versa for $\icr < 0$. The ICR
-phenomenon results from an asymmetry in the ionic conductance pathways (\eg~moving from \cisi{} to \trans{} is
-not equivalent as moving from \transi{} to \cisi{}). In turn, this stems from the intrinsic asymmetries of the
-nanopore itself (\ie~geometry and charge distribution) or its response to the electric field (\ie~gating or
-electrostriction).
+phenomenon results from an asymmetry in the ionic conductance pathways (\eg~moving from \cisi{} to \transi{}
+is not equivalent as moving from \transi{} to \cisi{}). In turn, this stems from the intrinsic asymmetries of
+the nanopore itself (\ie~geometry and charge distribution) or its response to the electric field (\ie~gating
+or electrostriction).
 
 The heatmap of the simulated (ePNP-NS) $\icr$ (\cref{fig:icr_contourmap_epnp}) reveals that $\icr>0$ between
 \SIrange{0}{200}{\mV} and \SIrange{0.005}{5}{\Molar}. It increases monotonically with increasing bias voltage
@@ -606,7 +605,7 @@ dependency of $\icr$ at \SIlist{50;100;150}{\mV} (\cref{fig:icr_vs_concentration
 increases monotonically with $\cbulk$ until it reaches a peak value, after which it decreases to approach
 unity ($\icr = 1$) at saturating salt concentrations ($\cbulk \approx \text{\SI{5}{\Molar}}$). Even though the
 values produced by the ePNP-NS simulations do not fully match quantitatively to the experimental results, at
-least for $\cbulk < \text{\SI{0.5}{\Molar}}$, they do 1) reproduce the observed trends qualitatively and 2)
+least for $\cbulk < \text{\SI{0.5}{\Molar}}$, they do (1) reproduce the observed trends qualitatively and (2)
 exhibit much smaller errors relative to the PNP-NS results (data not shown).
 
 \begin{figure*}
@@ -645,9 +644,9 @@ exhibit much smaller errors relative to the PNP-NS results (data not shown).
 
 \subsection{Peak values of the radial potential profiles inside ClyA}
 
-The peak values of the radial electrostatic potential $\radpot$ at the \cis\
-entry, middle of the lumen and the \trans\ constriction for $0.005$, $0.05$,
-$0.15$, $0.5$ and $5$~M \ce{NaCl} are summarized in \cref{tab:radial_potential}.
+The peak values of the radial electrostatic potential $\radpot$ at the \cis\ entry, middle of the lumen and
+the \trans\ constriction for \SIlist{0.005;0.05;0.15;0.5;5}{\Molar} \ce{NaCl} are summarized in
+\cref{tab:radial_potential}.
 
 %
 \begin{table}[!hbt]
@@ -671,52 +670,22 @@ $0.15$, $0.5$ and $5$~M \ce{NaCl} are summarized in \cref{tab:radial_potential}.
 \end{table}
 %
 
-\subsection{Pressure distribution inside ClyA}
-The electro-osmotic pressure distribution inside ClyA, as a consequence of the
-strong local enhancement of the ion concentration, is given in
-\cref{fig:pressure}.
 
-%
-\begin{figure*}[!htb]
+% Additional figures
 
-  \centering
-  \begin{minipage}[t]{10.75cm}
-    \begin{subfigure}[t]{5.5cm}
-      \centering
-      \caption{}\vspace{-3mm}\label{fig:pressure_contour}
-      \includegraphics[scale=1]{figures/pressure/pressure_contour_150mM_+000mV}
-    \end{subfigure}
-    \hspace{-5mm}
-    \begin{subfigure}[t]{2.5cm}
-      \centering
-      \caption{}\vspace{-3mm}\label{fig:pressure_radial_averages}
-      \includegraphics[scale=1]{figures/pressure/pressure_radial_averages_+000mV}
-    \end{subfigure}
-  \end{minipage}
+% \begin{subfigure}[t]{4cm}
+%   \addtocounter{subfigure}{-2}
+%   \centering
+%   \caption{}\vspace{2mm}\label{fig:flow_constriction_contour}
+%   \includegraphics[scale=1]{figures/flow/flow_constriction_contour}
+% \end{subfigure}
 
-  \caption%
-    [\textbf{Pressure distribution inside ClyA.}]
-    %
-    {%
-      %
-      \textbf{Pressure distribution inside ClyA.}
-      %
-      (\subref{fig:pressure_contour})
-      %
-      Contourmap of the pressure at $\cbulk=\SI{0.15}{\Molar}$ and $\vbias=\SI{0}{\mV}$, showing that the
-      \Na{} concentration `hotspots' near the pore wall result in build-up of electro-osmotic pressure
-      (\SIrange{5}{30}{\atm}) inside the  confined fluid. Pressure drops of such magnitude over the course of
-      a few nanometers could potentially exert a significant force on a captured
-      protein.\cite{Hoogerheide-2014}
-      %
-      (\subref{fig:pressure_radial_averages})
-      %
-      The axial pressure profile and averaged along the the entire radius of the pore at $\vbias=\SI{0}{\mV}$.
-      %At concentrations $\ge0.5$~M, a negative pressure develops in the `bulk' of the lumen due to the
-      %
-  }\label{fig:pressure}
-\end{figure*}
-%
+% \begin{subfigure}[t]{4cm}
+%   \vspace{2mm}
+%   \centering
+%   \caption{}\vspace{-5mm}\label{fig:flow_conductance_vs_voltage}
+%   \includegraphics[scale=1]{figures/flow/flow_conductance_vs_voltage}
+% \end{subfigure}
 
 %-------------------------------------------------------------------------------
 % SUPPORTING INFORMATION
