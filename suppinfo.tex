@@ -400,13 +400,13 @@ equation (smNPE)\cite{Lu-2012}
   \left(
     \diffusion_{i}\nabla\concentration_{i}
     + \chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential
-    + \vec{\beta_{i}} \concentration_{i}
+    + \diffusion_{i} \vec{\beta_{i}} \concentration_{i}
     - \velocity\concentration_{i}
   \right)
   \text{\quad with }
   \vec{\beta_{i}} =
-    \frac{\ionsize_{i}^3/\ionsize_{0}^3 \displaystyle\sum_{j} \ionsize_{j}^3 \nabla \concentration_{j}}
-        {1 - \displaystyle\sum_{j} \avogadro \ionsize_{j}^3 \concentration_{j}}
+    \frac{\ionsize_{i}^3/\ionsize_{0}^3 \dsum_{j} \avogadro \ionsize_{j}^3 \nabla \concentration_{j}}
+        {1 - \dsum_{j} \avogadro \ionsize_{j}^3 \concentration_{j}}
   \text{ ,}
 \end{equation}
 %
@@ -425,7 +425,7 @@ ion concentration test function $d_i$, the weak form of \cref{eq:smnp} becomes
   \displaystyle\int_{\Omega_w} \left[\nabla d_{i} \cdot \flux_{i} \right]\,d\Omega_w
   - \displaystyle\int_{\Gamma_\text{NP}}
   \left[ d_{i} \flux_{i} \cdot \vec{n} \right]\,d\Gamma_\text{NP} \notag \\
-  % Fill in fluc components
+  % Fill in flux components
   ={}&
   % Domain
   \displaystyle\int_{\Omega_w}
@@ -434,7 +434,7 @@ ion concentration test function $d_i$, the weak form of \cref{eq:smnp} becomes
     \left(
       \diffusion_{i}\nabla\concentration_{i}
       + \chargen_{i}\mobility_{i}\concentration_{i}\nabla\potential
-      + \vec{\beta_{i}} \concentration_{i}
+      + \diffusion_{i} \vec{\beta_{i}} \concentration_{i}
       - \velocity \concentration_{i}
     \right)
   \right]
@@ -446,7 +446,7 @@ ion concentration test function $d_i$, the weak form of \cref{eq:smnp} becomes
     \left(
       \diffusion_{i} \nabla \concentration_{i}
       + \chargen_{i} \mobility_{i} \concentration_{i} \nabla \potential
-      + \vec{\beta_{i}} \concentration_{i}
+      + \diffusion_{i} \vec{\beta_{i}} \concentration_{i}
       - \velocity \concentration_{i}
     \right)
     \cdot \vec{n}
