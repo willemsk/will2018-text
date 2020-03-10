@@ -14,6 +14,11 @@
 \DeclareSIUnit{\molar}{\mole\per\cubic\deci\metre}
 \DeclareSIUnit{\Molar}{\textsc{M}}
 \DeclareSIUnit{\atm}{\textsc{atm}}
+\DeclareSIUnit{\kBTe}{
+  \ensuremath{\textit{k}_{\textrm{B}}}
+  \textit{T}
+  \per \ensuremath{\textit{e}_{\textrm{c}}}
+}
 \newcommand{\mM}{\milli\Molar}
 \newcommand{\mV}{\milli\volt}
 \newcommand{\um}{\micro\meter}
@@ -27,6 +32,7 @@
 \newcommand{\kHz}{\kilo\hertz}
 \newcommand{\mps}{\meter\per\second}
 \newcommand{\cnmpnspv}{\cubic\nano\meter\per\nano\second\per\volt}
+\newcommand{\uL}{\micro\liter}
 
 % Vectors and math stuff
 \renewcommand{\vec}[1]{\boldsymbol{#1}}
@@ -124,7 +130,7 @@
 \newcommand{\deltaEt}{\Delta E_{\text{B},i}}
 \newcommand{\pH}[1]{pH~\num{#1}}
 \newcommand{\kT}{\boltzmann\temp}
-\newcommand{\kTe}{\kT / \echarge}
+\newcommand{\kTe}{\kT \echarge^{-1}}
 \newcommand{\revpot}{V_{\text{r}}}
 
 

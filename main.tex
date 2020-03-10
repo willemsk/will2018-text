@@ -133,8 +133,8 @@ equations; single molecule}
   characterization of biomarkers, proteins and nucleic acids at the single-molecule level. Despite their broad
   experimental utilization, a fast and accurate simulation methodology to investigate the nanofluidic
   properties and detailed ionic composition of biological nanopores is currently unavailable. Even though
-  molecular dynamics simulations have become significantly faster in recent years, the large atomic structure
-  of biological nanopores makes the collection of statistically meaningful amounts of data highly
+  molecular dynamics simulations have become significantly faster in recent years, the collection of
+  statistically meaningful amounts of data with all-atom simulations of biological nanopores remains
   computationally expensive. Continuum methods are orders of magnitude faster, but they are unable to
   accurately model the nanofluidic properties of complex molecular structures. Here, we describe a method,
   termed the extended Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations, which significantly improves the
@@ -144,13 +144,13 @@ equations; single molecule}
   size of the ions, and the density, viscosity and relative permittivity of the solvent. To demonstrate the
   power of our approach, we applied the ePNP-NS framework to a condensed, 2D-axisymmetric model of the
   Cytolysin A (ClyA) biological nanopore. Strikingly, the model faithfully reproduces the nanopore’s ionic
-  conductance for a wide range of ionic strengths and bias potentials. It also quantitatively describes many
-  characteristics that are not directly experimentally accessible, including the ion selectivity, the
-  distribution of ions and the electric potential inside the nanopore and, the magnitude of the
-  electro-osmotic flow. In summary, our work aims to bring the power of computationally inexpensive continuum
-  simulations that are both qualitatively and quantitatively meaningful, into the hands of biological nanopore
-  researchers. We believe our method could not only be an effective tool for the interpretation of nanopore
-  experiments but may also provide a means to rationally design the properties of biological nanopores.
+  conductance for a wide range of ionic strengths and bias potentials. It also describes many characteristics
+  that are not directly experimentally accessible, including the magnitude of the electro-osmotic flow, the
+  ion selectivity, the distribution of ions and the electric potential inside the nanopore. In summary, our
+  work aims to promote the use of fast, yet qualitatively and quantitatively meaningful, continuum simulations
+  in the biological nanopore field. We believe our method could not only be an effective tool for the
+  interpretation of nanopore experiments, but may also provide a means to rationally design the properties of
+  biological nanopores.
 \end{abstract}
 
 
@@ -170,7 +170,7 @@ DNA\cite{Deamer-2016,Kasianowicz-1996,Meller-2000,Maglia-2008,Butler-2008,Stodda
 or proteins,\cite{Restrepo-Perez-2018,Talaga-2009,Rodriguez-Larrea-2013, Nivala-2013,Kennedy-2016} to the
 detection and quantification of
 biomarkers,\cite{Chen-2013,Soskine-2012,Niedzwiecki-2013,VanMeervelt-2014,Huang-2017,Liu-2018,Galenkamp-2018}
-to the fundamental study of chemical or enzymatic reactions at the single molecular
+or the fundamental study of chemical or enzymatic reactions at the single molecular
 level.\cite{Willems-VanMeervelt-2017,Lieberman-2010, Nivala-2013,Ho-2015,Laszlo-2017}
 
 Nanopores are typically operated in the resistive-pulse mode, where the fluctuations of their ionic
@@ -728,10 +728,10 @@ non-bulk experimental data and the absence of a tractable analytical model. Furt
 current implementation of our concentration dependent functions will lead to an excellent agreement with the
 experimental data in all but the most extreme cases, justifying our choice \textit{a posteriori}. 
 %
-The ePNP-NS equations revert into the regular PNP-NS equations disabling the steric flux ($\vec{\beta}=0$) and
-by setting all concentration and wall distance functions to unity ($\relperm = \relperm^0$, $\diffusion_{i} =
-\diffusion_{i}^0$, $\mobility_{i} = \mobility_{i}^0$, $\viscosity = \viscosity^0$ and $\density =
-\density^0$).
+The ePNP-NS equations revert into the regular PNP-NS equations by disabling the steric flux ($\vec{\beta}=0$)
+and by setting all concentration and wall distance functions to unity ($\relperm = \relperm^0$,
+$\diffusion_{i} = \diffusion_{i}^0$, $\mobility_{i} = \mobility_{i}^0$, $\viscosity = \viscosity^0$ and
+$\density = \density^0$).
 
 %
 %
@@ -1088,23 +1088,23 @@ situation on the on the order of \SIrange{10}{100}{\ns}.\cite{Im-2002}
 
 \paragraph{Relative cation and anion concentrations.}
 %
-We use the relative ion concentration averaged over the entire volume of the pore ($\pavi$), as a function of
-bulk concentration, as a measure for global ionic conditions inside the pore
-(\cref{fig:concentration_pore_average_vs_cbulk}). At low ionic strengths ($\cbulk <
-\text{\SI{0.05}{\Molar}}$), our simulation predicts a strong enhancement of the \Na{} (cation) concentration
-($\pavNa$) and a clear depletion of the \Cl{} (anion) concentration ($\pavCl$) inside the pore. This effect
-diminishes rapidly with increasing ionic strengths, which can be explained by the electrolytic screening of
-the negative charges lining the walls of ClyA (\ie~the electrical double layer). At low reservoir
-concentrations ($\cbulk < \text{\SI{0.05}{\Molar}}$) the number of ions in the bulk is sparse, leading to the
-attraction and repulsion of respectively as many \Na{} and \Cl{} ions as the chemical potential allows. As the
-concentration increases, the overall availability of ions improves and the extreme concentration differences
-between the pore and the bulk are no longer required to offset the fixed charges lining ClyA's interior walls.
-For example, increasing the reservoir concentration at equilibrium ($\vbias = \text{\SI{0}{\mV}}$) from
-\SIrange{0.005}{0.05}{\Molar} causes $\pavNa$ to fall an order of magnitude (\numrange{34}{4.4}) and $\pavCl$
-to rise an order of magnitude (\numrange{0.05}{0.31}). Even though their concentrations still differ
-significantly from those in the reservoir ($\pavNa = 2.1$ and $\pavCl = 0.58$) at physiological salt
-concentrations ($\cbulk = \text{\SI{0.15}{\Molar}}$), they do approach bulk-like values ($1.14 \ge \pavNa \ge
-1$ and $0.89 \le \pavCl \le 1$) at higher concentrations ($\cbulk \ge \text{\SI{1}{\Molar}}$).
+We use the relative ion concentration averaged over the entire volume of the pore ($\pavi$), as a measure for
+global ionic conditions inside the pore (\cref{fig:concentration_pore_average_vs_cbulk}). At low ionic
+strengths ($\cbulk < \text{\SI{0.05}{\Molar}}$), our simulation predicts a strong enhancement of the \Na{}
+(cation) concentration ($\pavNa$) and a clear depletion of the \Cl{} (anion) concentration ($\pavCl$) inside
+the pore. This effect diminishes rapidly with increasing ionic strengths, which can be explained by the
+electrolytic screening of the negative charges lining the walls of ClyA (\ie~the electrical double layer). At
+low reservoir concentrations ($\cbulk < \text{\SI{0.05}{\Molar}}$) the number of ions in the bulk is sparse,
+leading to the attraction and repulsion of respectively as many \Na{} and \Cl{} ions as the chemical potential
+allows. As the concentration increases, the overall availability of ions improves and the extreme
+concentration differences between the pore and the bulk are no longer required to offset the fixed charges
+lining ClyA's interior walls. For example, increasing the reservoir concentration at equilibrium ($\vbias =
+\text{\SI{0}{\mV}}$) from \SIrange{0.005}{0.05}{\Molar} causes $\pavNa$ to fall an order of magnitude
+(\numrange{34}{4.4}) and $\pavCl$ to rise an order of magnitude (\numrange{0.05}{0.31}). Even though their
+concentrations still differ significantly from those in the reservoir ($\pavNa = 2.1$ and $\pavCl = 0.58$) at
+physiological salt concentrations ($\cbulk = \text{\SI{0.15}{\Molar}}$), they do approach bulk-like values
+($1.14 \ge \pavNa \ge 1$ and $0.89 \le \pavCl \le 1$) at higher concentrations ($\cbulk \ge
+\text{\SI{1}{\Molar}}$).
 
 
 We also observed a significant difference between their sensitivities to the applied bias voltage,
@@ -1112,7 +1112,7 @@ particularly at low salt concentrations (\cref{fig:concentration_pore_average_vs
 \SI{<0.15}{\Molar} line). Whereas the \Na{} concentration shows only a limited response, the \Cl{}
 concentration changes much more dramatically. For example, at $\cbulk = \text{\SI{0.15}{\Molar}}$, $\pavNa$
 rises \num{\approx 1.7}-fold (\numrange{1.6}{2.7}) and $\pavCl$ increases \num{\approx 3.8}-fold
-(\numrange{0.28}{1.06}) when changes the bias voltage from \SIrange{-150}{+150}{\mV}. This difference is
+(\numrange{0.28}{1.06}) when changing the bias voltage from \SIrange{-150}{+150}{\mV}. This difference is
 clearly visualized by the contour plots of the relative ion concentrations ($\ci/\cbulk$) at $\cbulk =
 \text{\SI{0.15}{\Molar}}$ and for $\vbias = \text{\SIlist{-150;+150}{\mV}}$
 (\cref{fig:concentration_contours}). They reveal that the \transi{} constriction ($\num{-1.85} < z <
@@ -1136,7 +1136,7 @@ The formation of an electrical double layer inside the pore, and the resulting a
 anion concentrations, gives rise to a net charge density inside the pore ($\scdion$, \cref{eq:scdion}). To
 investigate the distribution of these charges within ClyA, we divided the total interior volume of the pore
 (PT) into a `pore surface' (PS) and a `pore bulk' (PB) region. The PB region encompasses a cylindrical volume
-at the enter of the pore up until \SI{0.5}{\nm} from the wall ($\walldistance \ge \text{\SI{0.5}{\nm}}$), the
+at the entry of the pore up until \SI{0.5}{\nm} from the wall ($\walldistance \ge \text{\SI{0.5}{\nm}}$), the
 approximate distance from which the wall begins to exert a significant influence on the properties of the
 electrolyte (\cref{suppinfo:fig:corrections}c). The PS region includes the remaining volume between the PB
 domain and the nanopore wall ($\walldistance < \text{\SI{0.5}{\nm}}$). Integration of $\scdion$ over the PS
@@ -1295,22 +1295,22 @@ the \transi{} constriction ($z \approx \text{\SI{0}{\nm}}$) due to the close pro
 E11, E18, D21 and D25, and then quickly falls to \num{0} inside the \transi{} reservoir.
 
 At low ionic strengths ($\cbulk < \text{\SI{0.05}{\Molar}}$), the lack of sufficient ionic screening results
-in relatively high negative potentials throughout the entire pore. For example, for $\cbulk =
-\text{\SIlist{0.005;0.05}{\Molar}}$, the $\radeqpot$ inside the constriction ramps up to values of
-\SI{-144}{\mV} (\SI{-5.60}{\kTe}) and \SI{-86}{\mV} (\SI{-3.35}{\kTe}), respectively. These values
-significantly exceed the single ion thermal voltage $\kTe = \text{\SI{25.7}{\mV}}$. Hence, on the one hand
-they prohibit anions such as \Cl{} from entering the pore, and on the other they attract cations such as \Na{}
-and trap them inside the pore. For intermediate concentrations ($0.05 \le \cbulk < \text{\SI{0.5}{\Molar}}$)
-the influence of the negative charges becomes increasingly confined to several `hotspots' near the nanopore
-walls, most notably at entry of the pore ($10 < z < \text{\SI{12}{\nm}}$), in the middle of the \lumeni{} ($4
-< z < \text{\SI{6}{\nm}}$), and in the constriction ($-1.85 < z < \text{\SI{1.6}{\nm}}$), in accordance with
-the charge groups discussed in the previous section. Even though the magnitude of $\radeqpot$ at $\cbulk =
-\text{\SI{0.15}{\Molar}}$ drops below \SI{1}{\kTe} inside the \lumeni{} ($\radeqpot \approx
-\text{\SI{-14}{\mV}}$), it remains strongly negative inside the constriction ($\radeqpot \approx
-\text{\SI{-47}{\mV}}$). Finally, at high reservoir concentrations ($\cbulk \ge \text{\SI{0.5}{\Molar}}$) the
-potential is close to \SI{\approx0}{\mV} over the entire \lumeni{} of the pore, with only a small negative
-potential remaining inside the constriction. A summary of the most salient $\radeqpot$ values can be found in
-\cref{suppinfo:tab:radial_potential}.
+in relatively high negative potentials throughout the entire pore. For example, at low concentrations ($\cbulk
+= \text{\SIlist{0.005;0.05}{\Molar}}$), the $\radeqpot$ inside the constriction ramps up to values of
+\SI{-144}{\mV} (\SI{-5.60}{\kBTe}) and \SI{-86}{\mV} (\SI{-3.35}{\kBTe}), respectively. These values
+significantly exceed the single ion thermal voltage $\si{\kBTe} = \text{\SI{25.7}{\mV}}$. Hence, on the one
+hand they prohibit anions such as \Cl{} from entering the pore, and on the other they attract cations such as
+\Na{} and trap them inside the pore. For intermediate concentrations ($0.05 \le \cbulk <
+\text{\SI{0.5}{\Molar}}$) the influence of the negative charges becomes increasingly confined to several
+`hotspots' near the nanopore walls, most notably at entry of the pore ($10 < z < \text{\SI{12}{\nm}}$), in the
+middle of the \lumeni{} ($4 < z < \text{\SI{6}{\nm}}$), and in the constriction ($-1.85 < z <
+\text{\SI{1.6}{\nm}}$), in accordance with the charge groups discussed in the previous section. Even though
+the magnitude of $\radeqpot$ at $\cbulk = \text{\SI{0.15}{\Molar}}$ drops below \SI{1}{\kBTe} inside the
+\lumeni{} ($\radeqpot \approx \text{\SI{-14}{\mV}}$), it remains strongly negative inside the constriction
+($\radeqpot \approx \text{\SI{-47}{\mV}}$). Finally, at high reservoir concentrations ($\cbulk \ge
+\text{\SI{0.5}{\Molar}}$) the potential is close to \SI{\approx0}{\mV} over the entire \lumeni{} of the pore,
+with only a small negative potential remaining inside the constriction. A summary of the most salient
+$\radeqpot$ values can be found in \cref{suppinfo:tab:radial_potential}.
 
 
 %\subsection{Non-equilibrium electrostatic potential}\label{sec:ese}
@@ -1399,7 +1399,7 @@ potentials and hence contributes to the ion current rectification. The situation
 voltages (\ie~travelling from \transi{} to \cisi{}) is very different
 (\cref{fig:potential_energy_radial_averages}, fourth plot). Their ability to even enter the pore is severely
 hampered by an energy barrier of a few \si{\kT} at the \transi{} constriction. Any anions that do cross this
-barrier, and those still present in the \lumeni{} of ClyA, will be rapidly move towards the \cisi{} entry and
+barrier, and those still present in the \lumeni{} of ClyA, will rapidly move towards the \cisi{} entry and
 exit from the pore due to a continuous drop of electrostatic energy. This effectively depletes the entire
 \lumeni{} of anions, which can be observed from the much lower \Cl{} concentrations at negative voltages
 (see~\cref{fig:concentration_pore_average_vs_cbulk}).
@@ -1580,13 +1580,14 @@ nanopore walls and mobile charges in the electrolyte. It can be described by two
 (1) the excess transport of the hydration shell water molecules in one direction due to the pore's ion
 selectivity, and (2) the viscous drag exerted by the unidirectional movement of the electrical double layer
 inside the pore. The first mechanism likely dominates in pores with a diameter close to that of the hydrated
-ions (\SI{\le1}{\nm}) such as \ahl{} or FraC,\cite{Huang-2017,Huang-2019} while the second is expected to be
-stronger for larger pores (\SI{>1}{\nm}), such as ClyA\cite{Soskine-2012,Willems-Ruic-Biesemans-2019} or most
-solid-state nanopores.\cite{Mao-2014,Laohakunakorn-2015} In our simulation, the EOF is generated according to
-the second mechanism by coupling of the Navier-Stokes and the Poisson-Nernst-Planck equations through a volume
-force ($\volumeforce$, \cref{eq:ion_force_density}). This coupling dictates that the electric field exerts a
-net force on the fluid if it contains a net ionic charge density---as is the case for the electrical double
-layer lining the walls of ClyA (\cref{fig:ion_charge_dist_vs_cbulk}).
+ions (\SI{\le1}{\nm}) such as \textalpha-hemolysin (\ahl{}) or Fragaceatoxin C
+(FraC),\cite{Huang-2017,Huang-2019} while the second is expected to be stronger for larger pores
+(\SI{>1}{\nm}), such as ClyA\cite{Soskine-2012,Willems-Ruic-Biesemans-2019} or most solid-state
+nanopores.\cite{Mao-2014,Laohakunakorn-2015} In our simulation, the EOF is generated according to the second
+mechanism by coupling of the Navier-Stokes and the Poisson-Nernst-Planck equations through a volume force
+($\volumeforce$, \cref{eq:ion_force_density}). This coupling dictates that the electric field exerts a net
+force on the fluid if it contains a net ionic charge density---as is the case for the electrical double layer
+lining the walls of ClyA (\cref{fig:ion_charge_dist_vs_cbulk}).
 
 % In the following section we aim to quantitatively and a qualitatively describe the properties of the water
 % velocity inside ClyA and how it is influenced by the bulk ionic strength and the applied bias voltage
@@ -1627,12 +1628,12 @@ water velocity across the reservoir boundary (\cref{eq:flowrate}). The strength 
 and non-monotonically on the bulk ionic strength: $\flowcond$ rapidly increases with ionic strength until a
 peak value is reached at $\cbulk \approx \text{\SI{0.5}{\Molar}}$, followed by a gradual logarithmic decline
 (\cref{fig:flow_conductance_vs_concentration}). For example, at $\vbias = \text{\SI{-150}{\mV}}$, $\flowcond$
-changes from \SIlist[list-final-separator = { to }]{1.85;11.3;4.00}{\cubic\nm\per\ns\per\volt} at for $\cbulk
-= \text{\SIlist{0.005;0.5;5}{\Molar}}$, respectively.
+first increases from changes from \SI{1.85}{\cnmpnspv} (\SI{0.005}{\Molar}) to \SI{11.3}{\cnmpnspv}
+(\SI{0.5}{\Molar}), followed by a gradual decline to \SI{4.00}{\cnmpnspv} (\SI{5}{\Molar}).
 
 The sensitivity of the EOF to the magnitude and sign of the bias voltage is given by the electro-osmotic
 conductance rectification $\eor(V) = \flowcond (+V) / \flowcond (-V)$
-(\cref{fig:flow_conductance_rectification_vs_concentration}). For all voltages magnitudes, $\eor$ shows a
+(\cref{fig:flow_conductance_rectification_vs_concentration}). For all voltage magnitudes, $\eor$ shows a
 maximum at $\cbulk \approx \text{\SI{0.045}{\Molar}}$, after which it falls rapidly to reach unity ($\eor =
 1$) at approximately $\cbulk \approx \text{\SI{0.45}{\Molar}}$. A minimum is then reached at
 \SI{\approx1}{\Molar}, followed by a gradual approach towards unity at $\cbulk = \text{\SI{5}{\Molar}}$.
@@ -1648,8 +1649,8 @@ located at \cisi{} entry of the pore ($z = \text{\SI{11}{\nm}}$), in the middle 
 \text{\SI{4.5}{\nm}}$) and inside the entire constriction ($z = \text{\SI{-1}{\nm}}$)
 (\cref{fig:pressure_radial_averages}), and their influence extends well towards the center of the pore. Up
 until $\cbulk \approx \text{\SI{0.5}{\Molar}}$, increasing the reservoir salt concentration does not seem to
-strongly influence the overal magnitude of the pressures spots. Hence, because such pressures exert a
-significant amount of force on particles translocation through nanopores,\cite{Hoogerheide-2014} we expect
+strongly influence the overal magnitude of the pressure spots. Hence, because such pressures exert a
+significant amount of force on particles translocating through nanopores,\cite{Hoogerheide-2014} we expect
 them to play an important role in the detailed trapping dynamics of proteins inside
 ClyA.\cite{Soskine-Biesemans-2015,Willems-Ruic-Biesemans-2019}
 
@@ -1657,12 +1658,12 @@ ClyA.\cite{Soskine-Biesemans-2015,Willems-Ruic-Biesemans-2019}
 \section{Conclusions}\label{sec:conclusions}
 
 We have developed an extended version of the Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations that is
-capable of accurately modelling the transport of ions and water through a biological nanopores, yielding a
-wealth of information that is both qualitative and quantitative accurate. Our ePNP-NS equations combine many
-of the improvements to the PNP-NS equations available in literature, in addition to several new corrections.
-These include the finite size of the ions, self-consistent concentration- and positional-dependent
-parametrization of the ionic transport coefficients (diffusion coefficient and mobility) and of the
-electrolyte properties (density, viscosity and relative permittivity).
+capable of accurately modelling the transport of ions and water through biological nanopores, yielding a
+wealth of information that is both qualitatively and quantitatively accurate. Our ePNP-NS equations combine
+many of the improvements to the PNP-NS equations available in literature, in addition to several new
+corrections. These include the finite size of the ions, self-consistent concentration- and
+positional-dependent parametrization of the ionic transport coefficients (diffusion coefficient and mobility)
+and of the electrolyte properties (density, viscosity and relative permittivity).
 
 The use of computationally inexpensive continuum models is pervasive in the solid-state nanopore field, but
 their application to the structurally more complex biological nanopores has been limited to date. We made use
@@ -1803,9 +1804,9 @@ unit vector normal to $S$. Similarly, the volumetric flow rate, \ie~the volume o
 %
 ClyA-AS monomers were expressed, purified and oligomerized using methods described in detail
 elsewhere.\cite{Soskine-2012,Soskine-2013} Briefly, \textit{E. cloni} EXPRESS BL21 (DE3) cells (Lucigen
-Corporation, Middleton, USA) were transformed with a pT7 plasmid containing the ClyA-AS gene, followed by
-overexpression after induction with \SI{1}{\mM} isopropyl \textbeta{}-D-1-thiogalactopyranoside
-(Sigma-Aldrich, Zwijndrecht, The Netherlands). The ClyA monomers were purified using \ce{Ni+}-NTA affinity
+Corporation, Middleton, USA) were transformed with a pT7-SC1 plasmid containing the ClyA-AS gene, followed by
+overexpression after induction with \SI{0.5}{\mM} isopropyl \textbeta{}-D-1-thiogalactopyranoside
+(IPTG, Carl Roth, Karlsruhe, Germany). The ClyA monomers were purified using \ce{Ni+}-NTA affinity
 chromatography and oligomerized by incubation in \SI{0.2}{\percent} D-maltoside
 n-dodecyl-\textbeta{}-D-maltopyranoside (Sigma-Aldrich, Zwijndrecht, The Netherlands) for \SI{30}{\minute} at
 \SI{37}{\dC}. Pure ClyA-AS type-I (12-mer) nanopores were obtained using native PAGE on a
@@ -1815,16 +1816,21 @@ subsequent excision of the correct oligomer band.
 \paragraph{Recording of single-channel current-voltage curves.}
 %
 Experimental current-voltage curves where measured using single-channel electrophysiology, as detailed
-elsewhere.\cite{Maglia-2010,Soskine-2012,Soskine-2013} Briefly, a black lipid bilayer was inside a
-\SI{\approx100}{\um} diameter aperture in a thin teflon film separating two buffered electrolyte compartments
-by painting with 1,2-diphytanoyl-snglycero-3-phosphocholine (DPhPC, Avanti Polar Lipids, Alabaster, USA).
-Minute amounts ($\approx$) of the purified ClyA-AS type I oligomer were then added to the grounded \cisi{}
+elsewhere.\cite{Maglia-2010,Soskine-2012,Soskine-2013} First, a black lipid bilayer was formed inside a
+\SI{\approx100}{\um} diameter aperture in a thin teflon film separating two buffered electrolyte compartments.
+This was achieved by applying a droplet of \SI{5}{\percent} hexadecane in pentane (Sigma-Aldrich, Zwijndrecht,
+The Netherlands) over the aperture and leaving it to dry for \SI{1}{\minute} at \SI{25}{\dC}. The buffered
+electrolyte solution was added to both compartments, topped with \SI{10}{\uL} of
+\SI{6.25}{\milli\gram\per\milli\liter} 1,2-diphytanoyl-\textit{sn}-glycero-3-phosphocholine (DPhPC, Avanti
+Polar Lipids, Alabaster, USA) in pentane. The pentane was left to evaporate for \SI{2}{\minute} at
+\SI{25}{\dC}. A lipid bilayer was formed by lowering and raising the buffer level over the aperture. Minute
+amounts (\SI{\approx0.2}{\uL}) of the purified ClyA-AS type I oligomer were then added to the grounded \cisi{}
 reservoir and allowed to insert into the lipid bilayer. Single-channel current-voltage curves were recorded
 using a custom pulse protocol of the Clampex 10.4 software package connected to AxoPatch 200B patch-clamp
 amplifier via a Digidata 1440A digitizer (all from Molecular Devices, San Jose, USA). Data was acquired at
 \SI{10}{\kHz} and filtered using a \SI{2}{\kHz} low bandpass filter. Measurements at different ionic strengths
-were performed at \SI{\approx25}{\dC} in aqueous \ce{NaCl} solutions, buffered at \pH{7.5} using \SI{10}{\mM}
-MOPS (Sigma-Aldrich, Zwijndrecht,The Netherlands).
+were performed at \SI{\approx25}{\dC} in aqueous \ce{NaCl} (Carl Roth, Karlsruhe, Germany) solutions, buffered
+at \pH{7.5} using \SI{10}{\mM} MOPS (Carl Roth, Karlsruhe, Germany).
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% The "Acknowledgement" section can be given in all manuscript
