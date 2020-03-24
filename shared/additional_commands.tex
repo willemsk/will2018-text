@@ -141,18 +141,3 @@
 % Atom properties
 \newcommand{\partialcharge}{\delta}
 \newcommand{\atomradius}{R}
-
-
-% Colors
-\definecolor{graphgreen}  {rgb}{0.30196078, 0.68627451, 0.29019608}
-\definecolor{graphpurple} {rgb}{0.59607843, 0.30588235, 0.63921569}
-\definecolor{graphblue}   {rgb}{0.29803921, 0.57254902, 0.98823529}
-\definecolor{graphred}    {rgb}{0.91372549, 0.15686275, 0.18823529}
-
-% Line and marker styles
-\newcommand{\graphline}[2]{\raisebox{2pt}{\tikz{\draw[-,color=#2,#1,line width=1.5pt](0,0) -- (5mm,0);}}}
-\newcommand{\graphmarker}[2]{\raisebox{0.5pt}{\tikz{\node[draw,scale=0.5,#1,fill=none, color=#2](){};}}}
-
-%\newcommand{\graphlinemarker}[3]{\raisebox{0pt}{\tikz{\draw[-,#3,#1,line width = 1.0pt](2.mm,0) #2 (3.5mm,1.5mm);\draw[-,#3,#1,line width = 1.0pt](0.,0.8mm) -- (5.5mm,0.8mm)}}}
-%\newcommand{\rectangle}{\raisebox{0pt}{\tikz{\draw[-,black,dotted,line width = 1.0pt](0.,0.8mm) -- (5.5mm,0.8mm);\draw[black,solid,line width = 1.0pt](2.mm,0) circle (3.5mm,1.5mm)}}}
-\newcommand{\rectangle}[1]{\raisebox{0pt}{\tikz{\draw[-,black,solid,line width = 1.0pt](0.,0.8mm) -- (5.5mm,0.8mm);\draw[black,solid,line width = 1.0pt](2.mm,0) #1 (3.5mm,1.5mm)}}}

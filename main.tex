@@ -179,9 +179,9 @@ this is achieved by placing the nanopore between two electrolyte compartments an
 AC) voltage across them. Due to the high resistance of the nanopore, virtually the full potential change
 occurs within (and around) the pore, resulting in a strong electric field ($10^6$--$10^7$~\si{\mV\per\nm})
 that electrophoretically drives ions and water molecules through
-it.\cite{Wong-2007,Mao-2014,Haywood-2014,Laohakunakorn-2015} Hence, analyte molecules such as DNA or proteins
-are driven towards, and often \emph{through}, the nanopore by a combination of Coulombic (electrophoretic) and
-hydrodynamic (electro-osmotic) forces.\cite{Wong-2007,Grosberg-2010,Muthukumar-2010, Muthukumar-2014} If
+it.\cite{Wong-2007,Mao-2014,Haywood-2014,Laohakunakorn-2015} Analyte molecules such as DNA or proteins are
+then driven towards, and often \emph{through}, the nanopore by a combination of Coulombic (electrophoretic)
+and hydrodynamic (electro-osmotic) forces.\cite{Wong-2007,Grosberg-2010,Muthukumar-2010, Muthukumar-2014} If
 successful, a translocation event is observed as a temporal fluctuation in the ionic conductance of the pore
 that serves as a unique molecular `fingerprint' with which the molecule can be identified.\cite{Yusko-2017}
 Because the frequency, magnitude, duration and even noise levels\cite{Yusko-2017,Houghtaling-2019} of these
@@ -864,7 +864,9 @@ mobility and viscosity, ...) begin to deviate significantly from their `infinite
 (see~\cref{suppinfo:fig:corrections}). At $\cbulk < \text{\SI{0.15}{\Molar}}$ the ePNP-NS equations tended to
 subtly overestimate the ionic current, but the discrepancies were much smaller than those observed for PNP-NS.
 Finally, the bulk model managed to capture the currents surprisingly well at high salt concentrations and
-positive bias voltages, but faltered in the negative voltage regime. 
+positive bias voltages, indicating that, under these conditions, the distribution of ions inside the pore is
+similar the the bulk. In contrast, this simple model faltered in the negative voltage regime, suggesting that
+next to the geometry of the pore, also its electrostatics are important.
 
 The ability of a nanopore to conduct ions can be best expressed by its conductance: $\conductance = \current /
 \vbias$. We computed ClyA's conductance with the ePNP-NS equations as a function of bias voltage
@@ -913,18 +915,19 @@ and is likely caused by the overlapping of the electrical double layer (EDL) ins
 \SI{0.05}{\Molar} the EDL \SI{\approx1.4}{\nm}). This effectively excludes the co-ions---\Cl{} in this
 case---from the interior of the pore, preventing them from contributing to total ionic conductance and
 resulting in a conductance dominated by the surface charge.\cite{Uematsu-2018} The presence of only a single
-ion type inside the pore may also offer an explanation as to why the ePNP-NS equations are more accurate at
-higher ionic strengths (\SI{\ge0.15}{\Molar}). Because our ionic mobilities are derived from \emph{bulk} ionic
-conductances, \ie~for unconfined ions in a locally \emph{electroneutral} environment, it is likely that our
-mobility model begins to break down under conditions where only a single ion type is present.\cite{Duan-2010}
-Another cause of the discrepancies could be a slight narrowing of the nanopore at low salt concentrations,
-which cannot be captured by our simulation due to the static nature of its geometry and charge distributions.
-Nevertheless, our simplified 2D-axisymmetric model, in conjunction with the ePNP-NS equations, is able to
-accurately predict the ionic current flowing through ClyA for a wide range of experimentally relevant ionic
-strengths and bias voltages. This suggests that this continuum system can accurately capture the essential
-physical phenomena that drive the ion and water transport through the nanopore both qualitatively and
-quantitatively. Hence, we expect the distribution of the resulting properties (\eg~ion concentrations, ion
-fluxes, electric field and water velocity) to closely correspond to their true values.
+ion type inside the pore at low ionic strength may also offer an explanation as to why the ePNP-NS equations
+are more accurate at higher ionic strengths (\SI{\ge0.15}{\Molar}). Because our ionic mobilities are derived
+from \emph{bulk} ionic conductances, \ie~for unconfined ions in a locally \emph{electroneutral} environment,
+it is likely that our mobility model begins to break down under conditions where only a single ion type is
+present.\cite{Duan-2010} Another cause of the discrepancies could be a slight narrowing of the nanopore at low
+salt concentrations, which cannot be captured by our simulation due to the static nature of its geometry and
+charge distributions. Nevertheless, our simplified 2D-axisymmetric model, in conjunction with the ePNP-NS
+equations, is able to accurately predict the ionic current flowing through ClyA for a wide range of
+experimentally relevant ionic strengths and bias voltages. This suggests that this continuum system can
+accurately capture the essential physical phenomena that drive the ion and water transport through the
+nanopore both qualitatively and quantitatively. Hence, we expect the distribution of the resulting properties
+(\eg~ion concentrations, ion fluxes, electric field and water velocity) to closely correspond to their true
+values.
 
 \paragraph{Cation selectivity.}
 %
@@ -1669,20 +1672,20 @@ The use of computationally inexpensive continuum models is pervasive in the soli
 their application to the structurally more complex biological nanopores has been limited to date. We made use
 of the radial symmetry of the biological nanopore ClyA to create a 2D-axisymmetric model of the pore which, in
 conjuction with the ePNP-NS equations, is able to accurately describe the ionic current of ClyA for a wide
-range of ionic strengths and bias voltages. This shows that a continuum approach to modeling biological
-nanopores is not only feasible but to a very high degree predictive. Our results do not only describe the
-properties of the ionic currents through ClyA, they also paint a detailed picture of the ion concentrations,
-the distribution and magnitude of the electrostatic potential and the velocity of the electro-osmotic flow
-within the pore---all for a wide range of experimentally relevant conditions. They also reveal the presence of
-highly localized `hotspots' of osmotic pressure, which may play an important role in the dynamics of protein
-trapping within ClyA. Even though some inaccuracies still arise at low salt concentrations \SI{<50}{\mM}, they
-are both less relevant experimentally and can likely be resolved with an improved mobility model.
+range of experimentally relevant ionic strengths and bias voltages. Overall, our approach shows that continuum
+modelling of biological nanopores is not only feasible, but can also be predictive. Our results describe in
+great detail the properties of ClyA, such its true ion selectivity, the differences between cation and anion
+concentrations inside the pore, the distribution and magnitude of the electrostatic potential, the velocity of
+the electro-osmotic flow and the presence of highly localized `hotspots' of osmotic pressure. 
 
 In summary, we fully expect our model and the principles of our ePNP-NS framework to be transferable to other
-biological nanopores and nanoscale transport systems, providing a powerful and practical tool that can aid
-with (1) elucidating the link between ionic current observed during a nanopore experiment and the actual
-physical phenomenon, (2) describing the electrophoretic and electro-osmotic properties of any biological
-nanopore and (3) guiding the design of new variants of existing nanopores. 
+biological nanopores and nanoscale transport systems. We believe our model comprises a powerful and practical
+tool that can aid with (1) elucidating the link between ionic current observed during a nanopore experiment
+and the actual physical phenomenon, (2) describing the electrophoretic and electro-osmotic properties of any
+biological nanopore and (3) guiding the design of new variants of existing nanopores. 
+
+%Even though some inaccuracies still arise at low salt concentrations (\SI{<50}{\mM}), they are both less
+%relevant experimentally and can likely be resolved with an improved mobility model.
 
 %
 %
@@ -1838,10 +1841,12 @@ at \pH{7.5} using \SI{10}{\mM} MOPS (Carl Roth, Karlsruhe, Germany).
 %% environment, which will make the correct section or running title.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{acknowledgement}
-  K.W., J.H. and P.V.D. acknowledge the financial support by the FWO (grant number 3E130054). G.M. has
-  received funding from the European Research Council (ERC) under the European Union's Horizon 2020 research
-  and innovation programme (Grant agreement No. 726151). The authors thank Dr. Chang Chen and Dr. Yi Li for
-  their valuable feedback during discussions.
+  K.W. gratefully acknowledges the support by the IWT (grant number 3E130054). P.V.D. and J.H. gratefully
+  acknowledge the financial support by the FWO (grant number G.0683.15). G.M. has received funding from the
+  European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme
+  (Grant agreement No. 726151). J.H. gratefully acknowledges financial support from the Flemish government
+  through long term structural funding Methusalem (CASAS2, Meth/15/04). The authors thank Dr. Chang Chen and
+  Dr. Yi Li for their valuable feedback during discussions.
 \end{acknowledgement}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1851,7 +1856,7 @@ at \pH{7.5} using \SI{10}{\mM} MOPS (Carl Roth, Karlsruhe, Germany).
 \begin{suppinfo}
 	The supplementary info contains the Extended materials and methods, with details on the fitting of the
 	electrolyte properties and the calculation of the pore averaged values, and the weak forms of the ePNP-NS
-	equations. It also contains additional results, a figure about the ionic current rectificatione, and a table
+	equations. It also contains additional results, a figure about the ionic current rectification, and a table
 	detailing the peak values of the radial electrostatic potential inside ClyA.
 \end{suppinfo}
 
