@@ -201,15 +201,15 @@ Navier-Stokes (NS) equation to include electro-osmotically or pressure driven fl
 flow.\cite{Lu-2012,Pederson-2015} Due to their explicit atomic or particle nature, MD and BD simulations are
 considered to yield the most accurate results. However, the large computational cost of simulating a complete
 biological nanopore system (100K--1M atoms) for hundreds of nanoseconds still necessitates the use of
-supercomputers.\cite{Aksimentiev-2005,Bhattacharya-2011} The PNP(-NS) equations, on the other hand, are of
-particular interest due to their low computational demands and analytical tractability. In a continuum
-approach, the simulated system is subdivided in several `structureless' domains, the behavior of which is
-parameterized by material properties such as relative permittivity, diffusion coefficient, electrophoretic
-mobility, viscosity and density. Because these properties can only emerge from the collective behavior or
-interactions between small groups of atoms (\ie~the mean-field approximation), great care must be taken when
-using them to compute fluxes and fields at the nanoscale, where computational elements may only contain a few
-molecules.\cite{Corry-2000,Collins-2012} Nevertheless, even though the PNP equations have been used
-extensively for the qualitative simulation of ion channels,\cite{Im-2002,Furini-2006,Liu-2015} biological
+supercomputers.\cite{Aksimentiev-2005,Bhattacharya-2011,Wilson-2019} The PNP(-NS) equations, on the other
+hand, are of particular interest due to their low computational demands and analytical tractability. In a
+continuum approach, the simulated system is subdivided in several `structureless' domains, the behavior of
+which is parameterized by material properties such as relative permittivity, diffusion coefficient,
+electrophoretic mobility, viscosity and density. Because these properties can only emerge from the collective
+behavior or interactions between small groups of atoms (\ie~the mean-field approximation), great care must be
+taken when using them to compute fluxes and fields at the nanoscale, where computational elements may only
+contain a few molecules.\cite{Corry-2000,Collins-2012} Nevertheless, even though the PNP equations have been
+used extensively for the qualitative simulation of ion channels,\cite{Im-2002,Furini-2006,Liu-2015} biological
 nanopores\cite{Simakov-2010,Pederson-2015,Aguilella-Arzo-2017,Simakov-2018} and their solid-state
 counterparts,\cite{Cervera-2005,White-2008,Chaudhry-2014,Laohakunakorn-2015} the extent of their quantitative
 accuracy is often challenged.\cite{Corry-2000,Collins-2012,Maffeo-2012,Thomas-2014,Kim-2015}
@@ -231,10 +231,10 @@ later extended by Lu \etal{}, who used it to probe the effect of finite ion size
 enzymes.\cite{Lu-2011}
 
 The interaction of ions or small molecules such as water with the heavy atoms of proteins or DNA results in a
-strong reduction of their motility, as observed in MD simulations.\cite{Makarov-1998,Pronk-2014} Since these
-effects happen only at distances \SI{\le1}{\nm}, they can usually be neglected for macroscopic simulations.
-However, in small nanopores (\SI{\le10}{\nm} radius), they comprise a significant fraction of the total
-nanopore radius and hence must be taken into
+strong reduction of their motility, as observed in MD simulations.\cite{Makarov-1998,Pronk-2014,Wilson-2019}
+Since these effects happen only at distances \SI{\le1}{\nm}, they can usually be neglected for macroscopic
+simulations. However, in small nanopores (\SI{\le10}{\nm} radius), they comprise a significant fraction of the
+total nanopore radius and hence must be taken into
 account.\cite{Noskov-2004,Simakov-2010,Pederson-2015,McMullen-2017} In continuum simulations, this can be
 achieved with the use of positional-dependent ion diffusion coefficients. An example implementation is the
 `soft-repulsion PNP' developed by Simakov and Kurnikova,\cite{Simakov-2010,Simakov-2018} who used it to
@@ -627,7 +627,7 @@ coefficients\cite{Mills-1989} and the electrophoretic
 mobilities.\cite{Bianchi-1989,Currie-1960,Goldsack-1976,DellaMonica-1979} Likewise, the factors
 $\diffusion_{i}^w(\walldistance)$ and $\mobility_{i}^w(\walldistance)$ are empirical functions that introduce
 a spatial dependency on the distance from the nanopore wall $\walldistance$, and were parameterized by fitting
-to molecular dynamics data.\cite{Noskov-2004,Simakov-2010,Makarov-1998}
+to molecular dynamics data.\cite{Noskov-2004,Simakov-2010,Makarov-1998,Wilson-2019}
 
 Based on the observation that the diffusivity of nanometer- to micrometer-sized particles reduces
 significantly when confined in pores and slits of comparable dimensions,\cite{Renkin-1954,Deen-1987,
@@ -882,14 +882,15 @@ subsequently levels out at positive bias voltages.
 
 The cross-sections of the ionic conductance as a function of concentration at high positive and negative bias
 voltages (\cref{fig:conductance_loglog_exp_pnp_epnp}), serve to demonstrate the differences between these
-respective regimes. At high positive (\SI{+150}{\mV}) and negative (\SI{-150}{\mV}) bias voltages, the slopes
-of the conductance log-log plots with respect to the bulk salt concentration show linear and bi-linear
-behavior, respectively. This could be indicative of a different mode of ion conduction of positive and
-negative bias voltages, at least for concentrations \SI{<0.15}{\Molar}. The bulk model and the PNP-NS
-equations manage to capture the conductance at respectively high and low ionic strengths, only the ePNP-NS
-equations perform well over the entire concentration range. Overall, the predictions made using PNP-NS
-overestimate the conductance over the entire concentration range, but they do converge with those computed
-with ePNP-NS when approaching infinite dilution (\SI{<0.01}{\Molar}).
+respective regimes. At high positive ($\vbias=\text{\SI{+150}{\mV}}$) and negative
+($\vbias=\text{\SI{-150}{\mV}}$) bias voltages, the slopes of the conductance log-log plots with respect to
+the bulk salt concentration show linear and bi-linear behavior, respectively. This could be indicative of a
+different mode of ion conduction of positive and negative bias voltages, at least for low concentrations
+($\cbulk<\text{\SI{0.15}{\Molar}}$). The bulk model and the PNP-NS equations manage to capture the
+conductance at respectively high and low ionic strengths, only the ePNP-NS equations perform well over the
+entire concentration range. Overall, the predictions made using PNP-NS overestimate the conductance over the
+entire concentration range, but they do converge with those computed with ePNP-NS when approaching infinite
+dilution ($\cbulk<\text{\SI{0.01}{\Molar}}$).
 % At $\vbias = \text{\SI{-150}{\mV}}$, the log-log plot consists of two linear segments with a transition zone
 % at $\cbulk \approx \text{\SI{0.15}{\Molar}}$. This behavior is captured qualitatively by both simulation
 % methods, but an excellent quantitative match is only found for the ePNP-NS equations. The bulk model
@@ -903,31 +904,31 @@ strong degree of rectification, which is to be expected given its predominantly 
 and asymmetric \cisi{} (\SI{\approx3.3}{\nm}) and \transi{} (\SI{\approx6}{\nm}) entry diameters
 (\cref{fig:clya_side}). We found $\icr$ to increase monotonously with the bias voltage magnitude, at least
 over the investigated range. We found the dependence of $\icr$ on the ionic strength not to be monotonous, but
-rather rising rapidly to a peak value at \SI{\approx0.15}{\Molar}, followed by a gradual decline towards unity
-at saturating salt concentrations. This concentration is within the transition zone observed in the
-conductance at negative bias voltages (\cref{fig:conductance_loglog_exp_pnp_epnp}) and provides further
+rather rising rapidly to a peak value at $\cbulk=\text{\SI{0.15}{\Molar}}$, followed by a gradual decline
+towards unity at saturating salt concentrations. This concentration is within the transition zone observed in
+the conductance at negative bias voltages (\cref{fig:conductance_loglog_exp_pnp_epnp}) and provides further
 evidence for a change in the conductive properties of the pore.
 
 The results and comparisons discussed above indicate that ClyA's conductivity is dominated by the bulk
 electrolyte conductivity above physiological salt concentrations ($\cbulk > \text{\SI{0.15}{\Molar}}$). The
 breakdown of this simple dependency at lower ionic strengths is particularly evident at negative bias voltages
 and is likely caused by the overlapping of the electrical double layer (EDL) inside the pore (\ie~at
-\SI{0.05}{\Molar} the EDL \SI{\approx1.4}{\nm}). This effectively excludes the co-ions---\Cl{} in this
-case---from the interior of the pore, preventing them from contributing to total ionic conductance and
+$\cbulk=\text{\SI{0.05}{\Molar}}$ the EDL \SI{\approx1.4}{\nm}). This effectively excludes the co-ions---\Cl{}
+in this case---from the interior of the pore, preventing them from contributing to total ionic conductance and
 resulting in a conductance dominated by the surface charge.\cite{Uematsu-2018} The presence of only a single
 ion type inside the pore at low ionic strength may also offer an explanation as to why the ePNP-NS equations
-are more accurate at higher ionic strengths (\SI{\ge0.15}{\Molar}). Because our ionic mobilities are derived
-from \emph{bulk} ionic conductances, \ie~for unconfined ions in a locally \emph{electroneutral} environment,
-it is likely that our mobility model begins to break down under conditions where only a single ion type is
-present.\cite{Duan-2010} Another cause of the discrepancies could be a slight narrowing of the nanopore at low
-salt concentrations, which cannot be captured by our simulation due to the static nature of its geometry and
-charge distributions. Nevertheless, our simplified 2D-axisymmetric model, in conjunction with the ePNP-NS
-equations, is able to accurately predict the ionic current flowing through ClyA for a wide range of
-experimentally relevant ionic strengths and bias voltages. This suggests that this continuum system can
-accurately capture the essential physical phenomena that drive the ion and water transport through the
-nanopore both qualitatively and quantitatively. Hence, we expect the distribution of the resulting properties
-(\eg~ion concentrations, ion fluxes, electric field and water velocity) to closely correspond to their true
-values.
+are more accurate at higher ionic strengths ($\cbulk\ge\text{\SI{0.15}{\Molar}}$). Because our ionic
+mobilities are derived from \emph{bulk} ionic conductances, \ie~for unconfined ions in a locally
+\emph{electroneutral} environment, it is likely that our mobility model begins to break down under conditions
+where only a single ion type is present.\cite{Duan-2010} Another cause of the discrepancies could be a slight
+narrowing of the nanopore at low salt concentrations, which cannot be captured by our simulation due to the
+static nature of its geometry and charge distributions. Nevertheless, our simplified 2D-axisymmetric model, in
+conjunction with the ePNP-NS equations, is able to accurately predict the ionic current flowing through ClyA
+for a wide range of experimentally relevant ionic strengths and bias voltages. This suggests that this
+continuum system can accurately capture the essential physical phenomena that drive the ion and water
+transport through the nanopore both qualitatively and quantitatively. Hence, we expect the distribution of the
+resulting properties (\eg~ion concentrations, ion fluxes, electric field and water velocity) to closely
+correspond to their true values.
 
 \paragraph{Cation selectivity.}
 %
@@ -956,16 +957,17 @@ direction and magnitude of the electric field:  with negative bias voltages yiel
 \SI{0.125}{\Molar} at \SI{-150}{\mV}.
 
 Using the reversal potential method, Franceschini \etal{}\cite{Franceschini-2016} found ClyA's ion selectivity
-to be $\tna = 0.66$ ($\pna = 1.9$). This corresponds well to the average between the \cisi{} (\SI{1}{\Molar},
-$\tna = 0.57$, $\pna = 1.3$) and \transi{} (\SI{0.15}{\Molar}, $\tna = 0.84$, $\pna = 5.4$) reservoir
-concentrations used in their experiment. Therefore, this suggests that although measuring the reversal
-potential gives valuable insights into the selectivity ion channels and small nanopores, it does not actually
-describe the ion selectivity under \emph{symmetric} conditions. In addition, the GHK equation does not
-consider the ionic flux due to the electro-osmotic flow and assumes that the Nernst-Einstein relation holds
-for all used concentrations. These two effects should not be ignored as they contribute significantly to the
-total conductance of the pore. Furthermore, because the ion selectivity depends strongly on the ionic strength
-and often the applied bias voltage, the measured reversal potential will necessarily be influenced by the
-chosen salt gradient and represents the selectivity at an undetermined intermediate concentration.
+to be $\tna = 0.66$ ($\pna = 1.9$). This corresponds well to the average between the \cisi{}
+($\cbulk=\text{\SI{1}{\Molar}}$, $\tna = 0.57$, $\pna = 1.3$) and \transi{}
+($\cbulk=\text{\SI{0.15}{\Molar}}$, $\tna = 0.84$, $\pna = 5.4$) reservoir concentrations used in their
+experiment. Therefore, this suggests that although measuring the reversal potential gives valuable insights
+into the selectivity ion channels and small nanopores, it does not actually describe the ion selectivity under
+\emph{symmetric} conditions. In addition, the GHK equation does not consider the ionic flux due to the
+electro-osmotic flow and assumes that the Nernst-Einstein relation holds for all used concentrations. These
+two effects should not be ignored as they contribute significantly to the total conductance of the pore.
+Furthermore, because the ion selectivity depends strongly on the ionic strength and often the applied bias
+voltage, the measured reversal potential will necessarily be influenced by the chosen salt gradient and
+represents the selectivity at an undetermined intermediate concentration.
 
 % 0.15 M, 0 mV
 % Tna = 0.84299
@@ -1251,7 +1253,7 @@ accurately describe and understand the nanopore transport processes both contrib
 field inside the pore are essential, as their relative magnitudes and directions can significantly influence
 the transport of ions,\cite{Aksimentiev-2005,Bhattacharya-2011,DeBiase-2015,Basdevant-2019} water
 molecules\cite{Laohakunakorn-2015,Bhadauria-2017} and
-biopolymers\cite{Buchsbaum-2013,Muthukumar-2014,Willems-Ruic-Biesemans-2019}.
+biopolymers.\cite{Buchsbaum-2013,Muthukumar-2014,Willems-Ruic-Biesemans-2019}
 
 % potential drop of \SI{100}{\mV} across a \SI{10}{\nm} pore results in an electric field of
 % \SI[retain-unity-mantissa = false]{\approx10^7}{\volt\per\meter}
