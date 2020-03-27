@@ -129,28 +129,24 @@ equations; single molecule}
 
 \begin{abstract}
   \footnotesize
-  Biological nanopores are emerging as powerful instruments for the identification, quantification and
-  characterization of biomarkers, proteins and nucleic acids at the single-molecule level. Despite their broad
+  Biological nanopores are emerging as powerful instruments for the identification, quantification and,
+  characterization of proteins and nucleic acids at the single-molecule level. Despite their broad
   experimental utilization, a fast and accurate simulation methodology to investigate the nanofluidic
-  properties and detailed ionic composition of biological nanopores is currently unavailable. Even though
-  molecular dynamics simulations have become significantly faster in recent years, the collection of
-  statistically meaningful amounts of data with all-atom simulations of biological nanopores remains
-  computationally expensive. Continuum methods are orders of magnitude faster, but they are unable to
-  accurately model the nanofluidic properties of complex molecular structures. Here, we describe a method,
-  termed the extended Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations, which significantly improves the
-  accuracy of continuum methods at the nanoscale and at finite dilution. The ePNP-NS equations
-  self-consistently take into account the influence of both the ionic strength and the nanoscopic scale of the
-  pore on all relevant electrolyte properties, including the diffusion coefficients, mobilities and finite
-  size of the ions, and the density, viscosity and relative permittivity of the solvent. To demonstrate the
-  power of our approach, we applied the ePNP-NS framework to a condensed, 2D-axisymmetric model of the
-  Cytolysin A (ClyA) biological nanopore. Strikingly, the model faithfully reproduces the nanopore’s ionic
-  conductance for a wide range of ionic strengths and bias potentials. It also describes many characteristics
-  that are not directly experimentally accessible, including the magnitude of the electro-osmotic flow, the
-  ion selectivity, the distribution of ions and the electric potential inside the nanopore. In summary, our
-  work aims to promote the use of fast, yet qualitatively and quantitatively meaningful, continuum simulations
-  in the biological nanopore field. We believe our method could not only be an effective tool for the
-  interpretation of nanopore experiments, but may also provide a means to rationally design the properties of
-  biological nanopores.
+  properties and the detailed ionic composition of biological nanopores is currently unavailable. In this
+  work, we describe a continuum-based approach geared towards the accurate simulation of biological nanopores.
+  Our method revolves around (1) the extended Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations, a
+  heavily modified version of the well-known transport equations, and (2) an accurate yet computationally
+  efficient 2D-axisymmetric representation for the geometry and charge distribution of the nanopore. The
+  ePNP-NS equations self-consistently take into account the finite size of the ions and the influence of both
+  the ionic strength and the nanoscopic scale of the pore on the local properties of the electrolyte. The
+  latter includes the mobility and diffusivity of the ions, as well as the density, viscosity and relative
+  permittivity of the solvent. Crucially, we applied our methodology to Cytolysin A (ClyA), a biological
+  nanopore used for single-molecule enzymology at physiological ionic strengths, and show that we can
+  faithfully reproduce its ionic conductance for a wide range of ionic strengths and bias potentials.
+  Moreover, several nanofluidic characteristics could be directly observed, including the ion selectivity, the
+  distribution of ions inside the nanopore, the electrostatic potential landscape and, the magnitude and shape
+  of the electro-osmotic flow field. Hence, this work provides fundamental new insights into the nanofluidic
+  properties of biological nanopores and provides a new means for their rational engineering.
 \end{abstract}
 
 
