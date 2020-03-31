@@ -76,18 +76,19 @@ its ionic conductance over three orders of magnitude of ionic strength (*i.e.*, 
 such, we believe our framework could become a valuable addition to the toolbox of researchers.
 
 Our modeling of ClyA revealed insights that cannot be captured easily by experiments. For example, we found
-that under typical experimental conditions used in single-molecule enzymology studies
-[[Galenkamp, N. S., *et al.*, *Nat. Commun.* (2018)][galenkamp2018]],
-such as 150 mM NaCl (physiological ionic strength) and $-150$ mV applied bias, anions become greatly depleted
-from the interior of the pore, while cations are enriched. Our simulations also showed that the electro-osmotic
-flow has a maximum strength at 0.5 M NaCl, and revealed the presence of several highly localized "osmotic"
-pressure spots. The latter which may influence the dynamics of protein trapping within ClyA
+that anions become greatly depleted from the interior of the pore, while cations are enriched under the
+typical experimental conditions used in single-molecule enzymology studies, such as 150 mM NaCl (physiological
+ionic strength) and $-150$ mV applied bias
+[[Galenkamp, N. S., *et al.*, *Nat. Commun.* (2018)][galenkamp2018]].
+Our simulations also showed that the electro-osmotic flow has a maximum strength at 0.5 M NaCl, and revealed
+the presence of several highly localized "osmotic" pressure spots. The latter which may influence the dynamics
+of protein trapping within ClyA
 [[Willems, K., *et al.*, *ACS Nano* (2019)][willems2019]].
 
 In conclusion, by using an accurate, yet efficient continuum model, this manuscript provides the first
 in-depth characterization of the nanofluidic properties of the biological nanopore ClyA. This will pave the
-way for the quantitative analysis and improve the understanding of the properties of other biological nanopore
-systems. Moreover, it will enable more efficient engineering of nanopore functionalities. We believe our
+way for the quantitative analysis of other biological nanopore systems, improving our understanding of their
+properties. Moreover, it will enable more efficient engineering of nanopore functionalities. We believe our
 methodology will be of considerable interest not only to the nanopore community but to all researchers
 involved with understanding and quantifying nanoscale transport processes.
 
