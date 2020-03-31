@@ -15,7 +15,7 @@
    version="1.1"
    id="svg8"
    inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
-   sodipodi:docname="footer_imec.svg">
+   sodipodi:docname="letterfoot-imec.svg">
   <defs
      id="defs2" />
   <sodipodi:namedview
@@ -25,11 +25,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="233.52518"
-     inkscape:cy="65.797829"
+     inkscape:zoom="0.7"
+     inkscape:cx="-282.88429"
+     inkscape:cy="589.47666"
      inkscape:document-units="mm"
-     inkscape:current-layer="g1606"
+     inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="2560"
      inkscape:window-height="1377"
@@ -53,72 +53,72 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-257)">
-    <path
-       style="fill:none;stroke:#3c3c3b;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="M 190,260.55939 H 20"
-       id="path989"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc" />
     <g
-       id="g1606"
-       transform="translate(0,-3.7041668)">
+       id="g1504"
+       transform="translate(16.931549,85.906215)">
+      <path
+         sodipodi:nodetypes="cc"
+         inkscape:connector-curvature="0"
+         id="path989"
+         d="M 167.66845,179.22169 H 8.4684523"
+         style="fill:none;stroke:#3c3c3b;stroke-width:0.48385707;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <g
-         transform="translate(20)"
-         id="g1593">
+         id="g1593"
+         transform="translate(8.4684523,-85.041869)">
         <text
-           xml:space="preserve"
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.52777767px;line-height:1.25;font-family:'CMU Sans Serif';-inkscape-font-specification:'CMU Sans Serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-           x="-0.32039386"
+           id="text1567"
            y="270.91965"
-           id="text1567"><tspan
-             sodipodi:role="line"
-             id="tspan1565"
-             x="-0.32039386"
+           x="-0.32039386"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.52777767px;line-height:1.25;font-family:'CMU Sans Serif';-inkscape-font-specification:'CMU Sans Serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+           xml:space="preserve"><tspan
+             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.52777767px;font-family:'CMU Sans Serif';-inkscape-font-specification:'CMU Sans Serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332"
              y="270.91965"
-             style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:3.52777767px;font-family:'CMU Sans Serif';-inkscape-font-specification:'CMU Sans Serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;writing-mode:lr-tb;text-anchor:start;stroke-width:0.26458332">IMEC vzw</tspan></text>
+             x="-0.32039386"
+             id="tspan1565"
+             sodipodi:role="line">IMEC vzw</tspan></text>
         <text
-           xml:space="preserve"
-           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52777767px;line-height:1.25;font-family:'CMU Sans Serif';-inkscape-font-specification:'CMU Sans Serif, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-           x="-0.144694"
+           id="text1571"
            y="276.58929"
-           id="text1571"><tspan
-             sodipodi:role="line"
-             id="tspan1569"
-             x="-0.144694"
+           x="-0.144694"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52777767px;line-height:1.25;font-family:'CMU Sans Serif';-inkscape-font-specification:'CMU Sans Serif, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+           xml:space="preserve"><tspan
+             style="stroke-width:0.26458332"
              y="276.58929"
-             style="stroke-width:0.26458332">Kapeldreef 75</tspan><tspan
-             sodipodi:role="line"
              x="-0.144694"
+             id="tspan1569"
+             sodipodi:role="line">Kapeldreef 75</tspan><tspan
+             id="tspan1573"
+             style="stroke-width:0.26458332"
              y="280.99902"
-             style="stroke-width:0.26458332"
-             id="tspan1573">3001 Leuven</tspan><tspan
-             sodipodi:role="line"
              x="-0.144694"
-             y="285.40875"
+             sodipodi:role="line">3001 Leuven</tspan><tspan
+             id="tspan1575"
              style="stroke-width:0.26458332"
-             id="tspan1575">Belgium</tspan></text>
+             y="285.40875"
+             x="-0.144694"
+             sodipodi:role="line">Belgium</tspan></text>
       </g>
       <text
-         id="text1579"
-         y="276.58929"
-         x="190.15158"
+         xml:space="preserve"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52777767px;line-height:1.25;font-family:'CMU Sans Serif';-inkscape-font-specification:'CMU Sans Serif, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:end;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-         xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52777767px;font-family:'CMU Sans Serif';-inkscape-font-specification:'CMU Sans Serif, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:0.26458332"
-           y="276.58929"
-           x="190.15158"
+         x="167.82004"
+         y="191.54742"
+         id="text1579"><tspan
+           sodipodi:role="line"
            id="tspan1577"
-           sodipodi:role="line">Register of Legal Entities Leuven</tspan><tspan
-           id="tspan1581"
+           x="167.82004"
+           y="191.54742"
+           style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52777767px;font-family:'CMU Sans Serif';-inkscape-font-specification:'CMU Sans Serif, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:0.26458332">Register of Legal Entities Leuven</tspan><tspan
+           sodipodi:role="line"
+           x="167.82004"
+           y="195.95715"
            style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52777767px;font-family:'CMU Sans Serif';-inkscape-font-specification:'CMU Sans Serif, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:0.26458332"
-           y="280.99902"
-           x="190.15158"
-           sodipodi:role="line">VAT: BE 0425.260.668</tspan><tspan
-           id="tspan1583"
+           id="tspan1581">VAT: BE 0425.260.668</tspan><tspan
+           sodipodi:role="line"
+           x="167.82004"
+           y="200.36687"
            style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:3.52777767px;font-family:'CMU Sans Serif';-inkscape-font-specification:'CMU Sans Serif, Medium';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:end;writing-mode:lr-tb;text-anchor:end;stroke-width:0.26458332"
-           y="285.40875"
-           x="190.15158"
-           sodipodi:role="line">Phone: +32 16 28 12 11</tspan></text>
+           id="tspan1583">Phone: +32 16 28 12 11</tspan></text>
     </g>
   </g>
   <style

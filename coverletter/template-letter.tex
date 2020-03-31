@@ -5,6 +5,7 @@ $if(colorlinks)$
 $endif$
 %
 \documentclass[$if(fontsize)$$fontsize$,$endif$$if(lang)$$babel-lang$,$endif$$if(papersize)$$papersize$paper,$endif$$for(classoption)$$classoption$$sep$,$endfor$]{letter}
+\usepackage{nopageno}
 $if(fontfamily)$
 \usepackage[$for(fontfamilyoptions)$$fontfamilyoptions$$sep$,$endfor$]{$fontfamily$}
 $else$
@@ -256,6 +257,11 @@ $endif$
 $if(letterhead)$
 \usepackage{wallpaper}
 \ThisULCornerWallPaper{1}{$letterhead$}
+$endif$
+
+$if(letterfoot)$
+\usepackage{wallpaper}
+\LLCornerWallPaper{1}{$letterfoot$}
 $endif$
 
 \begin{document}

@@ -26,7 +26,8 @@ geometry:
 - left=1in
 - right=1in
 blockquote: true
-letterhead: includes/letterhead-imec2.pdf
+letterhead: includes/letterhead-imec.pdf
+letterfoot: includes/letterfoot-imec.pdf
 signature: includes/signature-KW.pdf
 signature-before: -8ex
 signature-after: 2ex
