@@ -1,22 +1,29 @@
 ---
 author:
-- Kherim Willems
-- imec vzw
-- Kapeldreef 75
-- B-3001 Leuven, Belgium
-- Kherim.Willems@imec.be
-- +32 485 245 215
+- name: Pol Van Dorpe
+  job: Scientific Director
+  affiliation:
+  - imec vzw
+  - Kapeldreef 75
+  - B-3001 Leuven, Belgium
+  email: Pol.VanDorpe@imec.be
+- name: Giovanni Maglia
+  job: Professor of Chemical Biology
+  affiliation:
+  - University of Groningen
+  - Groningen Biomolecular Sciences & Biotechnology Institute
+  - Nijenborgh 7, 9747 AG
+  - PO Box 11103, 9700 CC
+  - Groningen, The Netherlands
+  email: g.maglia@rug.nl
 opening: Dear editor,
 closing: Yours sincerely,
-date: 31 March 2020
+date: 2 April 2020
 address: 
 return-address: 
 - imec vzw
 - Kapeldreef 75
 - B-3001 Leuven, Belgium
-cc:
-encl:
-ps:
 papersize: a4
 fontfamily: mathpazo
 fontsize: 12pt
@@ -28,9 +35,11 @@ geometry:
 blockquote: true
 letterhead: includes/letterhead-imec.pdf
 letterfoot: includes/letterfoot-imec.pdf
-signature: includes/signature-KW.pdf
-signature-before: -8ex
-signature-after: 2ex
+signature:
+- includes/signature-pvd.pdf
+- includes/signature-gm.pdf
+signature-before: -6ex
+signature-after: 1ex
 closing-indentation: 0pt
 links-as-notes: false
 colorlinks: true
@@ -50,45 +59,45 @@ and a potential protein sequencing method
 [[Howorka, S. and Siwy, Z. S., *Nat. Biotechnol.* (2020)][howorka2020]],
 to direct quantitative detection of biomarkers from blood
 [[Galenkamp, N. S., *et al.*, *Nat. Commun.* (2018)][galenkamp2018]].
-Despite this success, however, an accurate physical description of the nanofluidic properties is currently not
-available for most biological nanopores, and the details of their working principles are generally poorly
-understood.
+Despite these successes, an accurate description of their nanofluidic properties, and the ionic conditions
+within them, is lacking for most biological nanopores. This knowledge gap fundamentally limits the engineering
+of their traits and hampers the understanding of the experimental results obtained with them.
 
-In this work, we developed a unified simulation framework—coined the extended Poisson-Nernst-Planck and
-Navier-Stokes (ePNP-NS) equations—that allows us to model the transport processes through biological nanopores
-with quantitative accuracy for a wide range of experimentally relevant ionic strengths and bias voltages.
-While the traditional PNP-NS equations are ubiquitiously employed throughout the nanopore field, they can only
-provide an adequate description of the ion and water transport through large ($>10$ nm) solid-state nanopores
-that possess simple geometries and uniform surface charge distributions
-[[Lu, B., *et al.*, *Phys. Rev. E* (2012)][lu2012]].
-Application of the PNP-NS equations to biological nanopores, which are typically narrower and posses complex
-geometries and charge distributions, is significantly more challenging and requires additional modifications
-[[Simakov, N. A., *et al.*, *J. Membr. Biol.* (2018)][simakov2018]]
-to obtain quantitative results.
-
-Hence, our ePNP-NS equations include a comprehensive set of corrections that take into account the properties
-of the electrolyte. These are formulated as self-consistent interactions between the ions and water molecules
-on the one hand and the walls of the pore on the other. Crucially, we also developed a computationally
-efficient method to describe the geometry of the pore and its complex fixed charge distribution. By combining
-both components, we succeeded in creating the first continuum model of Cytolysin A (ClyA)—a biological
-nanopore used for single-molecule enzymology at physiological salt concentrations—that can accurately predict
-its ionic conductance over three orders of magnitude of ionic strength (*i.e.*, from 5 mM to 5 M NaCl). As
-such, we believe our framework could become a valuable addition to the toolbox of researchers.
+In this work, we developed the extended Poisson-Nernst-Planck and Navier-Stokes (ePNP-NS) equations, a unified
+simulation framework that allows us to model the properties of biological nanopores with quantitative accuracy
+for a wide range of experimentally relevant ionic strengths and bias voltages. In contrast to the traditional
+PNP-NS equations, which can provide qualitatively meaningful results only for large ($>10$ nm) solid-state
+nanopores
+[[Lu, B., *et al.*, *Phys. Rev. E* (2012)][lu2012]],
+our ePNP-NS equations include a comprehensive set of such corrections that take into account the properties of
+the electrolyte and the nanoscopic scale of the pore
+[[Simakov, N. A., *et al.*, *J. Membr. Biol.* (2018)][simakov2018]].
+These corrections are formulated as self-consistent interactions between the ions, water molecules and the
+walls of the pore. Crucially, we also developed a computationally efficient method to describe the pore's
+geometry and its complex fixed charge distribution. By combining all these elements, we succeeded in creating the
+first continuum model of Cytolysin A (ClyA)—a biological nanopore used for single-molecule enzymology at
+physiological salt concentrations—that can accurately predict its experimentally determined ionic conductance
+over three orders of magnitude of ionic strength (*i.e.*, from 5 mM to 5 M NaCl). As such, we believe our
+framework could become an essential element within the toolbox of researchers.
 
 Our modeling of ClyA revealed insights that cannot be captured easily by experiments. For example, we found
-that anions become greatly depleted from the interior of the pore, while cations are enriched under the
-typical experimental conditions used in single-molecule enzymology studies, such as 150 mM NaCl (physiological
-ionic strength) and $-150$ mV applied bias
-[[Galenkamp, N. S., *et al.*, *Nat. Commun.* (2018)][galenkamp2018]].
-Our simulations also showed that the electro-osmotic flow has a maximum strength at 0.5 M NaCl, and revealed
-the presence of several highly localized "osmotic" pressure spots. The latter which may influence the dynamics
-of protein trapping within ClyA
+that at physiological ionic strength and negative bias voltage, experimental conditions typical for
+single-molecule enzymology studies
+[[Galenkamp, N. S., *et al.*, *Nat. Commun.* (2018)][galenkamp2018]],
+the interior of the pore becomes depleted of anions and enriched with cations. Such a confined,
+non-electroneutral ionic environment is a far-cry from the situation in a bulk liquid, which may have an
+impact on the kinetics of enzymes. Further, our simulations provide a detailed view on the influence of the
+ionic strength on the electro-osmotic flow and the electric field within the pore. We also reveal the
+presence of several nanometer-sized zones within the pore that exhibit a high osmotic pressure. Such
+localized pressure differences can exert a non-negligible force on trapped proteins—*i.e.*, comparable with
+those resulting from the electric field and the electro-osmotic flow. We expect all these forces will be
+important for explaining the full dynamics of protein trapping within ClyA
 [[Willems, K., *et al.*, *ACS Nano* (2019)][willems2019]].
 
 In conclusion, by using an accurate, yet efficient continuum model, this manuscript provides the first
-in-depth characterization of the nanofluidic properties of the biological nanopore ClyA. This will pave the
-way for the quantitative analysis of other biological nanopore systems, improving our understanding of their
-properties. Moreover, it will enable more efficient engineering of nanopore functionalities. We believe our
+in-depth characterization of the nanofluidic properties of the biological nanopore ClyA. This paves the way
+for the quantitative analysis of other biological nanopore systems, improving our understanding of their
+properties in doing so. Moreover, it will enable more efficient engineering of nanopore functionalities. Our
 methodology will be of considerable interest not only to the nanopore community but to all researchers
 involved with understanding and quantifying nanoscale transport processes.
 
@@ -98,7 +107,7 @@ on 09-JAN-2020 using the title
 
 > **Modeling of Ion and Water Transport in the Biological Nanopore ClyA**
 
-Relative to the pre-published version, the manuscript attached to this letter includes the same results and
+Compared to the pre-published version, the manuscript attached to this letter includes the same results and
 findings but boasts a polished text and improved figures.
 
 [jain2018]: https://doi.org/10.1038/nbt.4060

@@ -194,14 +194,39 @@ $endif$
 \def\fps@figure{htbp}
 \makeatother
 
+
 $if(signature)$
 \usepackage{graphicx,grffile}
-\signature{$if(signature-before)$\vspace*{$signature-before$}$endif$\includegraphics$if(signature-width)$[width=$signature-width$]$endif${$signature$}$if(author)$\\$if(signature-after)$\vspace*{$signature-after$}$endif$$for(author)$$author$$sep$\\$endfor$$endif$}
+\signature{
+$for(signature)$
+$if(signature-before)$\vspace*{$signature-before$}$endif$
+\parbox[t]{.49\linewidth}{\raggedright \includegraphics$if(signature-width)$[width=$signature-width$]$endif${$signature$}}
+$endfor$
+$if(author)$\\
+$if(signature-after)$\vspace*{$signature-after$}$endif$
+$for(author)$\parbox[t]{.49\linewidth}{\raggedright%
+$if(author.name)$$author.name$\\ \medskip $endif$
+$if(author.job)$$author.job$\\ \smallskip $endif$
+$if(author.affiliation)$ $for(author.affiliation)$ $author.affiliation$\\ $endfor$ \smallskip $endif$
+$if(author.email)$$author.email$\\$endif$
+}$endfor$$endif$
 $else$
 $if(author)$
 \signature{$for(author)$$author$$sep$\\$endfor$}
 $endif$
 $endif$
+}
+
+% $if(signature)$
+%   \usepackage{graphicx,grffile}
+%   \signature{$if(signature-before)$\vspace*{$signature-before$}$endif$\includegraphics$if(signature-width)$[width=$signature-width$]$endif${$signature$}$if(author)$\\$if(signature-after)$\vspace*{$signature-after$}$endif$$for(author)$$author$$sep$\\$endfor$$endif$}
+% $else$
+%   $if(author)$
+%   \signature{$for(author)$$author$$sep$\\$endfor$}
+%   $endif$
+% $endif$
+
+
 
 $if(date)$
 \date{$date$}
@@ -290,7 +315,11 @@ $if(closing)$
 $if(closing-indentation)$
 \longindentation=$closing-indentation$
 $endif$
+% temporarily overwrite \indentedwidth to ensure we can print across the entire width
+\newcommand{\tempwidth}{\indentedwidth}
+\indentedwidth=\textwidth 
 \closing{$closing$}
+\indentedwidth=\tempwidth
 $endif$
 $if(encl)$
 \encl{$for(encl)$$encl$$sep$\\$endfor$}
