@@ -1,20 +1,39 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% This is a (brief) model paper using the achemso class
-%% The document class accepts keyval options, which should include
-%% the target journal and optionally the manuscript type.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\documentclass[journal=ancac3,manuscript=article,etalmode=truncate,maxauthors=0,layout=onecolumn]{achemso}
-	\setkeys{acs}{etalmode=truncate,maxauthors=0}
+\documentclass[twoside,twocolumn,9pt]{article}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% Place any additional packages needed here.  Only include packages
-%% which are essential, to avoid problems later. Do NOT use any
-%% packages which require e-TeX (for example etoolbox): the e-TeX
-%% extensions are not currently available on the ACS conversion
-%% servers.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\usepackage[utf8]{inputenc}
+\usepackage{extsizes}
+\usepackage[super,sort&compress,comma]{natbib} 
+\usepackage[version=3]{mhchem}
+\usepackage[left=1.5cm, right=1.5cm, top=1.785cm, bottom=2.0cm]{geometry}
+\usepackage{balance}
+\usepackage{times,mathptmx}
+\usepackage{sectsty}
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage[format=plain,justification=justified,singlelinecheck=false,font={stretch=1.125,small,sf},labelfont=bf,labelsep=space]{caption}
+  \captionsetup[table]{singlelinecheck=false,font=footnotesize,labelfont=bf}
+\usepackage[font={stretch=1.125,small,sf},labelfont=bf,labelsep=period]{subcaption}
+	\captionsetup[subfigure]{labelfont=bf,textfont=normalfont,labelformat=simple,singlelinecheck=false}
+\usepackage{float}
+\usepackage{fancyhdr}
+\usepackage{fnpos}
 \usepackage[english]{babel}
+\addto{\captionsenglish}{%
+  \renewcommand{\refname}{Notes and references}
+}
+\usepackage{array}
+\usepackage{droidsans}
+\usepackage{charter}
+\usepackage[T1]{fontenc}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage{setspace}
+\usepackage[compact]{titlesec}
+\usepackage{hyperref}
+%%%Please don't disable any packages in the preamble, as this may cause the template to display incorrectly.%%%
+
+\definecolor{cream}{RGB}{222,217,201}
+
+\usepackage[utf8]{inputenc}
+
 \usepackage{csquotes}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -24,7 +43,6 @@
 \usepackage{textgreek}
 \usepackage{gensymb}
 
-\usepackage[version=4]{mhchem}
 \usepackage[alsoload=synchem]{siunitx}
 	\sisetup{separate-uncertainty=true}
 	\sisetup{multi-part-units=single}
@@ -35,25 +53,9 @@
   \sisetup{list-final-separator={ and }}
   \sisetup{retain-explicit-plus=true}
 
-\usepackage{float}
-\usepackage{graphicx}
-\usepackage{xcolor}
-\usepackage{tikz}
-	\usetikzlibrary{shapes,arrows.meta}
-\usepackage{pgf}
-\usepackage{pgfplots}
-\pgfplotsset{compat=1.15}
-\usepackage{array, booktabs, tabularx, multirow}
+\usepackage{booktabs, tabularx, multirow}
 \usepackage{pdfpages}
-
-
-\usepackage[font=scriptsize,labelfont=bf,labelsep=period]{caption}
-	\captionsetup[table]{singlelinecheck=false,font=footnotesize,labelfont=bf}
-\usepackage[font=scriptsize,labelfont=bf,labelsep=period]{subcaption}
-	\captionsetup[subfigure]{labelfont=bf,textfont=normalfont,labelformat=simple,singlelinecheck=false}
-
 \usepackage{xr-hyper}
-\usepackage{hyperref}
 \usepackage{cleveref}
 \creflabelformat{equation}{#2#1#3}
 \crefname{figure}{Fig.}{Figs.}
@@ -109,47 +111,162 @@
 
 \input{shared/authors.tex}
 
-
-\title{Accurate Modelling of Ion and Water Transport in the Biological Nanopore ClyA with the Extended PNP-NS Equations}
-
-\keywords{biological nanopore; cytolysin A; continuum simulation; Poisson-Nernst-Planck and Navier-Stokes
-equations; single molecule}
+% \keywords{biological nanopore; cytolysin A; continuum simulation; Poisson-Nernst-Planck and Navier-Stokes
+% equations; accurate; single molecule}
 
 
 
 \begin{document}
 
+\pagestyle{fancy}
+\thispagestyle{plain}
+\fancypagestyle{plain}{
+%%%HEADER%%%
+\renewcommand{\headrulewidth}{0pt}
+}
+%%%END OF HEADER%%%
 
-\begin{tocentry}
-  %\centering
-  %  \includegraphics[width=8.4cm]{TOC.PDF}
-\end{tocentry}
+%%%PAGE SETUP - Please do not change any commands within this section%%%
+\makeFNbottom
+\makeatletter
+\renewcommand\LARGE{\@setfontsize\LARGE{15pt}{17}}
+\renewcommand\Large{\@setfontsize\Large{12pt}{14}}
+\renewcommand\large{\@setfontsize\large{10pt}{12}}
+\renewcommand\footnotesize{\@setfontsize\footnotesize{7pt}{10}}
+\makeatother
+
+\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+\renewcommand\footnoterule{\vspace*{1pt}% 
+\color{cream}\hrule width 3.5in height 0.4pt \color{black}\vspace*{5pt}} 
+\setcounter{secnumdepth}{5}
+
+\makeatletter 
+\renewcommand\@biblabel[1]{#1}            
+\renewcommand\@makefntext[1]% 
+{\noindent\makebox[0pt][r]{\@thefnmark\,}#1}
+\makeatother 
+\renewcommand{\figurename}{\small{Fig.}~}
+\sectionfont{\sffamily\Large}
+\subsectionfont{\normalsize}
+\subsubsectionfont{\bf}
+\setstretch{1.125} %In particular, please do not alter this line.
+\setlength{\skip\footins}{0.8cm}
+\setlength{\footnotesep}{0.25cm}
+\setlength{\jot}{10pt}
+\titlespacing*{\section}{0pt}{4pt}{4pt}
+\titlespacing*{\subsection}{0pt}{15pt}{1pt}
+%%%END OF PAGE SETUP%%%
+
+%%%FOOTER%%%
+\fancyfoot{}
+\fancyfoot[LO,RE]{\vspace{-7.1pt}\includegraphics[height=9pt]{head_foot/LF}}
+\fancyfoot[CO]{\vspace{-7.1pt}\hspace{13.2cm}\includegraphics{head_foot/RF}}
+\fancyfoot[CE]{\vspace{-7.2pt}\hspace{-14.2cm}\includegraphics{head_foot/RF}}
+\fancyfoot[RO]{\footnotesize{\sffamily{1--\pageref{LastPage} ~\textbar  \hspace{2pt}\thepage}}}
+\fancyfoot[LE]{\footnotesize{\sffamily{\thepage~\textbar\hspace{3.45cm} 1--\pageref{LastPage}}}}
+\fancyhead{}
+\renewcommand{\headrulewidth}{0pt} 
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\arrayrulewidth}{1pt}
+\setlength{\columnsep}{6.5mm}
+\setlength\bibsep{1pt}
+%%%END OF FOOTER%%%
+
+%%%FIGURE SETUP - please do not change any commands within this section%%%
+\makeatletter 
+\newlength{\figrulesep} 
+\setlength{\figrulesep}{0.5\textfloatsep} 
+
+\newcommand{\topfigrule}{\vspace*{-1pt}% 
+\noindent{\color{cream}\rule[-\figrulesep]{\columnwidth}{1.5pt}} }
+
+\newcommand{\botfigrule}{\vspace*{-2pt}% 
+\noindent{\color{cream}\rule[\figrulesep]{\columnwidth}{1.5pt}} }
+
+\newcommand{\dblfigrule}{\vspace*{-1pt}% 
+\noindent{\color{cream}\rule[-\figrulesep]{\textwidth}{1.5pt}} }
+
+\makeatother
+%%%END OF FIGURE SETUP%%%
+
+%%%TITLE, AUTHORS AND ABSTRACT%%%
+\twocolumn[
+  \begin{@twocolumnfalse}
+{\includegraphics[height=30pt]{head_foot/journal_name}\hfill\raisebox{0pt}[0pt][0pt]{\includegraphics[height=55pt]{head_foot/RSC_LOGO_CMYK}}\\[1ex]
+\includegraphics[width=18.5cm]{head_foot/header_bar}}\par
+\vspace{1em}
+\sffamily
+\begin{tabular}{m{4.5cm} p{13.5cm} }
+
+\includegraphics{head_foot/DOI} & \noindent\LARGE{\textbf{%
+  Accurate modeling of a biological nanopore with an extended continuum framework$^\dag$
+}} \\
+\vspace{0.3cm} & \vspace{0.3cm} \\
+
+ & \noindent\large{%
+   Kherim Willems,\textit{$^{ab}$}
+   Dino Rui\'c,\textit{$^{bc}$}
+   Florian Lucas,\textit{$^{d}$}
+   Ujjal Barman,\textit{$^{b}$}
+   Niels Verellen,\textit{$^{b}$}
+   Johan Hofkens,\textit{$^{a}$}
+   Giovanni Maglia,$^{\ast}$\textit{$^{d}$} and
+   Pol Van Dorpe$^{\ast}$\textit{$^{bc}$}} \\
+
+
+\includegraphics{head_foot/dates} & \noindent\normalsize{%
+Biological nanopores are emerging as powerful instruments for the identification, quantification and,
+characterization of proteins and nucleic acids at the single-molecule level. Despite their broad experimental
+utilization, a fast and accurate simulation methodology for investigating the nanofluidic properties of
+biological nanopores is currently unavailable. This gap is a limiting factor towards the engineering of
+nanopore traits and the interpretation of experimental results. In this work, we aim to tackle this challenge
+using a continuum-based simulation approach. Our method revolves around (1) the extended
+Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations, a heavily modified version of the well-known transport
+equations, and (2) an accurate yet computationally efficient 2D-axisymmetric representation for the geometry
+and charge distribution of the nanopore. The ePNP-NS equations self-consistently take into account the finite
+size of the ions and the influence of both the ionic strength and the nanoscopic scale of the pore on the
+local properties of the electrolyte. The latter includes the mobility and diffusivity of the ions, and the
+density, viscosity and relative permittivity of the solvent. Crucially, we applied our methodology to
+Cytolysin A (ClyA), a biological nanopore used for single-molecule enzymology at physiological ionic
+strengths, and show that we can faithfully reproduce its ionic conductance for a wide range of ionic strengths
+and bias potentials. Moreover, several nanofluidic characteristics could be directly observed, including the
+ion selectivity, the internal distribution of ions, the electrostatic potential landscape and the magnitude of
+the electro-osmotic flow field. Hence, this work provides fundamental new insights into the nanofluidic
+properties of biological nanopores and paves the way towards their rational engineering.
+} \\
+
+\end{tabular}
+
+ \end{@twocolumnfalse} \vspace{0.6cm}
+
+  ]
+%%%END OF TITLE, AUTHORS AND ABSTRACT%%%
+
+%%%FONT SETUP - please do not change any commands within this section
+\renewcommand*\rmdefault{bch}\normalfont\upshape
+\rmfamily
+\section*{}
+\vspace{-1cm}
+
+
+%%%FOOTNOTES%%%
+
+\footnotetext{\textit{$^{a}$~\afkulchem.}}
+\footnotetext{\textit{$^{b}$~\afimec. E-mail: Pol.VanDorpe@imec.be}}
+\footnotetext{\textit{$^{c}$~\afkulphys.}}
+\footnotetext{\textit{$^{d}$~\afrug. E-mail: g.maglia@rug.nl}}
+
+
+%Please use \dag to cite the ESI in the main text of the article.
+%If you article does not have ESI please remove the the \dag symbol from the title and the footnotetext below.
+\footnotetext{\dag~Electronic Supplementary Information (ESI) available. See DOI: 00.0000/00000000.}
+%additional addresses can be cited as above using the lower-case letters, c, d, e... If all authors are from the same address, no letter is required
 
 
 
-\begin{abstract}
-  \footnotesize
-  Biological nanopores are emerging as powerful instruments for the identification, quantification and,
-  characterization of proteins and nucleic acids at the single-molecule level. Despite their broad
-  experimental utilization, a fast and accurate simulation methodology for investigating the nanofluidic
-  properties of biological nanopores is currently unavailable. This gap is a limiting factor towards the
-  engineering of nanopore traits and the interpretation of experimental results. In this work, we aim to
-  tackle this challenge using a continuum-based simulation approach. Our method revolves around (1) the
-  extended Poison-Nernst-Planck-Navier-Stokes (ePNP-NS) equations, a heavily modified version of the
-  well-known transport equations, and (2) an accurate yet computationally efficient 2D-axisymmetric
-  representation for the geometry and charge distribution of the nanopore. The ePNP-NS equations
-  self-consistently take into account the finite size of the ions and the influence of both the ionic strength
-  and the nanoscopic scale of the pore on the local properties of the electrolyte. The latter includes the
-  mobility and diffusivity of the ions, and the density, viscosity and relative permittivity of the solvent.
-  Crucially, we applied our methodology to Cytolysin A (ClyA), a biological nanopore used for single-molecule
-  enzymology at physiological ionic strengths, and show that we can faithfully reproduce its ionic conductance
-  for a wide range of ionic strengths and bias potentials. Moreover, several nanofluidic characteristics could
-  be directly observed, including the ion selectivity, the distribution of ions inside the nanopore, the
-  electrostatic potential landscape and, the magnitude and shape of the electro-osmotic flow field. Hence,
-  this work provides fundamental new insights into the nanofluidic properties of biological nanopores and
-  paves the way towards their rational engineering.
-\end{abstract}
+%%%END OF FOOTNOTES%%%
 
+%%%MAIN TEXT%%%%
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -210,7 +327,6 @@ used extensively for the qualitative simulation of ion channels,\cite{Im-2002,Fu
 nanopores\cite{Simakov-2010,Pederson-2015,Aguilella-Arzo-2017,Simakov-2018} and their solid-state
 counterparts,\cite{Cervera-2005,White-2008,Chaudhry-2014,Laohakunakorn-2015} the extent to which they are
 quantitatively accurate is often challenged.\cite{Corry-2000,Collins-2012,Maffeo-2012,Thomas-2014,Kim-2015}
-
 To remedy the shortcomings of PNP and NS theory, a number of modifications have been proposed over the years.
 These include, among others, (1) steric ion-ion interactions, (2) the effect of protein-ion/water interactions
 on their motility (\ie~diffusivity and electrophoretic mobility), (3) the concentration dependencies of ion
@@ -266,6 +382,95 @@ term.
 % set of NS equations that allowed for an incompressible fluid with a variable density and
 % viscosity.\cite{Axelsson-2015}
 
+\begin{figure*}[t]
+
+  \centering
+	\begin{minipage}[t]{5.5cm}
+		\begin{subfigure}[t]{5cm}
+			\centering
+			\caption{}\label{fig:clya_side}
+      \vspace{-5mm}
+			\includegraphics[scale=1]{figures/concept/clya_side}
+    \end{subfigure}
+    \vspace{0.5cm}
+   	\begin{subfigure}[t]{5cm}
+      \centering
+      \caption{}\label{fig:clya_top}
+      \vspace{-5mm}
+      \includegraphics[scale=1]{figures/concept/clya_top}
+    \end{subfigure}
+	\end{minipage}
+  \begin{minipage}[t]{12cm}
+    \hspace{0.5cm}
+    \begin{minipage}[t]{5.5cm}
+      \begin{minipage}[t]{5.5cm}
+        \begin{subfigure}[t]{1.6cm}
+          \centering
+          \caption{}\label{fig:model_geometry_vs_wedge}
+          \vspace{-3mm}
+          \includegraphics[scale=1]{figures/concept/model_geometry_vs_wedge}
+        \end{subfigure}
+        \begin{subfigure}[t]{2.5cm}
+          \centering
+          \caption{}\label{fig:model_charge_density}
+          \vspace{-3mm}
+          \includegraphics[scale=1]{figures/concept/model_charge_density}
+        \end{subfigure}
+      \end{minipage}
+      \begin{subfigure}[t]{5.5cm}
+        \hspace{1cm}
+        \centering
+        \vspace{0.5cm}
+        \caption{}\label{fig:model_geometry_zoom}
+        \vspace{-1cm}
+        \includegraphics[scale=1]{figures/concept/model_geometry_zoom}
+        %\vspace{0.25cm}
+      \end{subfigure}
+    \end{minipage}
+    \begin{subfigure}[t]{5.5cm}
+      \centering
+      \caption{}\label{fig:model_geometry}
+      \includegraphics[scale=1]{figures/concept/model_geometry}
+    \end{subfigure}
+  \end{minipage}
+
+  \caption%
+  %
+  [All-atom and 2D-axisymmetric models of ClyA.]
+  %
+  {%
+    %
+    All-atom and 2D-axisymmetric models of ClyA.
+    %
+    (\subref{fig:clya_side})
+    %
+    Axial cross-sectional and (\subref{fig:clya_top}) top views of the dodecameric nanopore
+    ClyA-AS,\cite{Soskine-2013} derived through homology modelling from the \textit{E. coli} Cytolysin A
+    crystal structure (PDBID: 2WCD\cite{Mueller-2009}). Figures were rendered with
+    VMD.\cite{Humphrey-1996,Stone-1998}
+    %
+    (\subref{fig:model_geometry_vs_wedge})
+    %
+    The 2D-axisymmetric geometry was derived directly from the all-atom model using a the radially averaged
+    atomic density (see methods for details). Hence, it closely follows the outline of a \ang{30} wedge out of
+    the homology model.
+    %
+    (\subref{fig:model_charge_density})
+    %
+    The fixed space charge density ($\scdpore$) map of ClyA-AS, obtained by Gaussian projection of each atom's
+    partial charge onto a 2D plane (see methods for details).
+    %
+    (\subref{fig:model_geometry_zoom}+\subref{fig:model_geometry})
+    %
+    The 2D-axisymmetric simulation geometry of ClyA (grey) embedded in a lipid bilayer (green) and surrounded
+    by a spherical water reservoir (blue). Note that all electrolyte parameters depend on the local average
+    ion concentration $\avionconc=\frac{1}{n}\sum_{i}^{n}\concentration_{i}$ and that some are also influenced
+    by the distance from the nanopore wall $\walldistance$.
+  %
+  }\label{fig:model_concept}
+\end{figure*}
+
+
 To the best of our knowledge, no attempt has been made to consolidate all of the corrections discussed above
 into a single framework. Hence, we propose an extended set of PNP-NS (ePNP-NS) equations, which improves the
 predictive power of the PNP-NS equations at the nanoscale and beyond infinite dilution. Our ePNP-NS framework
@@ -293,88 +498,6 @@ impact in \emph{\nameref{sec:conclusions}} and describe our protocols in more de
 \emph{\nameref{sec:methods}}.
 
 
-\begin{figure*}[!htb]
-
-	\centering
-	\begin{minipage}[t]{5cm}
-		\begin{subfigure}[t]{5cm}
-			\centering
-			\caption{}\label{fig:clya_side}
-      \vspace{-5mm}
-			\includegraphics[scale=1]{figures/concept/clya_side}
-		\end{subfigure}
-   	\begin{subfigure}[t]{5cm}
-      \centering
-      \caption{}\label{fig:clya_top}
-      \vspace{-5mm}
-      \includegraphics[scale=1]{figures/concept/clya_top}
-    \end{subfigure}
-	\end{minipage}
-  \hspace{-0.25cm}
-  \begin{minipage}[t]{11.5cm}
-    \begin{minipage}[t]{5.5cm}
-      \begin{minipage}[t]{5.5cm}
-        \begin{subfigure}[t]{1.6cm}
-          \centering
-          \caption{}\label{fig:model_geometry_vs_wedge}
-          \vspace{-3mm}
-          \includegraphics[scale=1]{figures/concept/model_geometry_vs_wedge}
-        \end{subfigure}
-        \begin{subfigure}[t]{2.5cm}
-          \centering
-          \caption{}\label{fig:model_charge_density}
-          \vspace{-3mm}
-          \includegraphics[scale=1]{figures/concept/model_charge_density}
-        \end{subfigure}
-      \end{minipage}
-      \begin{subfigure}[t]{5.5cm}
-        \centering
-        \vspace{0.5cm}
-        \caption{}\label{fig:model_geometry_zoom}
-        \vspace{-1cm}
-        \includegraphics[scale=1]{figures/concept/model_geometry_zoom}
-        %\vspace{0.25cm}
-      \end{subfigure}
-    \end{minipage}
-    \hspace{-0.8cm}
-    \begin{subfigure}[t]{5.5cm}
-      \centering
-      \caption{}\label{fig:model_geometry}
-      \includegraphics[scale=1]{figures/concept/model_geometry}
-    \end{subfigure}
-  \end{minipage}
-
-  \caption%
-    [\textbf{All-atom and 2D-axisymmetric models of ClyA.}]
-    {%
-      \textbf{All-atom and 2D-axisymmetric models of ClyA.}
-      (\subref{fig:clya_side})
-      %
-      Axial cross-sectional and (\subref{fig:clya_top}) top views of the dodecameric nanopore
-      ClyA-AS,\cite{Soskine-2013} derived through homology modelling from the \textit{E. coli} Cytolysin A
-      crystal structure (PDBID: 2WCD\cite{Mueller-2009}). Figures were rendered with
-      VMD.\cite{Humphrey-1996,Stone-1998}
-      %
-      (\subref{fig:model_geometry_vs_wedge})
-      %
-      The 2D-axisymmetric geometry was derived directly from the all-atom model using a the radially averaged
-      atomic density (see methods for details). Hence, it closely follows the outline of a \ang{30} wedge out
-      of the homology model.
-      %
-      (\subref{fig:model_charge_density})
-      %
-      The fixed space charge density ($\scdpore$) map of ClyA-AS, obtained by Gaussian projection of each
-      atom's partial charge onto a 2D plane (see methods for details).
-      %
-      (\subref{fig:model_geometry_zoom}+\subref{fig:model_geometry})
-      %
-      The 2D-axisymmetric simulation geometry of ClyA (grey) embedded in a lipid bilayer (green) and
-      surrounded by a spherical water reservoir (blue). Note that all electrolyte parameters depend on the
-      local average ion concentration $\avionconc=\frac{1}{n}\sum_{i}^{n}\concentration_{i}$ and that some are
-      also influenced by the distance from the nanopore wall $\walldistance$.
-    %
-    }\label{fig:model_concept}
-\end{figure*}
 
 
 \section{Mathematical model}\label{sec:model}
@@ -387,7 +510,7 @@ the total ionic flux and the fluid flow, respectively.\cite{Eisenberg-1996,Cerve
 
 \subsection{Model geometry}\label{sec:geom}
 
-\paragraph{2D-axisymmetric model of ClyA.}
+\subsubsection{2D-axisymmetric model of ClyA.}
 %
 ClyA is a relatively large protein nanopore that self-assembles on lipid bilayers to form \SI{14}{\nm} long
 hydrophilic channels. The interior of the pore can be divided into roughly two cylindrical compartments
@@ -409,7 +532,7 @@ outline of a \SI{30}{\degree} `wedge' of the full atom structure (\cref{fig:mode
 equilibrium charge map (\cref{fig:model_charge_density}) was loaded directly into our solver as a linear
 interpolation function ($\scdpore$) and applied across all computational domains.
 
-\paragraph{Global geometry.}
+\subsubsection{Global geometry.}
 %
 The complete system (\cref{fig:model_geometry_zoom,fig:model_geometry}) consists of a large hemispherical
 electrolyte reservoir ($R=\SI{250}{\nm}$), split through the middle into a \cisi{} and a \transi{} compartment
@@ -431,7 +554,7 @@ corrections make use of empirical functions that were fitted to experimental dat
 (\cref{tab:corrections_equations,suppinfo:tab:corrections_parameters}),
 the implementation of which will be explored next.
 
-\paragraph{Electrostatic field.}
+\subsubsection{Electrostatic field.}
 % 
 We make use of Poisson's equation to evaluate the electric potential
 %
@@ -467,24 +590,24 @@ relative permittivity at infinite dilution and $\relperm^c(\avionconc)$ a concen
 function parameterized with experimental data.
 
 %
-\begin{table*}[!hbt]
+\begin{table}[!t]
   \footnotesize
   \renewcommand{\arraystretch}{1.2}
-  \caption{Summary of the parameters and fitting equations used in the ePNP-NS equations.}
+  \caption{\ Summary of the parameters and fitting equations used in the ePNP-NS equations}
   \centering
   \label{tab:corrections_equations}
   
-  \begin{tabularx}{16.5cm}{>{\raggedright\hsize=3cm}X >{\hsize=1cm}l >{\hsize=6.5cm}X >{\hsize=2cm}l}
+  \begin{tabularx}{0.48\textwidth}{>{\raggedright\hsize=1.5cm}X >{\hsize=1cm}l >{\hsize=3.8cm}X >{\hsize=1cm}l}
     \toprule
   
-    Property
-      & Parameter$^\text{\emph{a}}$
-        & Infinite dilution value$^\text{\emph{b}}$/Fitting function$^\text{\emph{c}}$
+    Name
+      & Symbol$^\text{\emph{a}}$
+        & Infinite dilution value$^\text{\emph{b}}$/Function$^\text{\emph{c}}$
         & Reference \\
   
     \midrule
   
-    \multirow{4}{*}{Relative permittivity}
+    \multirow{4}{1.5cm}{Relative permittivity}
       & $\permittivity_{r,\text{p}}$
         & \num{20}
         & \citenum{Li-2013} \\
@@ -497,7 +620,7 @@ function parameterized with experimental data.
       & $\permittivity_{w}(\dconc)$
         & $1 - \left(1 -	\dfrac{P_1}{P_0}\right) L \left( \dfrac{3P_2}{P_0 - P_1} \dconc \right)$
         & \citenum{Gavish-2016} \\
-    \multirow{4}{3cm}{Ion self-diffusion coefficient}
+    \multirow{4}{1.5cm}{Ion self-diffusion coefficient}
       & $\diffusion_{\Na}^0$
         & \SI{1.334e-9}{\square\meter\per\second}
         & \citenum{Mills-1989} \\
@@ -511,7 +634,7 @@ function parameterized with experimental data.
         & $1-\exp{\left(-P_1(\dwall+P_2)\right)}$
         & \citenum{Makarov-1998,Simakov-2010} \vspace{0.25cm} \\
   
-    \multirow{4}{3cm}{Ion electrophoretic mobility}
+    \multirow{4}{1.5cm}{Ion electrophoretic mobility}
       & $\mobility_{\Na}^0$
         & \SI{5.192e-4}{\square\meter\per\second\per\volt}
         & \citenum{Bianchi-1989} \\
@@ -525,7 +648,7 @@ function parameterized with experimental data.
         & $1-\exp{\left(-P_1(\dwall+P_2)\right)}$
         & \citenum{Makarov-1998,Simakov-2010} \vspace{0.25cm} \\
   
-    \multirow{2}{3cm}{Ion transport number}
+    \multirow{2}{1.5cm}{Ion transport number}
       & $\transportn_{\Na}^0$
         & 0.396
         & \citenum{Bianchi-1989} \\
@@ -533,7 +656,7 @@ function parameterized with experimental data.
         & $\left( 1 + P_1\dconc^{0.5} + P_2\dconc + P_3\dconc^{1.5} + P_4\dconc^2 \right)^{-1}$
         & This work \vspace{0.25cm} \\
   
-    \multirow{3}{*}{Dynamic viscosity}
+    \multirow{3}{1.5cm}{Dynamic viscosity}
       & $\viscosity^0$
         & \SI{8.904}{\pascal\second}
         & \citenum{Hai-Lang-1996} \\
@@ -544,7 +667,7 @@ function parameterized with experimental data.
         & $1 + \exp{ \left( -P_1(\dwall-P_2) \right) }$
         & \citenum{Pronk-2014} \vspace{0.25cm} \\
   
-    \multirow{2}{*}{Fluid density}
+    \multirow{2}{1.5cm}{Fluid density}
       & $\density^0$
         & \SI{997}{\kilogram\per\cubic\meter}
         & \citenum{Hai-Lang-1996} \\
@@ -557,14 +680,14 @@ function parameterized with experimental data.
   \begin{flushleft}
     $^\text{\emph{a}}$Dependencies on either $\dconc = \avionconc/1$~M (dimensionless average ion
     concentration) and $\dwall = \walldistance/1$~nm (dimensionless distance from the nanopore wall);
-    $^\text{\emph{b}}$Values at infinite dilution for a system temperature of \SI{291.15}{\kelvin};
+    $^\text{\emph{b}}$Values at infinite dilution for a system temperature of \SI{298.15}{\kelvin};
     $^\text{\emph{c}}$These functions are empirical and hence have no physical meaning.
     The values of the fitting parameters $P_x$ of each property can be found in \cref{suppinfo:tab:corrections_parameters} and graphs of the fits in \cref{suppinfo:fig:corrections}.
   \end{flushleft}
-\end{table*}
+\end{table}
 %
 
-\paragraph{Ionic flux.}
+\subsubsection{Ionic flux.}
 %
 The total ionic flux $\flux_{i}$ of each ion $i$ is given by the size-modified Nernst-Planck
 equation,\cite{Lu-2011} and can be expressed as the sum of diffusive, electrophoretic, convective and steric
@@ -631,7 +754,7 @@ ion and the nanopore radii. We chose not to include this correction into our mod
 applicability for ions with a hydrodynamic radii comparable to size of the solvent molecules is
 questionable.\cite{Anderson-1972,Deen-1987}
 
-\paragraph{Fluid flow.}
+\subsubsection{Fluid flow.}
 %
 As derived by Axelsson \etal{},\cite{Axelsson-2015} the fluid flow and pressure field inside an incompressible
 fluid with a variable density and variable viscosity is given by the Navier-Stokes equations:
@@ -729,7 +852,7 @@ $\density = \density^0$).
 %
 %
 %
-\section{Results and Discussion}\label{sec:results}
+\section{Results and discussion}\label{sec:results}
 
 The current--voltage (IV) relationships of many nanopores, ClyA included, often deviate significantly from
 Ohm's law. This is because the ionic flux arises from a complex interplay between the pore's geometry
@@ -752,7 +875,7 @@ experiment and the simulations.
 % and a brief reflection of the key findings in this work.
 
 
-\begin{figure*}[!p]
+\begin{figure*}[!t]
   \centering
   \begin{minipage}[l]{16cm}
     \begin{minipage}[t]{5cm}
@@ -794,11 +917,11 @@ experiment and the simulations.
 
   \caption%
   %
-  [\textbf{Measured and simulated ionic conductance and cation selectivity of single ClyA nanopores.}]
+  [Measured and simulated ionic conductance and cation selectivity of single ClyA nanopores.]
   %
   {%
     %
-    \textbf{Measured and simulated ionic conductance and cation selectivity of single ClyA nanopores.}
+    Measured and simulated ionic conductance and cation selectivity of single ClyA nanopores.
     %
     (\subref{fig:current-voltage_curves})
     %
@@ -838,9 +961,9 @@ experiment and the simulations.
 \end{figure*}
 
 
-\subsection{Transport of Ions Through ClyA}\label{sec:iont}
+\subsection{Transport of ions through ClyA}\label{sec:iont}
 
-\paragraph{Ionic current and conductance.}
+\subsubsection{Ionic current and conductance.}
 %
 The ability of our model to reproduce the ionic current of a biological nanopore over a wide range of
 experimentally relevant conditions (between $\vbias = \text{\SIrange{-150}{+150}{\mV}}$ and for $\cbulk =
@@ -924,7 +1047,7 @@ transport through the nanopore both \emph{qualitatively} and \emph{quantitativel
 distribution of the resulting properties (\eg~ion concentrations, ion fluxes, electric field and water
 velocity) to closely correspond to their true values.
 
-\paragraph{Cation selectivity.}
+\subsubsection{Cation selectivity.}
 %
 The ion selectivity of a nanopore determines the preference with which it transports one ion type over the
 other. Experimentally, it is often determined by placing the pore in a salt gradient (\ie~different salt
@@ -979,10 +1102,10 @@ represents the selectivity at an undetermined intermediate concentration.
 % Tna = 0.90359
 % Pna = 9.37234
 
-\subsection{Ion Concentration Distribution}\label{sec:ionc}
+\subsection{Ion concentration distribution}\label{sec:ionc}
 %
 
-\begin{figure}[!htb]
+\begin{figure*}[!t]
   \centering
   \begin{minipage}[t]{8cm}
     \begin{subfigure}[t]{8cm}
@@ -1025,11 +1148,11 @@ represents the selectivity at an undetermined intermediate concentration.
 
   \caption%
   %
-  [\textbf{Ion concentration distribution inside ClyA.}]
+  [Ion concentration distribution inside ClyA.]
   %
   {%
     %
-    \textbf{Ion concentration distribution inside ClyA.}
+    Ion concentration distribution inside ClyA.
     %
     (\subref{fig:concentration_pore_average_vs_cbulk})
     %
@@ -1068,7 +1191,7 @@ represents the selectivity at an undetermined intermediate concentration.
     ($\walldistance \le \text{\SI{0.5}{\nm}}$).
     %
   }\label{fig:concentration_and_scd}
-  \end{figure}
+  \end{figure*}
 
 Following the validation of the model in previous section, we now proceed by describing the local ionic
 concentrations inside ClyA. Detailed knowledge of the ionic environment can be valuable to experimentalists
@@ -1085,7 +1208,7 @@ situation on the on the order of \SIrange{10}{100}{\ns}.\cite{Im-2002}
 % and 2) the accumulation of mobile charges inside the pore as a result of their asymmetric enhancement or
 % depletion (\cref{fig:ion_charge_dist_vs_cbulk,fig:ion_scd_contours,fig:ion_scd_radial_profiles}).
 
-\paragraph{Relative cation and anion concentrations.}
+\subsubsection{Relative cation and anion concentrations.}
 %
 We use the relative ion concentration averaged over the entire volume of the pore ($\pavi$), as a measure for
 global ionic conditions inside the pore (\cref{fig:concentration_pore_average_vs_cbulk}). At low ionic
@@ -1128,7 +1251,7 @@ the electrical double layer.
 % hence represent a time-averaged situation (typically on the order of \SIrange{10}{100}{\ns}).
 
 
-\paragraph{Ion Charge Density.}
+\subsubsection{Ion charge density.}
 %
 The formation of an electrical double layer inside the pore, and the resulting asymmetry in the cation and
 anion concentrations, gives rise to a net charge density inside the pore ($\scdion$, \cref{eq:scdion}). To
@@ -1176,9 +1299,9 @@ ionic conditions inside the pore, including the concentration difference with th
 significant imbalance between cations and anions.\cite{Warren-1966}
 
 
-\subsection{Electrostatic Potential and Energy}\label{sect:esp}
+\subsection{Electrostatic potential and energy}\label{sect:esp}
 
-\begin{figure*}[!btp]
+\begin{figure*}[!t]
   \centering
   \begin{minipage}[t]{16cm}
     \begin{subfigure}[t]{2.5cm}
@@ -1203,11 +1326,11 @@ significant imbalance between cations and anions.\cite{Warren-1966}
 
   \caption%
   %
-  [\textbf{Equilibrium electrostatic potential inside ClyA.}]
+  [Equilibrium electrostatic potential inside ClyA.]
   %
   {%
     %
-    \textbf{Equilibrium electrostatic potential inside ClyA.}
+    Equilibrium electrostatic potential inside ClyA.
     %
     (\subref{fig:potential_clya_charges})
     %
@@ -1259,7 +1382,7 @@ biopolymers.\cite{Buchsbaum-2013,Muthukumar-2014,Willems-Ruic-Biesemans-2019}
 % more quantitative explanation for the origin of ClyA's rectification, ion selectivity and asymmetric ion
 % concentrations.
 
-\paragraph{A few important charged residues.}
+\subsubsection{A few important charged residues.}
 %
 The interior walls of the ClyA nanopore (\cref{fig:potential_clya_charges}) are riddled with negatively
 charged amino acids (\ie~aspartate or glutamate), interspaced by a few positively charged residues 
@@ -1269,7 +1392,7 @@ E7, E11, K14, E18, D21, D25), in the middle of the \cisi{} \lumeni{} ($4 < z < \
 E57, D64, K147) and at the top of the pore ($10 < z < \text{\SI{12}{\nm}}$; D114, R118, D121, D122).
 As we shall see, these clusters leave strong negative fingerprints in the global electrostatic potential.
 
-\paragraph{Distribution of the equilibrium electrostatic potential.}
+\subsubsection{Distribution of the equilibrium electrostatic potential.}
 %
 The electrostatic potential at equilibrium ($\eqpot$, \ie~at $\vbias = \text{\SI{0}{\mV}}$) reveals the effect
 of ClyA's fixed charges on the potential inside the pore (\cref{fig:potential_contours}). Due to electric
@@ -1311,11 +1434,8 @@ the magnitude of $\radeqpot$ at $\cbulk = \text{\SI{0.15}{\Molar}}$ drops below 
 with only a small negative potential remaining inside the constriction. A summary of the most salient
 $\radeqpot$ values can be found in \cref{suppinfo:tab:radial_potential}.
 
-
-%\subsection{Non-equilibrium electrostatic potential}\label{sec:ese}
-
 %
-\begin{figure}[!tbp]
+\begin{figure}[!t]
   \centering
   \begin{subfigure}[t]{8.25cm}
     \centering
@@ -1330,11 +1450,11 @@ $\radeqpot$ values can be found in \cref{suppinfo:tab:radial_potential}.
 
   \caption%
   %
-  [\textbf{Non-equilibrium electrostatic energy landscape for single ions.}]
+  [Non-equilibrium electrostatic energy landscape for single ions.]
   %
   {%
     %
-    \textbf{Non-equilibrium electrostatic energy landscape for single ions.}
+    Non-equilibrium electrostatic energy landscape for single ions.
     %
     (\subref{fig:potential_energy_radial_averages})
     %
@@ -1356,7 +1476,7 @@ $\radeqpot$ values can be found in \cref{suppinfo:tab:radial_potential}.
 \end{figure}
 %
 
-\paragraph{Non-equilibrium electrostatic energy at $\mathbf{+150}$ and $\mathbf{-150}$~mV.}
+\subsubsection{Non-equilibrium electrostatic energy at $\mathbf{+150}$ and $\mathbf{-150}$~mV.}
 %
 To link back the observed ionic conductance properties to the electrostatic potential, we computed the
 radially averaged electrostatic energy for a monovalent ion, $\radenergy = \chargen_{i} \echarge \radpot$, at
@@ -1400,7 +1520,7 @@ exit from the pore due to a continuous drop of their electrostatic energy. This 
 entire \lumeni{} of anions, which can be observed from the much lower \Cl{} concentrations at negative
 voltages (see~\cref{fig:concentration_pore_average_vs_cbulk}).
 
-\paragraph{Concentration and voltage dependencies of the energy barrier at the constriction.}
+\subsubsection{Concentration and voltage dependencies of the energy barrier at the constriction.}
 %
 Many biological nanopores contain constrictions that play crucial roles in shaping their ionic conductance
 properties.\cite{Maglia-2008,Franceschini-2016,Huang-2017} The reason for this is two-fold, (1) the narrowest
@@ -1462,12 +1582,12 @@ compared to positive bias voltages (\cref{fig:transport_number_vs_concentration_
 % 5.00 : -0.07 = -1.8 mV
 %
 
-\subsection{Transport of Water Through ClyA}\label{sec:eof}
+\subsection{Transport of water through ClyA}\label{sec:eof}
 
 
-\begin{figure*}[!tbp]
+\begin{figure*}[!t]
   \centering
-  \hspace{-2cm}
+  %\hspace{-2cm}
   \begin{minipage}[t]{5.5cm}
     \begin{subfigure}[t]{5.5cm}
       \centering
@@ -1481,7 +1601,8 @@ compared to positive bias voltages (\cref{fig:transport_number_vs_concentration_
       \includegraphics[scale=1]{figures/flow/flow_constriction_profiles}
     \end{subfigure}
   \end{minipage}
-  \begin{minipage}[t]{10.5cm}
+  \begin{minipage}[t]{11.5cm}
+    \hspace{1cm}
     \begin{subfigure}[t]{5cm}
       \centering
       \caption{}\vspace{-3mm}\label{fig:flow_conductance_vs_concentration}
@@ -1493,7 +1614,7 @@ compared to positive bias voltages (\cref{fig:transport_number_vs_concentration_
       \includegraphics[scale=1]{figures/flow/flow_conductance_rectification_vs_concentration}
     \end{subfigure}
     \\
-    \begin{minipage}[t]{9cm}
+    \begin{minipage}[t]{10cm}
       \hspace{1cm}
       \begin{subfigure}[t]{5.5cm}
         \centering
@@ -1510,13 +1631,13 @@ compared to positive bias voltages (\cref{fig:transport_number_vs_concentration_
   \end{minipage}
 \centering
 
-\caption%
+  \caption%
   %
-  [\textbf{Concentration and voltage dependency of the electro-osmotic flow inside ClyA.}]
+  [Concentration and voltage dependency of the electro-osmotic flow inside ClyA.]
   %
   {%
     %
-    \textbf{Concentration and voltage dependency of the electro-osmotic flow inside ClyA.}
+    Concentration and voltage dependency of the electro-osmotic flow inside ClyA.
     %
     (\subref{fig:flow_contour})
     %
@@ -1590,7 +1711,7 @@ lining the walls of ClyA (\cref{fig:ion_charge_dist_vs_cbulk}).
 % (\cref{fig:flow}).
 
 
-\paragraph{Direction, magnitude and distribution of the water velocity.}
+\subsubsection{Direction, magnitude and distribution of the water velocity.}
 %
 As expected, given ClyA's negatively charged interior surface and the resulting positively charged electrical
 double layer, the direction of the net water flow inside ClyA follows the electric field, \ie~from the \cisi{}
@@ -1615,7 +1736,7 @@ hence a plug flow profile. Interestingly, at very high salt concentrations ($\cb
 This is the result of a self-induced pressure gradient caused by the expansion of the EOF as it exits the
 pore.\cite{Melnikov-2017}
 
-\paragraph{Influence of bulk ionic strength and bias voltage on the electro-osmotic conductance.}
+\subsubsection{Influence of bulk ionic strength and bias voltage on the electro-osmotic conductance.}
 %
 In analogy to the ionic conductance, the amount of water transported by ClyA can be expressed by the
 electro-osmotic conductance $\flowcond = \flowrate / \vbias$ (\cref{fig:flow_conductance_vs_concentration}).
@@ -1636,7 +1757,7 @@ maximum at $\cbulk \approx \text{\SI{0.045}{\Molar}}$, after which it falls rapi
 
 %The magnitude of the EOF is in agreement with the \cite{Willems-Ruic-Biesemans-2019}
 
-\paragraph{Pressure distribution inside ClyA.}
+\subsubsection{Pressure distribution inside ClyA.}
 %
 The large variations of \Na{} concentration along the walls of ClyA---up to several orders of magnitude over
 the course of a few nanometers (see~\cref{fig:concentration_contours})---induce regions of high `osmotic'
@@ -1682,9 +1803,11 @@ biological nanopore and (3) guiding the design of new variants of existing nanop
 
 %
 %
-\section{Materials and Methods}\label{sec:methods}
+\section{Materials and methods}\label{sec:methods}
 
-\paragraph{ClyA-AS homology model.}
+\subsection{Molecular modelling}
+
+\subsubsection{ClyA-AS homology model.}
 %
 A full atom model of ClyA-AS\cite{Soskine-2013} was built and optimized (MODELLER v9.18\cite{Sali-1993}) by
 introduction of the following point mutations in each of the 12 chains of the wild-type ClyA crystal structure
@@ -1703,7 +1826,7 @@ by addition of 214640 TIP3 water molecules (VMD solvate plugin), and the global 
 replacing 1276 random water molecules with 674 \Na{} and 602 \Cl{} ions (VMD autoionize
 plugin).\cite{Humphrey-1996}
 
-\paragraph{Molecular dynamics simulations.}
+\subsubsection{Molecular dynamics simulations.}
 %
 Using molecular dynamics (MD) with NAMD 2.12 (\SI{2}{\fs} timestep, CHARMM36 forcefield\cite{Best-2012}), the
 final system was minimized for \SI{5}{\ps}, heated from 0 to \SI{298.15}{\kelvin} in \SI{4}{\ps} and
@@ -1713,7 +1836,7 @@ Note that structural deterioration was prevented by harmonically restraining the
 to their original positions (spring constant of \SI{695}{\pN\per\nm}) during all MD
 runs.\cite{Bhattacharya-2011}
 
-\paragraph{Axially symmetric geometry.}
+\subsubsection{Axially symmetric geometry.}
 %
 The 2D-axisymmetric geometry of the ClyA-AS nanopore (\cref{fig:model_geometry_vs_wedge}) was derived directly
 from its full atom model by radially averaging the molecular density. Briefly, 50 sets of atomic coordinates
@@ -1735,7 +1858,7 @@ of the pore to obtain a 2D-axisymmetric density map. The contourline at \SI{25}{
 the nanopore simulation geometry, after manual removal of overlapping and superfluous vertices to improve the
 quality of the final computational mesh.
 
-\paragraph{Axially symmetric charge density.}
+\subsubsection{Axially symmetric charge density.}
 %
 The 2D-axially symmetric charge distribution (\cref{fig:model_charge_density} was also derived directly from
 the 50 sets of aligned nanopore coordinates) that were used for the geometry. Inspired by how charges are
@@ -1761,7 +1884,7 @@ precomputed values were used during the solver runtime. All partial charges (at 
 from the CHARMM36 forcefield\cite{Best-2012} and assigned using PROPKA\cite{Olsson-2011} and
 PBD2PQR.\cite{Jurrus-2018}
 
-\paragraph{Computing electrophoretic mobilities.}
+\subsubsection{Computing electrophoretic mobilities.}
 %
 To obtain the concentration-dependent ionic mobility  $\mobility^c_{i}$ from fitted functions, it must first
 be derived from the salt's molar conductivity $\molarconductivity$ and the ion's transport number
@@ -1796,7 +1919,12 @@ unit vector normal to $S$. Similarly, the volumetric flow rate, \ie~the volume o
 \end{align}
 %
 
-\paragraph{ClyA expression and purification.}
+%
+%
+\subsection{Single-channel nanopore experiments}
+%
+
+\subsubsection{ClyA expression and purification.}
 %
 ClyA-AS monomers were expressed, purified and oligomerized using methods described in detail
 elsewhere.\cite{Soskine-2012,Soskine-2013} Briefly, \textit{E. cloni} EXPRESS BL21 (DE3) cells (Lucigen
@@ -1809,7 +1937,7 @@ n-dodecyl-\textbeta{}-D-maltopyranoside (Sigma-Aldrich, Zwijndrecht, The Netherl
 \SIrange[range-phrase = --]{4}{15}{\percent} gradient gel (Bio-Rad, Veenendaal, The Netherlands) and
 subsequent excision of the correct oligomer band.
 
-\paragraph{Recording of single-channel current-voltage curves.}
+\subsubsection{Recording of single-channel current-voltage curves.}
 %
 Experimental current-voltage curves where measured using single-channel electrophysiology, as detailed
 elsewhere.\cite{Maglia-2010,Soskine-2012,Soskine-2013} First, a black lipid bilayer was formed inside a
@@ -1828,32 +1956,34 @@ amplifier via a Digidata 1440A digitizer (all from Molecular Devices, San Jose, 
 were performed at \SI{\approx25}{\dC} in aqueous \ce{NaCl} (Carl Roth, Karlsruhe, Germany) solutions, buffered
 at \pH{7.5} using \SI{10}{\mM} MOPS (Carl Roth, Karlsruhe, Germany).
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% The "Acknowledgement" section can be given in all manuscript
-%% classes.  This should be given within the "acknowledgement"
-%% environment, which will make the correct section or running title.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{acknowledgement}
-  K.W. gratefully acknowledges the support by the IWT (grant number 3E130054). P.V.D. and J.H. gratefully
-  acknowledge the financial support by the FWO (grant number G.0683.15). G.M. has received funding from the
-  European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme
-  (Grant agreement No. 726151). J.H. gratefully acknowledges financial support from the Flemish government
-  through long term structural funding Methusalem (CASAS2, Meth/15/04). The authors thank Dr. Chang Chen and
-  Dr. Yi Li for their valuable feedback during discussions.
-\end{acknowledgement}
+%
+%
+\section*{Conflicts of interest}
+%
+There are no conflicts to declare.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% The same is true for Supporting Information, which should use the
-%% suppinfo environment.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{suppinfo}
-	The supplementary info contains the Extended materials and methods, with details on the fitting of the
-	electrolyte properties and the calculation of the pore averaged values, and the weak forms of the ePNP-NS
-	equations. It also contains additional results, a figure about the ionic current rectification, and a table
-	detailing the peak values of the radial electrostatic potential inside ClyA.
-\end{suppinfo}
+%
+%
+\section*{Acknowledgements}
+%
+K.W. gratefully acknowledges the support by the IWT (grant number 3E130054). P.V.D. and J.H. gratefully
+acknowledge the financial support by the FWO (grant number G.0683.15). G.M. has received funding from the
+European Research Council (ERC) under the European Union's Horizon 2020 research and innovation programme
+(Grant agreement No. 726151). J.H. gratefully acknowledges financial support from the Flemish government
+through long term structural funding Methusalem (CASAS2, Meth/15/04). The authors thank Dr. Chang Chen and Dr.
+Yi Li for their valuable feedback during discussions.
+
+%%%END OF MAIN TEXT%%%
+
+%The \balance command can be used to balance the columns on the final page if desired. It should be placed anywhere within the first column of the last page.
+
+\balance
+
+%If notes are included in your references you can change the title from 'References' to 'Notes and references' using the following command:
+%\renewcommand\refname{Notes and references}
 
 \bibliography{shared/bibliography}
+\bibliographystyle{rsc}
 
 %\includepdf{suppinfo}
 \end{document}
