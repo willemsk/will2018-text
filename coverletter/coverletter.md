@@ -16,7 +16,7 @@ author:
   - PO Box 11103, 9700 CC
   - Groningen, The Netherlands
   email: g.maglia@rug.nl
-opening: Dear editor,
+opening: Dear Professor Dufrêne,
 closing: Yours sincerely,
 date: 20 April 2020
 address:
